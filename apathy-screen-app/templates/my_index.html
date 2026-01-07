@@ -30,6 +30,11 @@
       <span class="fw-bold text-primary">{{ progress_pct }}%</span>
     </div>
     <div class="small text-muted">{{ progress_done }} / {{ progress_total }} 件</div>
+    <div class="mt-2 text-end">
+      <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exportModal">
+        エクセル/CSV出力
+      </button>
+    </div>
   </div>
 </div>
 
@@ -95,3 +100,101 @@
   </div>
 </div>
 {% endblock %}
+
+<!-- Export Modal -->
+<div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exportModalLabel">エクスポート設定</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form id="exportForm" method="get" action="/export">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">出力タイプ</label>
+            <div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="export_type" id="type_progress" value="progress" checked>
+                <label class="form-check-label" for="type_progress">進捗ボード用（最終結果込み）</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="export_type" id="type_secondary" value="secondary">
+                <label class="form-check-label" for="type_secondary">2次スクリーニング配布用（カテゴリー別）</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">形式</label>
+            <select class="form-select" name="format">
+              <option value="csv" selected>CSV</option>
+              <option value="xlsx" disabled>Excel (xlsx) — 後で対応</option>
+            </select>
+          </div>
+
+          <div class="mb-3" id="categoryField" style="display:none;">
+            <label class="form-label">カテゴリー</label>
+            <select class="form-select" name="category">
+              <option value="">-- 指定しない --</option>
+              <option value="physical">physical</option>
+              <option value="brain">brain</option>
+              <option value="psycho">psycho</option>
+              <option value="drug">drug</option>
+            </select>
+          </div>
+
+          <div class="mb-3" id="decisionField" style="display:none;">
+            <label class="form-label">final_decision フィルタ</label>
+            <select class="form-select" name="decision">
+              <option value="">-- 指定しない --</option>
+              <option value="adopt">採用</option>
+              <option value="hold">保留</option>
+              <option value="exclude">除外</option>
+            </select>
+          </div>
+
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" id="finalOnly" name="final_only" value="1" checked>
+            <label class="form-check-label" for="finalOnly">final のみ（デフォルト ON）</label>
+          </div>
+
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" id="mismatchOnly" name="category_mismatch_only" value="1">
+            <label class="form-check-label" for="mismatchOnly">カテゴリー不一致のみ（監査用）</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+          <button type="submit" class="btn btn-primary">ダウンロード</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const typeProgress = document.getElementById('type_progress');
+  const typeSecondary = document.getElementById('type_secondary');
+  const categoryField = document.getElementById('categoryField');
+  const decisionField = document.getElementById('decisionField');
+  const exportForm = document.getElementById('exportForm');
+
+  function updateForm(){
+    if(typeSecondary.checked){
+      categoryField.style.display = '';
+      decisionField.style.display = '';
+      exportForm.action = '/export/secondary';
+    } else {
+      categoryField.style.display = 'none';
+      decisionField.style.display = 'none';
+      exportForm.action = '/export';
+    }
+  }
+
+  typeProgress.addEventListener('change', updateForm);
+  typeSecondary.addEventListener('change', updateForm);
+  updateForm();
+});
+</script>

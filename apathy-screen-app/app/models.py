@@ -53,6 +53,17 @@ class Article(SQLModel, table=True):
 
     group_no: int = Field(default=1)
 
+    # 最終確定結果（ペアすり合わせ後）
+    final_decision: Optional[int] = None  # 0=除外,1=採用,2=保留
+
+    final_cat_physical: bool = Field(default=False)
+    final_cat_brain: bool = Field(default=False)
+    final_cat_psycho: bool = Field(default=False)
+    final_cat_drug: bool = Field(default=False)
+
+    finalized_by: Optional[int] = Field(default=None, foreign_key="user.id")
+    finalized_at: Optional[str] = None
+
 class ScreeningDecision(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     user_id: int = Field(foreign_key="user.id")

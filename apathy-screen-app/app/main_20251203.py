@@ -694,13 +694,28 @@ def my_index(request: Request):
 
 
 # ---------------------------------------------------------
-# 結果 CSV エクスポート
+# 結果 CSV/XLSX エクスポート（進捗ボード用）および二次配布用エクスポート
 # ---------------------------------------------------------
+def _sd_categories(sd: ScreeningDecision):
+    cats = []
+    if getattr(sd, "cat_physical", False):
+        cats.append("physical")
+    if getattr(sd, "cat_brain", False):
+        cats.append("brain")
+    if getattr(sd, "cat_psycho", False):
+        cats.append("psycho")
+    if getattr(sd, "cat_drug", False):
+        cats.append("drug")
+    return cats
+
+
 @app.get("/export", response_class=StreamingResponse)
 def export_csv(request: Request):
     user = get_current_user(request)
     if not user:
         return RedirectResponse(url="/login")
+
+    from collections import OrderedDict
 
     with Session(engine) as session:
         stmt = (
@@ -711,51 +726,254 @@ def export_csv(request: Request):
         )
         rows = session.exec(stmt).all()
 
+    # group by article
+    articles = OrderedDict()
+    for sd, art, usr in rows:
+        if art.id not in articles:
+            articles[art.id] = {"article": art, "decisions": []}
+        articles[art.id]["decisions"].append((sd, usr))
+
     output = io.StringIO()
     output.write("\ufeff")  # BOM
-
     writer = csv.writer(output)
+
     writer.writerow(
         [
             "article_id",
             "pmid",
             "title_en",
             "title_ja",
-            "username",
-            "decision",
-            "comment",
-            "flag_cause",
-            "flag_treatment",
-            "direction_gpt",
-            "direction_gemini",
-            "condition_list_gpt",
-            "condition_list_gemini",
+            "r1_username",
+            "r1_decision",
+            "r1_category",
+            "r1_comment",
+            "r2_username",
+            "r2_decision",
+            "r2_category",
+            "r2_comment",
+            "final_decision",
+            "final_category",
+            "decision_mismatch",
+            "category_mismatch",
+            "finalized_by",
+            "finalized_at",
             "year",
+            "journal",
+            "doi",
         ]
     )
 
-    for sd, art, usr in rows:
+    for art_id, data in articles.items():
+        art = data["article"]
+        decs = data["decisions"]
+
+        r1 = decs[0] if len(decs) > 0 else (None, None)
+        r2 = decs[1] if len(decs) > 1 else (None, None)
+        sd1, usr1 = r1
+        sd2, usr2 = r2
+
+        r1_dec = sd1.decision if sd1 is not None else ""
+        r2_dec = sd2.decision if sd2 is not None else ""
+
+        r1_cats = _sd_categories(sd1) if sd1 is not None else []
+        r2_cats = _sd_categories(sd2) if sd2 is not None else []
+
+        # final: prefer stored final in Article; otherwise infer only when r1==r2
+        final_dec = getattr(art, "final_decision", None)
+        if final_dec is None:
+            if sd1 is not None and sd2 is not None and r1_dec == r2_dec:
+                final_dec = r1_dec
+            else:
+                final_dec = ""
+
+        # final categories: prefer Article final_* flags if present
+        final_cats = []
+        if getattr(art, "final_cat_physical", False):
+            final_cats.append("physical")
+        if getattr(art, "final_cat_brain", False):
+            final_cats.append("brain")
+        if getattr(art, "final_cat_psycho", False):
+            final_cats.append("psycho")
+        if getattr(art, "final_cat_drug", False):
+            final_cats.append("drug")
+        if not final_cats:
+            # fallback: intersection of r1/r2 if both present and equal
+            if sd1 is not None and sd2 is not None and set(r1_cats) == set(r2_cats):
+                final_cats = r1_cats
+
+        decision_mismatch = False
+        if sd1 is not None and sd2 is not None:
+            decision_mismatch = (r1_dec != r2_dec)
+
+        category_mismatch = False
+        if sd1 is not None and sd2 is not None:
+            category_mismatch = (set(r1_cats) != set(r2_cats))
+
         writer.writerow(
             [
                 art.id,
                 art.pmid,
                 art.title_en or "",
                 art.title_ja or "",
-                usr.username,
-                sd.decision,
-                sd.comment or "",
-                1 if (getattr(sd, "flag_cause", False)) else 0,
-                1 if (getattr(sd, "flag_treatment", False)) else 0,
-                art.direction_gpt if art.direction_gpt is not None else "",
-                art.direction_gemini if art.direction_gemini is not None else "",
-                art.condition_list_gpt or "",
-                art.condition_list_gemini or "",
+                usr1.username if usr1 is not None else "",
+                r1_dec,
+                "|".join(r1_cats) if r1_cats else "",
+                sd1.comment if sd1 is not None else "",
+                usr2.username if usr2 is not None else "",
+                r2_dec,
+                "|".join(r2_cats) if r2_cats else "",
+                sd2.comment if sd2 is not None else "",
+                final_dec,
+                "|".join(final_cats) if final_cats else "",
+                1 if decision_mismatch else 0,
+                1 if category_mismatch else 0,
+                getattr(art, "finalized_by", ""),
+                getattr(art, "finalized_at", ""),
                 art.year if art.year is not None else "",
+                art.journal or "",
+                art.doi or "",
             ]
         )
 
     output.seek(0)
     filename = "apathy_screening_results.csv"
+
+    return StreamingResponse(
+        output,
+        media_type="text/csv",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
+
+
+@app.get("/export/secondary", response_class=StreamingResponse)
+def export_secondary(request: Request, category: Optional[str] = None, decision: Optional[str] = None, final_only: int = 1, include_unfinal_but_r_any_adopt: int = 0, format: str = "csv"):
+    """二次スクリーニング配布用エクスポート
+    query params:
+      - category: physical|brain|psycho|drug
+      - decision: adopt|exclude|hold
+      - final_only: 1 (default) or 0
+      - include_unfinal_but_r_any_adopt: 1/0
+      - format: csv (only csv supported currently)
+    """
+    user = get_current_user(request)
+    if not user:
+        return RedirectResponse(url="/login")
+
+    if format != "csv":
+        return Response(content="Only csv format supported", status_code=400)
+
+    decision_map = {"exclude": 0, "adopt": 1, "hold": 2}
+    target_dec = decision_map.get(decision) if decision is not None else None
+
+    def article_matches(art, sd_list):
+        # determine final_dec
+        final_dec = getattr(art, "final_decision", None)
+        if final_dec is None:
+            if len(sd_list) >= 2 and sd_list[0][0].decision == sd_list[1][0].decision:
+                final_dec = sd_list[0][0].decision
+        # final-only filter
+        if final_only and final_dec is None:
+            # optionally include when some reviewer adopted/hold
+            if include_unfinal_but_r_any_adopt:
+                has_adopt = any(sd.decision in (1, 2) for sd, _ in sd_list)
+                if not has_adopt:
+                    return False
+            else:
+                return False
+
+        if target_dec is not None and final_dec is not None:
+            if final_dec != target_dec:
+                return False
+
+        # category filter: check final category flags first, otherwise any reviewer
+        if category:
+            cat_field = f"final_cat_{category}"
+            if getattr(art, cat_field, False):
+                return True
+            # fallback: any reviewer has the category
+            for sd, _ in sd_list:
+                if category == "physical" and sd.cat_physical:
+                    return True
+                if category == "brain" and sd.cat_brain:
+                    return True
+                if category == "psycho" and sd.cat_psycho:
+                    return True
+                if category == "drug" and sd.cat_drug:
+                    return True
+            return False
+
+        return True
+
+    from collections import OrderedDict
+
+    with Session(engine) as session:
+        stmt = (
+            select(ScreeningDecision, Article, User)
+            .join(Article, Article.id == ScreeningDecision.article_id)
+            .join(User, User.id == ScreeningDecision.user_id)
+            .order_by(Article.id, User.username)
+        )
+        rows = session.exec(stmt).all()
+
+    articles = OrderedDict()
+    for sd, art, usr in rows:
+        if art.id not in articles:
+            articles[art.id] = {"article": art, "decisions": []}
+        articles[art.id]["decisions"].append((sd, usr))
+
+    output = io.StringIO()
+    output.write("\ufeff")
+    writer = csv.writer(output)
+
+    writer.writerow(["article_id", "pmid", "title_en", "title_ja", "abstract_en", "r1_decision", "r2_decision", "final_decision", "final_category", "pmid_url"])
+
+    for art_id, data in articles.items():
+        art = data["article"]
+        sd_list = data["decisions"]
+        if not article_matches(art, sd_list):
+            continue
+
+        r1 = sd_list[0] if len(sd_list) > 0 else (None, None)
+        r2 = sd_list[1] if len(sd_list) > 1 else (None, None)
+        sd1, usr1 = r1
+        sd2, usr2 = r2
+
+        final_dec = getattr(art, "final_decision", None)
+        if final_dec is None and sd1 is not None and sd2 is not None and sd1.decision == sd2.decision:
+            final_dec = sd1.decision
+
+        final_cats = []
+        if getattr(art, "final_cat_physical", False):
+            final_cats.append("physical")
+        if getattr(art, "final_cat_brain", False):
+            final_cats.append("brain")
+        if getattr(art, "final_cat_psycho", False):
+            final_cats.append("psycho")
+        if getattr(art, "final_cat_drug", False):
+            final_cats.append("drug")
+        if not final_cats and sd1 is not None:
+            # fallback to union of reviewers
+            final_cats = _sd_categories(sd1)
+            if sd2 is not None:
+                final_cats = list(set(final_cats) | set(_sd_categories(sd2)))
+
+        pmid_url = f"https://pubmed.ncbi.nlm.nih.gov/{art.pmid}/" if art.pmid else ""
+
+        writer.writerow([
+            art.id,
+            art.pmid,
+            art.title_en or "",
+            art.title_ja or "",
+            art.abstract_en or "",
+            sd1.decision if sd1 is not None else "",
+            sd2.decision if sd2 is not None else "",
+            final_dec if final_dec is not None else "",
+            "|".join(final_cats) if final_cats else "",
+            pmid_url,
+        ])
+
+    output.seek(0)
+    filename = "apathy_secondary_screening.csv"
 
     return StreamingResponse(
         output,
