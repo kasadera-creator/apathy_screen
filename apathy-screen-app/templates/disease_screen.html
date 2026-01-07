@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+
+{% block title %}病態一次スクリーニング | AMEDアパシー研究{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-3">病態一次スクリーニング</h2>
+
+{# 個人の進捗バー #}
+<div class="mb-3">
+  <p>
+    あなたに割り当てられた病態スクリーニング対象論文：
+    <strong>{{ progress_total }}</strong> 件<br>
+    評価済み：
+    <strong>{{ progress_done }}</strong> 件
+    （<strong>{% if progress_total %}{{ (progress_done * 100 // progress_total) }}{% else %}0{% endif %}%</strong>）
+  </p>
+  <div class="progress" style="height: 18px;">
+    <div
+      class="progress-bar"
+      role="progressbar"
+      style="width: {% if progress_total %}{{ (progress_done * 100 // progress_total) }}{% else %}0{% endif %}%"
+      aria-valuenow="{% if progress_total %}{{ (progress_done * 100 // progress_total) }}{% else %}0{% endif %}"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    >
+      {% if progress_total %}{{ (progress_done * 100 // progress_total) }}{% else %}0{% endif %}%
+    </div>
+  </div>
+</div>
+
+<hr>
+
+{% if not article %}
+  <div class="alert alert-info">
+    現在、あなたに表示できる病態スクリーニング対象論文がありません。<br>
+    すべて評価済みか、割り当てが無い可能性があります。
+  </div>
+{% else %}
+
+  <p class="mb-2">
+    <strong>現在：</strong>
+    {{ current_index }} / {{ progress_total }} （あなたの担当論文）
+  </p>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title mb-2">
+        {% if article.title_ja %}
+          {{ article.title_ja }}
+        {% else %}
+          {{ article.title_en }}
+        {% endif %}
+      </h5>
+      <h6 class="card-subtitle mb-2 text-muted">
+        PMID: {{ article.pmid }}
+        {% if article.year %} | {{ article.year }}{% endif %}
+        {% if article.journal %} | {{ article.journal }}{% endif %}
+      </h6>
+
+      {% if article.citation %}
+        <p class="mb-1"><small>{{ article.citation }}</small></p>
+      {% endif %}
+
+      {% if article.doi %}
+        <p class="mb-2">
+          <a href="https://doi.org/{{ article.doi }}" target="_blank" class="me-2">DOI</a>
+          <a href="https://pubmed.ncbi.nlm.nih.gov/{{ article.pmid }}" target="_blank">PubMed</a>
+        </p>
+      {% endif %}
+
+      <hr>
+
+      <div class="mb-2">
+        <strong>LLM 判定コメント</strong>
+        <p class="mb-1">
+          {% if article.gpt_reason %}
+            {{ article.gpt_reason }}
+          {% else %}
+            <span class="text-muted">（コメントなし）</span>
+          {% endif %}
+        </p>
+      </div>
+
+      <div class="mb-2">
+        <strong>アパシーを来しうる病態・状態（LLM 抽出）</strong>
+        <p class="mb-1">
+          {% if article.condition_list_gpt %}
+            {{ article.condition_list_gpt }}
+          {% else %}
+            <span class="text-muted">（記載なし）</span>
+          {% endif %}
+        </p>
+      </div>
+
+      <div class="mb-2">
+        <strong>アパシーを来しうる病態・状態（Gemini 抽出）</strong>
+        <p class="mb-1">
+          {% if article.condition_list_gemini %}
+            {{ article.condition_list_gemini }}
+          {% else %}
+            <span class="text-muted">（記載なし）</span>
+          {% endif %}
+        </p>
+      </div>
+
+      <hr>
+
+      <details class="mb-2">
+        <summary class="mb-1">抄録（日本語）を表示</summary>
+        <p class="mt-2">
+          {% if article.abstract_ja %}
+            {{ article.abstract_ja }}
+          {% else %}
+            <span class="text-muted">（日本語抄録なし）</span>
+          {% endif %}
+        </p>
+      </details>
+
+      <details>
+        <summary class="mb-1">Abstract（英語）を表示</summary>
+        <p class="mt-2">
+          {% if article.abstract_en %}
+            {{ article.abstract_en }}
+          {% else %}
+            <span class="text-muted">（英語抄録なし）</span>
+          {% endif %}
+        </p>
+      </details>
+    </div>
+  </div>
+
+  {# 評価フォーム #}
+  <form method="post" action="{{ url_for('submit_screen') }}">
+    <input type="hidden" name="article_id" value="{{ article.id }}">
+
+    <div class="mb-3">
+      <label class="form-label">この論文の扱い（病態スクリーニング）</label>
+      <div class="form-check">
+        <input class="form-check-input"
+               type="radio"
+               name="decision"
+               id="dec_keep"
+               value="1"
+               {% if prev_decision == 1 %}checked{% endif %}>
+        <label class="form-check-label" for="dec_keep">
+          残す（アパシー・意欲低下の病態として採用候補）
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input"
+               type="radio"
+               name="decision"
+               id="dec_pending"
+               value="0"
+               {% if prev_decision == 0 %}checked{% endif %}>
+        <label class="form-check-label" for="dec_pending">
+          保留（あとで相談）
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input"
+               type="radio"
+               name="decision"
+               id="dec_exclude"
+               value="-1"
+               {% if prev_decision == -1 %}checked{% endif %}>
+        <label class="form-check-label" for="dec_exclude">
+          除外（アパシー・意欲低下とは無関係）
+        </label>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">この論文の使い方</label>
+      <div class="form-check">
+        <input class="form-check-input"
+               type="checkbox"
+               name="flag_cause"
+               id="flag_cause"
+               value="1"
+               {% if prev_flag_cause %}checked{% endif %}>
+        <label class="form-check-label" for="flag_cause">
+          原因病態リストの候補として使える
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input"
+               type="checkbox"
+               name="flag_treatment"
+               id="flag_treatment"
+               value="1"
+               {% if prev_flag_treatment %}checked{% endif %}>
+        <label class="form-check-label" for="flag_treatment">
+          治療・対応リストの候補として使える
+        </label>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="comment" class="form-label">メモ・コメント</label>
+      <textarea class="form-control"
+                id="comment"
+                name="comment"
+                rows="3">{{ prev_comment or "" }}</textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="jump_index" class="form-label">任意の番号へジャンプ</label>
+      <div class="input-group" style="max-width: 240px;">
+        <input type="number"
+               class="form-control"
+               id="jump_index"
+               name="jump_index"
+               min="1"
+               max="{{ progress_total }}"
+               placeholder="番号を入力">
+        <button class="btn btn-outline-secondary" type="submit" name="nav" value="jump">
+          移動
+        </button>
+      </div>
+      <small class="text-muted">1〜{{ progress_total }} の範囲で指定できます。</small>
+    </div>
+
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-outline-primary" type="submit" name="nav" value="prev">
+        &laquo; 前へ
+      </button>
+      <button class="btn btn-primary" type="submit" name="nav" value="next">
+        保存して次へ &raquo;
+      </button>
+    </div>
+
+  </form>
+
+{% endif %}
+
+{% endblock %}

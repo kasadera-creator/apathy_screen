@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+
+{% block title %}ホーム - AMEDアパシー研究ポータル{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<div class="p-5 mb-5 bg-white rounded-3 shadow-sm border" style="background: linear-gradient(135deg, #4f46e5 0%, #0ea5e9 100%);">
+  <div class="container-fluid py-3 position-relative" style="z-index: 2;">
+    <div class="row align-items-center">
+      <div class="col-lg-8 ps-lg-5">
+        <h1 class="display-4 fw-bold text-white mb-3">
+          <i class="bi bi-grid-1x2-fill me-3 opacity-75"></i>Apathy Research Portal
+        </h1>
+        <p class="fs-5 text-white opacity-90 mb-4 lh-lg">
+          PubMed検索結果から抽出したアパシー・意欲低下関連文献のデータベースおよび、
+          システマティックレビュー（SR）のためのスクリーニング作業を
+          効率的に行うための研究チーム専用ポータルサイトです。
+        </p>
+        
+        {% if not username %}
+          <a class="btn btn-light text-primary fw-bold btn-lg px-4 mt-3 rounded-pill shadow-sm" href="/login">
+            <i class="bi bi-box-arrow-in-right me-2"></i>プロジェクトに参加（ログイン）
+          </a>
+        {% else %}
+          <div class="mt-4">
+            <div class="d-flex flex-wrap gap-3">
+              <a class="btn btn-light text-primary fw-bold rounded-pill px-4 shadow-sm" href="/screen">
+                <i class="bi bi-play-fill me-1"></i>病態スクリーニング
+              </a>
+              <a class="btn btn-outline-light fw-bold rounded-pill px-4" href="/scale_screen">
+                <i class="bi bi-play-fill me-1"></i>尺度スクリーニング
+              </a>
+            </div>
+            <p class="mt-3 mb-0 small text-white opacity-75">
+              <i class="bi bi-person-check me-1"></i>ログイン中: {{ username }} 
+              ({{ GROUP_NAMES[group_no] if group_no in GROUP_NAMES else 'Group ' ~ group_no }})
+            </p>
+          </div>
+        {% endif %}
+      </div>
+      <div class="col-lg-4 text-center d-none d-lg-block">
+        <i class="bi bi-stack text-white opacity-25" style="font-size: 12rem;"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4 mb-5">
+
+  <!-- Column 1: Database -->
+  <div class="col-md-4">
+    <div class="card h-100 border-0 shadow-sm hover-up">
+      <div class="card-body p-4 d-flex flex-column">
+        <div class="d-flex align-items-center mb-3">
+          <div class="icon-box bg-indigo-soft text-indigo rounded-circle me-3">
+            <i class="bi bi-database"></i>
+          </div>
+          <h5 class="card-title fw-bold mb-0 text-dark">文献データベース</h5>
+        </div>
+        <p class="card-text text-muted flex-grow-1">
+          2025年11月実施のPubMed検索結果（8943件）を含む全データを収録。LLMによる予備判定結果や抄録を参照できます。
+        </p>
+        <a href="/database" class="btn btn-outline-dark border-0 bg-light w-100 fw-semibold mt-3 text-start">
+          データベースを開く <i class="bi bi-chevron-right float-end mt-1"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Column 2: Disease Screening -->
+  <div class="col-md-4">
+    <div class="card h-100 border-0 shadow-sm hover-up">
+      <div class="card-body p-4 d-flex flex-column">
+        <div class="d-flex align-items-center mb-3">
+          <div class="icon-box bg-primary-soft text-primary rounded-circle me-3">
+            <i class="bi bi-activity"></i>
+          </div>
+          <h5 class="card-title fw-bold mb-0 text-dark">病態スクリーニング</h5>
+        </div>
+        <p class="card-text text-muted flex-grow-1">
+          アパシーの原因病態・治療法に関する文献選定タスク。AI要約と判定支援機能を活用して効率的に進められます。
+        </p>
+        <a href="/screen" class="btn btn-outline-primary border-0 bg-primary-subtle w-100 fw-semibold mt-3 text-start">
+          タスクを開始する <i class="bi bi-chevron-right float-end mt-1"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Column 3: Scale Screening -->
+  <div class="col-md-4">
+    <div class="card h-100 border-0 shadow-sm hover-up">
+      <div class="card-body p-4 d-flex flex-column">
+        <div class="d-flex align-items-center mb-3">
+          <div class="icon-box bg-success-soft text-success rounded-circle me-3">
+            <i class="bi bi-clipboard-check"></i>
+          </div>
+          <h5 class="card-title fw-bold mb-0 text-dark">尺度スクリーニング</h5>
+        </div>
+        <p class="card-text text-muted flex-grow-1">
+          評価尺度（Scale）に関する文献選定タスク。専用フォームを用いて、レビューに含めるべき尺度論文を特定します。
+        </p>
+        <a href="/scale_screen" class="btn btn-outline-success border-0 bg-success-subtle w-100 fw-semibold mt-3 text-start">
+          タスクを開始する <i class="bi bi-chevron-right float-end mt-1"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Info Section -->
+<div class="row">
+  <div class="col-12">
+    <div class="card border-0 bg-light rounded-3 p-4">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 shadow-sm">
+        <div class="d-flex align-items-center">
+          <div class="text-secondary me-3 display-6"><i class="bi bi-info-circle"></i></div>
+          <div>
+            <h6 class="fw-bold text-dark mb-1">現在のプロジェクトフェーズ</h6>
+            <p class="mb-0 text-muted small">
+              一次スクリーニング（タイトル・抄録確認）進行中。各自の担当分を進めてください。
+            </p>
+          </div>
+        </div>
+        <div>
+          <a href="/dashboard" class="btn btn-outline-secondary btn-sm px-3">
+            <i class="bi bi-bar-chart me-1"></i>全体の進捗を見る
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hover-up {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .hover-up:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 3rem rgba(0,0,0,0.1)!important;
+  }
+  
+  .icon-box {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+  
+  .bg-indigo-soft { background-color: #e0e7ff; }
+  .text-indigo { color: #4f46e5; }
+  
+  .bg-primary-soft { background-color: #dbeafe; }
+  .bg-success-soft { background-color: #dcfce7; }
+</style>
+
+{% endblock %}

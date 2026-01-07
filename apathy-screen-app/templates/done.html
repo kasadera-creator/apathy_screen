@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}グループ {{ group_no }} の一次スクリーニング完了{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h3 class="card-title mb-2">グループ {{ group_no }} の一次スクリーニング</h3>
+    <p class="card-text mb-2">
+      このグループの論文はすべて評価済みです。
+    </p>
+    <p class="card-text text-muted">
+      進捗: {{ progress_done }}/{{ progress_total }}
+    </p>
+    <div class="d-flex gap-2 mt-2">
+      <a href="/screen" class="btn btn-primary">自分の担当画面に戻る</a>
+      <a href="/" class="btn btn-outline-secondary">トップページへ</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

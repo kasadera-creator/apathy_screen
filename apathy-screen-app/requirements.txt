@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+sqlmodel
+jinja2
+python-multipart
+passlib==1.7.4
+itsdangerous

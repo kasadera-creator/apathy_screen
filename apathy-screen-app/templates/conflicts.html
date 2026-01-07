@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+
+{% block title %}合議・コンフリクト解決{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h2 class="fw-bold mb-0"><i class="bi bi-people-fill me-2 text-warning"></i>判定不一致（Conflict）の解決</h2>
+    <p class="text-muted mb-0">評価者間で判定が割れている文献（保留 vs 除外）のリストです。合議の上、判定を統一してください。</p>
+  </div>
+  
+  <!-- フィルタ切り替え -->
+  <div class="d-flex gap-2">
+    <div class="btn-group">
+      <a href="/conflicts?mode=disease&group_no={{ target_group_no }}" class="btn btn-{{ 'primary' if mode == 'disease' else 'outline-primary' }}">病態</a>
+      <a href="/conflicts?mode=scale&group_no={{ target_group_no }}" class="btn btn-{{ 'success' if mode == 'scale' else 'outline-success' }}">尺度</a>
+    </div>
+    <div class="dropdown">
+      <button class="btn btn-light border dropdown-toggle" type="button" data-bs-toggle="dropdown">
+        <!-- 選択中のグループ名を表示 -->
+        {{ GROUP_NAMES[target_group_no] if target_group_no in GROUP_NAMES else 'Group ' ~ target_group_no }}
+      </button>
+      <ul class="dropdown-menu">
+        <!-- GROUP_NAMES からリストを生成 -->
+        {% for gid, gname in GROUP_NAMES.items() %}
+          <li>
+            <a class="dropdown-item {% if gid == target_group_no %}active{% endif %}" 
+               href="/conflicts?mode={{ mode }}&group_no={{ gid }}">
+               {{ gname }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+{# --- 未完了の場合の表示 --- #}
+{% if not is_complete %}
+  <div class="alert alert-secondary border shadow-sm p-5 text-center">
+    <div class="mb-3">
+      <i class="bi bi-hourglass-split display-1 text-secondary opacity-50"></i>
+    </div>
+    <h3 class="fw-bold text-secondary mb-3">時期尚早です</h3>
+    <p class="lead mb-4">
+      このグループ (<strong>{{ GROUP_NAMES[target_group_no] if target_group_no in GROUP_NAMES else 'Group ' ~ target_group_no }}</strong>) の一次スクリーニングはまだ完了していません。<br>
+      メンバー全員が担当分のすべての論文を判定し終えてから、合議を開始してください。
+    </p>
+    <a href="/dashboard" class="btn btn-outline-secondary px-4">
+      <i class="bi bi-bar-chart me-2"></i>ダッシュボードに戻る
+    </a>
+  </div>
+
+{# --- 完了済み: コンフリクトなし --- #}
+{% elif conflicts|length == 0 %}
+  <div class="card border-success shadow-sm">
+    <div class="card-body text-center p-5">
+      <div class="mb-4">
+        <i class="bi bi-check-circle-fill text-success display-1"></i>
+      </div>
+      <h3 class="card-title fw-bold text-success mb-3">コンフリクトなし</h3>
+      <p class="card-text text-muted mb-4 lead">
+        選択されたグループ (<strong>{{ GROUP_NAMES[target_group_no] if target_group_no in GROUP_NAMES else 'Group ' ~ target_group_no }}</strong>) において、協議が必要な判定不一致はありません。<br>
+        一次スクリーニングは完了しました。
+      </p>
+      
+      <div class="d-inline-block bg-light p-4 rounded-3 border">
+        <h6 class="fw-bold mb-3"><i class="bi bi-file-earmark-arrow-down me-2"></i>二次スクリーニング候補リスト (PMID)</h6>
+        <p class="small text-muted mb-3">
+          「採用 (2)」または「保留 (1)」と判定された文献のPMIDリストをダウンロードできます。<br>
+          ダッシュボードからでもダウンロード可能です。
+        </p>
+        <a href="/export_secondary_candidates?mode={{ mode }}&group_no={{ target_group_no }}" class="btn btn-primary fw-bold px-4 py-2">
+          <i class="bi bi-download me-2"></i>PMIDリストをダウンロード (.txt)
+        </a>
+      </div>
+    </div>
+  </div>
+
+{# --- 完了済み: コンフリクトあり --- #}
+{% else %}
+  <div class="alert alert-danger d-flex align-items-center shadow-sm mb-4">
+    <i class="bi bi-exclamation-triangle-fill fs-4 me-3"></i>
+    <div>
+      <strong>要対応：</strong> {{ conflicts|length }} 件の不一致があります。以下のリストを確認し、判定を統一してください。
+    </div>
+  </div>
+
+  <div class="accordion shadow-sm" id="conflictAccordion">
+    {% for item in conflicts %}
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="heading{{ item.id }}">
+          <button class="accordion-button {% if not loop.first %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ item.id }}" aria-expanded="{{ 'true' if loop.first else 'false' }}">
+            <div class="d-flex align-items-center w-100 me-3">
+              <span class="badge bg-secondary me-3 font-monospace">{{ item.pmid }}</span>
+              <span class="text-truncate fw-bold" style="max-width: 600px;">{{ item.title }}</span>
+              
+              <!-- 判定状況の可視化 -->
+              <div class="ms-auto d-flex gap-2">
+                {% for name, val in item.votes.items() if not name.startswith('_') %}
+                  <span class="badge bg-{{ 'secondary' if val==1 else 'danger' }} bg-opacity-75 border text-white">
+                    {{ name }}: {{ '保留(1)' if val==1 else '除外(0)' }}
+                  </span>
+                {% endfor %}
+              </div>
+            </div>
+          </button>
+        </h2>
+        <div id="collapse{{ item.id }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" data-bs-parent="#conflictAccordion">
+          <div class="accordion-body bg-light">
+            
+            <div class="row">
+              <!-- 左側: 論文情報 -->
+              <div class="col-md-8">
+                <div class="bg-white p-3 rounded border mb-3">
+                  <h6 class="fw-bold mb-2">Abstract</h6>
+                  <p class="small text-muted mb-0" style="white-space: pre-wrap;">{{ item.abstract or '(No Abstract)' }}</p>
+                  <div class="mt-2">
+                    {% if item.pmid %}
+                      <a href="https://pubmed.ncbi.nlm.nih.gov/{{ item.pmid }}/" target="_blank" class="btn btn-sm btn-outline-primary me-2">
+                        PubMed <i class="bi bi-box-arrow-up-right"></i>
+                      </a>
+                    {% endif %}
+                    {% if item.doi %}
+                      <a href="https://doi.org/{{ item.doi }}" target="_blank" class="btn btn-sm btn-outline-success">
+                        DOI <i class="bi bi-box-arrow-up-right"></i>
+                      </a>
+                    {% endif %}
+                  </div>
+                </div>
+                
+                <!-- 各ユーザーのコメント表示 -->
+                <div class="d-flex gap-3">
+                  {% for name, val in item.votes.items() if not name.startswith('_') %}
+                    <div class="card flex-fill border-0 shadow-sm">
+                      <div class="card-header py-1 px-3 bg-{{ 'secondary' if val==1 else 'danger' }} bg-opacity-10">
+                        <small class="fw-bold">{{ name }}</small>
+                        <span class="float-end badge bg-{{ 'secondary' if val==1 else 'danger' }}">
+                          {{ '保留(1)' if val==1 else '除外(0)' }}
+                        </span>
+                      </div>
+                      <div class="card-body py-2 px-3">
+                        <small class="text-muted">{{ item.votes['_comment_' + name] or '(コメントなし)' }}</small>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+
+              <!-- 右側: 判定アクション -->
+              <div class="col-md-4 border-start">
+                <h6 class="fw-bold mb-3 text-center">合議による判定を適用</h6>
+                <p class="small text-muted text-center mb-4">
+                  決定した判定で全員の評価を上書き更新します。
+                </p>
+
+                <form method="post" action="/resolve_conflict">
+                  <input type="hidden" name="mode" value="{{ mode }}">
+                  <input type="hidden" name="target_group_no" value="{{ target_group_no }}">
+                  <input type="hidden" name="article_id" value="{{ item.id }}">
+                  
+                  <div class="d-grid gap-3">
+                    <button type="submit" name="resolution" value="1" class="btn btn-outline-primary fw-bold py-3">
+                      <i class="bi bi-check-circle-fill me-2"></i>採用 (保留) にする
+                      <div class="small fw-normal mt-1">フルテキスト審査へ進む</div>
+                    </button>
+                    
+                    <div class="text-center text-muted small">- or -</div>
+
+                    <button type="submit" name="resolution" value="0" class="btn btn-outline-danger fw-bold py-3">
+                      <i class="bi bi-x-circle-fill me-2"></i>除外する
+                      <div class="small fw-normal mt-1">二次スクリーニングに進まない</div>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+{% endif %}
+
+{% endblock %}

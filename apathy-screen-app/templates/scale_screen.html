@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block title %}評価尺度一次スクリーニング{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-2">
+  <div>
+    <h3 class="mb-0">グループ {{ group_no }} のアパシー評価尺度一次スクリーニング</h3>
+    <div class="text-muted small">
+      進捗: {{ progress_done }}/{{ progress_total }}
+      {% if current_index %}
+        （文献番号: {{ current_index }} / {{ progress_total }}）
+      {% endif %}
+    </div>
+  </div>
+  <div class="text-end small">
+    <a href="/" class="text-decoration-none text-secondary me-3">
+      ← トップページ
+    </a>
+    <a href="/dashboard" class="text-decoration-none text-secondary">
+      進捗ダッシュボード
+    </a>
+  </div>
+</div>
+
+{# ---- 論文ヘッダー ---- #}
+<div class="card mb-3 shadow-sm">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-start flex-wrap">
+      <div>
+        <div class="mb-2">
+          <span class="badge bg-secondary me-2">PMID</span>
+          {% if article.pmid %}
+            <a href="https://pubmed.ncbi.nlm.nih.gov/{{ article.pmid }}/" target="_blank" rel="noopener">
+              {{ article.pmid }}
+            </a>
+          {% else %}
+            —
+          {% endif %}
+        </div>
+        {% if article.doi %}
+        <div class="mb-2">
+          <span class="badge bg-info text-dark me-2">DOI</span>
+          <a href="https://doi.org/{{ article.doi }}" target="_blank" rel="noopener">
+            {{ article.doi }}
+          </a>
+        </div>
+        {% endif %}
+      </div>
+      <div class="text-end small text-muted">
+        {{ article.journal or "" }}{% if article.year %}（{{ article.year }}）{% endif %}
+      </div>
+    </div>
+
+    <h4 class="mt-2">{{ article.title_en or "（タイトル不明）" }}</h4>
+    {% if article.title_ja %}
+      <p class="text-muted mb-1">{{ article.title_ja }}</p>
+    {% endif %}
+
+    {% if article.authors %}
+      <p class="mb-0"><strong>Authors:</strong> {{ article.authors }}</p>
+    {% endif %}
+    {% if article.citation %}
+      <p class="mb-0 text-muted small"><strong>Citation:</strong> {{ article.citation }}</p>
+    {% endif %}
+  </div>
+</div>
+
+{# ---- Abstract ---- #}
+<div class="row g-3 mb-3">
+  <div class="col-md-6">
+    <div class="card shadow-sm h-100">
+      <div class="card-body">
+        <h5 class="card-title">Abstract</h5>
+        <p class="card-text" style="white-space:pre-wrap;">{{ article.abstract_en or article.abstract or "No abstract available." }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card shadow-sm h-100">
+      <div class="card-body">
+        <h5 class="card-title">アブストラクト（DeepL）</h5>
+        <p class="card-text" style="white-space:pre-wrap;">{{ article.abstract_ja or "日本語アブストラクトはありません。" }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{# ---- 研究要約（Gemini 2.5 pro / Scale_Summary_ja） ---- #}
+<div class="card mb-3 shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title fw-bold">研究要約（Gemini 2.5 pro）</h5>
+    <p class="card-text" style="white-space:pre-wrap;">{{ article.gemini_summary_ja or "要約情報なし" }}</p>
+  </div>
+</div>
+
+{# ---- LLM 判定（Gemini 2.5 pro） ---- #}
+<div class="card mb-3 shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title fw-bold">LLM 判定（Gemini 2.5 pro）</h5>
+    <p class="mb-2"><strong>判定:</strong> {{ article.gemini_judgement or "—" }}</p>
+    <p class="mb-2"><strong>理由:</strong> {{ article.gemini_reason_ja or "—" }}</p>
+    <p class="mb-0"><strong>候補:</strong> {{ article.gemini_tools or "—" }}</p>
+  </div>
+</div>
+
+{# ---- 一次スクリーニング判定フォーム ---- #}
+<form method="post" action="/scale_screen" class="mt-3">
+  <input type="hidden" name="article_id" value="{{ article.id }}">
+
+  <div class="card mb-3 shadow-sm border-success">
+    <div class="card-body">
+      <div class="mb-4">
+        <label class="form-label fw-bold h5">
+          一次スクリーニング判定
+        </label>
+        <p class="text-muted small mb-2">
+          アパシー・意欲低下に関する評価尺度／評価法として、今回の評価尺度レビューに含める価値があるか
+        </p>
+        
+        <div class="d-flex gap-2">
+          <!-- 判定ボタン (screen.html と同じスタイルに統一) -->
+          <input type="radio" class="btn-check" name="decision" id="dec2" value="2" {% if my_rating == 2 %}checked{% endif %} required>
+          <label class="btn btn-outline-success flex-fill fw-bold py-2" for="dec2">
+            2: 必ず残す (採用)
+          </label>
+
+          <input type="radio" class="btn-check" name="decision" id="dec1" value="1" {% if my_rating == 1 %}checked{% endif %}>
+          <label class="btn btn-outline-secondary flex-fill fw-bold py-2" for="dec1">
+            1: 保留 (本文確認)
+          </label>
+
+          <input type="radio" class="btn-check" name="decision" id="dec0" value="0" {% if my_rating == 0 %}checked{% endif %}>
+          <label class="btn btn-outline-danger flex-fill fw-bold py-2" for="dec0">
+            0: 外す (対象外)
+          </label>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">コメント（任意）</label>
+        <textarea name="comment" rows="3" class="form-control">{{ my_comment }}</textarea>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+        <button class="btn btn-outline-secondary" type="submit" name="nav" value="prev" formnovalidate>
+          <i class="bi bi-chevron-left"></i> 1つ前に戻る
+        </button>
+
+        <div class="d-flex align-items-center gap-2">
+          <span class="small text-muted">No.へ移動:</span>
+          <input type="number" name="jump_index" min="1" max="{{ progress_total }}" class="form-control form-control-sm" style="width:5rem;">
+          <button class="btn btn-outline-secondary btn-sm" type="submit" name="nav" value="jump" formnovalidate>
+            Go
+          </button>
+        </div>
+
+        <button class="btn btn-primary px-4 fw-bold" type="submit" name="nav" value="next">
+          保存して次へ <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+{% endblock %}

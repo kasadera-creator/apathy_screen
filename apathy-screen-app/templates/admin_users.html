@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}ユーザー管理{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center mb-4">
+  <div class="bg-secondary bg-opacity-10 text-secondary p-3 rounded-circle me-3">
+    <i class="bi bi-people-fill fs-3"></i>
+  </div>
+  <div>
+    <h2 class="fw-bold mb-0">ユーザー管理</h2>
+    <p class="text-muted mb-0">ユーザー名、担当グループ、管理者権限の編集</p>
+  </div>
+</div>
+
+<div class="card border-0 shadow-sm">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="bg-light">
+          <tr>
+            <th class="ps-4 py-3">ID</th>
+            <th>ユーザー名</th>
+            <th>担当グループ</th>
+            <th class="text-center">管理者権限</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for u in all_users %}
+            <tr>
+              <td class="ps-4 text-muted fw-bold">{{ u.id }}</td>
+              <td>
+                <div class="fw-bold text-dark">{{ u.username }}</div>
+              </td>
+              <td>
+                <span class="badge bg-light text-dark border">
+                  {{ GROUP_NAMES[u.group_no] if u.group_no in GROUP_NAMES else 'Group ' ~ u.group_no }}
+                </span>
+              </td>
+              <td class="text-center">
+                {% if u.is_admin %}
+                  <span class="badge bg-primary">管理者</span>
+                {% else %}
+                  <span class="text-muted small">-</span>
+                {% endif %}
+              </td>
+              <td class="text-end pe-4">
+                <button type="button" 
+                        class="btn btn-sm btn-outline-secondary"
+                        data-bs-toggle="modal" 
+                        data-bs-target="#editUserModal{{ u.id }}">
+                  <i class="bi bi-pencil me-1"></i>編集
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="editUserModal{{ u.id }}" tabindex="-1" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title fw-bold">ユーザー編集 (ID: {{ u.id }})</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <form method="post" action="/admin/users/update">
+                        <div class="modal-body text-start">
+                          <input type="hidden" name="user_id" value="{{ u.id }}">
+                          
+                          <div class="mb-3">
+                            <label class="form-label fw-bold">ユーザー名</label>
+                            <input type="text" name="username" class="form-control" value="{{ u.username }}" required>
+                          </div>
+                          
+                          <div class="mb-3">
+                            <label class="form-label fw-bold">担当グループ (1-4)</label>
+                            <select name="group_no" class="form-select" required>
+                              {% for gid, gname in GROUP_NAMES.items() %}
+                                <option value="{{ gid }}" {% if u.group_no == gid %}selected{% endif %}>{{ gname }}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                          
+                          <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="is_admin" value="true" id="isAdminCheck{{ u.id }}" {% if u.is_admin %}checked{% endif %} {% if u.id == request.state.user.id %}disabled{% endif %}>
+                            <label class="form-check-label" for="isAdminCheck{{ u.id }}">
+                              管理者権限を付与する
+                            </label>
+                            {% if u.id == request.state.user.id %}
+                              <input type="hidden" name="is_admin" value="true">
+                              <div class="form-text text-warning small">自分自身の管理者権限は外せません。</div>
+                            {% endif %}
+                          </div>
+                          
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-light" data-bs-dismiss="modal">キャンセル</button>
+                          <button type="submit" class="btn btn-primary fw-bold">保存する</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="mt-4">
+  <a href="/settings" class="btn btn-outline-secondary">
+    <i class="bi bi-arrow-left me-1"></i>管理者ダッシュボードに戻る
+  </a>
+</div>
+{% endblock %}

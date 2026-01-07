@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+
+{% block title %}一次スクリーニング{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div>
+    <h3 class="mb-0">グループ {{ group_no }} ({{ GROUP_NAMES[group_no] if group_no in GROUP_NAMES else 'G' ~ group_no }}) の一次スクリーニング</h3>
+    <div class="text-muted small">
+      進捗: {{ progress_done }}/{{ progress_total }}
+      {% if current_index %}
+        （文献番号: {{ current_index }} / {{ progress_total }}）
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{# ---- 論文ヘッダー ---- #}
+<div class="card mb-3 shadow-sm">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-start flex-wrap">
+      <div>
+        <div class="mb-2">
+          <span class="badge bg-secondary me-2">PMID</span>
+          {% if article.pmid %}
+            <a href="https://pubmed.ncbi.nlm.nih.gov/{{ article.pmid }}/" target="_blank" rel="noopener">
+              {{ article.pmid }}
+            </a>
+          {% else %}
+            —
+          {% endif %}
+        </div>
+        {% if article.doi %}
+        <div class="mb-2">
+          <span class="badge bg-info text-dark me-2">DOI</span>
+          <a href="https://doi.org/{{ article.doi }}" target="_blank" rel="noopener">
+            {{ article.doi }}
+          </a>
+        </div>
+        {% endif %}
+      </div>
+      <div class="text-end small text-muted">
+        {{ article.journal or "" }}{% if article.year %}（{{ article.year }}）{% endif %}
+      </div>
+    </div>
+
+    <h4 class="mt-2">{{ article.title_en or "（タイトル不明）" }}</h4>
+    {% if article.title_ja %}
+      <p class="text-muted mb-1">{{ article.title_ja }}</p>
+    {% endif %}
+
+    {% if article.authors %}
+      <p class="mb-0"><strong>Authors:</strong> {{ article.authors }}</p>
+    {% endif %}
+  </div>
+</div>
+
+{# ---- Abstract ---- #}
+<div class="row g-3 mb-3">
+  <div class="col-md-6">
+    <div class="card shadow-sm h-100">
+      <div class="card-body">
+        <h5 class="card-title">Abstract</h5>
+        <p class="card-text" style="white-space:pre-wrap;">{{ article.abstract_en or "No abstract available." }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card shadow-sm h-100">
+      <div class="card-body">
+        <h5 class="card-title">アブストラクト（DeepL）</h5>
+        <p class="card-text" style="white-space:pre-wrap;">{{ article.abstract_ja or "日本語アブストラクトはありません。" }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{# ---- GPT5.1 要約 ---- #}
+<div class="card mb-3 shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title fw-bold">研究要約（GPT5.1）</h5>
+    <p class="card-text" style="white-space:pre-wrap;">{{ article.gpt_reason or "要約情報がありません。" }}</p>
+  </div>
+</div>
+
+{# ---- LLM 判定比較 ---- #}
+<div class="card mb-3 shadow-sm">
+  <div class="card-header bg-light py-2">
+    <h5 class="card-title fw-bold mb-0 text-dark"><i class="bi bi-robot me-2"></i>LLM 判定比較</h5>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-bordered mb-0">
+        <thead class="table-secondary text-center">
+          <tr>
+            <th style="width: 50%;">GPT-5.1</th>
+            <th style="width: 50%;">Gemini 2.5 Pro</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="align-top">
+              <ul class="list-unstyled mb-0 small">
+                <li class="mb-2"><strong>研究方向 (Direction):</strong> {{ article.direction_gpt if article.direction_gpt is not none else "-" }}</li>
+                <li class="mb-2"><strong>アパシーの扱い:</strong> {{ article.apathy_centrality_gpt or "-" }}</li>
+                <li class="mb-2"><strong>年齢層:</strong> {{ article.age_focus_gpt or "-" }}</li>
+                <li class="mb-2"><strong>抽出病態:</strong><br>
+                  <span class="text-primary">{{ article.condition_list_gpt or "-" }}</span>
+                </li>
+                <li><strong>総合判定:</strong> {{ article.judgement_gpt or "-" }}</li>
+              </ul>
+            </td>
+            <td class="align-top">
+              <ul class="list-unstyled mb-0 small">
+                <li class="mb-2"><strong>研究方向 (Direction):</strong> {{ article.direction_gemini if article.direction_gemini is not none else "-" }}</li>
+                <li class="mb-2"><strong>アパシーの扱い:</strong> {{ article.apathy_centrality_gemini or "-" }}</li>
+                <li class="mb-2"><strong>年齢層:</strong> {{ article.age_focus_gemini or "-" }}</li>
+                <li class="mb-2"><strong>抽出病態:</strong><br>
+                  <span class="text-success">{{ article.condition_list_gemini or "-" }}</span>
+                </li>
+                <li><strong>総合判定:</strong> {{ article.judgement_gemini or "-" }}</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<form method="post" action="/screen" class="mt-3">
+  <input type="hidden" name="article_id" value="{{ article.id }}">
+
+  <div class="card mb-3 shadow-sm border-primary">
+    <div class="card-body">
+      <div class="mb-4">
+        <label class="form-label fw-bold h5">
+          一次スクリーニング判定
+        </label>
+        <p class="text-muted small mb-2">アパシー・意欲低下をきたす病態・状態を調査するために、本文を入手して読む価値があるか</p>
+        
+        <div class="d-flex gap-2">
+          <!-- 判定ボタン -->
+          <input type="radio" class="btn-check" name="decision" id="dec2" value="2" {% if prev_decision == 2 %}checked{% endif %} required onchange="toggleCategories()">
+          <label class="btn btn-outline-success flex-fill fw-bold py-2" for="dec2">
+            2: 必ず残す (採用)
+          </label>
+
+          <input type="radio" class="btn-check" name="decision" id="dec1" value="1" {% if prev_decision == 1 %}checked{% endif %} onchange="toggleCategories()">
+          <label class="btn btn-outline-secondary flex-fill fw-bold py-2" for="dec1">
+            1: 保留 (本文確認)
+          </label>
+
+          <input type="radio" class="btn-check" name="decision" id="dec0" value="0" {% if prev_decision == 0 %}checked{% endif %} onchange="toggleCategories()">
+          <label class="btn btn-outline-danger flex-fill fw-bold py-2" for="dec0">
+            0: 外す (対象外)
+          </label>
+        </div>
+      </div>
+
+      <!-- カテゴリー分類 (判定2 または 1 の時のみ表示) -->
+      <div id="category-section" class="mb-4 p-3 bg-light border rounded" style="display: none;">
+        <label class="form-label fw-bold text-success">
+          <i class="bi bi-tags-fill me-1"></i>カテゴリー分類 (複数選択可)
+        </label>
+        <p class="text-muted small mb-2">
+          「採用」または「保留」の場合、該当する要因カテゴリーを選択してください。
+        </p>
+        
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="checkbox" name="cat_physical" id="cat_physical" value="1" {% if prev_cat_physical %}checked{% endif %}>
+          <label class="form-check-label" for="cat_physical">
+            ① 身体的要因（内科疾患、疼痛などを含む）
+          </label>
+        </div>
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="checkbox" name="cat_brain" id="cat_brain" value="1" {% if prev_cat_brain %}checked{% endif %}>
+          <label class="form-check-label" for="cat_brain">
+            ② 脳器質的要因 (認知症、パーキンソン病含む)
+          </label>
+        </div>
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="checkbox" name="cat_psycho" id="cat_psycho" value="1" {% if prev_cat_psycho %}checked{% endif %}>
+          <label class="form-check-label" for="cat_psycho">
+            ③ 心理・環境要因 (精神疾患含む)
+          </label>
+        </div>
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="checkbox" name="cat_drug" id="cat_drug" value="1" {% if prev_cat_drug %}checked{% endif %}>
+          <label class="form-check-label" for="cat_drug">
+            ④ 薬剤要因（特定の薬がアパシー・無関心を誘発・増悪させる可能性）
+          </label>
+        </div>
+      </div>
+
+      <div class="mb-3">
+      <h5 class="card-title fw-bold">コメント（任意）</h5>
+        <textarea name="comment" rows="3" class="form-control">{{ prev_comment }}</textarea>
+      </div>
+
+  <div class="card mb-3 shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title fw-bold">追加チェック</h5>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="flag_treatment" value="1" id="flag_treatment" {% if prev_flag_treatment %}checked{% endif %}>
+        <label class="form-check-label" for="flag_treatment">治療法・対応法リスト作成にも使えそう</label>
+      </div>
+    </div>
+  </div>
+
+      <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+        <button class="btn btn-outline-secondary" type="submit" name="nav" value="prev" formnovalidate>
+          <i class="bi bi-chevron-left"></i> 1つ前に戻る
+        </button>
+
+        <div class="d-flex align-items-center gap-2">
+          <span class="small text-muted">No.へ移動:</span>
+          <input type="number" name="jump_index" min="1" max="{{ progress_total }}" class="form-control form-control-sm" style="width:5rem;">
+          <button class="btn btn-outline-secondary btn-sm" type="submit" name="nav" value="jump" formnovalidate>
+            Go
+          </button>
+        </div>
+
+        <button class="btn btn-primary px-4 fw-bold" type="submit" name="nav" value="next">
+          保存して次へ <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<script>
+  function toggleCategories() {
+    const dec2 = document.getElementById('dec2').checked;
+    const dec1 = document.getElementById('dec1').checked;
+    const catSection = document.getElementById('category-section');
+    
+    // 判定2 または 判定1 が選択されている場合に表示
+    if (dec2 || dec1) {
+      catSection.style.display = 'block';
+    } else {
+      catSection.style.display = 'none';
+    }
+  }
+  // 初期表示時の実行
+  document.addEventListener('DOMContentLoaded', toggleCategories);
+</script>
+
+{% endblock %}

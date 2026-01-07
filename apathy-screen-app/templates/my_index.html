@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}担当文献一覧（病態）{% endblock %}
+
+{% block content %}
+
+<!-- Header -->
+<div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+  <div>
+    <h2 class="fw-bold mb-1">
+      <i class="bi bi-list-ul text-primary me-2"></i>担当文献一覧
+    </h2>
+    <div class="d-flex align-items-center gap-2 mt-2">
+      <span class="badge bg-primary-subtle text-primary-emphasis border border-primary-subtle">
+        <i class="bi bi-person me-1"></i>{{ view_user.username }}
+      </span>
+      <span class="badge bg-light text-dark border">
+        Group {{ view_user.group_no }}
+      </span>
+      <span class="text-muted small ms-1">病態スクリーニング</span>
+    </div>
+  </div>
+  
+  <div class="text-end">
+    <div class="text-muted small mb-1">進捗状況</div>
+    <div class="d-flex align-items-center gap-2">
+      <div class="progress" style="width: 150px; height: 10px;">
+        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ progress_pct }}%"></div>
+      </div>
+      <span class="fw-bold text-primary">{{ progress_pct }}%</span>
+    </div>
+    <div class="small text-muted">{{ progress_done }} / {{ progress_total }} 件</div>
+  </div>
+</div>
+
+<!-- List -->
+<div class="card border-0 shadow-sm">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="bg-light">
+          <tr>
+            <th class="ps-4 py-3" style="width: 60px;">#</th>
+            <th style="width: 110px;">PMID</th>
+            <th>タイトル</th>
+            <th style="width: 100px;">状態</th>
+            <th style="width: 80px;" class="text-center">判定</th>
+            <th style="width: 100px;"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for art, dec in rows %}
+            <tr>
+              <td class="ps-4 text-muted fw-bold">{{ loop.index }}</td>
+              <td>
+                <a href="https://pubmed.ncbi.nlm.nih.gov/{{ art.pmid }}/" target="_blank" class="badge bg-light text-secondary border text-decoration-none font-monospace">
+                  {{ art.pmid }} <i class="bi bi-box-arrow-up-right ms-1" style="font-size:0.7em"></i>
+                </a>
+              </td>
+              <td>
+                <div class="fw-bold text-dark mb-1" style="font-size: 0.95rem; line-height: 1.4;">
+                  {{ art.title_ja or art.title_en }}
+                </div>
+                {% if art.title_ja and art.title_en %}
+                  <div class="text-muted small text-truncate" style="max-width: 500px;">{{ art.title_en }}</div>
+                {% endif %}
+              </td>
+              <td>
+                {% if dec %}
+                  <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill">
+                    <i class="bi bi-check-circle-fill me-1"></i>済
+                  </span>
+                {% else %}
+                  <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle rounded-pill">未</span>
+                {% endif %}
+              </td>
+              <td class="fw-bold text-center fs-5 text-secondary">
+                {% if dec %}
+                  {{ dec.decision }}
+                {% else %}
+                  <span class="text-black-50">-</span>
+                {% endif %}
+              </td>
+              <td class="text-end pe-3">
+                <a class="btn btn-sm btn-outline-primary rounded-pill px-3"
+                   href="/screen?article_index={{ loop.index }}&group_no={{ view_user.group_no }}">
+                  確認 <i class="bi bi-chevron-right ms-1"></i>
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

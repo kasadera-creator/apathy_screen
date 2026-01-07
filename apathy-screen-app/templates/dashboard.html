@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+
+{% block title %}全体進捗ダッシュボード{% endblock %}
+
+{% block content %}
+
+<div class="d-flex align-items-center mb-4">
+  <div class="bg-warning-soft text-warning p-3 rounded-circle me-3">
+    <i class="bi bi-speedometer2 fs-3 text-dark"></i>
+  </div>
+  <div>
+    <h2 class="fw-bold mb-0">全体進捗ダッシュボード</h2>
+    <p class="text-muted mb-0">プロジェクト全体の進捗状況と各メンバーのステータス</p>
+  </div>
+</div>
+
+<!-- アクションエリア（条件分岐） -->
+
+<!-- 1. 病態スクリーニングのアクション -->
+{% if is_disease_complete %}
+  {% if has_disease_conflicts %}
+    <div class="alert alert-warning border-warning shadow-sm mb-4 d-flex align-items-center justify-content-between">
+      <div>
+        <h5 class="alert-heading fw-bold mb-1"><i class="bi bi-exclamation-circle-fill me-2"></i>[病態] 合議が必要です</h5>
+        <p class="mb-0 small text-dark">
+          一次スクリーニングが完了しましたが、判定の不一致（コンフリクト）があります。合議画面で解消してください。
+        </p>
+      </div>
+      <a href="/conflicts?mode=disease&group_no={{ group_no }}" class="btn btn-warning text-dark fw-bold px-4 shadow-sm">
+        <i class="bi bi-people-fill me-2"></i>病態の合議を開始
+      </a>
+    </div>
+  {% else %}
+    <div class="alert alert-success border-success shadow-sm mb-4 d-flex align-items-center justify-content-between">
+      <div>
+        <h5 class="alert-heading fw-bold mb-1"><i class="bi bi-check-circle-fill me-2"></i>[病態] 一次スクリーニング完了！</h5>
+        <p class="mb-0 small text-dark">
+          全員の判定が完了し、コンフリクトもありません。二次スクリーニング用の候補リストをダウンロードできます。
+        </p>
+      </div>
+      <a href="/export_secondary_candidates?mode=disease&group_no={{ group_no }}" class="btn btn-success fw-bold px-4 shadow-sm">
+        <i class="bi bi-download me-2"></i>候補PMID (病態)
+      </a>
+    </div>
+  {% endif %}
+{% endif %}
+
+<!-- 2. 尺度スクリーニングのアクション -->
+{% if is_scale_complete %}
+  {% if has_scale_conflicts %}
+    <div class="alert alert-warning border-warning shadow-sm mb-4 d-flex align-items-center justify-content-between">
+      <div>
+        <h5 class="alert-heading fw-bold mb-1"><i class="bi bi-exclamation-circle-fill me-2"></i>[尺度] 合議が必要です</h5>
+        <p class="mb-0 small text-dark">
+          一次スクリーニングが完了しましたが、判定の不一致（コンフリクト）があります。合議画面で解消してください。
+        </p>
+      </div>
+      <a href="/conflicts?mode=scale&group_no={{ group_no }}" class="btn btn-warning text-dark fw-bold px-4 shadow-sm">
+        <i class="bi bi-people-fill me-2"></i>尺度の合議を開始
+      </a>
+    </div>
+  {% else %}
+    <div class="alert alert-success border-success shadow-sm mb-4 d-flex align-items-center justify-content-between">
+      <div>
+        <h5 class="alert-heading fw-bold mb-1"><i class="bi bi-check-circle-fill me-2"></i>[尺度] 一次スクリーニング完了！</h5>
+        <p class="mb-0 small text-dark">
+          全員の判定が完了し、コンフリクトもありません。二次スクリーニング用の候補リストをダウンロードできます。
+        </p>
+      </div>
+      <a href="/export_secondary_candidates?mode=scale&group_no={{ group_no }}" class="btn btn-success fw-bold px-4 shadow-sm">
+        <i class="bi bi-download me-2"></i>候補PMID (尺度)
+      </a>
+    </div>
+  {% endif %}
+{% endif %}
+
+
+<!-- 全体サマリー -->
+<div class="row g-4 mb-5">
+  <div class="col-md-6">
+    <div class="card h-100 border-0 shadow-sm bg-primary text-white position-relative overflow-hidden">
+      <div class="card-body p-4 position-relative" style="z-index: 2;">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <div>
+            <h5 class="fw-bold opacity-75"><i class="bi bi-activity me-2"></i>病態スクリーニング</h5>
+            <h2 class="display-4 fw-bold mb-0">{{ overall_dis_rated }}</h2>
+            <p class="opacity-75">完了 / 全 {{ overall_dis_total }} 件</p>
+          </div>
+          <div class="text-end">
+            <span class="display-6 fw-bold">{{ "%.1f"|format(overall_dis_pct) }}%</span>
+          </div>
+        </div>
+        <div class="progress bg-white bg-opacity-25" style="height: 8px;">
+          <div class="progress-bar bg-white" role="progressbar" style="width: {{ overall_dis_pct }}%"></div>
+        </div>
+      </div>
+      <!-- Decoration -->
+      <i class="bi bi-activity position-absolute bottom-0 end-0 mb-n3 me-n3 text-white opacity-25" style="font-size: 6rem;"></i>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card h-100 border-0 shadow-sm bg-success text-white position-relative overflow-hidden">
+      <div class="card-body p-4 position-relative" style="z-index: 2;">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <div>
+            <h5 class="fw-bold opacity-75"><i class="bi bi-clipboard-check me-2"></i>尺度スクリーニング</h5>
+            <h2 class="display-4 fw-bold mb-0">{{ overall_scale_rated }}</h2>
+            <p class="opacity-75">完了 / 全 {{ overall_scale_total }} 件</p>
+          </div>
+          <div class="text-end">
+            <span class="display-6 fw-bold">{{ "%.1f"|format(overall_scale_pct) }}%</span>
+          </div>
+        </div>
+        <div class="progress bg-white bg-opacity-25" style="height: 8px;">
+          <div class="progress-bar bg-white" role="progressbar" style="width: {{ overall_scale_pct }}%"></div>
+        </div>
+      </div>
+      <!-- Decoration -->
+      <i class="bi bi-clipboard-check position-absolute bottom-0 end-0 mb-n3 me-n3 text-white opacity-25" style="font-size: 6rem;"></i>
+    </div>
+  </div>
+</div>
+
+<!-- ユーザー別進捗テーブル -->
+<div class="card border-0 shadow-sm mb-5">
+  <div class="card-header bg-white py-3 px-4 border-bottom-0">
+    <h5 class="mb-0 fw-bold"><i class="bi bi-people-fill text-secondary me-2"></i>ユーザー別進捗状況</h5>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="bg-light text-secondary small text-uppercase">
+          <tr>
+            <th class="ps-4 py-3">User</th>
+            <th>Group</th>
+            <th class="text-center">Disease Progress</th>
+            <th style="width: 30%;"></th>
+            <th class="text-center">Scale Progress</th>
+            <th style="width: 30%;"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in rows %}
+            <tr>
+              <td class="ps-4 fw-bold text-dark">
+                <div class="d-flex align-items-center">
+                  <div class="bg-light rounded-circle p-2 me-2 text-secondary">
+                    <i class="bi bi-person-fill"></i>
+                  </div>
+                  {{ row.username }}
+                </div>
+              </td>
+              <!-- グループ名の表示変更 -->
+              <td>
+                <span class="badge bg-light text-dark border">
+                  {{ GROUP_NAMES[row.group_no] if row.group_no in GROUP_NAMES else 'Group ' ~ row.group_no }}
+                </span>
+              </td>
+
+              <!-- 病態 -->
+              <td class="text-center small">
+                <span class="fw-bold">{{ row.dis_rated }}</span> / {{ row.dis_total }}
+              </td>
+              <td class="pe-4">
+                <a href="/my_index?target_user_id={{ row.id }}" class="text-decoration-none" title="病態詳細リストへ">
+                  <div class="d-flex align-items-center">
+                    <div class="progress flex-grow-1" style="height: 8px;">
+                      <div class="progress-bar bg-primary" role="progressbar" style="width: {{ row.dis_pct }}%"></div>
+                    </div>
+                    <span class="ms-2 small text-primary fw-bold" style="width: 35px; text-align: right;">{{ "%.0f"|format(row.dis_pct) }}%</span>
+                  </div>
+                </a>
+              </td>
+
+              <!-- 尺度 -->
+              <td class="text-center small">
+                <span class="fw-bold">{{ row.scale_rated }}</span> / {{ row.scale_total }}
+              </td>
+              <td class="pe-4">
+                <a href="/scale_my_index?target_user_id={{ row.id }}" class="text-decoration-none" title="尺度詳細リストへ">
+                  <div class="d-flex align-items-center">
+                    <div class="progress flex-grow-1" style="height: 8px;">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: {{ row.scale_pct }}%"></div>
+                    </div>
+                    <span class="ms-2 small text-success fw-bold" style="width: 35px; text-align: right;">{{ "%.0f"|format(row.scale_pct) }}%</span>
+                  </div>
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- 結果ダウンロードエリア -->
+<div class="card border-0 shadow-sm bg-light">
+  <div class="card-body p-4">
+    <div class="row align-items-center">
+      <div class="col-md-7">
+        <h5 class="fw-bold text-dark"><i class="bi bi-database-down me-2"></i>データバックアップ</h5>
+        <p class="text-muted mb-md-0 small">
+          現在の判定状況（全データ）をCSV形式でダウンロードします。<br>
+          ※ 二次スクリーニング用候補リストではなく、全判定データのバックアップです。
+        </p>
+      </div>
+      <div class="col-md-5 text-md-end">
+        <div class="d-flex gap-2 justify-content-md-end">
+          <a href="{{ request.app.url_path_for('download_disease') }}" class="btn btn-white border shadow-sm text-secondary fw-bold">
+            <i class="bi bi-file-earmark-spreadsheet me-1"></i>病態 (CSV)
+          </a>
+          <a href="{{ request.app.url_path_for('download_scale') }}" class="btn btn-white border shadow-sm text-secondary fw-bold">
+            <i class="bi bi-file-earmark-spreadsheet me-1"></i>尺度 (CSV)
+          </a>
+          <!-- カテゴリ別ダウンロード（病態：各カテゴリ） -->
+          <div class="btn-group">
+            <button type="button" class="btn btn-success fw-bold dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-download me-1"></i>カテゴリ別 (病態)
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="/export_category_physical?group_no={{ group_no }}">Physical カテゴリ (CSV)</a></li>
+              <li><a class="dropdown-item" href="/export_category_brain?group_no={{ group_no }}">Brain カテゴリ (CSV)</a></li>
+              <li><a class="dropdown-item" href="/export_category_psycho?group_no={{ group_no }}">Psycho カテゴリ (CSV)</a></li>
+              <li><a class="dropdown-item" href="/export_category_drug?group_no={{ group_no }}">Drug カテゴリ (CSV)</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .bg-warning-soft { background-color: #fef3c7; }
+</style>
+
+{% endblock %}

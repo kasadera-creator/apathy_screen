@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block title %}文献データベース{% endblock %}
+
+{% block content %}
+
+<div class="d-flex align-items-center mb-4">
+  <div class="bg-indigo-soft text-indigo p-3 rounded-circle me-3">
+    <i class="bi bi-database fs-3"></i>
+  </div>
+  <div>
+    <h2 class="fw-bold mb-0">文献データベース</h2>
+    <p class="text-muted mb-0">PubMed検索結果およびLLMによる予備解析済みデータセット</p>
+  </div>
+</div>
+
+<div class="alert alert-light border shadow-sm mb-5">
+  <h5 class="alert-heading fw-bold"><i class="bi bi-info-circle-fill text-primary me-2"></i>データセットについて</h5>
+  <p class="mb-0 text-muted small">
+    本プロジェクトで使用している文献データは、2025年11月18日にPubMedにて検索・取得されたものです。<br>
+    以下の各フェーズにおけるデータセットをダウンロード可能です。
+  </p>
+</div>
+
+<div class="row g-4">
+
+  <!-- Set A: All -->
+  <div class="col-lg-6">
+    <div class="card h-100 border-0 shadow-sm">
+      <div class="card-header bg-white border-bottom-0 pt-4 px-4 pb-0">
+        <span class="badge bg-secondary mb-2">Original</span>
+        <h5 class="card-title fw-bold">セットA：全検索結果</h5>
+      </div>
+      <div class="card-body px-4">
+        <p class="card-text text-muted small">
+          PubMed検索式によりヒットした全文献データ。<br>
+          <span class="fw-bold">件数: 8,943件</span>
+        </p>
+      </div>
+      <div class="card-footer bg-light border-top-0 p-3">
+        <div class="d-grid gap-2">
+          <a href="/static/ris/apathy_8943.ris" class="btn btn-outline-secondary btn-sm text-start">
+            <i class="bi bi-download me-2"></i>apathy_8943.ris <span class="float-end small text-muted">RIS形式</span>
+          </a>
+          <a href="/static/ris/apathy_8943.txt" class="btn btn-outline-secondary btn-sm text-start">
+            <i class="bi bi-file-text me-2"></i>apathy_8943.txt <span class="float-end small text-muted">PMIDリスト</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Set B: LLM Filtered -->
+  <div class="col-lg-6">
+    <div class="card h-100 border-0 shadow-sm">
+      <div class="card-header bg-white border-bottom-0 pt-4 px-4 pb-0">
+        <span class="badge bg-info text-dark mb-2">Step 1 Filtered</span>
+        <h5 class="card-title fw-bold">セットB：LLM一次フィルタ通過</h5>
+      </div>
+      <div class="card-body px-4">
+        <p class="card-text text-muted small">
+          LLMにより「明らかに無関係な文献」を除外したセット。<br>
+          <span class="fw-bold">件数: 5,432件</span>
+        </p>
+      </div>
+      <div class="card-footer bg-light border-top-0 p-3">
+        <div class="d-grid gap-2">
+          <a href="/static/ris/apathy_5432.ris" class="btn btn-outline-info btn-sm text-start text-dark">
+            <i class="bi bi-download me-2"></i>apathy_5432.ris <span class="float-end small text-muted">RIS形式</span>
+          </a>
+          <a href="/static/ris/apathy_5432.txt" class="btn btn-outline-info btn-sm text-start text-dark">
+            <i class="bi bi-file-text me-2"></i>apathy_5432.txt <span class="float-end small text-muted">PMIDリスト</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Set C: Disease Candidates -->
+  <div class="col-lg-6">
+    <div class="card h-100 border-0 shadow-sm border-start border-primary border-4">
+      <div class="card-header bg-white border-bottom-0 pt-4 px-4 pb-0">
+        <span class="badge bg-primary mb-2">For Disease Review</span>
+        <h5 class="card-title fw-bold text-primary">セットC：病態・原因候補</h5>
+      </div>
+      <div class="card-body px-4">
+        <p class="card-text text-muted small">
+          アパシーの原因病態、背景疾患、治療介入などに関連する可能性が高いとLLMが判定した文献群。<br>
+          <strong>病態スクリーニングの対象です。</strong><br>
+          <span class="fw-bold">件数: 3,416件</span>
+        </p>
+      </div>
+      <div class="card-footer bg-white border-top-0 p-3">
+        <div class="d-grid gap-2">
+          <a href="/static/ris/apathy_3416.ris" class="btn btn-primary btn-sm text-start">
+            <i class="bi bi-download me-2"></i>apathy_3416.ris <span class="float-end small text-white-50">RIS形式</span>
+          </a>
+          <a href="/static/ris/apathy_3416.txt" class="btn btn-outline-primary btn-sm text-start">
+            <i class="bi bi-file-text me-2"></i>apathy_3416.txt <span class="float-end small text-muted">PMIDリスト</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Set D: Scale Candidates -->
+  <div class="col-lg-6">
+    <div class="card h-100 border-0 shadow-sm border-start border-success border-4">
+      <div class="card-header bg-white border-bottom-0 pt-4 px-4 pb-0">
+        <span class="badge bg-success mb-2">For Scale Review</span>
+        <h5 class="card-title fw-bold text-success">セットD：評価尺度・スケール</h5>
+      </div>
+      <div class="card-body px-4">
+        <p class="card-text text-muted small">
+          アパシーの評価尺度（Scale）、測定法、妥当性検証などに関連する文献群。<br>
+          <strong>尺度スクリーニングの対象です。</strong><br>
+          <span class="fw-bold">件数: 731件</span>
+        </p>
+      </div>
+      <div class="card-footer bg-white border-top-0 p-3">
+        <div class="d-grid gap-2">
+          <a href="/static/ris/apathy_scales.ris" class="btn btn-success btn-sm text-start">
+            <i class="bi bi-download me-2"></i>apathy_scales.ris <span class="float-end small text-white-50">RIS形式</span>
+          </a>
+          <a href="/static/ris/apathy_scales.nbib" class="btn btn-outline-success btn-sm text-start">
+            <i class="bi bi-download me-2"></i>apathy_scales.nbib <span class="float-end small text-muted">PubMed形式</span>
+          </a>
+          <a href="/static/ris/apathy_scales.txt" class="btn btn-outline-success btn-sm text-start">
+            <i class="bi bi-file-text me-2"></i>apathy_scales.txt <span class="float-end small text-muted">PMIDリスト</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="mt-5">
+  <h5 class="fw-bold mb-3">文献管理ソフトへの取り込み方法</h5>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card bg-light border-0">
+        <div class="card-body">
+          <h6 class="fw-bold"><i class="bi bi-book me-2"></i>EndNote / Mendeley / Zotero</h6>
+          <p class="small text-muted mb-0">
+            メニューの「File &gt; Import」から、ダウンロードした <code>.ris</code> ファイルを選択してください。形式は「Reference Manager (RIS)」を指定するとスムーズです。
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card bg-light border-0">
+        <div class="card-body">
+          <h6 class="fw-bold"><i class="bi bi-list-ol me-2"></i>PubMed (PMIDリスト)</h6>
+          <p class="small text-muted mb-0">
+            <code>.txt</code> ファイルはPMIDのリストです。PubMedの検索ボックスにそのまま貼り付ければ検索結果のように表示できます。その後、Advanced Searchで利用可能です。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .bg-indigo-soft { background-color: #e0e7ff; }
+  .text-indigo { color: #4f46e5; }
+</style>
+
+{% endblock %}
