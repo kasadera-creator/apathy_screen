@@ -1,0 +1,29 @@
+# OS / editor
+.DS_Store
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.env.*
+
+# Conda / virtual envs
+miniconda3/
+anaconda3/
+
+# Logs
+*.log
+
+# Databases (絶対にGitに入れない)
+*.db
+*.sqlite
+*.sqlite3
+db_backup/
+db_rescue/
+
+# RIS / 文献データ（巨大）
+static/ris/
+data/*.xlsx
