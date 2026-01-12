@@ -290,7 +290,9 @@ def index(request: Request):
 def database(request: Request):
     user = get_current_user(request)
     with Session(engine) as session:
-        articles = session.exec(select(Article).order_by(Article.id)).all()
+        # select minimal columns to avoid errors when newer Article columns are missing
+        rows = session.exec(select(Article.id, Article.pmid, Article.title_en, Article.title_ja, Article.year).order_by(Article.id)).all()
+        articles = [SimpleNamespace(id=r[0], pmid=r[1], title_en=r[2], title_ja=r[3], year=r[4]) for r in rows]
     return templates.TemplateResponse("database.html", {
         "request": request, "articles": articles,
         "username": user.username if user else None,
@@ -705,12 +707,19 @@ def my_index(request: Request, target_user_id: Optional[int] = Query(None)):
         done_count = session.exec(select(func.count(ScreeningDecision.id)).where(
             (ScreeningDecision.user_id == view_user.id) & (ScreeningDecision.article_id.in_(id_list)) & (ScreeningDecision.decision.is_not(None))
         )).one() if id_list else 0
-        stmt = select(Article, ScreeningDecision).join(
-            ScreeningDecision, 
-            (ScreeningDecision.article_id == Article.id) & (ScreeningDecision.user_id == view_user.id), 
-            isouter=True
+        # select minimal Article columns + decision to avoid loading missing Article columns
+        fields = [Article.id, Article.pmid, Article.title_en, Article.title_ja, ScreeningDecision.decision]
+        stmt = select(*fields).join(
+            ScreeningDecision,
+            (ScreeningDecision.article_id == Article.id) & (ScreeningDecision.user_id == view_user.id),
+            isouter=True,
         ).where(Article.id.in_(id_list)).order_by(Article.id)
-        rows = session.exec(stmt).all()
+        raw = session.exec(stmt).all()
+        rows = []
+        for r in raw:
+            art = SimpleNamespace(id=r[0], pmid=r[1], title_en=r[2], title_ja=r[3])
+            dec = SimpleNamespace(decision=r[4]) if r[4] is not None else None
+            rows.append((art, dec))
     return templates.TemplateResponse("my_index.html", {
         "request": request, "rows": rows, "username": current_user.username, "group_no": current_user.group_no,
         "view_user": view_user, "current_page": "my_index", 
@@ -731,12 +740,18 @@ def scale_my_index(request: Request, target_user_id: Optional[int] = Query(None)
         done_count = session.exec(select(func.count(ScaleScreeningDecision.id)).where(
             (ScaleScreeningDecision.user_id == view_user.id) & (ScaleScreeningDecision.scale_article_id.in_(id_list)) & (ScaleScreeningDecision.rating.is_not(None))
         )).one() if id_list else 0
-        stmt = select(ScaleArticle, ScaleScreeningDecision).join(
-            ScaleScreeningDecision, 
-            (ScaleScreeningDecision.scale_article_id == ScaleArticle.id) & (ScaleScreeningDecision.user_id == view_user.id), 
-            isouter=True
+        fields = [ScaleArticle.id, ScaleArticle.pmid, ScaleArticle.title_en, ScaleArticle.title_ja, ScaleScreeningDecision.rating]
+        stmt = select(*fields).join(
+            ScaleScreeningDecision,
+            (ScaleScreeningDecision.scale_article_id == ScaleArticle.id) & (ScaleScreeningDecision.user_id == view_user.id),
+            isouter=True,
         ).where(ScaleArticle.id.in_(id_list)).order_by(ScaleArticle.id)
-        rows = session.exec(stmt).all()
+        raw = session.exec(stmt).all()
+        rows = []
+        for r in raw:
+            art = SimpleNamespace(id=r[0], pmid=r[1], title_en=r[2], title_ja=r[3])
+            dec = SimpleNamespace(rating=r[4]) if r[4] is not None else None
+            rows.append((art, dec))
     return templates.TemplateResponse("scale_my_index.html", {
         "request": request, "rows": rows, "username": current_user.username, "group_no": current_user.group_no,
         "view_user": view_user, "current_page": "scale_my_index", 
