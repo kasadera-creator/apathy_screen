@@ -38,9 +38,14 @@
           全員の判定が完了し、コンフリクトもありません。二次スクリーニング用の候補リストをダウンロードできます。
         </p>
       </div>
-      <a href="/export_secondary_candidates?mode=disease&group_no={{ group_no }}" class="btn btn-success fw-bold px-4 shadow-sm">
-        <i class="bi bi-download me-2"></i>候補PMID (病態)
-      </a>
+      <div class="btn-group">
+        <a href="/export_secondary_candidates?mode=disease&group_no={{ group_no }}" class="btn btn-success fw-bold px-4 shadow-sm">
+          <i class="bi bi-download me-2"></i>候補PMID (病態・各グループ)
+        </a>
+        <a href="/export_secondary_candidates?mode=disease&all_groups=true" class="btn btn-outline-success fw-bold px-3 shadow-sm" title="全グループの候補をまとめてダウンロード">
+          全グループ
+        </a>
+      </div>
     </div>
   {% endif %}
 {% endif %}
@@ -67,9 +72,14 @@
           全員の判定が完了し、コンフリクトもありません。二次スクリーニング用の候補リストをダウンロードできます。
         </p>
       </div>
-      <a href="/export_secondary_candidates?mode=scale&group_no={{ group_no }}" class="btn btn-success fw-bold px-4 shadow-sm">
-        <i class="bi bi-download me-2"></i>候補PMID (尺度)
-      </a>
+      <div class="btn-group">
+        <a href="/export_secondary_candidates?mode=scale&group_no={{ group_no }}" class="btn btn-success fw-bold px-4 shadow-sm">
+          <i class="bi bi-download me-2"></i>候補PMID (グループ)
+        </a>
+        <a href="/export_secondary_candidates?mode=scale&all_groups=true" class="btn btn-outline-success fw-bold px-3 shadow-sm" title="全グループの候補をまとめてダウンロード">
+          全グループ
+        </a>
+      </div>
     </div>
   {% endif %}
 {% endif %}
