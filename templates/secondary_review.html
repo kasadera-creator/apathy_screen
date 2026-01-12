@@ -26,10 +26,10 @@
       {% if secondary %}
         <p><strong>PMID:</strong> {{ secondary.pmid }}</p>
         <p><strong>フラグ:</strong>
-          {% if secondary.is_physical %} 身体的 {% endif %}
-          {% if secondary.is_brain %} 脳器質的 {% endif %}
-          {% if secondary.is_psycho %} 心理・環境 {% endif %}
-          {% if secondary.is_drug %} 薬剤 {% endif %}
+          {% if secondary.is_physical %} 身体的要因 {% endif %}
+          {% if secondary.is_brain %} 脳神経疾患 {% endif %}
+          {% if secondary.is_psycho %} 精神・心理・環境要因 {% endif %}
+          {% if secondary.is_drug %} 薬剤性 {% endif %}
         </p>
       {% endif %}
     {% endif %}
@@ -47,9 +47,9 @@
   <div class="col-md-5">
     <h5>自動抽出 (Gemini)</h5>
     {% if auto %}
-      <p><strong>Target condition:</strong> {{ auto.auto_target_condition }}</p>
-      <p><strong>Apathy terms:</strong> {{ auto.auto_apathy_terms }}</p>
-      <p><strong>Confidence:</strong> {{ auto.auto_confidence }}</p>
+      <p><strong>対象疾患・病態:</strong> {{ auto.auto_target_condition }}</p>
+      <p><strong>意欲低下を示す用語:</strong> {{ auto.auto_apathy_terms }}</p>
+      <p><strong>信頼度:</strong> {{ auto.auto_confidence }}</p>
     {% else %}
       <div class="alert alert-secondary">自動抽出は処理中／未反映です（後から反映されます）</div>
     {% endif %}

@@ -97,28 +97,30 @@
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#appNavbar" aria-controls="appNavbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="appNavbar">
-
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        
-        <!-- 書誌情報データベース -->
-        <li class="nav-item">
-          <a class="nav-link {% if current_page == 'database' %}active{% endif %}" href="/database">
-            <i class="bi bi-database nav-icon"></i>書誌情報DB
+        <li>
+          <a class="dropdown-item" href="/screen">
+            <i class="bi bi-check2-square"></i>判定画面へ
           </a>
         </li>
 
-        <!-- 病態スクリーニング (ドロップダウン) -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle {% if current_page in ['screen', 'my_index'] %}active{% endif %}" 
-             href="#" id="navDisease" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-activity nav-icon"></i>病態スクリーニング
+        <li>
+          <a class="dropdown-item" href="/my_index">
+            <i class="bi bi-list-ul"></i>担当文献一覧（進捗）
           </a>
-          <ul class="dropdown-menu border-0 shadow-sm" aria-labelledby="navDisease">
-            <li>
-              <a class="dropdown-item" href="/screen">
+        </li>
+
+        <li><hr class="dropdown-divider"></li>
+        <li>
+          <a class="dropdown-item text-warning" href="/conflicts?mode=disease">
+            <i class="bi bi-people-fill text-warning"></i>合議・不一致解決
+          </a>
+        </li>
+        <li><hr class="dropdown-divider"></li>
+        <li>
+          <a class="dropdown-item" href="/secondary">
+            <i class="bi bi-filter-square"></i>二次スクリーニング
+          </a>
+        </li>
                 <i class="bi bi-check2-square"></i>判定画面へ
               </a>
             </li>
