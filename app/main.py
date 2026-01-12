@@ -1123,12 +1123,41 @@ def export_disease_csv(request: Request):
         for c in cat_cols:
             if has_cols.get(c, False):
                 sd_fields.append(getattr(ScreeningDecision, c))
-
-        article_fields = [Article.id, Article.pmid, Article.title_en, Article.title_ja, Article.direction_gpt, Article.direction_gemini, Article.condition_list_gpt, Article.condition_list_gemini, Article.year]
+        # select only article columns that exist to avoid missing-column errors
+        article_col_checks = [
+            "id", "pmid", "title_en", "title_ja", "direction_gpt", "direction_gemini",
+            "condition_list_gpt", "condition_list_gemini", "year",
+        ]
+        has_article = table_has_columns(session, "article", article_col_checks)
+        article_fields = []
+        # core fields
+        article_fields.append(Article.id)
+        article_fields.append(Article.pmid)
+        if has_article.get("title_en", False):
+            article_fields.append(Article.title_en)
+        if has_article.get("title_ja", False):
+            article_fields.append(Article.title_ja)
+        # optional analysis fields
+        if has_article.get("direction_gpt", False):
+            article_fields.append(Article.direction_gpt)
+        if has_article.get("direction_gemini", False):
+            article_fields.append(Article.direction_gemini)
+        if has_article.get("condition_list_gpt", False):
+            article_fields.append(Article.condition_list_gpt)
+        if has_article.get("condition_list_gemini", False):
+            article_fields.append(Article.condition_list_gemini)
+        if has_article.get("year", False):
+            article_fields.append(Article.year)
         user_fields = [User.username]
 
         stmt = select(*sd_fields, *article_fields, *user_fields).join(Article, Article.id == ScreeningDecision.article_id).join(User, User.id == ScreeningDecision.user_id).order_by(Article.id, User.username)
-        rows = session.exec(stmt).all()
+        try:
+            rows = session.exec(stmt).all()
+        except Exception:
+            # defensive fallback: select minimal article fields only
+            article_fields = [Article.id, Article.pmid, Article.title_en, Article.title_ja, Article.year]
+            stmt = select(*sd_fields, *article_fields, *user_fields).join(Article, Article.id == ScreeningDecision.article_id).join(User, User.id == ScreeningDecision.user_id).order_by(Article.id, User.username)
+            rows = session.exec(stmt).all()
 
     output = io.StringIO(); output.write("\ufeff"); writer = csv.writer(output)
     writer.writerow(["article_id", "pmid", "title_en", "title_ja", "username", "decision", "comment", 
@@ -1152,9 +1181,24 @@ def export_disease_csv(request: Request):
                 sd_cat_vals.append(0)
 
         # article fields
-        art_id = row[idx]; pmid = row[idx+1]; title_en = row[idx+2]; title_ja = row[idx+3]
-        direction_gpt = row[idx+4]; direction_gemini = row[idx+5]; condition_list_gpt = row[idx+6]; condition_list_gemini = row[idx+7]; year = row[idx+8]
-        idx += 9
+        art_id = row[idx]; pmid = row[idx+1]
+        cur = 2
+        title_en = None; title_ja = None; direction_gpt = None; direction_gemini = None; condition_list_gpt = None; condition_list_gemini = None; year = None
+        if has_article.get("title_en", False):
+            title_en = row[idx + cur - 1]; cur += 1
+        if has_article.get("title_ja", False):
+            title_ja = row[idx + cur - 1]; cur += 1
+        if has_article.get("direction_gpt", False):
+            direction_gpt = row[idx + cur - 1]; cur += 1
+        if has_article.get("direction_gemini", False):
+            direction_gemini = row[idx + cur - 1]; cur += 1
+        if has_article.get("condition_list_gpt", False):
+            condition_list_gpt = row[idx + cur - 1]; cur += 1
+        if has_article.get("condition_list_gemini", False):
+            condition_list_gemini = row[idx + cur - 1]; cur += 1
+        if has_article.get("year", False):
+            year = row[idx + cur - 1]; cur += 1
+        idx += cur
 
         username = row[idx]
 
