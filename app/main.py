@@ -123,6 +123,13 @@ app = FastAPI()
 
 templates = Jinja2Templates(directory=str(TEMPLATE_DIR))
 templates.env.globals["GROUP_NAMES"] = GROUP_NAMES
+# 二次スクリーニングのグループ表示ラベル（日本語）
+templates.env.globals["SECONDARY_GROUP_LABELS"] = {
+    "physical": "身体的要因",
+    "brain": "脳神経疾患",
+    "psycho": "精神・心理・環境要因",
+    "drug": "薬剤性",
+}
 
 app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
 

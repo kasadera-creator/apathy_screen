@@ -9,8 +9,8 @@
     <div class="col-md-3 mb-3">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">{{ g|capitalize }}</h5>
-          <p class="card-text">Total: {{ s.total }}<br>Pending: {{ s.pending }}<br>Included: {{ s.included }}<br>Excluded: {{ s.excluded }}</p>
+          <h5 class="card-title">{{ SECONDARY_GROUP_LABELS[g] if g in SECONDARY_GROUP_LABELS else g|capitalize }}</h5>
+          <p class="card-text">合計: {{ s.total }}<br>未処理: {{ s.pending }}<br>採用: {{ s.included }}<br>除外: {{ s.excluded }}</p>
           <a href="/secondary/{{ g }}/next" class="btn btn-primary">次の未着手へ</a>
         </div>
       </div>
