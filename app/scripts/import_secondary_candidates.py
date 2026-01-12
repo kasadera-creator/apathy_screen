@@ -85,6 +85,9 @@ def upsert_from_list(pmids, pdf_dir=None, source_filename: str | None = None):
                 is_psycho = getattr(art, 'final_cat_psycho', False) or getattr(art, 'cat_psycho', False)
                 is_drug = getattr(art, 'final_cat_drug', False) or getattr(art, 'cat_drug', False)
 
+            # determine group_no: prefer Article.group_no when available, otherwise 0
+            group_no = (art.group_no if (art and getattr(art, 'group_no', None) is not None) else 0)
+
             # apply file-based forcing flags (ensure True if present in filename)
             if force_flags.get('is_physical'):
                 is_physical = True
@@ -106,11 +109,14 @@ def upsert_from_list(pmids, pdf_dir=None, source_filename: str | None = None):
                 sec.is_psycho = bool(is_psycho)
                 sec.is_drug = bool(is_drug)
                 sec.pdf_exists = bool(pdf_exists)
+                # ensure group_no is populated when missing
+                if getattr(sec, 'group_no', None) is None or sec.group_no == 0:
+                    sec.group_no = group_no
                 sec.updated_at = datetime.utcnow().isoformat()
                 session.add(sec)
                 updated += 1
             else:
-                sec = SecondaryArticle(pmid=pmid_i, is_physical=is_physical, is_brain=is_brain, is_psycho=is_psycho, is_drug=is_drug, pdf_exists=bool(pdf_exists), created_at=datetime.utcnow().isoformat(), updated_at=datetime.utcnow().isoformat())
+                sec = SecondaryArticle(pmid=pmid_i, group_no=group_no, is_physical=is_physical, is_brain=is_brain, is_psycho=is_psycho, is_drug=is_drug, pdf_exists=bool(pdf_exists), created_at=datetime.utcnow().isoformat(), updated_at=datetime.utcnow().isoformat())
                 session.add(sec)
                 created += 1
         session.commit()

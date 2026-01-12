@@ -131,6 +131,9 @@ class SecondaryArticle(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     pmid: int = Field(index=True, unique=True)
 
+    # numeric group assignment (1..4) for reviewer groups; 0 = unassigned
+    group_no: int = Field(default=0)
+
     is_physical: bool = Field(default=False)
     is_brain: bool = Field(default=False)
     is_psycho: bool = Field(default=False)
