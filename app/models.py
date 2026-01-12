@@ -169,7 +169,6 @@ class SecondaryReview(SQLModel, table=True):
     final_citation: Optional[str] = None
     final_apathy_terms: Optional[str] = None
     final_target_condition: Optional[str] = None
-    final_population_N: Optional[str] = None
     final_population_n: Optional[str] = None
     final_prevalence: Optional[str] = None
     final_intervention: Optional[str] = None

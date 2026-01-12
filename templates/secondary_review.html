@@ -87,7 +87,7 @@
         {% if auto and auto.auto_population_N %}
           <div class="form-text text-muted small">自動抽出: {{ auto.auto_population_N }}</div>
         {% endif %}
-        <input class="form-control" name="final_population_n" value="{{ review.final_population_n or review.final_population_N or '' }}">
+        <input class="form-control" name="final_population_n" value="{{ review.final_population_n or '' }}">
       </div>
 
       <div class="mb-2">

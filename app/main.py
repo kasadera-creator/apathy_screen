@@ -48,8 +48,8 @@ GROUP_NAMES = {
     4: "Nagoya2",
 }
 
+# engine and metadata creation
 engine = create_engine(DATABASE_URL, echo=False)
-SQLModel.metadata.create_all(engine)
 
 # Default PDF directory for secondary PDFs when env var is not set
 DEFAULT_SECONDARY_PDF_DIR = str(Path.home() / "apathy_screen_app" / "PDF")
@@ -83,8 +83,10 @@ def _ensure_table_columns(engine):
         pass
 
 
-# try to patch legacy DB schema if needed
-_ensure_table_columns(engine)
+# NOTE: Do NOT run DDL (create_all / ALTER) at import time to avoid accidental
+# schema changes against production DBs. Table creation / migrations should be
+# executed explicitly (e.g. via migration scripts) or by setting
+# AUTO_CREATE_TABLES=1 in development environments.
 
 TEMPLATE_DIR = BASE_DIR / "templates"
 app = FastAPI()
@@ -160,7 +162,25 @@ def ensure_default_users():
 
 @app.on_event("startup")
 def on_startup():
-    ensure_default_users()
+    auto = os.getenv("AUTO_CREATE_TABLES", "0")
+    if auto == "1":
+        # Development: create tables automatically and attempt to patch legacy schema
+        print("AUTO_CREATE_TABLES=1 -> running SQLModel.metadata.create_all(engine)")
+        SQLModel.metadata.create_all(engine)
+        try:
+            _ensure_table_columns(engine)
+        except Exception:
+            pass
+        try:
+            ensure_default_users()
+        except Exception as e:
+            print("Warning: ensure_default_users failed after create_all:", e)
+    else:
+        # Production-ish: do not modify schema. Try to ensure default users but do not fail startup.
+        try:
+            ensure_default_users()
+        except Exception:
+            print("AUTO_CREATE_TABLES!=1: skipping automatic table creation. If this is a new DB run migration script `migrate_secondary_schema`.")
 
 def get_group_article_ids(session: Session, year_min: Optional[int], user_group_no: int) -> List[int]:
     all_rows = list(session.exec(select(Article.id, Article.authors, Article.pmid, Article.year)))
@@ -1716,15 +1736,7 @@ def secondary_save(request: Request, group: str, pmid: int,
         review.final_apathy_terms = final_apathy_terms
         review.final_target_condition = final_target_condition
         # persist both variants if model has them for compatibility
-        try:
-            review.final_population_n = final_population_n
-        except Exception:
-            pass
-        try:
-            # older DBs/models may use final_population_N
-            review.final_population_N = final_population_n
-        except Exception:
-            pass
+        review.final_population_n = final_population_n
         review.final_prevalence = final_prevalence
         review.final_intervention = final_intervention
         review.comment = comment
