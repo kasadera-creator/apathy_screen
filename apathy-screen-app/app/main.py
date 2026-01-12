@@ -10,7 +10,8 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 
 from sqlmodel import SQLModel, Session, create_engine, select
-from sqlalchemy import func
+from sqlalchemy import func, text
+from datetime import datetime
 
 from starlette.middleware.sessions import SessionMiddleware
 from passlib.context import CryptContext
@@ -136,6 +137,19 @@ def get_group_article_ids(session: Session, year_min: Optional[int], user_group_
             id_list.append(row[0])
     return id_list
 
+
+def table_has_columns(session: Session, table_name: str, col_names: List[str]) -> Dict[str, bool]:
+    """
+    Check whether given columns exist in a SQLite table using PRAGMA table_info.
+    Returns a dict mapping column name -> bool.
+    """
+    try:
+        rows = session.exec(text(f"PRAGMA table_info({table_name})")).all()
+        existing = {r[1] for r in rows}
+        return {c: (c in existing) for c in col_names}
+    except Exception:
+        return {c: False for c in col_names}
+
 def get_group_scale_article_ids(session: Session, user_group_no: int) -> List[int]:
     rows = session.exec(select(ScaleArticle.id).where(ScaleArticle.group_no == user_group_no).order_by(ScaleArticle.id)).all()
     if rows: return [int(r) for r in rows]
@@ -159,18 +173,19 @@ def check_group_status(session: Session, group_no: int, mode: str = "disease"):
     if mode == "disease":
         year_min = get_year_min(session)
         article_ids = get_group_article_ids(session, year_min, group_no)
-        decisions = session.exec(select(ScreeningDecision).where(ScreeningDecision.article_id.in_(article_ids))).all()
+        # Select only minimal columns to avoid querying possibly-missing columns
+        decisions = session.exec(select(ScreeningDecision.article_id, ScreeningDecision.user_id, ScreeningDecision.decision).where(ScreeningDecision.article_id.in_(article_ids))).all()
         decision_map = defaultdict(dict)
-        for d in decisions:
-            if d.decision is not None:
-                decision_map[d.article_id][d.user_id] = d.decision
+        for aid, uid, dec in decisions:
+            if dec is not None:
+                decision_map[aid][uid] = dec
     else: # scale
         article_ids = get_group_scale_article_ids(session, group_no)
-        decisions = session.exec(select(ScaleScreeningDecision).where(ScaleScreeningDecision.scale_article_id.in_(article_ids))).all()
+        decisions = session.exec(select(ScaleScreeningDecision.scale_article_id, ScaleScreeningDecision.user_id, ScaleScreeningDecision.rating).where(ScaleScreeningDecision.scale_article_id.in_(article_ids))).all()
         decision_map = defaultdict(dict)
-        for d in decisions:
-            if d.rating is not None:
-                decision_map[d.scale_article_id][d.user_id] = d.rating
+        for aid, uid, rating in decisions:
+            if rating is not None:
+                decision_map[aid][uid] = rating
 
     total_articles = len(article_ids)
     if total_articles == 0: return False, False
@@ -385,16 +400,33 @@ def screen_page(request: Request, group_no: int = Query(None), article_index: in
         prev_cat_drug = False
 
         if article:
-            existing = session.exec(select(ScreeningDecision).where((ScreeningDecision.user_id == user_id) & (ScreeningDecision.article_id == article.id))).first()
-            if existing:
-                prev_decision = existing.decision
-                prev_comment = existing.comment or ""
-                prev_flag_cause = existing.flag_cause
-                prev_flag_treatment = existing.flag_treatment
-                prev_cat_physical = existing.cat_physical
-                prev_cat_brain = existing.cat_brain
-                prev_cat_psycho = existing.cat_psycho
-                prev_cat_drug = existing.cat_drug
+            # select only columns that exist to avoid missing-column errors
+            cat_cols = ["cat_physical", "cat_brain", "cat_psycho", "cat_drug"]
+            has_cols = table_has_columns(session, "screeningdecision", cat_cols)
+            fields = [ScreeningDecision.decision, ScreeningDecision.comment, ScreeningDecision.flag_cause, ScreeningDecision.flag_treatment]
+            for c in cat_cols:
+                if has_cols.get(c, False):
+                    fields.append(getattr(ScreeningDecision, c))
+
+            row = session.exec(select(*fields).where((ScreeningDecision.user_id == user_id) & (ScreeningDecision.article_id == article.id))).first()
+            if row:
+                prev_decision = row[0]
+                prev_comment = row[1] or ""
+                prev_flag_cause = bool(row[2])
+                prev_flag_treatment = bool(row[3])
+                offset = 4
+                prev_cat_physical = bool(row[offset]) if has_cols.get("cat_physical", False) else False
+                prev_cat_brain = bool(row[offset + (1 if has_cols.get("cat_physical", False) else 0)]) if has_cols.get("cat_brain", False) else False
+                # compute offsets more robustly
+                idx = 4
+                if has_cols.get("cat_physical", False):
+                    prev_cat_physical = bool(row[idx]); idx += 1
+                if has_cols.get("cat_brain", False):
+                    prev_cat_brain = bool(row[idx]); idx += 1
+                if has_cols.get("cat_psycho", False):
+                    prev_cat_psycho = bool(row[idx]); idx += 1
+                if has_cols.get("cat_drug", False):
+                    prev_cat_drug = bool(row[idx]); idx += 1
 
     return templates.TemplateResponse("screen.html", {
         "request": request, "group_no": group_no, "username": user.username,
@@ -428,26 +460,68 @@ def submit_screen(
         try: current_index = id_list.index(article_id) + 1
         except ValueError: current_index = 1
         
-        existing = session.exec(select(ScreeningDecision).where((ScreeningDecision.user_id == user.id) & (ScreeningDecision.article_id == article_id))).first()
-        
-        if existing:
-            if decision is not None: existing.decision = decision
-            existing.comment = comment or ""
-            existing.flag_cause = bool(flag_cause)
-            existing.flag_treatment = bool(flag_treatment)
-            existing.cat_physical = bool(cat_physical)
-            existing.cat_brain = bool(cat_brain)
-            existing.cat_psycho = bool(cat_psycho)
-            existing.cat_drug = bool(cat_drug)
-            session.add(existing)
-        elif decision is not None:
-            session.add(ScreeningDecision(
-                user_id=user.id, article_id=article_id, decision=decision, comment=comment or "",
-                flag_cause=bool(flag_cause), flag_treatment=bool(flag_treatment),
-                cat_physical=bool(cat_physical), cat_brain=bool(cat_brain), cat_psycho=bool(cat_psycho),
-                cat_drug=bool(cat_drug)
-            ))
-        session.commit()
+        # Use core UPDATE/INSERT limiting to columns that actually exist in DB
+        cat_cols = ["cat_physical", "cat_brain", "cat_psycho", "cat_drug"]
+        has_cols = table_has_columns(session, "screeningdecision", cat_cols)
+
+        existing_id = session.exec(select(ScreeningDecision.id).where((ScreeningDecision.user_id == user.id) & (ScreeningDecision.article_id == article_id))).first()
+
+        if existing_id:
+            # build UPDATE with only existing columns
+            set_clauses = []
+            params = {"id": int(existing_id)}
+            if decision is not None:
+                set_clauses.append("decision = :decision")
+                params["decision"] = int(decision)
+            set_clauses.append("comment = :comment")
+            params["comment"] = comment or ""
+            set_clauses.append("flag_cause = :flag_cause")
+            params["flag_cause"] = int(bool(flag_cause))
+            set_clauses.append("flag_treatment = :flag_treatment")
+            params["flag_treatment"] = int(bool(flag_treatment))
+            # category flags only when present
+            if has_cols.get("cat_physical", False):
+                set_clauses.append("cat_physical = :cat_physical")
+                params["cat_physical"] = int(bool(cat_physical))
+            if has_cols.get("cat_brain", False):
+                set_clauses.append("cat_brain = :cat_brain")
+                params["cat_brain"] = int(bool(cat_brain))
+            if has_cols.get("cat_psycho", False):
+                set_clauses.append("cat_psycho = :cat_psycho")
+                params["cat_psycho"] = int(bool(cat_psycho))
+            if has_cols.get("cat_drug", False):
+                set_clauses.append("cat_drug = :cat_drug")
+                params["cat_drug"] = int(bool(cat_drug))
+
+            if set_clauses:
+                sql = f"UPDATE screeningdecision SET {', '.join(set_clauses)} WHERE id = :id"
+                session.exec(text(sql), params)
+                session.commit()
+        else:
+            # INSERT only when user provided a decision
+            if decision is not None:
+                cols = ["user_id", "article_id", "decision", "comment", "flag_cause", "flag_treatment"]
+                vals = [":user_id", ":article_id", ":decision", ":comment", ":flag_cause", ":flag_treatment"]
+                params = {
+                    "user_id": user.id,
+                    "article_id": article_id,
+                    "decision": int(decision),
+                    "comment": comment or "",
+                    "flag_cause": int(bool(flag_cause)),
+                    "flag_treatment": int(bool(flag_treatment)),
+                }
+                if has_cols.get("cat_physical", False):
+                    cols.append("cat_physical"); vals.append(":cat_physical"); params["cat_physical"] = int(bool(cat_physical))
+                if has_cols.get("cat_brain", False):
+                    cols.append("cat_brain"); vals.append(":cat_brain"); params["cat_brain"] = int(bool(cat_brain))
+                if has_cols.get("cat_psycho", False):
+                    cols.append("cat_psycho"); vals.append(":cat_psycho"); params["cat_psycho"] = int(bool(cat_psycho))
+                if has_cols.get("cat_drug", False):
+                    cols.append("cat_drug"); vals.append(":cat_drug"); params["cat_drug"] = int(bool(cat_drug))
+
+                sql = f"INSERT INTO screeningdecision ({', '.join(cols)}) VALUES ({', '.join(vals)})"
+                session.exec(text(sql), params)
+                session.commit()
     
     total = len(id_list)
     target = current_index
@@ -663,14 +737,22 @@ def conflicts_page(request: Request, mode: str = Query("disease"), group_no: Opt
             if mode == "disease":
                 year_min = get_year_min(session)
                 article_ids = get_group_article_ids(session, year_min, group_no)
-                decisions = session.exec(select(ScreeningDecision).where(ScreeningDecision.article_id.in_(article_ids))).all()
+                # select minimal columns to avoid referencing possibly-missing cat_* columns
+                decisions = session.exec(
+                    select(
+                        ScreeningDecision.article_id,
+                        ScreeningDecision.user_id,
+                        ScreeningDecision.decision,
+                        ScreeningDecision.comment,
+                    ).where(ScreeningDecision.article_id.in_(article_ids))
+                ).all()
                 art_map = defaultdict(dict)
-                for d in decisions:
-                    if d.decision is not None:
-                        u = session.get(User, d.user_id)
-                        uname = u.username if u else str(d.user_id)
-                        art_map[d.article_id][uname] = d.decision
-                        art_map[d.article_id]['_comment_' + uname] = d.comment
+                for aid, uid, dec, comment in decisions:
+                    if dec is not None:
+                        u = session.get(User, uid)
+                        uname = u.username if u else str(uid)
+                        art_map[aid][uname] = dec
+                        art_map[aid]['_comment_' + uname] = comment
                 for aid, votes in art_map.items():
                     vals = [v for k, v in votes.items() if not k.startswith('_')]
                     has_2 = any(v == 2 for v in vals)
@@ -689,14 +771,21 @@ def conflicts_page(request: Request, mode: str = Query("disease"), group_no: Opt
                             })
             else:
                 scale_ids = get_group_scale_article_ids(session, group_no)
-                decisions = session.exec(select(ScaleScreeningDecision).where(ScaleScreeningDecision.scale_article_id.in_(scale_ids))).all()
+                decisions = session.exec(
+                    select(
+                        ScaleScreeningDecision.scale_article_id,
+                        ScaleScreeningDecision.user_id,
+                        ScaleScreeningDecision.rating,
+                        ScaleScreeningDecision.comment,
+                    ).where(ScaleScreeningDecision.scale_article_id.in_(scale_ids))
+                ).all()
                 art_map = defaultdict(dict)
-                for d in decisions:
-                    if d.rating is not None:
-                        u = session.get(User, d.user_id)
-                        uname = u.username if u else str(d.user_id)
-                        art_map[d.scale_article_id][uname] = d.rating
-                        art_map[d.scale_article_id]['_comment_' + uname] = d.comment
+                for aid, uid, rating, comment in decisions:
+                    if rating is not None:
+                        u = session.get(User, uid)
+                        uname = u.username if u else str(uid)
+                        art_map[aid][uname] = rating
+                        art_map[aid]['_comment_' + uname] = comment
                 for aid, votes in art_map.items():
                     vals = [v for k, v in votes.items() if not k.startswith('_')]
                     has_2 = any(v == 2 for v in vals)
@@ -740,21 +829,22 @@ def resolve_conflict(request: Request, mode: str = Form(...), article_id: int = 
     return RedirectResponse(f"/conflicts?mode={mode}&group_no={target_group_no}", 303)
 
 @app.get("/export_secondary_candidates", response_class=StreamingResponse)
-def export_secondary_candidates_txt(request: Request, mode: str = Query("disease"), group_no: Optional[int] = Query(None), all_groups: bool = Query(False)):
+def export_secondary_candidates_txt(request: Request, mode: str = Query("disease"), group_no: Optional[int] = Query(None)):
+    """
+    Export secondary screening candidate PMIDs.
+    - If `group_no` is omitted (None), export across all groups (all articles meeting year_min).
+    - If `group_no` provided, behave exactly as before (group-sliced selection).
+    - Prefer `Article.final_decision` when the column exists in the DB; otherwise fall back to aggregated per-user votes.
+    """
     user = get_current_user(request)
     if not user: return RedirectResponse("/login", 303)
-    target_group = group_no if group_no else user.group_no
     output = io.StringIO()
     with Session(engine) as session:
-        # 完了チェック: グループ単位のエクスポートか全グループかで振る舞いを変える
-        if all_groups:
-            # 全グループが完了かつコンフリクトなしであることを確認
-            for g in range(1, N_GROUPS + 1):
-                is_complete, has_conflicts = check_group_status(session, g, mode)
-                if not is_complete or has_conflicts:
-                    return HTMLResponse("Error: Screening incomplete or conflicts exist for some groups.", status_code=400)
-        else:
-            is_complete, has_conflicts = check_group_status(session, target_group, mode)
+        # If a specific group is requested, require that group's screening is complete and conflict-free.
+        # When exporting across all groups (group_no is None), proceed regardless of completion so
+        # users can download the union of current candidates.
+        if group_no is not None:
+            is_complete, has_conflicts = check_group_status(session, group_no, mode)
             if not is_complete or has_conflicts:
                 return HTMLResponse("Error: Screening incomplete or conflicts exist.", status_code=400)
 
@@ -762,57 +852,85 @@ def export_secondary_candidates_txt(request: Request, mode: str = Query("disease
 
         if mode == "disease":
             year_min = get_year_min(session)
-            # 対象記事IDの決定
-            if all_groups:
+
+            # determine article_ids (group-sliced or all)
+            if group_no is None:
                 all_rows = list(session.exec(select(Article.id, Article.year)))
                 if year_min is not None:
                     rows = [r for r in all_rows if (r[1] is not None and r[1] >= year_min)]
-                    if not rows: rows = all_rows
+                    if not rows:
+                        rows = all_rows
                 else:
                     rows = all_rows
                 article_ids = [r[0] for r in rows]
             else:
-                article_ids = get_group_article_ids(session, year_min, target_group)
+                article_ids = get_group_article_ids(session, year_min, group_no)
 
-            # decisions を集め、記事ごとに集計して aggregated decision が採用(>=1)なら出力
-            decisions = session.exec(select(ScreeningDecision).where(ScreeningDecision.article_id.in_(article_ids))).all()
-            art_map = defaultdict(list)
-            for d in decisions:
-                if d.decision is not None:
-                    art_map[d.article_id].append(int(d.decision))
+            # If DB has final_decision column, use it (safe SELECT only when column exists)
+            cols = table_has_columns(session, "article", ["final_decision"]) if article_ids else {"final_decision": False}
+            use_final = cols.get("final_decision", False)
 
-            for aid in article_ids:
-                decs = art_map.get(aid, [])
-                if decs and max(decs) >= 1:
-                    art = session.get(Article, aid)
-                    if art and art.pmid:
-                        pmids.add(art.pmid)
+            if use_final:
+                rows = session.exec(select(Article.id, Article.pmid, Article.final_decision).where(Article.id.in_(article_ids))).all()
+                for r in rows:
+                    aid, pmid, final_dec = r
+                    try:
+                        if final_dec is not None and int(final_dec) >= 1 and pmid:
+                            pmids.add(pmid)
+                    except Exception:
+                        continue
+            else:
+                # fall back to aggregated per-user votes
+                decisions = session.exec(select(ScreeningDecision.article_id, ScreeningDecision.decision).where(ScreeningDecision.article_id.in_(article_ids))).all()
+                art_map = defaultdict(list)
+                for aid, dec in decisions:
+                    if dec is not None:
+                        art_map[aid].append(int(dec))
+
+                for aid in article_ids:
+                    decs = art_map.get(aid, [])
+                    if decs and max(decs) >= 1:
+                        # safe to SELECT only id,pmid
+                        row = session.exec(select(Article.id, Article.pmid).where(Article.id == aid)).first()
+                        if row:
+                            _, pmid = row
+                            if pmid:
+                                pmids.add(pmid)
         else:
-            # scale モード: 同様に全グループ/グループ絞り込みをサポート
-            if all_groups:
-                scale_rows = list(session.exec(select(ScaleArticle.id, ScaleArticle.pmid)))
+            # scale: behave as before, group_no None => all scale articles
+            if group_no is None:
+                scale_rows = list(session.exec(select(ScaleArticle.id)))
                 scale_ids = [r[0] for r in scale_rows]
             else:
-                scale_ids = get_group_scale_article_ids(session, target_group)
+                scale_ids = get_group_scale_article_ids(session, group_no)
 
-            decisions = session.exec(select(ScaleScreeningDecision).where(ScaleScreeningDecision.scale_article_id.in_(scale_ids))).all()
+            decisions = session.exec(select(ScaleScreeningDecision.scale_article_id, ScaleScreeningDecision.rating).where(ScaleScreeningDecision.scale_article_id.in_(scale_ids))).all()
             art_map = defaultdict(list)
-            for d in decisions:
-                if d.rating is not None:
-                    art_map[d.scale_article_id].append(int(d.rating))
+            for aid, rating in decisions:
+                if rating is not None:
+                    art_map[aid].append(int(rating))
 
             for aid in scale_ids:
                 decs = art_map.get(aid, [])
                 if decs and max(decs) >= 1:
-                    art = session.get(ScaleArticle, aid)
-                    if art and art.pmid:
-                        pmids.add(art.pmid)
+                    row = session.exec(select(ScaleArticle.id, ScaleArticle.pmid).where(ScaleArticle.id == aid)).first()
+                    if row:
+                        _, pmid = row
+                        if pmid:
+                            pmids.add(pmid)
 
         for pmid in sorted(list(pmids)):
             output.write(f"{pmid}\n")
     output.seek(0)
-    filename = f"secondary_candidates_{mode}_g{target_group}.txt"
-    return StreamingResponse(output, media_type="text/plain", headers={"Content-Disposition": f'attachment; filename="{filename}"'})
+
+    # filename: include allgroups marker when group_no omitted
+    ts = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+    if group_no is None:
+        filename = f"secondary_candidates_{mode}_allgroups_{ts}.txt"
+    else:
+        filename = f"secondary_candidates_{mode}_g{group_no}_{ts}.txt"
+
+    return StreamingResponse(output, media_type="text/plain; charset=utf-8", headers={"Content-Disposition": f'attachment; filename="{filename}"'})
 
 # --- Export ---
 @app.get("/export_disease", response_class=StreamingResponse, name="download_disease")
@@ -820,18 +938,53 @@ def export_disease_csv(request: Request):
     user = get_current_user(request)
     if not user: return RedirectResponse("/login")
     with Session(engine) as session:
-        rows = session.exec(select(ScreeningDecision, Article, User).join(Article, Article.id == ScreeningDecision.article_id).join(User, User.id == ScreeningDecision.user_id).order_by(Article.id, User.username)).all()
+        # select only screeningdecision columns that exist to avoid missing-column errors
+        cat_cols = ["cat_physical", "cat_brain", "cat_psycho", "cat_drug"]
+        has_cols = table_has_columns(session, "screeningdecision", cat_cols)
+        sd_fields = [ScreeningDecision.decision, ScreeningDecision.comment, ScreeningDecision.flag_cause, ScreeningDecision.flag_treatment]
+        for c in cat_cols:
+            if has_cols.get(c, False):
+                sd_fields.append(getattr(ScreeningDecision, c))
+
+        article_fields = [Article.id, Article.pmid, Article.title_en, Article.title_ja, Article.direction_gpt, Article.direction_gemini, Article.condition_list_gpt, Article.condition_list_gemini, Article.year]
+        user_fields = [User.username]
+
+        stmt = select(*sd_fields, *article_fields, *user_fields).join(Article, Article.id == ScreeningDecision.article_id).join(User, User.id == ScreeningDecision.user_id).order_by(Article.id, User.username)
+        rows = session.exec(stmt).all()
+
     output = io.StringIO(); output.write("\ufeff"); writer = csv.writer(output)
     writer.writerow(["article_id", "pmid", "title_en", "title_ja", "username", "decision", "comment", 
                      "flag_cause", "flag_treatment", 
-                     "cat_physical", "cat_brain", "cat_psycho", "cat_drug", # ★追加
+                     "cat_physical", "cat_brain", "cat_psycho", "cat_drug", 
                      "direction_gpt", "direction_gemini", "condition_list_gpt", "condition_list_gemini", "year"])
-    for sd, art, usr in rows:
+
+    for row in rows:
+        # unpack screeningdecision fields
+        idx = 0
+        sd_decision = row[idx]; idx += 1
+        sd_comment = row[idx]; idx += 1
+        sd_flag_cause = int(bool(row[idx])); idx += 1
+        sd_flag_treatment = int(bool(row[idx])); idx += 1
+
+        sd_cat_vals = []
+        for c in cat_cols:
+            if has_cols.get(c, False):
+                sd_cat_vals.append(int(bool(row[idx]))); idx += 1
+            else:
+                sd_cat_vals.append(0)
+
+        # article fields
+        art_id = row[idx]; pmid = row[idx+1]; title_en = row[idx+2]; title_ja = row[idx+3]
+        direction_gpt = row[idx+4]; direction_gemini = row[idx+5]; condition_list_gpt = row[idx+6]; condition_list_gemini = row[idx+7]; year = row[idx+8]
+        idx += 9
+
+        username = row[idx]
+
         writer.writerow([
-            art.id, art.pmid, art.title_en, art.title_ja, usr.username, sd.decision, sd.comment, 
-            int(sd.flag_cause), int(sd.flag_treatment), 
-            int(sd.cat_physical), int(sd.cat_brain), int(sd.cat_psycho), int(sd.cat_drug), # ★追加
-            art.direction_gpt, art.direction_gemini, art.condition_list_gpt, art.condition_list_gemini, art.year
+            art_id, pmid, title_en, title_ja, username, sd_decision, sd_comment,
+            sd_flag_cause, sd_flag_treatment,
+            sd_cat_vals[0], sd_cat_vals[1], sd_cat_vals[2], sd_cat_vals[3],
+            direction_gpt, direction_gemini, condition_list_gpt, condition_list_gemini, year
         ])
     output.seek(0)
     return StreamingResponse(output, media_type="text/csv", headers={"Content-Disposition": 'attachment; filename="apathy_disease_screening_results.csv"'})
@@ -866,25 +1019,53 @@ def export_aggregated_disease(request: Request, group_no: Optional[int] = Query(
         year_min = get_year_min(session)
         article_ids = get_group_article_ids(session, year_min, target_group)
 
-        # gather decisions
-        decisions = session.exec(select(ScreeningDecision).where(ScreeningDecision.article_id.in_(article_ids))).all()
+        # gather decisions: select only the columns that exist to avoid missing-column errors
+        cat_cols = ["cat_physical", "cat_brain", "cat_psycho", "cat_drug"]
+        has_cols = table_has_columns(session, "screeningdecision", cat_cols)
+        fields = [
+            ScreeningDecision.article_id,
+            ScreeningDecision.user_id,
+            ScreeningDecision.decision,
+            ScreeningDecision.comment,
+        ]
+        for c in cat_cols:
+            if has_cols.get(c, False):
+                fields.append(getattr(ScreeningDecision, c))
+
+        decisions = session.exec(select(*fields).where(ScreeningDecision.article_id.in_(article_ids))).all()
 
         # map article_id -> list of (username, decision, cat flags, comment)
         art_map = defaultdict(list)
-        for d in decisions:
-            if d.decision is None and d.comment is None and not any([d.cat_physical, d.cat_brain, d.cat_psycho, d.cat_drug]):
-                # skip empty rows (user hasn't rated yet)
+        for row in decisions:
+            # row is a tuple aligned with `fields`
+            aid = row[0]
+            uid = row[1]
+            dec = row[2]
+            comment = row[3] or ""
+            # build category flags safely
+            offset = 4
+            cat_vals = {}
+            for i, c in enumerate(cat_cols):
+                if has_cols.get(c, False):
+                    val = row[offset + i]
+                    cat_vals[c] = int(bool(val))
+                else:
+                    cat_vals[c] = 0
+
+            if dec is None and not comment and not any(cat_vals.values()):
+                # skip empty rows
                 continue
-            u = session.get(User, d.user_id)
-            uname = u.username if u else str(d.user_id)
-            art_map[d.article_id].append({
+
+            u = session.get(User, uid)
+            uname = u.username if u else str(uid)
+            art_map[aid].append({
                 "username": uname,
-                "decision": d.decision,
-                "comment": d.comment or "",
-                "cat_physical": int(bool(d.cat_physical)),
-                "cat_brain": int(bool(d.cat_brain)),
-                "cat_psycho": int(bool(d.cat_psycho)),
-                "cat_drug": int(bool(d.cat_drug)),
+                "decision": dec,
+                "comment": comment,
+                "cat_physical": cat_vals["cat_physical"],
+                "cat_brain": cat_vals["cat_brain"],
+                "cat_psycho": cat_vals["cat_psycho"],
+                "cat_drug": cat_vals["cat_drug"],
             })
 
         output = io.StringIO(); output.write("\ufeff"); writer = csv.writer(output)
@@ -968,11 +1149,23 @@ def export_category_lists(request: Request, group_no: Optional[int] = Query(None
         year_min = get_year_min(session)
         article_ids = get_group_article_ids(session, year_min, target_group)
 
-        # collect screening decisions
-        decisions = session.exec(select(ScreeningDecision).where(ScreeningDecision.article_id.in_(article_ids))).all()
+        # collect screening decisions: select only category columns that exist
+        cat_cols = ["cat_physical", "cat_brain", "cat_psycho", "cat_drug"]
+        has_cols = table_has_columns(session, "screeningdecision", cat_cols)
+        fields = [ScreeningDecision.article_id]
+        for c in cat_cols:
+            if has_cols.get(c, False):
+                fields.append(getattr(ScreeningDecision, c))
+        decisions = session.exec(select(*fields).where(ScreeningDecision.article_id.in_(article_ids))).all()
         art_map = defaultdict(list)
-        for d in decisions:
-            art_map[d.article_id].append(d)
+        for row in decisions:
+            aid = row[0]
+            d = {}
+            offset = 1
+            for i, c in enumerate(cat_cols):
+                if has_cols.get(c, False):
+                    d[c] = row[offset + i]
+            art_map[aid].append(d)
 
         # produce CSV with category sections separated by header rows
         output = io.StringIO(); output.write("\ufeff"); writer = csv.writer(output)
@@ -983,7 +1176,7 @@ def export_category_lists(request: Request, group_no: Optional[int] = Query(None
             for aid in sorted(article_ids):
                 art = session.get(Article, aid)
                 rows = art_map.get(aid, [])
-                votes = [int(getattr(r, extractor)) for r in rows if getattr(r, extractor) is not None]
+                votes = [int(r.get(extractor)) for r in rows if r.get(extractor) is not None]
                 if votes and max(votes) >= 1:
                     status = "accepted"
                 else:
@@ -1010,10 +1203,20 @@ def _export_category_csv(session: Session, article_ids: List[int], cat_attr: str
     output = io.StringIO(); output.write("\ufeff"); writer = csv.writer(output)
     writer.writerow(["article_id", "pmid", "title_en", "title_ja", "aggregated_decision", "category_votes"])
 
-    decisions = session.exec(select(ScreeningDecision).where(ScreeningDecision.article_id.in_(article_ids))).all()
+    # select only necessary columns (decision and requested category) to avoid missing-column errors
+    has_cat = table_has_columns(session, "screeningdecision", [cat_attr]).get(cat_attr, False)
+    fields = [ScreeningDecision.article_id, ScreeningDecision.decision]
+    if has_cat:
+        fields.append(getattr(ScreeningDecision, cat_attr))
+    decisions = session.exec(select(*fields).where(ScreeningDecision.article_id.in_(article_ids))).all()
     art_map = defaultdict(list)
-    for d in decisions:
-        art_map[d.article_id].append(d)
+    for row in decisions:
+        aid = row[0]
+        dec = row[1]
+        cat_val = None
+        if has_cat:
+            cat_val = row[2]
+        art_map[aid].append({"decision": dec, cat_attr: cat_val})
 
     for aid in sorted(article_ids):
         art = session.get(Article, aid)
