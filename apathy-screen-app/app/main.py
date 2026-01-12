@@ -740,43 +740,76 @@ def resolve_conflict(request: Request, mode: str = Form(...), article_id: int = 
     return RedirectResponse(f"/conflicts?mode={mode}&group_no={target_group_no}", 303)
 
 @app.get("/export_secondary_candidates", response_class=StreamingResponse)
-def export_secondary_candidates_txt(request: Request, mode: str = Query("disease"), group_no: Optional[int] = Query(None)):
+def export_secondary_candidates_txt(request: Request, mode: str = Query("disease"), group_no: Optional[int] = Query(None), all_groups: bool = Query(False)):
     user = get_current_user(request)
     if not user: return RedirectResponse("/login", 303)
     target_group = group_no if group_no else user.group_no
     output = io.StringIO()
     with Session(engine) as session:
-        # 完了チェック
-        is_complete, has_conflicts = check_group_status(session, target_group, mode)
-        if not is_complete or has_conflicts:
-             return HTMLResponse("Error: Screening incomplete or conflicts exist.", status_code=400)
+        # 完了チェック: グループ単位のエクスポートか全グループかで振る舞いを変える
+        if all_groups:
+            # 全グループが完了かつコンフリクトなしであることを確認
+            for g in range(1, N_GROUPS + 1):
+                is_complete, has_conflicts = check_group_status(session, g, mode)
+                if not is_complete or has_conflicts:
+                    return HTMLResponse("Error: Screening incomplete or conflicts exist for some groups.", status_code=400)
+        else:
+            is_complete, has_conflicts = check_group_status(session, target_group, mode)
+            if not is_complete or has_conflicts:
+                return HTMLResponse("Error: Screening incomplete or conflicts exist.", status_code=400)
 
         pmids = set()
-        
+
         if mode == "disease":
             year_min = get_year_min(session)
-            article_ids = get_group_article_ids(session, year_min, target_group)
+            # 対象記事IDの決定
+            if all_groups:
+                all_rows = list(session.exec(select(Article.id, Article.year)))
+                if year_min is not None:
+                    rows = [r for r in all_rows if (r[1] is not None and r[1] >= year_min)]
+                    if not rows: rows = all_rows
+                else:
+                    rows = all_rows
+                article_ids = [r[0] for r in rows]
+            else:
+                article_ids = get_group_article_ids(session, year_min, target_group)
+
+            # decisions を集め、記事ごとに集計して aggregated decision が採用(>=1)なら出力
             decisions = session.exec(select(ScreeningDecision).where(ScreeningDecision.article_id.in_(article_ids))).all()
-            art_votes = defaultdict(list)
+            art_map = defaultdict(list)
             for d in decisions:
-                if d.decision is not None: art_votes[d.article_id].append(d.decision)
-            
-            for aid, votes in art_votes.items():
-                if votes and max(votes) >= 1:
+                if d.decision is not None:
+                    art_map[d.article_id].append(int(d.decision))
+
+            for aid in article_ids:
+                decs = art_map.get(aid, [])
+                if decs and max(decs) >= 1:
                     art = session.get(Article, aid)
-                    if art and art.pmid: pmids.add(art.pmid)
+                    if art and art.pmid:
+                        pmids.add(art.pmid)
         else:
-            scale_ids = get_group_scale_article_ids(session, target_group)
+            # scale モード: 同様に全グループ/グループ絞り込みをサポート
+            if all_groups:
+                scale_rows = list(session.exec(select(ScaleArticle.id, ScaleArticle.pmid)))
+                scale_ids = [r[0] for r in scale_rows]
+            else:
+                scale_ids = get_group_scale_article_ids(session, target_group)
+
             decisions = session.exec(select(ScaleScreeningDecision).where(ScaleScreeningDecision.scale_article_id.in_(scale_ids))).all()
-            art_votes = defaultdict(list)
+            art_map = defaultdict(list)
             for d in decisions:
-                if d.rating is not None: art_votes[d.scale_article_id].append(d.rating)
-            
-            for aid, votes in art_votes.items():
-                if votes and max(votes) >= 1:
+                if d.rating is not None:
+                    art_map[d.scale_article_id].append(int(d.rating))
+
+            for aid in scale_ids:
+                decs = art_map.get(aid, [])
+                if decs and max(decs) >= 1:
                     art = session.get(ScaleArticle, aid)
-                    if art and art.pmid: pmids.add(art.pmid)
-        for pmid in sorted(list(pmids)): output.write(f"{pmid}\n")
+                    if art and art.pmid:
+                        pmids.add(art.pmid)
+
+        for pmid in sorted(list(pmids)):
+            output.write(f"{pmid}\n")
     output.seek(0)
     filename = f"secondary_candidates_{mode}_g{target_group}.txt"
     return StreamingResponse(output, media_type="text/plain", headers={"Content-Disposition": f'attachment; filename="{filename}"'})
