@@ -1473,12 +1473,19 @@ def _export_category_csv(session: Session, article_ids: List[int], cat_attr: str
 def export_category_physical(request: Request, group_no: Optional[int] = Query(None)):
     user = get_current_user(request)
     if not user: return RedirectResponse("/login")
-    target_group = group_no if group_no is not None else user.group_no
+    # Export should include all groups regardless of `group_no`
     with Session(engine) as session:
         year_min = get_year_min(session)
-        article_ids = get_group_article_ids(session, year_min, target_group)
+        all_rows = list(session.exec(select(Article.id, Article.year)).all())
+        if year_min is not None:
+            rows = [r for r in all_rows if (r[1] is not None and r[1] >= year_min)]
+            if not rows:
+                rows = all_rows
+        else:
+            rows = all_rows
+        article_ids = [r[0] for r in rows]
         output = _export_category_csv(session, article_ids, "cat_physical")
-    filename = f"category_physical_group{target_group}.csv"
+    filename = f"category_physical_allgroups.csv"
     return StreamingResponse(output, media_type="text/csv", headers={"Content-Disposition": f'attachment; filename="{filename}"'})
 
 
@@ -1486,12 +1493,19 @@ def export_category_physical(request: Request, group_no: Optional[int] = Query(N
 def export_category_brain(request: Request, group_no: Optional[int] = Query(None)):
     user = get_current_user(request)
     if not user: return RedirectResponse("/login")
-    target_group = group_no if group_no is not None else user.group_no
+    # Export should include all groups regardless of `group_no`
     with Session(engine) as session:
         year_min = get_year_min(session)
-        article_ids = get_group_article_ids(session, year_min, target_group)
+        all_rows = list(session.exec(select(Article.id, Article.year)).all())
+        if year_min is not None:
+            rows = [r for r in all_rows if (r[1] is not None and r[1] >= year_min)]
+            if not rows:
+                rows = all_rows
+        else:
+            rows = all_rows
+        article_ids = [r[0] for r in rows]
         output = _export_category_csv(session, article_ids, "cat_brain")
-    filename = f"category_brain_group{target_group}.csv"
+    filename = f"category_brain_allgroups.csv"
     return StreamingResponse(output, media_type="text/csv", headers={"Content-Disposition": f'attachment; filename="{filename}"'})
 
 
@@ -1499,12 +1513,19 @@ def export_category_brain(request: Request, group_no: Optional[int] = Query(None
 def export_category_psycho(request: Request, group_no: Optional[int] = Query(None)):
     user = get_current_user(request)
     if not user: return RedirectResponse("/login")
-    target_group = group_no if group_no is not None else user.group_no
+    # Export should include all groups regardless of `group_no`
     with Session(engine) as session:
         year_min = get_year_min(session)
-        article_ids = get_group_article_ids(session, year_min, target_group)
+        all_rows = list(session.exec(select(Article.id, Article.year)).all())
+        if year_min is not None:
+            rows = [r for r in all_rows if (r[1] is not None and r[1] >= year_min)]
+            if not rows:
+                rows = all_rows
+        else:
+            rows = all_rows
+        article_ids = [r[0] for r in rows]
         output = _export_category_csv(session, article_ids, "cat_psycho")
-    filename = f"category_psycho_group{target_group}.csv"
+    filename = f"category_psycho_allgroups.csv"
     return StreamingResponse(output, media_type="text/csv", headers={"Content-Disposition": f'attachment; filename="{filename}"'})
 
 
@@ -1512,10 +1533,17 @@ def export_category_psycho(request: Request, group_no: Optional[int] = Query(Non
 def export_category_drug(request: Request, group_no: Optional[int] = Query(None)):
     user = get_current_user(request)
     if not user: return RedirectResponse("/login")
-    target_group = group_no if group_no is not None else user.group_no
+    # Export should include all groups regardless of `group_no`
     with Session(engine) as session:
         year_min = get_year_min(session)
-        article_ids = get_group_article_ids(session, year_min, target_group)
+        all_rows = list(session.exec(select(Article.id, Article.year)).all())
+        if year_min is not None:
+            rows = [r for r in all_rows if (r[1] is not None and r[1] >= year_min)]
+            if not rows:
+                rows = all_rows
+        else:
+            rows = all_rows
+        article_ids = [r[0] for r in rows]
         output = _export_category_csv(session, article_ids, "cat_drug")
-    filename = f"category_drug_group{target_group}.csv"
+    filename = f"category_drug_allgroups.csv"
     return StreamingResponse(output, media_type="text/csv", headers={"Content-Disposition": f'attachment; filename="{filename}"'})
