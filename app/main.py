@@ -36,9 +36,9 @@ import os
 # =========================================================
 BASE_DIR = Path(__file__).resolve().parent.parent
 DB_PATH = BASE_DIR / "apathy_screening.db"
-DATABASE_URL = f"sqlite:///{DB_PATH}"
-# Secondary DB URL: fallback to DATABASE_URL when unset
-SECONDARY_DATABASE_URL = os.getenv("SECONDARY_DATABASE_URL") or os.getenv("DATABASE_URL") or DATABASE_URL
+# Prefer explicit DATABASE_URL from the environment; fall back to repo default
+DEFAULT_DATABASE_URL = f"sqlite:///{DB_PATH}"
+DATABASE_URL = os.getenv("DATABASE_URL") or DEFAULT_DATABASE_URL
 
 N_GROUPS = 4
 
@@ -52,17 +52,12 @@ GROUP_NAMES = {
 
 # engine and metadata creation
 engine = create_engine(DATABASE_URL, echo=False)
-# secondary engine (may point to same DB as main if SECONDARY_DATABASE_URL not set)
-secondary_engine = create_engine(SECONDARY_DATABASE_URL, echo=False)
 
-# Print DB connection info for startup diagnostics
+# Print DB connection info for startup diagnostics (best-effort)
 try:
-    print(f"[DB] DATABASE_URL={DATABASE_URL}")
+    print(f"[DB] Using DATABASE_URL={DATABASE_URL}")
     print(f"[DB] engine.url={engine.url}")
-    print(f"[DB] SECONDARY_DATABASE_URL={SECONDARY_DATABASE_URL}")
-    print(f"[DB] secondary_engine.url={secondary_engine.url}")
 except Exception:
-    # best-effort logging, do not crash on import
     pass
 
 # Default PDF directory for secondary PDFs when env var is not set
@@ -84,12 +79,12 @@ def _ensure_table_columns(engine):
     }
     try:
         with engine.connect() as conn:
-            rows = conn.exec(text("PRAGMA table_info(secondaryarticle)")).all()
+            rows = conn.execute(text("PRAGMA table_info(secondaryarticle)")).all()
             existing = {r[1] for r in rows}
             for col, coldef in required.items():
                 if col not in existing:
                     try:
-                        conn.exec(text(f"ALTER TABLE secondaryarticle ADD COLUMN {col} {coldef}"))
+                        conn.execute(text(f"ALTER TABLE secondaryarticle ADD COLUMN {col} {coldef}"))
                     except Exception:
                         # ignore failures (e.g., table missing) and continue
                         pass
@@ -198,16 +193,16 @@ def on_startup():
 
     # Log whether secondaryreview table exists (read-only check). Works for SQLite.
     try:
-        sec_url = str(secondary_engine.url)
-        if 'sqlite' in sec_url:
-            with secondary_engine.connect() as conn:
-                r = conn.exec(text("SELECT name FROM sqlite_master WHERE type='table' AND name='secondaryreview' LIMIT 1")).first()
+        eng_url = str(engine.url)
+        if 'sqlite' in eng_url:
+            with engine.connect() as conn:
+                r = conn.execute(text("SELECT name FROM sqlite_master WHERE type='table' AND name='secondaryreview' LIMIT 1")).first()
                 if r:
-                    print("[DB CHECK] table 'secondaryreview' exists in secondary DB")
+                    print("[DB CHECK] table 'secondaryreview' exists in DB")
                 else:
-                    print("[DB CHECK] table 'secondaryreview' NOT found in secondary DB")
+                    print("[DB CHECK] table 'secondaryreview' NOT found in DB")
         else:
-            print("[DB CHECK] secondary DB is not SQLite; skipping sqlite_master check")
+            print("[DB CHECK] DB is not SQLite; skipping sqlite_master check")
     except Exception as e:
         print(f"[DB CHECK] failed to check secondaryreview table: {e}")
 
