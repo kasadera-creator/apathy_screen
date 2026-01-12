@@ -12,6 +12,7 @@ from fastapi.staticfiles import StaticFiles
 from sqlmodel import SQLModel, Session, create_engine, select
 from sqlalchemy import func, text
 from datetime import datetime
+from types import SimpleNamespace
 
 from starlette.middleware.sessions import SessionMiddleware
 from passlib.context import CryptContext
@@ -162,6 +163,64 @@ def get_group_scale_article_ids(session: Session, user_group_no: int) -> List[in
         if ((i * N_GROUPS) // n + 1) == user_group_no:
             id_list.append(row[0])
     return id_list
+
+
+def get_article_safe(session: Session, article_id: int) -> Optional[SimpleNamespace]:
+    """
+    Fetch a minimal safe set of Article columns that likely exist in older DBs.
+    Returns a SimpleNamespace with attributes for accessed fields, or None.
+    """
+    cols = [
+        "id", "pmid", "title_en", "title_ja", "abstract_en", "abstract_ja",
+        "doi", "year", "authors", "direction_gpt", "direction_gemini",
+        "condition_list_gpt", "condition_list_gemini",
+    ]
+    existing = table_has_columns(session, "article", cols)
+    fields = []
+    for c in cols:
+        if existing.get(c, False):
+            fields.append(getattr(Article, c))
+
+    if not fields:
+        return None
+
+    row = session.exec(select(*fields).where(Article.id == article_id)).first()
+    if not row:
+        return None
+
+    data = {}
+    idx = 0
+    for c in cols:
+        if existing.get(c, False):
+            data[c] = row[idx]
+            idx += 1
+        else:
+            data[c] = None
+
+    return SimpleNamespace(**data)
+
+
+def get_scale_article_safe(session: Session, article_id: int) -> Optional[SimpleNamespace]:
+    cols = ["id", "pmid", "title_en", "title_ja", "year", "doi", "group_no"]
+    existing = table_has_columns(session, "scalearticle", cols)
+    fields = []
+    for c in cols:
+        if existing.get(c, False):
+            fields.append(getattr(ScaleArticle, c))
+    if not fields:
+        return None
+    row = session.exec(select(*fields).where(ScaleArticle.id == article_id)).first()
+    if not row:
+        return None
+    data = {}
+    idx = 0
+    for c in cols:
+        if existing.get(c, False):
+            data[c] = row[idx]
+            idx += 1
+        else:
+            data[c] = None
+    return SimpleNamespace(**data)
 
 def check_group_status(session: Session, group_no: int, mode: str = "disease"):
     """
@@ -377,17 +436,17 @@ def screen_page(request: Request, group_no: int = Query(None), article_index: in
         if id_list:
             if article_index is not None:
                 idx = max(1, min(article_index, total))
-                article = session.get(Article, id_list[idx - 1])
+                article = get_article_safe(session, id_list[idx - 1])
                 current_index = idx
             else:
                 decided_ids = set(session.exec(select(ScreeningDecision.article_id).where(ScreeningDecision.user_id == user_id)).all())
                 for i, aid in enumerate(id_list):
                     if aid not in decided_ids:
-                        article = session.get(Article, aid)
+                        article = get_article_safe(session, aid)
                         current_index = i + 1
                         break
                 if not article:
-                    article = session.get(Article, id_list[-1])
+                    article = get_article_safe(session, id_list[-1])
                     current_index = total
 
         prev_decision = None
@@ -453,8 +512,8 @@ def submit_screen(
     if not user: return RedirectResponse("/login", 303)
     
     with Session(engine) as session:
-        target_article = session.get(Article, article_id)
-        target_group_no = target_article.group_no if target_article else (user.group_no or 1)
+        target_article = get_article_safe(session, article_id)
+        target_group_no = target_article.group_no if target_article and getattr(target_article, 'group_no', None) is not None else (user.group_no or 1)
         year_min = get_year_min(session)
         id_list = get_group_article_ids(session, year_min, target_group_no)
         try: current_index = id_list.index(article_id) + 1
@@ -760,13 +819,13 @@ def conflicts_page(request: Request, mode: str = Query("disease"), group_no: Opt
                     has_0 = any(v == 0 for v in vals)
                     if not has_2:
                         if has_1 and has_0:
-                            art = session.get(Article, aid)
+                            art = get_article_safe(session, aid)
                             if art: conflicts_list.append({
                                 "id": art.id,
                                 "pmid": art.pmid,
                                 "doi": art.doi,
-                                "title": art.title_ja or art.title_en,
-                                "abstract": art.abstract_ja or art.abstract_en,
+                                "title": (art.title_ja or art.title_en) if art else None,
+                                "abstract": (art.abstract_ja or art.abstract_en) if art else None,
                                 "votes": votes
                             })
             else:
@@ -1081,7 +1140,7 @@ def export_aggregated_disease(request: Request, group_no: Optional[int] = Query(
         ])
 
         for aid in sorted(article_ids):
-            art = session.get(Article, aid)
+            art = get_article_safe(session, aid)
             rows = art_map.get(aid, [])
 
             # aggregated decision logic: list counts for 0/1/2, and majority (max of votes) as in existing export
@@ -1174,7 +1233,7 @@ def export_category_lists(request: Request, group_no: Optional[int] = Query(None
             writer.writerow([cat_label])
             writer.writerow(["article_id", "pmid", "title", "status", "votes_summary"])
             for aid in sorted(article_ids):
-                art = session.get(Article, aid)
+                art = get_article_safe(session, aid)
                 rows = art_map.get(aid, [])
                 votes = [int(r.get(extractor)) for r in rows if r.get(extractor) is not None]
                 if votes and max(votes) >= 1:
@@ -1219,7 +1278,7 @@ def _export_category_csv(session: Session, article_ids: List[int], cat_attr: str
         art_map[aid].append({"decision": dec, cat_attr: cat_val})
 
     for aid in sorted(article_ids):
-        art = session.get(Article, aid)
+        art = get_article_safe(session, aid)
         rows = art_map.get(aid, [])
         # aggregated decision checks
         dec_votes = [int(d.decision) for d in rows if d.decision is not None]
