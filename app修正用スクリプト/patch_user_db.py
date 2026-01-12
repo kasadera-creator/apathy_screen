@@ -1,8 +1,9 @@
 import sqlite3
 from pathlib import Path
 
-DEFAULT_DB = "sqlite:////home/yvofxbku/apathy_data/apathy_screen.db"
-DATABASE_URL = os.getenv("DATABASE_URL") or DEFAULT_DB
+DATABASE_URL = os.getenv("DATABASE_URL")
+if not DATABASE_URL:
+    raise SystemExit("DATABASE_URL environment variable is required for this script")
 DB_PATH = None
 if DATABASE_URL.startswith("sqlite://"):
     DB_PATH = Path(DATABASE_URL.split("sqlite://", 1)[1]).expanduser()

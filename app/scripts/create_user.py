@@ -9,13 +9,15 @@ import os
 from pathlib import Path
 
 
-def _database_url_from_env_or_default():
-    default = "sqlite:////home/yvofxbku/apathy_data/apathy_screen.db"
-    return os.getenv("DATABASE_URL") or default
+def _database_url_from_env_or_exit():
+    DATABASE_URL = os.getenv("DATABASE_URL")
+    if not DATABASE_URL:
+        raise SystemExit("DATABASE_URL environment variable is required")
+    return DATABASE_URL
 
 
 def get_engine():
-    DATABASE_URL = _database_url_from_env_or_default()
+    DATABASE_URL = _database_url_from_env_or_exit()
     return create_engine(DATABASE_URL, echo=False)
 
 
@@ -31,8 +33,9 @@ def main():
     pw_hash = pwd_context.hash(args.password)
 
     engine = get_engine()
-    # ensure tables exist
-    SQLModel.metadata.create_all(engine)
+    # Only run create_all when explicitly enabled
+    if os.getenv("AUTO_CREATE_TABLES", "0") == "1":
+        SQLModel.metadata.create_all(engine)
     with Session(engine) as session:
         existing = session.exec(select(User).where(User.username == args.username)).first()
         if existing:

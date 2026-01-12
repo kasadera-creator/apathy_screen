@@ -9,6 +9,7 @@ Usage:
 By default the script will create a timestamped backup of the DB before ALTER TABLE.
 """
 import argparse
+import os
 import sqlite3
 import shutil
 from pathlib import Path
@@ -65,11 +66,23 @@ def add_column(db_path: Path, table: str, column: str, coldef: str, do_backup: b
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--db", help="Path to SQLite DB", default="/home/yvofxbku/apathy_data/apathy_screen.db")
+    p.add_argument("--db", help="Path to SQLite DB (sqlite file path or sqlite:/// URL)", default=None)
     p.add_argument("--no-backup", help="Do not create backup before altering", action="store_true")
     args = p.parse_args()
 
-    db_path = Path(args.db).expanduser()
+    # Determine DB path: prefer --db, otherwise use DATABASE_URL env
+    db_arg = args.db
+    if not db_arg:
+        db_arg = os.getenv("DATABASE_URL")
+        if not db_arg:
+            print("Error: must provide --db or set DATABASE_URL environment variable", file=sys.stderr)
+            sys.exit(2)
+
+    # Accept either a plain file path or a sqlite:/// URL
+    if db_arg.startswith("sqlite://"):
+        db_path = Path(db_arg.split("sqlite://", 1)[1]).expanduser()
+    else:
+        db_path = Path(db_arg).expanduser()
     table = "secondaryreview"
     column = "final_population_n"
     coldef = "TEXT"

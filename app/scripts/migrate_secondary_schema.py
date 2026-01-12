@@ -13,6 +13,7 @@ It creates a timestamped backup by default.
 """
 from pathlib import Path
 import argparse
+import os
 import sqlite3
 import shutil
 from datetime import datetime
@@ -86,11 +87,20 @@ def create_tables(conn: sqlite3.Connection):
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--db", default="/home/yvofxbku/apathy_data/apathy_screen.db")
+    p.add_argument("--db", default=None, help="Path to sqlite DB file or sqlite:/// URL")
     p.add_argument("--no-backup", action="store_true", help="Do not create a backup copy before modifying DB")
     args = p.parse_args()
 
-    db_path = Path(args.db).expanduser()
+    db_arg = args.db or os.getenv("DATABASE_URL")
+    if not db_arg:
+        print("Error: must provide --db or set DATABASE_URL environment variable", file=sys.stderr)
+        sys.exit(2)
+
+    if db_arg.startswith("sqlite://"):
+        db_path = Path(db_arg.split("sqlite://", 1)[1]).expanduser()
+    else:
+        db_path = Path(db_arg).expanduser()
+
     if not db_path.exists():
         print(f"Error: DB not found: {db_path}", file=sys.stderr)
         sys.exit(2)

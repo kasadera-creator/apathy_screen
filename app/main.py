@@ -31,14 +31,26 @@ from .models import (
 )
 import os
 
+# Load environment from dotenv: allow explicit ENV_FILE or fallback to local
+from dotenv import load_dotenv
+
+# 明示指定があればそれを読む（例: ENV_FILE=/path/to/.env.prod）
+env_file = os.getenv("ENV_FILE")
+if env_file:
+    load_dotenv(env_file)
+else:
+    # ローカル開発の標準
+    load_dotenv(".env.local")
+
 # =========================================================
 # 基本設定
 # =========================================================
 # Application base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
-# Prefer explicit DATABASE_URL from the environment; fall back to production DB path
-DEFAULT_DATABASE_URL = "sqlite:////home/yvofxbku/apathy_data/apathy_screen.db"
-DATABASE_URL = os.getenv("DATABASE_URL") or DEFAULT_DATABASE_URL
+# DATABASE_URL must be provided by the environment. Do NOT fall back to a hardcoded path.
+DATABASE_URL = os.getenv("DATABASE_URL")
+if not DATABASE_URL:
+    raise RuntimeError("DATABASE_URL environment variable is required and must point to the main DB")
 
 N_GROUPS = 4
 
@@ -55,11 +67,11 @@ engine = create_engine(DATABASE_URL, echo=False)
 
 # Print DB connection info for startup diagnostics (best-effort)
 try:
-    print(f"[DB] Using DATABASE_URL={DATABASE_URL}")
+    print(f"[DB] DATABASE_URL={DATABASE_URL}")
     print(f"[DB] engine.url={engine.url}")
-    # If SQLite, print resolved filesystem path as well
+    # If sqlite, show resolved filesystem path
     try:
-        if engine.url.drivername and "sqlite" in engine.url.drivername:
+        if DATABASE_URL.startswith("sqlite://"):
             db_file = engine.url.database
             if db_file:
                 resolved = Path(db_file).expanduser().resolve()

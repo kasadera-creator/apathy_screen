@@ -23,8 +23,10 @@ from sqlmodel import Session, create_engine, select
 from app.models import Article, ScreeningDecision
 import os
 
-# Use unified DATABASE_URL from environment or production default
-DATABASE_URL = os.getenv("DATABASE_URL") or "sqlite:////home/yvofxbku/apathy_data/apathy_screen.db"
+# Use unified DATABASE_URL from environment only (required)
+DATABASE_URL = os.getenv("DATABASE_URL")
+if not DATABASE_URL:
+    raise SystemExit("DATABASE_URL environment variable is required for backfill_final.py")
 
 
 def gather_decisions(session: Session):

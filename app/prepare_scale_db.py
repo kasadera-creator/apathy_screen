@@ -9,8 +9,10 @@ from sqlalchemy import delete
 from .models import ScaleArticle
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-DEFAULT_DATABASE_URL = "sqlite:////home/yvofxbku/apathy_data/apathy_screen.db"
-DB_URL = os.getenv("DATABASE_URL") or DEFAULT_DATABASE_URL
+# Require DATABASE_URL from environment; no code-side fallback allowed
+DB_URL = os.getenv("DATABASE_URL")
+if not DB_URL:
+    raise RuntimeError("DATABASE_URL environment variable is required for prepare_scale_db.py")
 
 # データファイルの候補
 DATA_FILES = [

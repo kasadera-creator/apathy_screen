@@ -15,13 +15,17 @@ from datetime import datetime
 
 
 def get_engine():
-    # Use environment DATABASE_URL or fallback to production DB
-    default = "sqlite:////home/yvofxbku/apathy_data/apathy_screen.db"
-    DATABASE_URL = os.getenv("DATABASE_URL") or default
+    # Require environment DATABASE_URL; do not fallback
+    DATABASE_URL = os.getenv("DATABASE_URL")
+    if not DATABASE_URL:
+        raise SystemExit("DATABASE_URL environment variable is required")
     return create_engine(DATABASE_URL, echo=False)
 
 
 def create_tables(engine):
+    if os.getenv("AUTO_CREATE_TABLES", "0") != "1":
+        print("AUTO_CREATE_TABLES is not '1' — refusing to run create_all from CLI helper")
+        return
     SQLModel.metadata.create_all(engine)
     print("Created/verified tables via SQLModel.metadata.create_all")
 

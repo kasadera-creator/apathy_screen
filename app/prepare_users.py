@@ -5,8 +5,10 @@ from .models import User
 from passlib.context import CryptContext
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-DEFAULT_DATABASE_URL = "sqlite:////home/yvofxbku/apathy_data/apathy_screen.db"
-DB_URL = os.getenv("DATABASE_URL") or DEFAULT_DATABASE_URL
+# Require DATABASE_URL from environment; do not fallback to repo defaults
+DB_URL = os.getenv("DATABASE_URL")
+if not DB_URL:
+    raise RuntimeError("DATABASE_URL environment variable is required for prepare_users.py")
 
 pwd_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")
 

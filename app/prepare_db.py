@@ -33,8 +33,10 @@ N_GROUPS: int = 4
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-DEFAULT_DATABASE_URL = "sqlite:////home/yvofxbku/apathy_data/apathy_screen.db"
-DB_URL = os.getenv("DATABASE_URL") or DEFAULT_DATABASE_URL
+# Require DATABASE_URL from environment; do not fall back to repository or other defaults.
+DB_URL = os.getenv("DATABASE_URL")
+if not DB_URL:
+    raise RuntimeError("DATABASE_URL environment variable is required for prepare_db.py")
 
 EXCEL_PATH = BASE_DIR / "data" / "PubMED_with_abstracts_ja_LLM3.xlsx"
 
