@@ -1006,6 +1006,110 @@ def export_secondary_candidates_txt(request: Request, mode: str = Query("disease
 
     return StreamingResponse(output, media_type="text/plain; charset=utf-8", headers={"Content-Disposition": f'attachment; filename="{filename}"'})
 
+
+@app.get("/export_secondary_pmid_list", response_class=StreamingResponse)
+def export_secondary_pmid_list(request: Request, mode: str = Query("disease"), group_no: Optional[int] = Query(None)):
+    """
+    Export CSV list of PMIDs for secondary screening based on aggregated ScreeningDecision.
+    - Does NOT alter DB schema.
+    - If `group_no` omitted -> all groups (respecting `year_min` filter).
+    - Aggregates `ScreeningDecision` by `article_id` and picks the mode (most frequent) decision.
+      Ties => `PENDING`.
+    - Outputs only articles whose final aggregated decision is not an exclusion (safe default: decision != 0).
+    """
+    user = get_current_user(request)
+    if not user:
+        return RedirectResponse("/login", 303)
+
+    output = io.StringIO()
+    writer = csv.writer(output)
+    # header
+    writer.writerow(["pmid", "decision_final", "group_no", "year", "title_en", "title_ja"])
+
+    with Session(engine) as session:
+        # determine article ids to consider
+        year_min = get_year_min(session)
+        if mode != "disease":
+            # For now only disease supported
+            return HTMLResponse("Only disease mode is supported for this export.", status_code=400)
+
+        if group_no is None:
+            all_rows = list(session.exec(select(Article.id, Article.year)))
+            if year_min is not None:
+                rows = [r for r in all_rows if (r[1] is not None and r[1] >= year_min)]
+                if not rows:
+                    rows = all_rows
+            else:
+                rows = all_rows
+            article_ids = [r[0] for r in rows]
+        else:
+            article_ids = get_group_article_ids(session, year_min, group_no)
+
+        if not article_ids:
+            output.seek(0)
+            ts = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+            if group_no is None:
+                filename = f"secondary_pmid_list_{mode}_allgroups_{ts}.csv"
+            else:
+                filename = f"secondary_pmid_list_{mode}_g{group_no}_{ts}.csv"
+            return StreamingResponse(output, media_type="text/csv; charset=utf-8", headers={"Content-Disposition": f'attachment; filename="{filename}"'})
+
+        # Aggregate screeningdecision counts per article_id,decision
+        sd_rows = session.exec(
+            select(ScreeningDecision.article_id, ScreeningDecision.decision, func.count())
+            .where(ScreeningDecision.article_id.in_(article_ids))
+            .group_by(ScreeningDecision.article_id, ScreeningDecision.decision)
+        ).all()
+
+        from collections import defaultdict
+
+        counts = defaultdict(lambda: defaultdict(int))
+        for aid, dec, c in sd_rows:
+            if dec is None:
+                continue
+            counts[aid][str(int(dec))] += int(c)
+
+        # decide final per-article
+        final_map = {}
+        for aid in article_ids:
+            decs = counts.get(aid, {})
+            if not decs:
+                final_map[aid] = "PENDING"
+                continue
+            maxc = max(decs.values())
+            winners = [d for d, cnt in decs.items() if cnt == maxc]
+            if len(winners) != 1:
+                final_map[aid] = "PENDING"
+            else:
+                final_map[aid] = winners[0]
+
+        # treat '0' as exclusion by default; everything else goes to secondary candidates
+        EXCLUDE_DECISIONS = {"0"}
+        DECISION_LABEL = {"0": "exclude", "1": "include", "2": "hold", "PENDING": "PENDING"}
+
+        # Fetch minimal article fields for those selected
+        for aid, fin in final_map.items():
+            label = DECISION_LABEL.get(fin, fin)
+            if str(fin) in EXCLUDE_DECISIONS:
+                continue
+            # select minimal article columns
+            row = session.exec(select(Article.id, Article.pmid, Article.group_no, Article.year, Article.title_en, Article.title_ja).where(Article.id == aid)).first()
+            if not row:
+                continue
+            _id, pmid, gno, yr, t_en, t_ja = row
+            if not pmid:
+                continue
+            writer.writerow([pmid, label, gno, yr, t_en or "", t_ja or ""])
+
+    output.seek(0)
+    ts = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+    if group_no is None:
+        filename = f"secondary_pmid_list_{mode}_allgroups_{ts}.csv"
+    else:
+        filename = f"secondary_pmid_list_{mode}_g{group_no}_{ts}.csv"
+
+    return StreamingResponse(output, media_type="text/csv; charset=utf-8", headers={"Content-Disposition": f'attachment; filename="{filename}"'})
+
 # --- Export ---
 @app.get("/export_disease", response_class=StreamingResponse, name="download_disease")
 def export_disease_csv(request: Request):
