@@ -3,9 +3,9 @@
 """
 PubMED_with_abstracts_ja_LLM3.xlsx から Article テーブルを作り直すスクリプト。
 
-- 病態システマティックレビュー用の 3416 件を対象
-- 英語/日本語アブストラクト、GPT/Gemini の判定結果などを Article に格納
-- 年度フィルタとグループ数は YEAR_MIN, N_GROUPS で制御
+ 病態システマティックレビュー用の 3416 件を対象
+ 英語/日本語アブストラクト、GPT/Gemini の判定結果などを Article に格納
+ 年度フィルタとグループ数は YEAR_MIN, N_GROUPS で制御
 """
 
 from pathlib import Path
@@ -33,8 +33,8 @@ N_GROUPS: int = 4
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-DB_PATH = BASE_DIR / "apathy_screening.db"
-DB_URL = f"sqlite:///{DB_PATH}"
+DEFAULT_DATABASE_URL = "sqlite:////home/yvofxbku/apathy_data/apathy_screen.db"
+DB_URL = os.getenv("DATABASE_URL") or DEFAULT_DATABASE_URL
 
 EXCEL_PATH = BASE_DIR / "data" / "PubMED_with_abstracts_ja_LLM3.xlsx"
 
@@ -97,9 +97,17 @@ def assign_groups_by_authors(
 
 def main():
     # 既存 DB を一度消して作り直す（※ Screening 結果も消えるので注意）
-    if DB_PATH.exists():
-        print(f"[prepare_db] 既存 DB を削除します: {DB_PATH}")
-        DB_PATH.unlink()
+    if DB_URL.startswith("sqlite://"):
+        db_path_str = DB_URL.split("sqlite://", 1)[1]
+        db_path = Path(db_path_str).expanduser()
+        if db_path.exists():
+            print(f"[prepare_db] Existing DB file detected: {db_path}")
+            print("[prepare_db] It will be overwritten by this script.")
+            try:
+                db_path.unlink()
+                print(f"[prepare_db] Deleted {db_path}")
+            except Exception as e:
+                print(f"[prepare_db] Failed to delete {db_path}: {e}")
 
     engine = create_engine(DB_URL, echo=False)
 

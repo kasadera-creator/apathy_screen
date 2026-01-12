@@ -5,13 +5,17 @@ from pathlib import Path
 import os
 
 from ..models import User
+import os
+from pathlib import Path
+
+
+def _database_url_from_env_or_default():
+    default = "sqlite:////home/yvofxbku/apathy_data/apathy_screen.db"
+    return os.getenv("DATABASE_URL") or default
 
 
 def get_engine():
-    # Match the main app's DB location (repository root / apathy_screening.db)
-    BASE_DIR = Path(__file__).resolve().parent.parent.parent
-    DB_PATH = BASE_DIR / "apathy_screening.db"
-    DATABASE_URL = f"sqlite:///{DB_PATH}"
+    DATABASE_URL = _database_url_from_env_or_default()
     return create_engine(DATABASE_URL, echo=False)
 
 

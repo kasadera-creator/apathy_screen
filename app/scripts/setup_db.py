@@ -15,9 +15,9 @@ from datetime import datetime
 
 
 def get_engine():
-    BASE_DIR = Path(__file__).resolve().parent.parent.parent
-    DB_PATH = BASE_DIR / "apathy_screening.db"
-    DATABASE_URL = f"sqlite:///{DB_PATH}"
+    # Use environment DATABASE_URL or fallback to production DB
+    default = "sqlite:////home/yvofxbku/apathy_data/apathy_screen.db"
+    DATABASE_URL = os.getenv("DATABASE_URL") or default
     return create_engine(DATABASE_URL, echo=False)
 
 

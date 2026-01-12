@@ -5,8 +5,8 @@ from .models import User
 from passlib.context import CryptContext
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-DB_PATH = BASE_DIR / "apathy_screening.db"
-DB_URL = f"sqlite:///{DB_PATH}"
+DEFAULT_DATABASE_URL = "sqlite:////home/yvofxbku/apathy_data/apathy_screen.db"
+DB_URL = os.getenv("DATABASE_URL") or DEFAULT_DATABASE_URL
 
 pwd_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")
 

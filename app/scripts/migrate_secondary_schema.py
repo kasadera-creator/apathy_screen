@@ -6,7 +6,7 @@ Idempotent migration script to ensure secondary tables exist:
  - secondaryreview
 
 Usage:
-  python app/scripts/migrate_secondary_schema.py --db /path/to/apathy_screening.db
+    python app/scripts/migrate_secondary_schema.py --db /path/to/apathy_screen.db
 
 The script checks sqlite_master for each table and runs CREATE TABLE only when missing.
 It creates a timestamped backup by default.
@@ -86,7 +86,7 @@ def create_tables(conn: sqlite3.Connection):
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--db", default="/home/yvofxbku/apathy_data/apathy_screening.db")
+    p.add_argument("--db", default="/home/yvofxbku/apathy_data/apathy_screen.db")
     p.add_argument("--no-backup", action="store_true", help="Do not create a backup copy before modifying DB")
     args = p.parse_args()
 

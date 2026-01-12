@@ -21,7 +21,10 @@ from sqlmodel import Session, create_engine, select
 
 # Import models and DATABASE_URL from app main so we use same DB
 from app.models import Article, ScreeningDecision
-from app.main_20251203 import DATABASE_URL
+import os
+
+# Use unified DATABASE_URL from environment or production default
+DATABASE_URL = os.getenv("DATABASE_URL") or "sqlite:////home/yvofxbku/apathy_data/apathy_screen.db"
 
 
 def gather_decisions(session: Session):

@@ -4,7 +4,7 @@ Idempotent migration: add `final_population_n` TEXT column to `secondaryreview` 
 if it does not already exist.
 
 Usage:
-  python app/scripts/migrate_add_final_population_n.py --db /path/to/apathy_screening.db
+    python app/scripts/migrate_add_final_population_n.py --db /path/to/apathy_screen.db
 
 By default the script will create a timestamped backup of the DB before ALTER TABLE.
 """
@@ -65,7 +65,7 @@ def add_column(db_path: Path, table: str, column: str, coldef: str, do_backup: b
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--db", help="Path to SQLite DB", default="/home/yvofxbku/apathy_data/apathy_screening.db")
+    p.add_argument("--db", help="Path to SQLite DB", default="/home/yvofxbku/apathy_data/apathy_screen.db")
     p.add_argument("--no-backup", help="Do not create backup before altering", action="store_true")
     args = p.parse_args()
 

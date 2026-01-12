@@ -34,10 +34,10 @@ import os
 # =========================================================
 # 基本設定
 # =========================================================
+# Application base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
-DB_PATH = BASE_DIR / "apathy_screening.db"
-# Prefer explicit DATABASE_URL from the environment; fall back to repo default
-DEFAULT_DATABASE_URL = f"sqlite:///{DB_PATH}"
+# Prefer explicit DATABASE_URL from the environment; fall back to production DB path
+DEFAULT_DATABASE_URL = "sqlite:////home/yvofxbku/apathy_data/apathy_screen.db"
 DATABASE_URL = os.getenv("DATABASE_URL") or DEFAULT_DATABASE_URL
 
 N_GROUPS = 4
@@ -57,6 +57,15 @@ engine = create_engine(DATABASE_URL, echo=False)
 try:
     print(f"[DB] Using DATABASE_URL={DATABASE_URL}")
     print(f"[DB] engine.url={engine.url}")
+    # If SQLite, print resolved filesystem path as well
+    try:
+        if engine.url.drivername and "sqlite" in engine.url.drivername:
+            db_file = engine.url.database
+            if db_file:
+                resolved = Path(db_file).expanduser().resolve()
+                print(f"[DB] sqlite file={resolved}")
+    except Exception:
+        pass
 except Exception:
     pass
 

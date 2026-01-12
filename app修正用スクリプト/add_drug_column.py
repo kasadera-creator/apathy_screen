@@ -1,7 +1,14 @@
 import sqlite3
+import os
 from pathlib import Path
 
-DB_PATH = Path("apathy_screening.db")
+DEFAULT_DB = "sqlite:////home/yvofxbku/apathy_data/apathy_screen.db"
+DATABASE_URL = os.getenv("DATABASE_URL") or DEFAULT_DB
+DB_PATH = None
+if DATABASE_URL.startswith("sqlite://"):
+    DB_PATH = Path(DATABASE_URL.split("sqlite://", 1)[1]).expanduser()
+else:
+    raise SystemExit("This script requires DATABASE_URL pointing to a sqlite DB")
 
 def add_drug_column():
     print(f"Connecting to database: {DB_PATH}")
@@ -9,7 +16,7 @@ def add_drug_column():
         print("Error: Database file not found!")
         return
 
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(str(DB_PATH))
     cursor = conn.cursor()
     
     column_name = "cat_drug"

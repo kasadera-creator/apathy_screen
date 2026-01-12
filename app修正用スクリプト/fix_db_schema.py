@@ -2,7 +2,13 @@ import sqlite3
 from pathlib import Path
 
 # データベースファイルのパス
-DB_PATH = Path("apathy_screening.db")
+DEFAULT_DB = "sqlite:////home/yvofxbku/apathy_data/apathy_screen.db"
+DATABASE_URL = os.getenv("DATABASE_URL") or DEFAULT_DB
+DB_PATH = None
+if DATABASE_URL.startswith("sqlite://"):
+    DB_PATH = Path(DATABASE_URL.split("sqlite://", 1)[1]).expanduser()
+else:
+    raise SystemExit("This script requires DATABASE_URL pointing to a sqlite DB")
 
 def fix_database():
     print(f"Connecting to database: {DB_PATH}")
