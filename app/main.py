@@ -37,6 +37,8 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 DB_PATH = BASE_DIR / "apathy_screening.db"
 DATABASE_URL = f"sqlite:///{DB_PATH}"
+# Secondary DB URL: fallback to DATABASE_URL when unset
+SECONDARY_DATABASE_URL = os.getenv("SECONDARY_DATABASE_URL") or os.getenv("DATABASE_URL") or DATABASE_URL
 
 N_GROUPS = 4
 
@@ -50,6 +52,18 @@ GROUP_NAMES = {
 
 # engine and metadata creation
 engine = create_engine(DATABASE_URL, echo=False)
+# secondary engine (may point to same DB as main if SECONDARY_DATABASE_URL not set)
+secondary_engine = create_engine(SECONDARY_DATABASE_URL, echo=False)
+
+# Print DB connection info for startup diagnostics
+try:
+    print(f"[DB] DATABASE_URL={DATABASE_URL}")
+    print(f"[DB] engine.url={engine.url}")
+    print(f"[DB] SECONDARY_DATABASE_URL={SECONDARY_DATABASE_URL}")
+    print(f"[DB] secondary_engine.url={secondary_engine.url}")
+except Exception:
+    # best-effort logging, do not crash on import
+    pass
 
 # Default PDF directory for secondary PDFs when env var is not set
 DEFAULT_SECONDARY_PDF_DIR = str(Path.home() / "apathy_screen_app" / "PDF")
@@ -181,6 +195,21 @@ def on_startup():
             ensure_default_users()
         except Exception:
             print("AUTO_CREATE_TABLES!=1: skipping automatic table creation. If this is a new DB run migration script `migrate_secondary_schema`.")
+
+    # Log whether secondaryreview table exists (read-only check). Works for SQLite.
+    try:
+        sec_url = str(secondary_engine.url)
+        if 'sqlite' in sec_url:
+            with secondary_engine.connect() as conn:
+                r = conn.exec(text("SELECT name FROM sqlite_master WHERE type='table' AND name='secondaryreview' LIMIT 1")).first()
+                if r:
+                    print("[DB CHECK] table 'secondaryreview' exists in secondary DB")
+                else:
+                    print("[DB CHECK] table 'secondaryreview' NOT found in secondary DB")
+        else:
+            print("[DB CHECK] secondary DB is not SQLite; skipping sqlite_master check")
+    except Exception as e:
+        print(f"[DB CHECK] failed to check secondaryreview table: {e}")
 
 def get_group_article_ids(session: Session, year_min: Optional[int], user_group_no: int) -> List[int]:
     all_rows = list(session.exec(select(Article.id, Article.authors, Article.pmid, Article.year)))
