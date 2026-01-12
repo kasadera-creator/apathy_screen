@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}二次スクリーニング - ダッシュボード{% endblock %}
+
+{% block content %}
+<h3>二次スクリーニング</h3>
+<div class="row">
+  {% for g, s in stats.items() %}
+    <div class="col-md-3 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ g|capitalize }}</h5>
+          <p class="card-text">Total: {{ s.total }}<br>Pending: {{ s.pending }}<br>Included: {{ s.included }}<br>Excluded: {{ s.excluded }}</p>
+          <a href="/secondary/{{ g }}/next" class="btn btn-primary">次の未着手へ</a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -5,7 +5,7 @@ import io
 from collections import defaultdict
 
 from fastapi import FastAPI, Request, Form, Query, Depends
-from fastapi.responses import HTMLResponse, RedirectResponse, StreamingResponse
+from fastapi.responses import HTMLResponse, RedirectResponse, StreamingResponse, FileResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 
@@ -25,7 +25,11 @@ from .models import (
     AppConfig,
     ScaleArticle,
     ScaleScreeningDecision,
+    SecondaryArticle,
+    SecondaryAutoExtraction,
+    SecondaryReview,
 )
+import os
 
 # =========================================================
 # 基本設定
@@ -46,6 +50,41 @@ GROUP_NAMES = {
 
 engine = create_engine(DATABASE_URL, echo=False)
 SQLModel.metadata.create_all(engine)
+
+# Default PDF directory for secondary PDFs when env var is not set
+DEFAULT_SECONDARY_PDF_DIR = str(Path.home() / "apathy_screen_app" / "PDF")
+
+
+def _ensure_table_columns(engine):
+    """Ensure legacy DB has necessary columns for SecondaryArticle.
+    Adds missing columns via ALTER TABLE when possible (SQLite).
+    """
+    required = {
+        'is_physical': 'INTEGER DEFAULT 0',
+        'is_brain': 'INTEGER DEFAULT 0',
+        'is_psycho': 'INTEGER DEFAULT 0',
+        'is_drug': 'INTEGER DEFAULT 0',
+        'pdf_exists': 'INTEGER DEFAULT 0',
+        'created_at': 'TEXT',
+        'updated_at': 'TEXT',
+    }
+    try:
+        with engine.connect() as conn:
+            rows = conn.exec(text("PRAGMA table_info(secondaryarticle)")).all()
+            existing = {r[1] for r in rows}
+            for col, coldef in required.items():
+                if col not in existing:
+                    try:
+                        conn.exec(text(f"ALTER TABLE secondaryarticle ADD COLUMN {col} {coldef}"))
+                    except Exception:
+                        # ignore failures (e.g., table missing) and continue
+                        pass
+    except Exception:
+        pass
+
+
+# try to patch legacy DB schema if needed
+_ensure_table_columns(engine)
 
 TEMPLATE_DIR = BASE_DIR / "templates"
 app = FastAPI()
@@ -1549,3 +1588,192 @@ def export_category_drug(request: Request, group_no: Optional[int] = Query(None)
         output = _export_category_csv(session, article_ids, "cat_drug")
     filename = f"category_drug_allgroups.csv"
     return StreamingResponse(output, media_type="text/csv", headers={"Content-Disposition": f'attachment; filename="{filename}"'})
+
+
+# =========================================================
+# Secondary (二次) screening routes
+# =========================================================
+@app.get("/secondary", response_class=HTMLResponse)
+def secondary_index(request: Request):
+    user = get_current_user(request)
+    if not user: return RedirectResponse("/login", 303)
+    groups = ["physical", "brain", "psycho", "drug"]
+    stats = {}
+    with Session(engine) as session:
+        for g in groups:
+            col = getattr(SecondaryArticle, f"is_{g}")
+            total = session.exec(select(func.count(SecondaryArticle.id)).where(col == True)).one() if session.exec(select(func.count(SecondaryArticle.id)).where(col == True)).one() is not None else 0
+
+            if user.is_admin:
+                # Admin: pending = articles in this group that admin has not completed (no review or pending)
+                pmid_rows = session.exec(select(SecondaryArticle.pmid).where(col == True).order_by(SecondaryArticle.pmid)).all()
+                pending_count = 0
+                included_count = 0
+                excluded_count = 0
+                for pr in pmid_rows:
+                    pmid = pr
+                    rev = session.exec(select(SecondaryReview).where((SecondaryReview.group == g) & (SecondaryReview.reviewer_id == user.id) & (SecondaryReview.pmid == pmid))).first()
+                    if not rev:
+                        pending_count += 1
+                    else:
+                        if rev.decision == 'pending':
+                            pending_count += 1
+                        elif rev.decision == 'include':
+                            included_count += 1
+                        elif rev.decision == 'exclude':
+                            excluded_count += 1
+                stats[g] = {"total": total or 0, "pending": pending_count, "included": included_count, "excluded": excluded_count}
+            else:
+                pending = session.exec(select(func.count(SecondaryReview.id)).where((SecondaryReview.group == g) & (SecondaryReview.reviewer_id == user.id) & (SecondaryReview.decision == "pending"))).one()
+                included = session.exec(select(func.count(SecondaryReview.id)).where((SecondaryReview.group == g) & (SecondaryReview.reviewer_id == user.id) & (SecondaryReview.decision == "include"))).one()
+                excluded = session.exec(select(func.count(SecondaryReview.id)).where((SecondaryReview.group == g) & (SecondaryReview.reviewer_id == user.id) & (SecondaryReview.decision == "exclude"))).one()
+                stats[g] = {"total": total or 0, "pending": pending or 0, "included": included or 0, "excluded": excluded or 0}
+
+    return templates.TemplateResponse("secondary_index.html", {"request": request, "username": user.username, "group_no": user.group_no, "stats": stats, "current_page": "secondary"})
+
+
+@app.get("/secondary/{group}/next")
+def secondary_next(request: Request, group: str):
+    user = get_current_user(request)
+    if not user: return RedirectResponse("/login", 303)
+    with Session(engine) as session:
+        if user.is_admin:
+            # find first SecondaryArticle in this group that admin hasn't completed (no review) or has pending
+            col = getattr(SecondaryArticle, f"is_{group}")
+            rows = session.exec(select(SecondaryArticle.pmid).where(col == True).order_by(SecondaryArticle.pmid)).all()
+            for r in rows:
+                pmid = r
+                rev = session.exec(select(SecondaryReview).where((SecondaryReview.group == group) & (SecondaryReview.reviewer_id == user.id) & (SecondaryReview.pmid == pmid))).first()
+                if not rev or (rev and rev.decision == 'pending'):
+                    return RedirectResponse(f"/secondary/{group}/{pmid}", 303)
+        else:
+            nxt = session.exec(select(SecondaryReview).where((SecondaryReview.group == group) & (SecondaryReview.reviewer_id == user.id) & (SecondaryReview.decision == "pending")).order_by(SecondaryReview.pmid)).first()
+            if nxt:
+                return RedirectResponse(f"/secondary/{group}/{nxt.pmid}", 303)
+    return templates.TemplateResponse("secondary_empty.html", {"request": request, "username": user.username, "group": group, "current_page": "secondary"})
+
+
+@app.get("/secondary/{group}/{pmid}", response_class=HTMLResponse)
+def secondary_review_page(request: Request, group: str, pmid: int):
+    user = get_current_user(request)
+    if not user: return RedirectResponse("/login", 303)
+    with Session(engine) as session:
+        article = session.exec(select(Article).where(Article.pmid == pmid)).first()
+        secondary = session.exec(select(SecondaryArticle).where(SecondaryArticle.pmid == pmid)).first()
+        auto = session.exec(select(SecondaryAutoExtraction).where(SecondaryAutoExtraction.pmid == pmid)).first()
+        review = session.exec(select(SecondaryReview).where((SecondaryReview.pmid == pmid) & (SecondaryReview.group == group) & (SecondaryReview.reviewer_id == user.id))).first()
+        if not review:
+            if user.is_admin:
+                # create a pending review record for admin on-the-fly
+                review = SecondaryReview(pmid=pmid, group=group, reviewer_id=user.id, decision="pending")
+                session.add(review); session.commit()
+                review = session.exec(select(SecondaryReview).where((SecondaryReview.pmid == pmid) & (SecondaryReview.group == group) & (SecondaryReview.reviewer_id == user.id))).first()
+            else:
+                # non-admins should not view unassigned items
+                return templates.TemplateResponse("secondary_empty.html", {"request": request, "username": user.username, "group": group, "current_page": "secondary"})
+
+        pdf_available = False
+        pdf_dir = os.getenv("SECONDARY_PDF_DIR", DEFAULT_SECONDARY_PDF_DIR)
+        if pdf_dir:
+            pdf_path = Path(pdf_dir) / f"{pmid}.pdf"
+            pdf_available = pdf_path.exists()
+
+    return templates.TemplateResponse("secondary_review.html", {
+        "request": request,
+        "username": user.username,
+        "group": group,
+        "pmid": pmid,
+        "article": article,
+        "secondary": secondary,
+        "auto": auto,
+        "review": review,
+        "pdf_available": pdf_available,
+        "current_page": "secondary"
+    })
+
+
+@app.post("/secondary/{group}/{pmid}/save")
+def secondary_save(request: Request, group: str, pmid: int,
+                   decision: str = Form("pending"), final_citation: str = Form(""), final_apathy_terms: str = Form(""),
+                   final_target_condition: str = Form(""), final_population_n: str = Form(""), final_prevalence: str = Form(""), final_intervention: str = Form(""),
+                   comment: str = Form(""), action: str = Form("save")):
+    user = get_current_user(request)
+    if not user: return RedirectResponse("/login", 303)
+    with Session(engine) as session:
+        review = session.exec(select(SecondaryReview).where((SecondaryReview.pmid == pmid) & (SecondaryReview.group == group) & (SecondaryReview.reviewer_id == user.id))).first()
+        if not review:
+            if user.is_admin:
+                review = SecondaryReview(pmid=pmid, group=group, reviewer_id=user.id)
+            else:
+                # non-admin cannot save for unassigned item
+                return RedirectResponse(f"/secondary/{group}/next", 303)
+        # If user clicked the explicit "除外して次へ" button, force decision to exclude
+        if action == 'exclude_next':
+            review.decision = 'exclude'
+        else:
+            review.decision = decision
+        review.final_citation = final_citation
+        review.final_apathy_terms = final_apathy_terms
+        review.final_target_condition = final_target_condition
+        # persist both variants if model has them for compatibility
+        try:
+            review.final_population_n = final_population_n
+        except Exception:
+            pass
+        try:
+            # older DBs/models may use final_population_N
+            review.final_population_N = final_population_n
+        except Exception:
+            pass
+        review.final_prevalence = final_prevalence
+        review.final_intervention = final_intervention
+        review.comment = comment
+        review.updated_at = datetime.utcnow().isoformat()
+        session.add(review); session.commit()
+
+    if action in ("save_next", "exclude_next"):
+        return RedirectResponse(f"/secondary/{group}/next", 303)
+    # default: return to same page
+    return RedirectResponse(f"/secondary/{group}/{pmid}", 303)
+
+
+@app.get("/secondary/pdf/{pmid}")
+def secondary_pdf(pmid: int):
+    pdf_dir = os.getenv("SECONDARY_PDF_DIR", DEFAULT_SECONDARY_PDF_DIR)
+    if not pdf_dir:
+        return HTMLResponse("PDF directory not configured", status_code=404)
+    path = Path(pdf_dir) / f"{pmid}.pdf"
+    if not path.exists():
+        return HTMLResponse("PDF not found", status_code=404)
+    return FileResponse(path, media_type="application/pdf", headers={"Content-Disposition": f'inline; filename="{pmid}.pdf"'})
+
+
+@app.get("/secondary/{group}/export")
+def secondary_group_export(request: Request, group: str):
+    user = get_current_user(request)
+    if not user: return RedirectResponse("/login", 303)
+    output = io.StringIO(); writer = csv.writer(output)
+    writer.writerow(["pmid", "reviewer", "decision", "final_target_condition", "final_apathy_terms", "comment", "auto_target_condition", "auto_apathy_terms"])
+    with Session(engine) as session:
+        rows = session.exec(select(SecondaryReview, SecondaryAutoExtraction, User).join(User, User.id == SecondaryReview.reviewer_id).outerjoin(SecondaryAutoExtraction, SecondaryAutoExtraction.pmid == SecondaryReview.pmid).where(SecondaryReview.group == group)).all()
+        for rev, auto, usr in rows:
+            writer.writerow([rev.pmid, usr.username if usr else rev.reviewer_id, rev.decision, rev.final_target_condition or "", rev.final_apathy_terms or "", rev.comment or "", (auto.auto_target_condition if auto else ""), (auto.auto_apathy_terms if auto else "")])
+    output.seek(0)
+    filename = f"secondary_group_{group}_export.csv"
+    return StreamingResponse(output, media_type="text/csv", headers={"Content-Disposition": f'attachment; filename="{filename}"'})
+
+
+@app.get("/secondary/conditions/summary")
+def secondary_conditions_summary(request: Request):
+    user = get_current_user(request)
+    if not user: return RedirectResponse("/login", 303)
+    from collections import defaultdict
+    cnt = defaultdict(list)
+    with Session(engine) as session:
+        rows = session.exec(select(SecondaryReview).where(SecondaryReview.final_target_condition.is_not(None))).all()
+        for r in rows:
+            key = (r.final_target_condition or "").strip()
+            if not key: continue
+            cnt[key].append(r.pmid)
+    out = {k: {"count": len(v), "pmids": v} for k, v in cnt.items()}
+    return out

@@ -1,0 +1,880 @@
+﻿article_id,pmid,title_en,title_ja,aggregated_decision,category_votes
+1,27524403,Staff Distress Improves by Treating Pain in Nursing Home Patients With Dementia: Results From a Cluster-Randomized Controlled Trial,認知症介護施設患者の疼痛治療によるスタッフストレスの改善：クラスター無作為化比較試験の結果,2,1+0
+2,29436490,Subthalamic stimulation and neuropsychiatric symptoms in Parkinson's disease: results from a long-term follow-up cohort study,パーキンソン病における視床下核刺激と神経精神症状：長期追跡コホート研究の結果,2,0+1
+11,39540250,The prevalence and risk factors of apathy among the Canadian long-term care residents with Alzheimer's disease and related dementias,アルツハイマー病および関連認知症を有するカナダの長期療養施設入居者における無気力の有病率と危険因子,2,1+1
+13,33716830,"Depression in Alzheimer's Disease: A Delphi Consensus on Etiology, Risk Factors, and Clinical Management",アルツハイマー病におけるうつ病：病因、危険因子、臨床管理に関するデルファイ法による合意形成,1,1+0
+14,33628415,"Focus on Depression in Parkinson's Disease: A Delphi Consensus of Experts in Psychiatry, Neurology, and Geriatrics",パーキンソン病におけるうつ病に焦点を当てた研究：精神医学、神経学、老年医学の専門家によるデルファイ法による合意形成,1,1+1
+15,23871117,A novel rating scale for the measurement of apathy in institutionalized persons with dementia: the APADEM-NH,施設入所認知症患者における無気力測定のための新規評価尺度：APADEM-NH,2,1+0
+16,27428560,Structural correlates of apathy in Alzheimer's disease: a multimodal MRI study,アルツハイマー病における無気力の構造的相関：マルチモーダルMRI研究,2,1+0
+19,40123132,[Asthenia in the acute period of ischemic stroke],[虚脱症：虚血性脳卒中急性期における],2,1+1
+20,30834978,Non-motor symptoms in Huntington's disease: a comparative study with Parkinson's disease,ハンチントン病における非運動症状：パーキンソン病との比較研究,2,1+1
+21,29292530,Apathy in idiopathic normal pressure hydrocephalus: A marker of reversible gait disorders,特発性正常圧水頭症における無関心：可逆性歩行障害のマーカー,2,1+1
+22,27965058,Apathy and higher level of gait control in normal pressure hydrocephalus,正常圧水頭症における無関心と高次歩行制御,2,1+1
+31,31495773,The Relationships Between Cognitive Reserve and Psychological Symptoms: A Cross-Sectional Study in Healthy Individuals,認知予備力と心理的症状の関係：健常者を対象とした横断研究,2,1+0
+32,34864668,A Comparison of Behavioral and Psychological Symptoms of Dementia (BPSD) and BPSD Sub-Syndromes in Early-Onset and Late-Onset Alzheimer's Disease,若年性および老年性アルツハイマー病における認知症行動心理症状（BPSD）およびBPSDサブ症候群の比較,2,1+1
+33,26406134,Impact of Neuropsychiatric Symptoms on the Quality of Life of Subjects with Parkinson's Disease,パーキンソン病患者の生活の質に対する神経精神症状の影響,2,1+1
+34,27567885,Apathy in Mild Parkinson's Disease: Neuropsychological and Neuroimaging Evidence,軽度パーキンソン病における無関心：神経心理学的および神経画像学的証拠,2,1+0
+39,26572551,Group and individual cognitive therapies in Alzheimer's disease: the ETNA3 randomized trial,アルツハイマー病における集団および個別認知療法：ETNA3無作為化試験,2,1+1
+42,39710559,Psychiatric and cognitive symptoms of Parkinson's disease: A life's tale,パーキンソン病の精神症状と認知症状：人生の物語,2,1+0
+43,32570436,VIVID: Independent Living of Aging Adults Suffered a Stroke,VIVID：脳卒中を経験した高齢者の自立生活,2,1+0
+48,30211612,Executive impairment is associated with unawareness of neuropsychiatric symptoms in premanifest and early Huntington's disease,前駆期および初期ハンチントン病における神経精神症状の自覚不足と実行機能障害の関連性,2,1+1
+49,30378268,Association of Alzheimer's genetic loci with mild behavioral impairment,アルツハイマー病関連遺伝子座と軽度行動障害の関連性,2,1+0
+50,26602086,Assessing Alzheimer's disease patients' quality of life: Discrepancies between patient and caregiver perspectives,アルツハイマー病患者の生活の質評価：患者と介護者の視点の相違,2,1+1
+58,29424552,Differences in neuropsychiatric symptoms between nursing home residents with young-onset dementia and late-onset dementia,若年性認知症と遅発性認知症の介護施設入居者における神経精神症状の差異,2,1+1
+62,29244062,Longitudinal Course and Predictors of Apathetic Symptoms after Severe Traumatic Brain Injury,重度外傷性脳損傷後の無関心症状の経過と予測因子,2,1+1
+67,39668706,"The effect of cognitive stimulation therapy (CST) on apathy, loneliness, anxiety and activities of daily living in older people with Alzheimer's disease: randomized control study",アルツハイマー病高齢者の無関心・孤独感・不安・日常生活動作に対する認知刺激療法（CST）の効果：無作為化比較試験,2,1+1
+71,34039534,Monitoring Behaviors of Patients With Late-Stage Dementia Using Passive Environmental Sensing Approaches: A Case Series,受動的環境センシング手法を用いた末期認知症患者の行動モニタリング：症例シリーズ,2,1+0
+72,36745966,"Poststroke apathy: Major role of cognitive, depressive and neurological disorders over imaging determinants",脳卒中後の無関心：画像所見よりも認知機能障害、抑うつ、神経学的障害が主要な役割を果たす,2,1+1
+75,28884712,[Clinical and neurovisualization characteristics of apathetic depression],[無関心性うつ病の臨床的・神経画像学的特徴],2,1+0
+76,36592107,Mild Behavioral Impairment: A New Prodromal Syndrome for Dementia,軽度行動障害：認知症の新たな前駆症候群,2,1+0
+77,29606317,Behavioral disorders: The 'blind spot' of neurology and psychiatry,行動障害：神経学と精神医学の「盲点」,1,1+1
+79,30035003,Apathy and atrophy of subcortical brain structures in Huntington's disease: A two-year follow-up study,ハンチントン病における無関心と皮質下脳構造の萎縮：2年間の追跡調査,2,1+1
+80,25600482,Resting-state frontostriatal functional connectivity in Parkinson's disease-related apathy,パーキンソン病関連無関心における安静時前頭線条体機能的接続性,2,1+0
+82,39344629,The prevalence of neuropsychiatric symptoms and correlation with MRI findings in CADASIL patients,CADASIL患者における神経精神症状の有病率とMRI所見との相関,2,1+1
+83,26120984,[Inflammatory mechanisms of fatigue syndrome in Parkinson's disease],[パーキンソン病における疲労症候群の炎症メカニズム],2,1+0
+85,30935215,Prevalence and Severity of Neuropsychiatric Symptoms in Early- Versus Late-Onset Alzheimer's Disease,早期発症と遅発性アルツハイマー病における神経精神症状の有病率と重症度,2,1+1
+87,30136743,Comparison of the efficacy of gesture-verbal treatment and doll therapy for managing neuropsychiatric symptoms in older patients with dementia,認知症高齢患者の神経精神症状管理におけるジェスチャー言語療法と人形療法の有効性比較,2,0+1
+88,32088096,The Association Between Biomarkers and Neuropsychiatric Symptoms Across the Alzheimer's Disease Spectrum,アルツハイマー病スペクトラムにおけるバイオマーカーと神経精神症状の関連性,2,1+0
+89,40528389,Neuropsychiatric symptoms and awareness in young-and-late-onset dementia,若年性および遅発性認知症における神経精神症状と自覚症状,2,0+1
+91,30212839,Apathy in rapid eye movement sleep behaviour disorder is associated with serotonin depletion in the dorsal raphe nucleus,急速眼球運動睡眠行動障害における無気力は背側縫線核のセロトニン枯渇と関連する,2,1+1
+92,28472425,Prodromal Parkinsonism and Neurodegenerative Risk Stratification in REM Sleep Behavior Disorder,レム睡眠行動障害における前駆性パーキンソン症候群と神経変性リスク層別化,2,1+1
+93,29114969,Apathy in rapid eye movement sleep behaviour disorder is common and under-recognized,急速眼球運動睡眠行動障害における無関心は一般的であり、認識不足である,2,1+1
+96,31422368,Effects of bilateral stimulation of the subthalamic nucleus in Parkinson's disease with and without REM sleep behaviour disorder,レム睡眠行動障害の有無によるパーキンソン病における視床下核の両側刺激の効果,2,1+0
+97,29253029,Sleep-wake functions and quality of life in patients with subthalamic deep brain stimulation for Parkinson's disease,パーキンソン病に対する視床下部深部脳刺激療法を受けた患者の睡眠・覚醒機能と生活の質,2,1+1
+98,30826716,Apathy in Parkinson's disease with REM sleep behavior disorder,レム睡眠行動障害を伴うパーキンソン病における無関心,2,1+1
+102,25916562,Alzheimer's disease first symptoms are age dependent: Evidence from the NACC dataset,アルツハイマー病の初期症状は年齢依存性である：NACCデータセットからの証拠,2,1+1
+107,37449850,The impact of COVID-19 pandemic on elderly with neurocognitive disorders,COVID-19パンデミックが神経認知障害を有する高齢者に与える影響,2,1+0
+109,30444020,White matter myelin profiles linked to clinical subtypes of Parkinson's disease,パーキンソン病の臨床亜型に関連する白質ミエリンプロファイル,2,1+0
+115,33404617,Progression of Behavioral Disturbances and Neuropsychiatric Symptoms in Patients With Genetic Frontotemporal Dementia,遺伝性前頭側頭型認知症患者における行動障害および神経精神症状の進行,2,1+1
+118,32353168,"Lower Blood Pressure, Small-Vessel Disease, and Apathy in Older Persons With Mild Cognitive Deficits",軽度認知障害を有する高齢者の低血圧、小血管疾患、および無関心,2,1+0
+120,34017242,"Case Report: Barely Able to Speak, Can't Stop Echoing: Echolalic Dynamic Aphasia in Progressive Supranuclear Palsy",症例報告：ほとんど話せず、反響を止められない：進行性核上性麻痺における反響言語を伴う動的失語症,2,1+0
+122,34294015,Behavioral variations among vascular cognitive impairment subtypes - A comparative study,血管性認知障害サブタイプ間における行動変異 - 比較研究,2,1+1
+124,25545235,The BCoS cognitive profile screen: Utility and predictive value for stroke,BCoS認知プロファイルスクリーニング：脳卒中に対する有用性と予測価値,1,1+0
+127,31304792,"Depression, apathy and impaired self-awareness following severe traumatic brain injury: a preliminary investigation",重度外傷性脳損傷後の抑うつ、無関心、自己認識障害：予備的研究,2,0+1
+129,27260328,Dysexecutive syndrome in amnesic mild cognitive impairment: a multicenter study,健忘型軽度認知障害における実行機能障害症候群：多施設共同研究,2,1+1
+133,33055276,Apathy and risk of probable incident dementia among community-dwelling older adults,地域在住高齢者における無関心と認知症発症リスク,2,1+0
+137,33646168,Neuropsychiatric Symptoms in Patients with Dementia Associated with Increased Psychological Distress in Caregivers During the COVID-19 Pandemic,COVID-19パンデミック下における介護者の心理的苦痛の増大と認知症患者の神経精神症状の関連性,2,1+0
+138,31170813,Apathy and Disinhibition Related to Neuropathology in Amnestic Versus Behavioral Dementias,健忘型認知症と行動障害型認知症における神経病理に関連する無関心と抑制解除,2,1+1
+141,30517631,The course of neuropsychiatric symptoms in patients with dementia in primary care,プライマリケアにおける認知症患者の神経精神症状の経過,2,1+1
+142,28985387,Neuropsychiatric symptoms and psychotropic drug use in patients with dementia in general practices,一般診療における認知症患者の神経精神症状と向精神薬の使用,2,0+1
+143,25403309,The course of neuropsychiatric symptoms in community-dwelling patients with dementia: a systematic review,地域在住認知症患者の神経精神症状の経過：系統的レビュー,2,1+1
+146,40774233,"Mental fatigue in older adults: A narrative review of subjective, behavioral, neurophysiological, and physical changes",高齢者の精神的疲労：主観的、行動的、神経生理学的、身体的変化に関する記述的レビュー,1,1+0
+148,35146060,Depression and Apathy across Different Variants of Progressive Supranuclear Palsy,進行性核上性麻痺の異なる亜型における抑うつと無関心,2,1+1
+151,32544926,Motivation and sensitivity to monetary reward in late-life insomnia: moderating role of sex and the inflammatory marker CRP,老年期不眠症における金銭的報酬への動機付けと感受性：性別と炎症マーカーCRPの調整作用,2,1+0
+152,38909542,Social dysfunction relates to shifts within socioaffective brain systems among Schizophrenia and Alzheimer's disease patients,社会機能障害は、統合失調症およびアルツハイマー病患者における社会情動的脳システム内の変化と関連する,2,1+1
+153,35830959,Implementing Affordable Socially Assistive Pet Robots in Care Homes Before and During the COVID-19 Pandemic: Stratified Cluster Randomized Controlled Trial and Mixed Methods Study,COVID-19パンデミック前および期間中の介護施設における手頃な価格の社会支援型ペットロボットの導入：層別クラスター無作為化比較試験と混合手法研究,2,1+1
+156,36514440,Effect of traumatic brain injury on mild behavioral impairment domains prior to all-cause dementia diagnosis and throughout disease progression,外傷性脳損傷が、全原因性認知症診断前および疾患進行過程における軽度行動障害領域に及ぼす影響,2,1+1
+157,33470043,Traumatic brain injury alters neuropsychiatric symptomatology in all-cause dementia,外傷性脳損傷は全原因性認知症における神経精神症状を変化させる,2,1+1
+158,30121084,Apathy is associated with faster global cognitive decline and early nursing home admission in dementia with Lewy bodies,無関心はレビー小体型認知症における全般的認知機能低下加速および早期介護施設入所と関連する,2,1+1
+163,25687925,The course of neuropsychiatric symptoms in dementia: a 3-year longitudinal study,認知症における神経精神症状の経過：3年間の縦断研究,2,1+1
+166,30604055,Clinical and demographic correlates of apathy in Parkinson's disease,パーキンソン病における無気力の臨床的・人口統計学的相関,2,1+1
+168,39825282,Changes in sensor recorded activity patterns and neuropsychiatric symptoms after deep brain stimulation for Parkinson's disease: 5 case reports,パーキンソン病に対する深部脳刺激術後のセンサー記録活動パターンと神経精神症状の変化：5症例報告,2,1+0
+170,40033596,User Experience in Virtual Reality (VR) Applications for Elderly People with Cognitive Impairment and Dementia: A Scoping Review,認知機能障害および認知症を有する高齢者向けバーチャルリアリティ（VR）アプリケーションにおけるユーザー体験：スコーピングレビュー,1,0+1
+171,27573215,Non-Motor symptoms in Portuguese Parkinson's Disease patients: correlation and impact on Quality of Life and Activities of Daily Living,ポルトガル人パーキンソン病患者における非運動症状：相関関係と生活の質および日常生活動作への影響,2,1+1
+172,32816194,Cerebellar Grey Matter Volume in Older Persons Is Associated with Worse Cognitive Functioning,高齢者の小脳灰白体容積は認知機能の低下と関連している,2,1+1
+173,33975314,Apathy Measures in Older Adults and People with Dementia: A Systematic Review of Measurement Properties Using the COSMIN Methodology,高齢者および認知症患者における無関心度測定：COSMIN手法を用いた測定特性の系統的レビュー,2,1+0
+174,31435870,Diagnosing and Treating Depression in Patients with Alzheimer's Disease,アルツハイマー病患者におけるうつ病の診断と治療,2,1+0
+175,27111252,Neuropsychiatric symptoms and Apolipoprotein E: Associations with eventual Alzheimer's disease development,神経精神症状とアポリポタンパク質E：アルツハイマー病発症との関連性,2,1+0
+176,25904206,Caregiver burden in amyotrophic lateral sclerosis: a cross-sectional investigation of predictors,筋萎縮性側索硬化症における介護者の負担：予測因子の横断的研究,2,1+1
+177,38443298,Study Partner Report of Apathy in Older Adults is Associated with AD Biomarkers: Findings from the Harvard Aging Brain Study,高齢者の無関心に関する研究パートナー報告はアルツハイマー病バイオマーカーと関連：ハーバード老化脳研究からの知見,2,1+1
+179,31683475,Psychiatric Phenocopy Syndrome of Behavioral Frontotemporal Dementia: Behavioral and Cognitive Fingerprint,行動性前頭側頭型認知症の精神症状模倣症候群：行動および認知の指紋,2,1+1
+180,31003069,Dopamine receptor D(4) (DRD(4)) polymorphisms with reduced functional potency intensify atrophy in syndrome-specific sites of frontotemporal dementia,機能的効力が低下したドーパミン受容体D4（DRD4）多型は、前頭側頭型認知症の症候群特異的部位における萎縮を悪化させる,1,1+0
+181,28248557,The Parkinson's Active Living (PAL) Program,パーキンソン病患者向けアクティブ・リビング（PAL）プログラム,2,1+1
+183,32490831,Resting-state fMRI analysis in apathetic Alzheimer's disease,無関心型アルツハイマー病における安静時fMRI解析,2,1+0
+184,30369270,The burden of apathy for caregivers of patients with amyotrophic lateral sclerosis,筋萎縮性側索硬化症患者の介護者における無気力の負担,2,0+1
+185,29189922,Apathy and its impact on patient outcome in amyotrophic lateral sclerosis,筋萎縮性側索硬化症における無関心とその患者転帰への影響,2,1+1
+186,26822417,Apathy is associated with poor prognosis in amyotrophic lateral sclerosis,無関心は筋萎縮性側索硬化症の予後不良と関連している,2,1+1
+187,33033486,Behavioral and Psychological Effects of Coronavirus Disease-19 Quarantine in Patients With Dementia,認知症患者における新型コロナウイルス感染症-19隔離の行動的・心理的影響,2,1+0
+189,28871794,Differentiating Between Apathy and Depression in Patients With Parkinson Disease Dementia,パーキンソン病認知症患者における無関心と抑うつの鑑別,2,1+0
+190,32602253,Parkinson disease clinical subtypes: key features & clinical milestones,パーキンソン病の臨床サブタイプ：主な特徴と臨床的マイルストーン,2,1+1
+191,40488989,Clinical MRI to predict motor and non-motor effects of deep brain stimulation in Parkinson disease,パーキンソン病における深部脳刺激の運動効果および非運動効果を予測する臨床MRI,2,1+0
+192,37351584,Associations between neuropsychiatric symptoms of affective and vegetative domains and brain morphology in aging people with mild cognitive impairment and Alzheimer's disease,軽度認知障害およびアルツハイマー病を有する高齢者の情動領域および自律神経領域の神経精神症状と脳形態との関連性,2,1+0
+193,40308647,Neuropsychiatric Symptoms and Mortality in Cognitively Normal Older Mexican Americans,認知機能正常なメキシコ系アメリカ人高齢者における神経精神症状と死亡率,2,1+0
+194,35912738,Association of Cerebral Small Vessel Disease Burden with Neuropsychiatric Symptoms in Non-Demented Elderly: A Longitudinal Study,非認知症高齢者における脳小血管病変負荷と神経精神症状の関連：縦断研究,2,1+1
+196,39579261,Psychometric properties and clinical correlates of the Frontal Behaviour Inventory in progressive supranuclear palsy: data from the PSP-NET,進行性核上性麻痺における前頭葉行動目録の心理測定特性と臨床的相関：PSP-NETからのデータ,2,1+0
+197,27514578,Dementia after Three Months and One Year from Stroke: New Onset or Previous Cognitive Impairment?,脳卒中後3ヶ月および1年経過時の認知症：新規発症か既往認知障害か？,1,1+0
+198,29110353,Amotivation is associated with smaller ventral striatum volumes in older patients with schizophrenia,高齢統合失調症患者における無動機性は腹側線条体容積の減少と関連する,2,1+0
+201,31700058,"Depression and Apathy After Transient Ischemic Attack or Minor Stroke: Prevalence, Evolution and Predictors",一過性脳虚血発作または軽微な脳卒中後のうつ病と無関心：有病率、経過、予測因子,2,1+1
+202,29521883,Residual Symptoms After Treatment for Depression in Patients With Coronary Heart Disease,冠動脈性心疾患患者におけるうつ病治療後の残存症状,2,1+0
+203,28035924,The Effect of the Association between Donepezil and Choline Alphoscerate on Behavioral Disturbances in Alzheimer's Disease: Interim Results of the ASCOMALVA Trial,ドネペジルとコリン・アルファスケレートとの併用がアルツハイマー病の行動障害に及ぼす影響：ASCOMALVA試験の中間結果,2,1+0
+204,29100973,Evaluating psychiatric symptoms in Parkinson's Disease by a clinimetric analysis of the Hopkins Symptom Checklist (SCL-90-R),ホプキンズ症状チェックリスト（SCL-90-R）の臨床測定学的分析によるパーキンソン病の精神症状の評価,2,1+1
+206,26507184,"Associations Between Original and a Reduced Frontal Systems Behavior Scale (FrSBe), Cognition, and Activities of Daily Living in a Large Neurologic Sample",大規模神経学的サンプルにおけるオリジナル版および短縮版前頭葉システム行動尺度（FrSBe）、認知機能、日常生活動作の関連性,2,1+0
+208,31559533,Cognitive impairment and structural brain damage in multiple system atrophy-parkinsonian variant,多系統萎縮症（パーキンソン型）における認知機能障害と脳構造損傷,2,1+1
+211,35364452,Specific depressive symptoms are related with different patterns of alcohol use in community-dwelling older adults,地域在住高齢者における特定の抑うつ症状と異なる飲酒パターンの関連性,2,1+0
+212,40659932,Brain functional connectivity changes in amyotrophic lateral sclerosis with apathy and depression,無関心と抑うつを伴う筋萎縮性側索硬化症における脳機能的接続性の変化,2,1+0
+214,35147532,Clinical Trajectories of Neuropsychiatric Symptoms in Mild-Moderate to Advanced Dementia,軽度～中等度から高度認知症における神経精神症状の臨床経過,2,1+1
+215,40384367,The Unseen Burden: Uncovering Shame and Its Determinants in Parkinson's Disease,見えない負担：パーキンソン病における羞恥心とその決定要因の解明,2,1+0
+218,31342135,Regional changes in the type 1 cannabinoid receptor are associated with cognitive dysfunction in Parkinson's disease,地域的なカンナビノイド受容体1型（CB1R）の変化はパーキンソン病における認知機能障害と関連する,2,1+0
+219,30911822,Olfaction and taste in Parkinson's disease: the association with mild cognitive impairment and the single cognitive domain dysfunction,パーキンソン病における嗅覚と味覚：軽度認知障害および単一認知領域機能障害との関連,2,1+0
+220,35742625,Mediation Analyses of the Role of Apathy on Motoric Cognitive Outcomes,運動認知機能に対する無関心（アパシー）の役割に関する媒介分析,2,1+0
+221,39781213,Stratifying Risk for Cognitive Decline in Older Adult Populations using the Geriatric Depression Scale,老年うつ病尺度を用いた高齢者集団における認知機能低下のリスク層別化,2,1+0
+223,31830849,The Longitudinal Impact of Excessive Daytime Somnolence on Motor and Nonmotor Symptoms of Parkinson's Disease in a Southeast Asian Cohort,東南アジアコホートにおける過度の昼間眠気がパーキンソン病の運動症状および非運動症状に及ぼす経時的影響,2,1+1
+224,33423870,Structural Brain Differences Between Cognitively Impaired Patients With and Without Apathy,無関心症の有無による認知障害患者の脳構造的差異,2,1+0
+225,39266407,Differential Social Cognitive Performance in Older Adults With Mild Cognitive Impairment and Dementia,軽度認知障害と認知症を有する高齢者の社会的認知機能の差異,2,1+0
+227,39490916,Abnormal intrinsic brain functional network dynamics in stroke and correlation with neuropsychiatric symptoms revealed based on lesion and cerebral blood flow,脳卒中における脳内機能ネットワークの異常な動態と神経精神症状との相関：病変と脳血流に基づく解明,2,1+0
+229,37995462,Prevalence of post-stroke cognitive impairment and associated risk factors in Chinese stroke survivors,中国脳卒中生存者における脳卒中後認知障害の有病率と関連リスク因子,2,1+0
+230,38153242,Apathy mediates the association between age and cognition after stroke,脳卒中後の年齢と認知機能の関連における無気力の媒介作用,2,1+1
+231,26890774,Apathy and Attentional Biases in Alzheimer's Disease,アルツハイマー病における無関心と注意バイアス,2,1+0
+232,34924392,"Cerebral Volumetric Correlates of Apathy in Alzheimer's Disease and Cognitively Normal Older Adults: Meta-Analysis, Label-Based Review, and Study of an Independent Cohort",アルツハイマー病および認知機能正常高齢者における無気力と脳容積の相関：メタ分析、ラベルベースレビュー、および独立コホート研究,2,1+0
+234,29548857,C-Reactive Protein Can Be an Early Predictor of Poststroke Apathy in Acute Ischemic Stroke Patients,急性虚血性脳卒中患者における脳卒中後無気力の早期予測因子としてのC反応性タンパク質,2,1+0
+235,29966477,Neuropsychiatric Symptoms and Caregiver Burden in Individuals With Alzheimer's Disease: The TEAM-AD VA Cooperative Study,アルツハイマー病患者の神経精神症状と介護者の負担：TEAM-AD VA 共同研究,2,1+1
+237,29409164,"Reliability and structural validity of the Chinese version of the Neuropsychiatric Inventory, Nursing Home version",神経精神科評価尺度（Neuropsychiatric Inventory）介護施設版中国語版の信頼性と構造的妥当性,2,1+0
+238,36092817,White matter hyperintensities in dementia with Lewy bodies are associated with poorer cognitive function and higher dementia stages,レビー小体型認知症における白質高信号域は、認知機能の低下および認知症段階の進行と関連している,2,1+1
+240,38696151,[Diagnostic approaches to assessing mild behavioral impairment in patients with mild cognitive impairment],[軽度認知障害患者における軽度行動障害の評価診断アプローチ],2,1+0
+242,32888656,Behavioural Disturbances in Patients with Diagnosis of Neurocognitive Disorder in Bogotá (Colombia),ボゴタ（コロンビア）における神経認知障害と診断された患者の行動障害,2,1+1
+243,29449185,"Association of coffee consumption and non-motor symptoms in drug-naïve, early-stage Parkinson's disease",薬物未治療の初期段階パーキンソン病におけるコーヒー摂取と非運動症状の関連性,2,1+1
+244,36434931,The effectiveness of non-pharmacological interventions using information and communication technologies for behavioral and psychological symptoms of dementia: A systematic review and meta-analysis,認知症の行動・心理症状に対する情報通信技術を用いた非薬物療法の効果：系統的レビューとメタ分析,2,0+1
+245,33640853,Automated analysis of lexical features in frontotemporal degeneration,前頭側頭型認知症における語彙的特徴の自動分析,2,1+0
+248,32036726,Felt Age Among Racial/Ethnic Minority Older Adults Attending a Senior Center,高齢者センターを利用する人種的・民族的マイノリティ高齢者の自覚年齢,2,1+0
+251,36941070,Apathy in Patients With Cerebral Amyloid Angiopathy: A Multimodal Neuroimaging Study,脳アミロイド血管症患者における無関心：多模態神経画像研究,2,1+1
+252,25967086,Dopamine enhances willingness to exert effort for reward in Parkinson's disease,パーキンソン病における報酬獲得のための努力意欲を高めるドーパミンの作用,2,1+1
+255,38426222,Atrophy network mapping of clinical subtypes and main symptoms in frontotemporal dementia,前頭側頭型認知症における臨床亜型と主要症状の萎縮ネットワークマッピング,2,1+0
+256,33227684,Subjective cognitive Complaints in early Parkinson's disease patients with normal cognition are associated with affective symptoms,正常な認知機能を有する早期パーキンソン病患者における主観的認知苦情は情動症状と関連する,1,1+1
+258,26717857,Apathy and striatal dopamine defects in non-demented patients with Parkinson's disease,パーキンソン病非認知症患者における無関心と線条体ドーパミン機能障害,2,1+0
+259,36490272,Are neuropsychiatric symptoms a marker of small vessel disease progression in older adults? Evidence from the Lothian Birth Cohort 1936,神経精神症状は高齢者の小血管病変進行のマーカーか？ 1936年ロージアン出生コホートからの証拠,2,1+1
+260,26228083,The association between fatigue and apathy in patients with either Parkinson's disease or multiple sclerosis,パーキンソン病または多発性硬化症患者における疲労と無気力の関連性,2,1+1
+262,25769262,The Unique and Combined Effects of Apathy and Depression on Cognition in Parkinson's Disease,パーキンソン病における無関心と抑うつが認知機能に及ぼす単独および複合的影響,2,1+0
+263,27070004,Impaired Switching from Self-Prepared Actions in Mild Parkinson Disease,軽度パーキンソン病における自己準備動作からの切り替え障害,2,1+0
+266,39862881,"Intranasal oxytocin for apathy in people with frontotemporal dementia (FOXY): a multicentre, randomised, double-blind, placebo-controlled, adaptive, crossover, phase 2a/2b superiority trial",前頭側頭型認知症（FOXY）患者の無関心に対する経鼻オキシトシン：多施設共同、無作為化、二重盲検、プラセボ対照、適応型、クロスオーバー、第2a/2b相優越性試験,2,1+0
+267,30085899,Gender Differences in Neuropsychiatric Symptoms in Mild to Moderate Alzheimer's Disease Patients Undergoing Switch of Cholinesterase Inhibitors: A Post Hoc Analysis of the EVOLUTION Study,コリンエステラーゼ阻害薬切り替えを受けた軽度～中等度アルツハイマー病患者における神経精神症状の性差：EVOLUTION研究事後解析,2,1+0
+268,25963296,Effects of anosognosia and neuropsychiatric symptoms on the quality of life of patients with Alzheimer's disease: a 24-month follow-up study,アルツハイマー病患者の生活の質に対する無自覚症および神経精神症状の影響：24ヶ月追跡調査,2,1+0
+269,34352166,Amyloid Burden and Depressive Symptom Trajectories in Older Adults at Risk of Developing Cognitive Decline,認知機能低下リスクのある高齢者におけるアミロイド負荷と抑うつ症状の経過,1,1+0
+270,29548721,The stability of neuropsychiatric subsyndromes in Alzheimer's disease,アルツハイマー病における神経精神学的サブ症候群の安定性,1,1+1
+271,36715000,Apathy and depression in mild cognitive impairment: distinct longitudinal trajectories and clinical outcomes,軽度認知障害における無関心と抑うつ：異なる経時的経過と臨床転帰,2,1+1
+272,30322899,Cortical correlates of behavioural change in amyotrophic lateral sclerosis,筋萎縮性側索硬化症における行動変化の皮質相関,2,1+0
+273,38389222,Loneliness as neurobehavioral issue in amyotrophic lateral sclerosis,筋萎縮性側索硬化症における神経行動学的課題としての孤独感,2,1+0
+276,40451311,Investigating the structural neuroimaging signature of apathy in Parkinson's disease,パーキンソン病における無関心症の構造的神経画像学的特徴の検討,2,1+0
+277,29710717,Behavioral and Neuropsychiatric Disorders in Alzheimer's Disease,アルツハイマー病における行動・神経精神障害,2,1+1
+278,25545189,Circadian sleep/wake rhythm abnormalities as a risk factor of a poststroke apathy,脳卒中後の無関心症の危険因子としての概日睡眠・覚醒リズム異常,2,1+1
+279,31448481,Progression of behavioural disturbances in frontotemporal dementia: a longitudinal observational study,前頭側頭型認知症における行動障害の進行：縦断的観察研究,2,1+1
+280,29787739,Apathy in individuals with Parkinson's disease associated with mild cognitive impairment. A neuropsychological investigation,軽度認知障害を伴うパーキンソン病患者における無気力。神経心理学的調査,2,1+1
+282,37425947,Dissociable effects of dopaminergic medications on depression symptom dimensions in Parkinson's disease,パーキンソン病における抑うつ症状の次元に対するドーパミン作動薬の分離可能な効果,2,1+1
+283,40103483,Impaired reward sensitivity in Parkinson's depression is unresponsive to dopamine treatment,パーキンソン病うつ病における報酬感受性障害はドーパミン治療に反応しない,2,1+0
+284,37221053,Longitudinal decline in striatal dopamine transporter binding in Parkinson's disease: associations with apathy and anhedonia,パーキンソン病における線条体ドーパミントランスポーター結合の経時的減少：無関心および快感喪失との関連,2,1+0
+285,37528586,Caudate volume and symptoms of apathy in older adults with multiple sclerosis,多発性硬化症高齢者の尾状核容積と無関心症状,2,1+1
+291,37668827,Application of the mild behavioral impairment checklist in Chinese patients with the behavioral variant of frontotemporal dementia,前頭側頭型認知症の行動変異型を有する中国人患者における軽度行動障害チェックリストの適用,2,1+1
+296,33812772,"Social cognitive impairment in early Parkinson's disease: A novel ""mild impairment""?",パーキンソン病初期における社会的認知障害：新たな「軽度障害」？,2,1+0
+298,35538300,A longitudinal study on the effects of COVID-19 pandemic on non-motor symptoms in Parkinson's disease,COVID-19パンデミックがパーキンソン病の非運動症状に及ぼす影響に関する縦断的研究,2,1+0
+300,26890768,Delusions in Patients with Alzheimer's Disease: A Multidimensional Approach,アルツハイマー病患者における妄想：多次元的アプローチ,2,1+1
+301,30107062,Beneficial effects of bilateral subthalamic stimulation on alexithymia in Parkinson's disease,パーキンソン病におけるアレキシサイミアに対する両側視床下核刺激の有益な効果,2,1+0
+302,33948656,Influence of Music Therapy and Music-Based Interventions on Dementia: A Pilot Study,音楽療法および音楽に基づく介入が認知症に及ぼす影響：パイロット研究,2,1+1
+304,39307006,Psychiatric predictors of quality of life in Parkinson's disease: A three-year longitudinal study,パーキンソン病における生活の質の精神医学的予測因子：3年間の縦断的研究,2,1+0
+307,41023472,"Catecholaminergic nucleus integrity and Alzheimer's pathology, symptoms, and progression",カテコールアミン作動性核の完全性とアルツハイマー病の病理、症状、進行,2,1+0
+309,40214960,Risky decision-making in dementia: Exploring neural correlates and related clinical symptoms,認知症におけるリスクを伴う意思決定：神経相関と関連する臨床症状の探索,2,1+0
+310,31906766,Do patients with PD benefit from music assisted therapy plus treadmill-based gait training? An exploratory study focused on behavioral outcomes,パーキンソン病患者は音楽支援療法とトレッドミル歩行訓練の併用から利益を得るか？行動転帰に焦点を当てた探索的研究,2,0+1
+311,41076410,Mild Behavioral Impairment as a Predictor of Functional Status,機能状態の予測因子としての軽度行動障害,2,1+0
+312,34228317,Intervention of companion clowns in a special care unit: a 1-year pilot study,特別治療室におけるコンパニオン・クラウン介入：1年間のパイロット研究,2,1+0
+313,39909861,Mapping Longitudinal Psychiatric Signatures in Huntington's Disease,ハンチントン病における縦断的精神医学的特徴のマッピング,2,1+1
+315,30276884,Examining differences in neuropsychiatric symptom factor trajectories in empirically derived mild cognitive impairment subtypes,経験的に導出された軽度認知障害サブタイプにおける神経精神症状因子の経過の差異の検討,2,1+1
+318,29689719,The Behavioral and Psychological Symptoms of Dementia in Down Syndrome (BPSD-DS) Scale: Comprehensive Assessment of Psychopathology in Down Syndrome,ダウン症における認知症の行動・心理症状（BPSD-DS）尺度：ダウン症における精神病理の包括的評価,2,1+0
+319,30238286,[The behavioral and psychological symptoms of dementia in down syndrome (BPSD-DS) scale: comprehensive assessment of psychopathology in down syndrome],ダウン症候群における認知症の行動・心理症状（BPSD-DS）尺度：ダウン症候群の精神病理学的評価の包括的アプローチ,2,1+0
+320,32170444,Autonomic dysfunction is associated with neuropsychological impairment in Lewy body disease,レビー小体型認知症における自律神経機能障害と神経心理学的障害の関連性,2,1+1
+323,24953008,Apathy as a feature of prodromal Alzheimer's disease: an FDG-PET ADNI study,前駆期アルツハイマー病の特徴としての無関心：FDG-PET ADNI研究,2,1+0
+324,30057445,Improving well-being in patients with major neurodegenerative disorders: differential efficacy of brief social robot-based intervention for 3 neuropsychiatric profiles,主要な神経変性疾患患者のウェルビーイング向上：3つの神経精神プロファイルに対する簡易ソーシャルロボット介入の差別化効果,2,1+0
+325,38848193,Disease Progression of Data-Driven Subtypes of Parkinson's Disease: 5-Year Longitudinal Study from the Early Parkinson's Disease Longitudinal Singapore (PALS) Cohort,データ駆動型パーキンソン病サブタイプの疾患進行：早期パーキンソン病縦断研究シンガポール（PALS）コホートによる5年間の縦断研究,2,1+1
+326,27721206,The cortical thickness correlates of clinical manifestations in the mid-stage sporadic Parkinson's disease,中等度散発性パーキンソン病における臨床症状と皮質厚の相関,2,1+0
+327,26210749,Sexual dysfunction is associated with postural instability gait difficulty subtype of Parkinson's disease,性機能障害はパーキンソン病の姿勢不安定性歩行障害サブタイプと関連する,2,1+1
+332,25812125,Neurocognitive features distinguishing primary central nervous system lymphoma from other possible causes of rapidly progressive dementia,急速進行性認知症の他の原因と区別する原発性中枢神経系リンパ腫の神経認知学的特徴,2,1+1
+333,35171235,Associations Between Neuropsychiatric Symptoms and Neuropathological Diagnoses of Alzheimer Disease and Related Dementias,神経精神症状とアルツハイマー病および関連認知症の神経病理学的診断との関連性,2,1+1
+334,37749500,An ethnography study exploring factors that influence social isolation in care home residents living with dementia and hearing loss,認知症と難聴を併発する介護施設入居者の社会的孤立に影響を与える要因を探る民族誌的研究,2,0+1
+335,31321539,Fatigue in patients with vestibular schwannoma,前庭神経鞘腫患者の疲労,2,1+1
+336,27336799,Fighting apathy in Alzheimer's dementia: A brief emotional-based intervention,アルツハイマー型認知症における無気力との闘い：簡便な感情ベース介入法,2,1+0
+337,39234671,"CADA-PRO: A Patient Questionnaire Measuring Key Cognitive, Motor, Emotional, and Behavioral Outcomes in CADASIL",CADA-PRO：CADASILにおける主要な認知、運動、感情、行動アウトカムを測定する患者用質問票,1,1+0
+340,32444620,A unified neurocognitive model of semantics language social behaviour and face recognition in semantic dementia,意味論的認知症における意味論・言語・社会的行動・顔認識の統合神経認知モデル,2,1+0
+341,32238507,Telephone-based cognitive behavioral therapy for depression in Parkinson disease: A randomized controlled trial,パーキンソン病におけるうつ病に対する電話ベース認知行動療法：無作為化比較試験,2,1+0
+343,29362011,Neuropsychiatric symptoms and cognitive profile in mild cognitive impairment with Lewy bodies,レビー小体を伴う軽度認知障害における神経精神症状と認知プロファイル,2,1+1
+344,25697700,Depressive Symptoms and Biomarkers of Alzheimer's Disease in Cognitively Normal Older Adults,認知機能正常高齢者の抑うつ症状とアルツハイマー病バイオマーカー,2,1+0
+345,29325447,Longitudinal Association of Amyloid Beta and Anxious-Depressive Symptoms in Cognitively Normal Older Adults,認知機能正常高齢者を対象としたアミロイドβと不安・抑うつ症状の縦断的関連性,2,1+0
+346,37526768,Gender differences in non-motor fluctuations in Parkinson's disease,パーキンソン病における非運動症状の変動における性差,2,1+1
+347,31985463,Neuroticism-Withdrawal and Neuroticism-Volatility Differently Influence the Risk of Neuropsychiatric Symptoms in Alzheimer's Disease,神経症的傾向-回避性と神経症的傾向-変動性がアルツハイマー病における神経精神症状のリスクに及ぼす異なる影響,2,1+0
+348,29079017,Baseline Vascular Cognitive Impairment Predicts the Course of Apathetic Symptoms After Stroke: The CASPER Study,脳卒中後の無関心症状の経過を予測する基線血管性認知障害：CASPER研究,2,1+1
+349,29073590,"Temporal Associations between Fatigue, Depression, and Apathy after Stroke: Results of the Cognition and Affect after Stroke, a Prospective Evaluation of Risks Study",脳卒中後の疲労、抑うつ、無気力の間の一時的関連性：脳卒中後の認知と情動に関する前向きリスク評価研究の結果,2,1+1
+350,29935757,Personality traits and course of symptoms of depression and apathy after stroke: Results of the CASPER study,脳卒中後の抑うつおよび無気力症状の経過と性格特性：CASPER研究の結果,2,1+0
+353,32761061,Dopamine and reward hypersensitivity in Parkinson's disease with impulse control disorder,衝動制御障害を伴うパーキンソン病におけるドーパミンと報酬過敏性,2,1+0
+355,40768869,Non-motor subtypes in candidates for subthalamic deep brain stimulation for Parkinson's disease,パーキンソン病に対する視床下部深部脳刺激術の適応患者における非運動型サブタイプ,2,1+0
+356,31109909,"Impact of Cognitive, Functional, Behavioral Disorders, and Caregiver Burden on the Risk of Nursing Home Placement",認知機能障害、機能障害、行動障害、介護者負担が介護施設入所のリスクに与える影響,2,0+1
+357,26350121,Cognitive disorders in Parkinson's disease: Confirmation of a spectrum of severity,パーキンソン病における認知障害：重症度のスペクトル確認,2,1+0
+361,27222059,"Symptom trajectory and symptom burden in older people with multimorbidity, secondary outcome from the RCT AGe-FIT study",多疾患併存高齢者の症状経過と症状負担：RCT AGe-FIT研究の副次的アウトカム,1,1+0
+363,35100918,Residential aged care staff perceptions and responses towards neuropsychiatric symptoms: a mixed methods analysis of electronic healthcare records,神経精神症状に対する高齢者施設職員の認識と対応：電子医療記録を用いた混合手法分析,2,1+0
+366,37629464,Mild Behavioral Impairment in Psychogeriatric Patients: Clinical Features and Psychopathology Severity,老年精神科患者における軽度行動障害：臨床的特徴と精神病理学的重症度,2,1+0
+367,28431515,The effectiveness of creating an online life story book on persons with early dementia and their informal caregivers: a protocol of a randomized controlled trial,初期認知症患者とその非公式介護者におけるオンライン人生記録帳作成の有効性：無作為化比較試験のプロトコル,2,1+0
+368,29059120,"Change in Depression, Confidence, and Physical Function Among Older Adults With Mild Cognitive Impairment",軽度認知障害を有する高齢者の抑うつ、自信、身体機能の変化,2,1+0
+369,24670286,The relationship between apathy and participation in therapeutic activities in nursing home residents with dementia: Evidence for an association and directions for further research,認知症介護施設入居者における無関心と治療的活動への参加の関係：関連性の証拠と今後の研究の方向性,2,1+0
+372,27158121,Clinical clusters and dopaminergic dysfunction in de-novo Parkinson disease,新規発症パーキンソン病における臨床的クラスターとドーパミン作動性機能障害,2,1+0
+374,35331144,The shift from old age to very old age: an analysis of the perception of aging among older people,老年期から超老年期への移行：高齢者の加齢認識に関する分析,1,1+0
+380,28130887,Neural correlates of apathy in late-life depression: a pilot [(18) F]FDDNP positron emission tomography study,老年期うつ病における無気力の神経相関：パイロット研究［18F］FDDNP陽電子放射断層撮影法による検討,2,1+0
+381,39835577,Reward Decision Network Disconnection in Poststroke Apathy: A Prospective Multimodality Imaging Study,脳卒中後の無関心における報酬決定ネットワークの切断：前向き多モダリティ画像研究,1,1+0
+382,37132066,Evaluation of apathy among institutionalized older persons: Its mediating role between cognitive functioning and lack of awareness,施設入所高齢者の無関心症の評価：認知機能と自覚症状の欠如との間の媒介的役割,2,1+1
+385,30425751,Apathy Is Correlated with Widespread Diffusion Tensor Imaging (DTI) Impairment in Amyotrophic Lateral Sclerosis,筋萎縮性側索硬化症における無関心と拡散テンソル画像（DTI）障害の広範な相関,1,1+0
+387,32635640,Effects of the Level of Interactivity of a Social Robot and the Response of the Augmented Reality Display in Contextual Interactions of People with Dementia,認知症患者の状況に応じた相互作用におけるソーシャルロボットの対話レベルと拡張現実ディスプレイの応答が及ぼす影響,2,1+1
+390,28240379,Different apathy clinical profile and neural correlates in behavioral variant frontotemporal dementia and Alzheimer's disease,行動変異型前頭側頭型認知症とアルツハイマー病における無関心症の臨床プロファイルと神経相関の違い,2,1+1
+392,29210282,Neuropsychiatric Profile in Early Versus Late Onset Alzheimer's Disease,早期発症と遅発性アルツハイマー病における神経精神医学的プロファイル,2,1+1
+396,34024833,Clinical Phenotypes of Behavioral Variant Frontotemporal Dementia by Age at Onset,発症年齢による行動変異型前頭側頭型認知症の臨床的表現型,1,0+1
+399,28911268,"Apathy, not depressive symptoms, as a predictor of semantic and phonemic fluency task performance in stroke and transient ischemic attack",脳卒中および一過性脳虚血発作における意味的・音韻的流暢性課題の予測因子としての無関心（抑うつ症状ではない）,1,1+1
+400,27270271,Computerized assessment of goal-directed behavior in Parkinson's disease,パーキンソン病における目標指向行動のコンピュータ化評価,2,1+0
+401,26117435,Caregiver report of apathy predicts dementia in Parkinson's disease,介護者による無気力感の報告はパーキンソン病における認知症を予測する,2,1+1
+402,30403307,Prominent physical inactivity in acute dementia care: Psychopathology seems to be more important than the dose of sedative medication,急性期認知症ケアにおける顕著な身体活動不足：鎮静薬投与量よりも精神病理学的要因が重要と思われる,2,1+0
+407,28079675,Recent advances in the management of neuropsychiatric symptoms in dementia,認知症における神経精神症状管理の最近の進展,1,1+1
+409,26209222,Patterns of Neuropsychiatric Symptoms in Mild Cognitive Impairment and Risk of Dementia,軽度認知障害における神経精神症状のパターンと認知症リスク,2,1+0
+410,39164933,Cognitive behavioural treatment for mild Alzheimer's patients and their caregivers (CBTAC): results of a randomised controlled trial,軽度アルツハイマー病患者とその介護者に対する認知行動療法（CBTAC）：無作為化比較試験の結果,2,1+1
+411,26578083,Motivational processes in mild cognitive impairment and Alzheimer's disease: results from the Motivational Reserve in Alzheimer's (MoReA) study,軽度認知障害およびアルツハイマー病における動機付けプロセス：アルツハイマー病における動機付け予備力（MoReA）研究の結果,2,1+0
+413,29097960,Activity Disengagement: Understanding Challenges and Opportunities for Reengagement,活動からの離脱：再関与に向けた課題と機会の理解,2,1+0
+414,31640092,"The LIBRA Index in Relation to Cognitive Function, Functional Independence, and Psycho-Behavioral Symptoms in a Sample of Non-Institutionalized Seniors at Risk of Dementia",認知症リスクのある非施設入所高齢者を対象とした認知機能、機能的自立度、精神行動症状とLIBRA指標の関係,2,1+0
+417,35446723,Apathy as a Predictor for Conversion From Mild Cognitive Impairment to Dementia: A Systematic Review and Meta-Analysis of Longitudinal Studies,軽度認知障害から認知症への移行を予測する無関心：縦断研究の系統的レビューとメタ分析,2,1+1
+419,29256912,Apathy and Cognitive Deficits in Patients with Transient Global Ischemia After Cardiac Arrest,心停止後の一過性全脳虚血患者における無関心と認知機能障害,2,1+0
+421,28276131,Different clinical effect of four antidementia drugs for Alzheimer's disease patients depending on white matter severity,アルツハイマー病患者における4種類の抗認知症薬の臨床効果は白質病変の重症度によって異なる,2,1+0
+422,25876569,Computerized touch-panel screening tests for detecting mild cognitive impairment and Alzheimer's disease,軽度認知障害およびアルツハイマー病検出のためのコンピュータ化タッチパネルスクリーニング検査,2,1+0
+423,29213453,Effects of cognitive stimulation on neuropsychiatric symptoms in elderly with Alzheimer's disease: A systematic review,アルツハイマー病高齢者の神経精神症状に対する認知刺激の効果：系統的レビュー,2,1+1
+424,30877750,Hallucinations and Delusions Signal Alzheimer's Associated Cognitive Dysfunction More Strongly Compared to Other Neuropsychiatric Symptoms,幻覚と妄想は、他の神経精神症状と比較してアルツハイマー病関連認知機能障害をより強く示す,1,1+0
+425,30688000,Can we predict amyloid deposition by objective cognition and regional cerebral blood flow in patients with subjective cognitive decline?,主観的認知機能低下患者におけるアミロイド沈着を客観的認知機能と局所脳血流で予測できるか？,2,1+0
+426,28755989,Apathy Mediates Cognitive Difficulties in Geriatric Depression,無関心は老年期うつ病における認知障害を媒介する,2,1+0
+429,26296336,Prevalence and correlates of apathy in myotonic dystrophy type 1,筋強直性ジストロフィー1型における無気力の有病率と関連因子,2,0+1
+430,33793069,Characterization of dementia with Lewy bodies (DLB) and mild cognitive impairment using the Lewy body dementia module (LBD-MOD),レビー小体型認知症（DLB）および軽度認知障害のレビー小体型認知症モジュール（LBD-MOD）を用いた特徴付け,2,1+1
+431,35538522,Characteristics of people living with undiagnosed dementia: findings from the CFAS Wales study,未診断認知症患者の特徴：CFASウェールズ研究からの知見,2,1+1
+432,30452412,Long-Term Severe Mental Disorders Preceding Behavioral Variant Frontotemporal Dementia: Frequency and Clinical Correlates in an Outpatient Sample,行動変異型前頭側頭型認知症に先行する長期重篤精神疾患：外来患者サンプルにおける頻度と臨床的相関,2,1+1
+433,36123648,The presence and co-incidence of geriatric syndromes in older patients with mild-moderate Lewy body dementia,軽度～中等度レビー小体型認知症高齢患者における老年症候群の併存と同時発生,2,1+1
+435,25923857,ON-OFF Effects of Dopaminergic Therapy on Psychiatric Symptoms in Parkinson's Disease,パーキンソン病における精神症状に対するドーパミン作動薬療法のON-OFF効果,2,1+1
+437,40192627,Effects of digital technology-based serious games interventions for older adults with mild cognitive impairment: a meta-analysis of randomised controlled trials,軽度認知障害を有する高齢者を対象としたデジタル技術ベースのシリアスゲーム介入の効果：無作為化比較試験のメタ分析,1,0+1
+439,30084177,Medial temporal lobe atrophy is independently associated with behavioural and psychological symptoms in Alzheimer's disease,海馬傍回萎縮はアルツハイマー病における行動・心理症状と独立して関連する,2,0+1
+440,40993548,Mortality and institutionalization of patients with dementia treated in primary care: influence of neuropsychiatric symptoms (NeDEM project),プライマリケアで治療を受けた認知症患者の死亡率と施設入所：神経精神症状の影響（NeDEMプロジェクト）,1,1+1
+445,28410856,Regional 18F-Fluorodeoxyglucose Hypometabolism is Associated with Higher Apathy Scores Over Time in Early Alzheimer Disease,地域的18F-フルオロデオキシグルコース代謝低下は、初期アルツハイマー病における経時的無関心スコア上昇と関連する,2,0+1
+449,28323838,"Bupropion for the treatment of apathy in Huntington's disease: A multicenter, randomised, double-blind, placebo-controlled, prospective crossover trial",ハンチントン病における無気力症治療のためのブプロピオン：多施設共同、無作為化、二重盲検、プラセボ対照、前向きクロスオーバー試験,1,1+1
+450,34216935,"Long-term effect of bilateral STN-DBS on non-motor symptoms in Parkinson's disease: A four-year observational, prospective study",パーキンソン病における非運動症状に対する両側STN-DBSの長期効果：4年間の観察的前向き研究,1,0+1
+452,30854733,Awareness and its relationships with neuropsychiatric symptoms in people with Korsakoff syndrome or other alcohol-related cognitive disorders living in specialized nursing homes,専門介護施設に入所するコルサコフ症候群またはその他のアルコール関連認知障害患者における意識状態と神経精神症状との関連性,2,0+1
+453,34923217,Depressive symptom profiles predict dementia onset and brain pathology in older persons. The AGES-Reykjavik study,抑うつ症状プロファイルが高齢者の認知症発症と脳病理を予測する：AGES-レイキャビク研究,1,1+0
+454,26228098,A preoperative metabolic marker of parkinsonian apathy following subthalamic nucleus stimulation,視床下核刺激後のパーキンソン病性無関心の術前代謝マーカー,2,0+1
+455,29542093,Posterior limb of the internal capsule predicts poor quality of life in patients with Parkinson's disease: connectometry approach,内側束後脚はパーキンソン病患者の生活の質の低下を予測する：コネクトメトリーアプローチ,1,0+1
+456,38597943,Clinical and neuroanatomical characterization of the semantic behavioral variant of frontotemporal dementia in a multicenter Italian cohort,多施設共同イタリア人コホートにおける前頭側頭型認知症の語義的行動変異型の臨床的・神経解剖学的特徴,2,1+1
+458,34198487,Is Depression or Apathy Playing a Key Role in Predicting Financial Capacity in Parkinson's Disease with Dementia and Frontotemporal Dementia?,認知症を伴うパーキンソン病および前頭側頭型認知症における経済的能力予測において、抑うつ状態と無関心状態のどちらが主要な役割を果たすのか？,1,0+1
+460,39558706,Apathy and Functional Status in Early-Stage Huntington's Disease,初期ハンチントン病における無関心と機能状態,2,1+1
+461,33612541,Neuropsychiatric Symptoms Among Hispanics: Results of the Maracaibo Aging Study,ヒスパニック系における神経精神症状：マラカイボ加齢研究の結果,2,1+0
+462,30688355,"Instrumental Activities of Daily Living, Neuropsychiatric Symptoms, and Neuropsychological Impairment in Mild Cognitive Impairment",軽度認知障害における日常生活動作、神経精神症状、および神経心理学的障害,1,1+1
+466,26890770,Characteristics of Alzheimer's Disease Patients with Severe Executive Disorders,重度の実行機能障害を伴うアルツハイマー病患者の特徴,2,1+1
+469,28124590,A Multicentre Italian Validation Study in Aging Adults with Down Syndrome and Other Forms of Intellectual Disabilities: Dementia Screening Questionnaire for Individuals with Intellectual Disabilities,ダウン症候群およびその他の知的障害を有する高齢成人を対象としたイタリア多施設共同検証研究：知的障害者向け認知症スクリーニング質問票,2,1+1
+470,39231554,Association between apathy and caregiver burden in patients with amyotrophic lateral sclerosis: a cross-sectional study,筋萎縮性側索硬化症患者における無関心と介護負担の関連性：横断研究,2,1+0
+471,38513620,Neuropsychiatric Profiles and Cerebral Amyloid Burden in Adults without Dementia,認知症のない成人の神経精神学的プロファイルと脳アミロイド負荷,2,1+1
+473,38877658,Mild behavioral impairment domains are longitudinally associated with pTAU and metabolic biomarkers in dementia-free older adults,認知症のない高齢者における軽度行動障害領域は、pTAUおよび代謝バイオマーカーと縦断的に関連している,2,1+1
+474,32198120,Apathy in frontotemporal dementia is related to medial prefrontal atrophy and is independent of executive dysfunction,前頭側頭型認知症における無関心は内側前頭前野萎縮と関連し、実行機能障害とは独立している,2,0+1
+475,41117394,Classification of AD and bvFTD using neuropsychological and neuropsychiatric variables: a machine learning study,神経心理学的および神経精神医学的変数を用いたADおよびbvFTDの分類：機械学習研究,2,1+1
+477,31565112,Effect of Hearing Ability and Mild Behavioural Impairment on MoCA and Memory Index Scores,聴力および軽度行動障害がMoCAおよび記憶指数スコアに及ぼす影響,1,0+1
+478,30362933,Predicting progression in the late onset frontal lobe syndrome,遅発性前頭葉症候群の進行予測,2,1+1
+479,31857304,Association of brain amyloidosis with the incidence and frequency of neuropsychiatric symptoms in ADNI: a multisite observational cohort study,ADNIにおける脳アミロイド症と神経精神症状の発生率・頻度の関連性：多施設共同観察コホート研究,2,1+1
+480,39391020,Mild behavioral impairment in the general population aged 55+ and its association with incident dementia,55歳以上の一般人口における軽度行動障害と認知症発症との関連,2,1+1
+482,35764422,The association of depression and apathy with Alzheimer's disease biomarkers in a cross-cultural sample,抑うつと無気力とアルツハイマー病バイオマーカーの関連性：異文化間サンプルにおける検討,2,0+1
+484,27355103,"Clinically significant psychiatric symptoms among male carriers of the fragile X premutation, with and without FXTAS, and the mediating influence of executive functioning",脆弱X症候群前変異を有する男性における臨床的に有意な精神症状（FXTASの有無別）と実行機能の媒介的影響,2,1+0
+487,26807552,Latent class analysis of the Apathy Scale does not identify subtypes of apathy in general population-based older persons,アパシー尺度に対する潜在クラス分析は、一般人口ベースの高齢者におけるアパシーのサブタイプを特定しない,2,1+1
+489,25125462,Closing-in is related to apathy in Alzheimer's disease patients,アルツハイマー病患者における閉鎖空間への接近と無関心症の関係,2,0+1
+491,39994576,Unique amnestic syndrome after isolated left anterolateral thalamic stroke: a case report,左前外側視床単発性脳梗塞後の特異的健忘症候群：症例報告,2,0+1
+493,40752280,Potential profiles of social isolation in elderly stroke patients: A cross-sectional study,高齢脳卒中患者における社会的孤立の潜在的プロファイル：横断研究,2,1+1
+495,26401564,"The Apathy Evaluation Scale: A Comparison of Subject, Informant, and Clinician Report in Cognitively Normal Elderly and Mild Cognitive Impairment",無関心評価尺度：認知機能正常高齢者および軽度認知障害における本人報告、情報提供者報告、臨床医報告の比較,2,1+1
+496,25716491,Apathy is associated with lower inferior temporal cortical thickness in mild cognitive impairment and normal elderly individuals,軽度認知障害および健常高齢者における無関心は下側頭葉皮質の薄さと関連する,2,0+1
+497,38839833,"Cognitive profile, neuroimaging and fluid biomarkers in post-acute COVID-19 syndrome",急性期後COVID-19症候群における認知プロファイル、神経画像、体液性バイオマーカー,2,0+1
+498,32102601,Assessing Mental Health Difficulties of Persons With Huntington's Disease: Does Informant Presence Make a Difference?,ハンチントン病患者の精神保健上の困難の評価：情報提供者の同席は影響を与えるか？,2,1+1
+500,38143362,Amyloid Pathology Modulates the Associations of Neuropsychiatric Symptoms with Cognitive Impairments and Neurodegeneration in Non-Demented Elderly,非認知症高齢者における神経精神症状と認知障害・神経変性の関連性を調節するアミロイド病理,2,1+1
+503,33935080,"Interventional Study to Evaluate the Clinical Effects and Safety of the Nutraceutical Compound BrainUp-10® in a Cohort of Patients with Alzheimer's Disease: A Multicenter, Randomized, Double-Blind, and Placebo-Controlled Trial",アルツハイマー病患者コホートにおける栄養補助食品化合物BrainUp-10®の臨床効果と安全性を評価する介入研究：多施設共同、無作為化、二重盲検、プラセボ対照試験,1,1+1
+504,26426392,Behavioral Evolution of Progressive Semantic Aphasia in Comparison with Nonfluent Aphasia,非流暢性失語症と比較した進行性意味失語症の行動学的経過,2,1+1
+507,35213766,"The apathy, gait impairment, and executive dysfunction (AGED) triad vascular variant",無関心・歩行障害・実行機能障害（AGED）三徴候の血管性変異型,2,1+1
+512,40359409,Safety and tolerability of intravenous liposomal GM1 in patients with Parkinson disease: A single-center open-label clinical phase I trial (NEON trial),パーキンソン病患者における静脈内リポソームGM1の安全性および忍容性：単一施設非盲検第I相臨床試験（NEON試験）,1,0+1
+514,34803857,Plasma Total Tau and Neurobehavioral Symptoms of Cognitive Decline in Cognitively Normal Older Adults,認知機能正常高齢者の血漿総タウと認知機能低下の神経行動症状,2,1+1
+515,29376861,The Progression of Neuropsychiatric Symptoms in Alzheimer's Disease During a Five-Year Follow-Up: Kuopio ALSOVA Study,5年間の追跡調査におけるアルツハイマー病の神経精神症状の進行：クオピオALSOVA研究,2,1+1
+516,27048704,Socio-Emotional Adaptation Theory: Charting the Emotional Process of Alzheimer's Disease,社会感情的適応理論：アルツハイマー病の感情的プロセスの図式化,2,1+0
+517,31937636,Psychosocial Resources and Emotions in Women Living With HIV Who Have Cognitive Impairment: Applying the Socio-Emotional Adaptation Theory,認知障害を伴うHIV感染女性における心理社会的資源と感情：社会感情的適応理論の適用,1,0+1
+518,27251297,Neuroanatomic pathways associated with monoaminergic dysregulation after stroke,脳卒中後のモノアミン作動性調節異常に関連する神経解剖学的経路,1,0+1
+519,33177575,Relationships between motor and cognitive functions and subsequent post-stroke mood disorders revealed by machine learning analysis,機械学習解析により明らかになった運動機能・認知機能と脳卒中後気分障害の発症との関連性,2,1+1
+520,34898646,Altered resting-state functional connectivity of the frontal-striatal circuit in elderly with apathy,無関心症を呈する高齢者における前頭葉-線条体回路の安静時機能的接続性の変化,2,0+1
+522,32579704,Prevalence of non-motor symptoms and their association with quality of life in cervical dystonia,頸部ジストニアにおける非運動症状の有病率と生活の質との関連,2,0+1
+523,39182059,Mixed effects models but not t-tests or linear regression detect progression of apathy in Parkinson's disease over seven years in a cohort: a comparative analysis,混合効果モデルはt検定や線形回帰とは異なり、コホートにおけるパーキンソン病の7年間にわたる無気力進行を検出する：比較分析,2,1+1
+524,40388933,Sex-specific progression of Parkinson's disease: A longitudinal mixed-models analysis,性別特異的なパーキンソン病の進行：縦断的混合モデル解析,2,1+1
+525,30335265,Anterior cerebral artery infarcts; two years follow-up study,前大脳動脈梗塞：2年間の追跡調査,2,1+1
+530,38834246,Exploring experiential differences in everyday activities - A focused ethnographic study in the homes of people living with memory-led Alzheimer's disease and posterior cortical atrophy,日常生活活動における経験的差異の探求 - 記憶主導型アルツハイマー病および後部皮質萎縮症患者の家庭における焦点的民族誌的研究,2,1+1
+542,34575040,Frailty in Stroke-A Narrated Review,脳卒中における虚弱性－解説付きレビュー,2,1+1
+546,26352492,Cerebral autosomal dominant arteriopathy with subcortical infarcts and leukoencephalopathy (CADASIL) in Argentina,アルゼンチンにおける皮質下梗塞および白質脳症を伴う脳常染色体優性動脈病（CADASIL）,1,1+0
+547,40390335,Impact of Neuropsychiatric Symptoms on Caregiver Burden of People With Dementia With Lewy Bodies: A Multicentre Prospective Longitudinal Study,レビー小体型認知症患者の介護者負担に対する神経精神症状の影響：多施設共同前向き縦断研究,1,1+1
+549,26200048,Cortical correlates of affective syndrome in dementia due to Alzheimer's disease,アルツハイマー病による認知症における情動症候群の皮質相関,1,0+1
+553,38942197,Modifiable risk factors for mild cognitive impairment among cognitively normal community-dwelling older adults: A systematic review and meta-analysis,認知機能正常な在宅高齢者の軽度認知障害に対する修正可能な危険因子：系統的レビューとメタ分析,2,1+0
+560,37545719,Cognitive impairments predict the behavioral and psychological symptoms of dementia,認知機能障害は認知症の行動・心理症状を予測する,2,1+1
+563,30703703,Predictors of care dependency in nursing home residents with moderate to severe dementia: A cross-sectional study,中等度から重度の認知症を有する介護施設入居者の介護依存度予測因子：横断研究,2,1+1
+564,31860641,Mood and behavioral problems are important predictors of quality of life of nursing home residents with moderate to severe dementia: A cross-sectional study,中等度から重度の認知症を有する介護施設入居者の生活の質における気分および行動問題の重要性：横断研究,2,1+1
+568,26332177,Examining Huntington's disease patient and informant concordance on frontally mediated behaviors,ハンチントン病患者と情報提供者の前頭葉介在行動に関する一致性の検証,2,1+1
+570,28065176,"Behavioural and psychological symptoms in general hospital patients with dementia, distress for nursing staff and complications in care: results of the General Hospital Study",一般病院における認知症患者の行動・心理症状、看護スタッフの苦痛、およびケア上の合併症：総合病院研究の結果,1,0+1
+577,33622073,Bidirectional Correlations Between Dopaminergic Function and Motivation in Parkinson's Disease,パーキンソン病におけるドーパミン作動性機能と動機付けの双方向相関,1,0+1
+579,36058887,Associations of depressive symptoms with white matter abnormalities and regional cerebral blood flow in patients with amnestic mild cognitive impairment,健忘型軽度認知障害患者における抑うつ症状と白質異常および局所脳血流との関連,1,0+1
+581,25952646,"Characteristic features of cognitive, affective and daily living functions of late-elderly dementia",後期高齢期認知症における認知機能、情動機能、日常生活機能の特徴,2,1+1
+582,26493280,Cognitive and affective functions in Alzheimer's disease patients with metabolic syndrome,代謝症候群を伴うアルツハイマー病患者の認知機能と情動機能,2,1+1
+583,27578455,Comprehensive effects of galantamine and cilostazol combination therapy on patients with Alzheimer's disease with asymptomatic lacunar infarction,無症候性ラクナ梗塞を伴うアルツハイマー病患者に対するガランタミンとシロスタゾール併用療法の包括的効果,1,0+1
+587,35544317,Virtual Reality Intervention for Managing Apathy in People With Cognitive Impairment: Systematic Review,認知障害者の無気力管理のための仮想現実介入：系統的レビュー,1,0+1
+590,26490330,Differential relationships between apathy and depression with white matter microstructural changes and functional outcomes,無関心と抑うつが白質微細構造変化および機能的転帰と示す相違関係,1,0+1
+592,35633155,"Relationship between Apathy and Subjective Poor Night-time Sleep in de novo, Untreated Parkinson's Disease",新規発症・未治療パーキンソン病における無関心と主観的夜間睡眠障害の関係,2,1+1
+593,28067961,Quality of Life in relation to neuropsychiatric symptoms in Alzheimer's disease: 5-year prospective ALSOVA cohort study,アルツハイマー病における神経精神症状と生活の質の関係：5年間の前向きALSOVAコホート研究,2,1+1
+597,40157435,Social interaction as a unique form of reward - Insights from healthy ageing and frontotemporal dementia,報酬としての社会的相互作用―健康な加齢と前頭側頭型認知症からの知見,2,1+1
+599,28595181,Informant-Reported Cognitive Decline and Activity Engagement across Four Years in a Community Sample,地域住民サンプルにおける4年間の情報提供者報告による認知機能低下と活動参加,1,1+1
+600,26448131,Reduced Verbal Fluency following Subthalamic Deep Brain Stimulation: A Frontal-Related Cognitive Deficit?,視床下部深部脳刺激後の言語流暢性低下：前頭葉関連認知障害か？,1,1+1
+605,26251110,"Cognitive and Behavioral Symptoms in ALSFTD: Detection, Differentiation, and Progression",ALSFTDにおける認知および行動症状：検出、鑑別、および進行,2,1+1
+606,32479315,Neuropsychiatric symptoms as prognostic makers for the elderly with mild cognitive impairment: a meta-analysis,軽度認知障害高齢者の予後マーカーとしての神経精神症状：メタ分析,2,1+1
+607,40238956,Cognitive and neuropsychiatric profiles distinguish atypical parkinsonian syndromes,認知および神経精神プロファイルによる非定型パーキンソン症候群の鑑別,2,1+1
+608,30408646,Gender and onset age related-differences of non-motor symptoms and quality of life in drug-naïve Parkinson's disease,薬物未治療パーキンソン病における非運動症状と生活の質に関する性別および発症年齢関連の差異,2,1+1
+609,32476139,Non-motor symptoms are associated with midline tremor in essential tremor,本態性振戦における正中線振戦と非運動症状の関連性,1,1+0
+611,40215604,Functional and microstructural neurosubstrates between apathy and depressive symptoms in dementia,認知症における無関心と抑うつ症状の機能的・微細構造的神経基盤,1,0+1
+612,32394109,Behavioral and Psychological Symptoms that Predict Cognitive Decline or Impairment in Cognitively Normal Middle-Aged or Older Adults: a Meta-Analysis,認知機能正常な中高年成人における認知機能低下または障害を予測する行動・心理症状：メタアナリシス,1,1+1
+613,26343341,Neuropsychiatric effects of neurodegeneration of the medial versus lateral ventral prefrontal cortex in humans,ヒトにおける腹側前頭前野内側部と外側部の神経変性が及ぼす神経精神医学的影響,1,0+1
+614,27802220,Brain Regions Involved in Arousal and Reward Processing are Associated with Apathy in Alzheimer's Disease and Frontotemporal Dementia,覚醒と報酬処理に関与する脳領域は、アルツハイマー病および前頭側頭型認知症における無関心と関連している,1,0+1
+619,33459663,"Life with Parkinson's Disease During the COVID-19 Pandemic: The Pressure Is ""OFF""",COVID-19パンデミック下におけるパーキンソン病との生活：「プレッシャーは『OFF』」,2,1+1
+620,39107406,Microstructural brain assessment in late-life depression and apathy using diffusion MRI multi-compartments models and tractometry,拡散MRI多室モデルおよびトラクトメトリーを用いた老年期うつ病および無気力症における脳微細構造の評価,1,0+1
+622,32390614,In vivo MRI Structural and PET Metabolic Connectivity Study of Dopamine Pathways in Alzheimer's Disease,アルツハイマー病におけるドーパミン経路の生体MRI構造およびPET代謝接続性研究,1,0+1
+624,32962076,Association between Daily Activities and Behavioral and Psychological Symptoms of Dementia in Community-Dwelling Older Adults with Memory Complaints by Their Families,家族から記憶障害を訴えられる在宅高齢者の日常生活活動と認知症の行動・心理症状との関連,1,1+0
+626,32281119,Relationship between executive dysfunction and neuropsychiatric symptoms and impaired instrumental activities of daily living among patients with very mild Alzheimer's disease,非常に軽度のアルツハイマー病患者における実行機能障害と神経精神症状および日常生活動作障害との関連,2,1+1
+630,25330926,The neuropsychiatric profile of posterior cortical atrophy,後部皮質萎縮症の神経精神学的特徴,2,1+1
+632,30630729,Personality Changes With Dementia From the Informant Perspective: New Data and Meta-Analysis,介護者視点から見た認知症に伴う人格変化：新規データとメタ分析,2,1+0
+633,28059789,The Mild Behavioral Impairment Checklist (MBI-C): A Rating Scale for Neuropsychiatric Symptoms in Pre-Dementia Populations,軽度行動障害チェックリスト（MBI-C）：認知症前段階集団における神経精神症状の評価尺度,2,0+1
+634,26096665,Neuropsychiatric symptoms as early manifestations of emergent dementia: Provisional diagnostic criteria for mild behavioral impairment,新興認知症の初期症状としての神経精神症状：軽度行動障害の暫定診断基準,2,1+1
+636,38179433,Presence and Characteristics of Behavioral and Psychological Symptoms in Subacute Stroke Patients with Cognitive Impairment,認知障害を伴う亜急性期脳卒中患者における行動・心理症状の有無と特徴,2,1+1
+640,33567399,Determinants of caregiver burden in male patients with epilepsy following penetrating traumatic brain injury,貫通性外傷性脳損傷後の男性てんかん患者における介護者負担の決定要因,1,1+1
+642,32417778,Modelling Awareness in Alzheimer's Disease,アルツハイマー病における意識のモデリング,1,1+1
+643,28413709,"Awareness, apathy, and depression in Alzheimer's disease and mild cognitive impairment",アルツハイマー病および軽度認知障害における意識、無関心、うつ状態,1,1+1
+644,40045280,"Reliability, validity, and diagnostic accuracy of the apathy evaluation scale in chronic stroke survivors",慢性脳卒中生存者における無関心評価尺度の信頼性、妥当性、診断精度,2,1+1
+645,39117299,Lille Apathy Rating Scale-Patient Version in Stroke Survivors: Psychometric Properties and Diagnostic Accuracy,脳卒中生存者におけるリール無関心評価尺度-患者版：心理測定特性と診断精度,2,1+1
+646,41238723,Validation of the dimensional apathy scale and predictors of apathy in stroke survivors,脳卒中生存者における次元性無気力尺度と無気力の予測因子の検証,2,1+1
+649,32925031,Affective Neuropsychiatric Symptoms as Early Signs of Dementia Risk in Older Adults,高齢者の認知症リスクの早期兆候としての情動性神経精神症状,2,1+1
+653,25984756,Developing the Person-Environment Apathy Rating for persons with dementia,認知症患者向け「人-環境無関心評価尺度」の開発,1,0+1
+654,26055779,The Association Between Characteristics of Care Environments and Apathy in Residents With Dementia in Long-term Care Facilities,長期療養施設における認知症入居者のケア環境特性と無気力との関連性,2,0+1
+655,31241031,Association between environmental stimulation and apathy in nursing home residents with dementia,認知症を有する介護施設入居者における環境刺激と無気力感の関連性,2,0+1
+656,29437184,Real-Time Observation of Apathy in Long-Term Care Residents With Dementia: Reliability of the Person-Environment Apathy Rating Scale,認知症を伴う長期療養施設入居者における無気力のリアルタイム観察：人-環境無気力評価尺度の信頼性,1,0+1
+659,28506191,Use of the Neuropsychiatric Inventory to Characterize the Course of Neuropsychiatric Symptoms in Progressive Supranuclear Palsy,進行性核上性麻痺における神経精神症状の経過を特徴づけるための神経精神症状評価尺度（NPI）の使用,2,1+1
+660,39129694,"Enhancing Outcomes in Alzheimer's Disease: Exploring the Effects of a Diversified Rehabilitation Program Combined with Donepezil on Apathy, Cognitive Function, and Family Caregiver Burden",アルツハイマー病における治療成果の向上：ドネペジルと組み合わせた多様化リハビリテーションプログラムが無気力、認知機能、家族介護者の負担に及ぼす影響の検討,2,0+1
+661,40186124,Associations between neuropsychiatric symptoms and motoric cognitive risk syndrome,神経精神症状と運動認知リスク症候群との関連性,2,1+0
+662,39868480,Malnutrition exacerbating neuropsychiatric symptoms on the Alzheimer's continuum is relevant to the cAMP signaling pathway: Human and mouse studies,アルツハイマー病連続体における神経精神症状を悪化させる栄養失調はcAMPシグナル伝達経路に関連：ヒトおよびマウス研究,1,1+0
+664,38237255,Efficacy and safety of neuromodulation for apathy in patients with Alzheimer's disease: A systematic review and meta-analysis of randomized controlled trials,アルツハイマー病患者の無関心に対する神経調節療法の有効性と安全性：無作為化比較試験の系統的レビューとメタ分析,2,0+1
+666,28632431,Psychometric testing of a Swedish version of the Apathy Evaluation Scale,無関心評価尺度のスウェーデン語版に関する心理測定学的検証,1,1+1
+667,35346458,"Development of Apathy, Anxiety, and Depression in Cognitively Unimpaired Older Adults: Effects of Alzheimer's Disease Pathology and Cognitive Decline",認知機能障害のない高齢者における無関心・不安・抑うつの発症：アルツハイマー病病理と認知機能低下の影響,2,1+1
+668,31735378,Apathy and anxiety are early markers of Alzheimer's disease,無関心と不安はアルツハイマー病の早期マーカーである,2,1+1
+670,25162776,Anxiety and Depression Are Better Correlates of Parkinson's Disease Quality of Life Than Apathy,無関心よりも不安と抑うつがパーキンソン病の生活の質とより強く相関する,2,1+1
+671,31343240,Depressive symptoms precede cognitive impairment in de novo Parkinson's disease patients: Analysis of the PPMI cohort,新規発症パーキンソン病患者における抑うつ症状は認知機能障害に先行する：PPMIコホート解析,2,1+1
+672,26792098,Mood Differences Among Parkinson's Disease Patients With Mild Cognitive Impairment,軽度認知障害を伴うパーキンソン病患者における気分の差異,2,1+1
+673,25365564,Latent growth-curve analysis reveals that worsening Parkinson's disease quality of life is driven by depression,潜在成長曲線分析により、パーキンソン病の生活の質の悪化は抑うつによって引き起こされることが明らかになった,2,1+1
+674,26401563,Reaction Time is a Marker of Early Cognitive and Behavioral Alterations in Pure Cerebral Small Vessel Disease,純粋脳小血管病における反応時間は早期認知・行動変化のマーカーである,2,1+1
+676,27454622,Neuropsychiatric characteristics of PiB-negative subcortical vascular dementia versus behavioral variant frontotemporal dementia,PiB陰性皮質下血管性認知症と行動変異型前頭側頭型認知症の神経精神学的特徴,2,1+1
+678,31092277,Assessing cognition and daily function in early dementia using the cognitive-functional composite: findings from the Catch-Cog study cohort,認知機能複合指標を用いた初期認知症における認知機能と日常生活機能の評価：Catch-Cog研究コホートからの知見,1,1+1
+682,29734988,Change in Cognition and Other Non-Motor Symptoms With Obstructive Sleep Apnea Treatment in Parkinson Disease,パーキンソン病における閉塞性睡眠時無呼吸症候群治療に伴う認知機能およびその他の非運動症状の変化,1,1+1
+683,25511791,Differentiating between right-lateralised semantic dementia and behavioural-variant frontotemporal dementia: an examination of clinical characteristics and emotion processing,右側優位性意味性認知症と行動変異型前頭側頭型認知症の鑑別：臨床的特徴と感情処理の検討,2,1+1
+684,39761997,Tract-specific white matter hyperintensities and neuropsychiatric syndromes: a multicentre memory clinic study,経路特異的白質高信号域と神経精神症候群：多施設共同記憶クリニック研究,1,1+1
+685,37729769,Comorbid amyloid with cerebrovascular disease in domain-specific cognitive and neuropsychiatric disturbances: a cross-sectional memory clinic study,ドメイン特異的認知障害および神経精神障害における脳血管疾患との併存性アミロイド病変：横断的記憶クリニック研究,2,1+1
+686,34814099,Interactions of comorbid neuropsychiatric subsyndromes with neurodegenerative and cerebrovascular pathologies on cognition,併存する神経精神科的サブ症候群と神経変性・脳血管病変が認知機能に及ぼす相互作用,2,1+1
+687,39321409,"Clinical Phenotypes Associated With Cerebral Small Vessel Disease: A Study of 45,013 UK Biobank Participants","脳小血管病変に関連する臨床的表現型：英国バイオバンク参加者45,013名を対象とした研究",2,1+1
+688,32081532,Dimensions of Poststroke Depression and Neuropsychological Deficits in Older Adults,高齢者の脳卒中後うつ病と神経心理学的障害の次元,2,1+1
+689,40107929,"Neuroimaging of psychosis, agitation, and affective disturbance in Alzheimer's disease, dementia with Lewy bodies, and mild cognitive impairment",アルツハイマー病、レビー小体型認知症、軽度認知障害における精神病、興奮、情動障害の神経画像診断,2,1+1
+690,30474244,Apathy and right caudate perfusion in idiopathic normal pressure hydrocephalus: A case-control study,特発性正常圧水頭症における無関心と右尾状核血流：症例対照研究,1,0+1
+691,26810545,Effect of lumbo-peritoneal shunt surgery on neuropsychiatric symptoms in patients with idiopathic normal pressure hydrocephalus,腰椎腹膜シャント手術が特発性正常圧水頭症患者の神経精神症状に及ぼす影響,2,1+1
+692,41058585,Impact of Urinary Incontinence on Idiopathic Normal Pressure Hydrocephalus: A Cross-Sectional Study With Alzheimer's Disease and Dementia With Lewy Bodies,尿失禁が特発性正常圧水頭症に及ぼす影響：アルツハイマー病およびレビー小体型認知症を対象とした横断研究,2,1+1
+693,40271986,Introducing Virtual Reality to Home-Based Primary Care Veterans With Dementia,認知症を有する在宅一次医療退役軍人へのバーチャルリアリティ導入,1,1+1
+695,25967541,Dysexecutive functioning in ALS patients and its clinical implications,ALS患者の実行機能障害とその臨床的意義,2,1+1
+697,32797255,Distinct clinicopathologic clusters of persons with TDP-43 proteinopathy,TDP-43タンパク質病変を有する患者の明確な臨床病理学的クラスター,2,1+1
+698,38582898,Neuropsychiatric symptoms with focus on apathy and irritability in sporadic and hereditary cerebral amyloid angiopathy,散発性および遺伝性脳アミロイド血管症における無関心と過敏性に焦点を当てた神経精神症状,2,1+1
+699,28536519,Apathy and Executive Function in Healthy Elderly-Resting State fMRI Study,健常高齢者における無関心と実行機能－安静時fMRI研究,1,0+1
+701,33268471,Late onset depression: dopaminergic deficit and clinical features of prodromal Parkinson's disease: a cross-sectional study,遅発性うつ病：前駆期パーキンソン病におけるドーパミン作動性欠損と臨床的特徴：横断研究,2,0+1
+702,27858707,Neural Basis of Apathy in Patients with Amnestic Mild Cognitive Impairment,健忘型軽度認知障害患者における無関心症の神経基盤,1,0+1
+703,27536962,Differences of Behavioral and Psychological Symptoms of Dementia in Disease Severity in Four Major Dementias,4大認知症における疾患重症度と認知症の行動・心理症状の違い,2,1+1
+705,29282160,Emotion Recognition Correlates With Social-Neuropsychiatric Dysfunction in Huntington's Disease,ハンチントン病における感情認識と社会神経精神機能障害の相関,2,1+1
+706,26185903,Natural History of Poststroke Apathy During Acute Rehabilitation,急性期リハビリテーション中の脳卒中後無気力の自然経過,2,1+1
+708,39460556,Psychological predictors of incident subjective cognitive complaints in community dwelling older adults,地域在住高齢者における主観的認知症状発症の心理的予測因子,2,1+0
+710,34191260,Prevalence of mild behavioral impairment in patients with mild cognitive impairment,軽度認知障害患者における軽度行動障害の有病率,2,1+1
+711,33663416,Behavioural and psychological symptoms of dementia in patients with Alzheimer's disease and family caregiver burden: a path analysis,アルツハイマー病患者の認知症行動・心理症状と家族介護者の負担：パス分析,1,1+1
+714,38833653,Regional Burden of Enlarged Perivascular Spaces and Cognition and Neuropsychiatric Symptoms in Drug-Naive Patients With Parkinson Disease,パーキンソン病の未治療患者における血管周囲腔拡大の局所的負荷と認知機能・神経精神症状,1,1+1
+715,31434232,Malnutrition is Associated with Behavioral and Psychiatric Symptoms of Dementia in Older Women with Mild Cognitive Impairment and Early-Stage Alzheimer's Disease,軽度認知障害および初期アルツハイマー病を有する高齢女性における認知症の行動・精神症状と栄養不良の関連性,2,1+1
+718,28895973,Development and Testing of a Neuropsychiatric Symptoms Model in Mild Cognitive Impairment,軽度認知障害における神経精神症状モデルの開発と検証,2,1+1
+721,28794518,Pre-stroke apathy symptoms are associated with an increased risk of delirium in stroke patients,脳卒中前無関心症状は脳卒中患者のせん妄リスク増加と関連する,2,1+1
+722,39442414,The relationship between perceived engagement in meaningful activity and behavioral and psychological symptoms of dementia among assisted living residents,介護付き住宅居住者における有意義な活動への没頭感と認知症の行動・心理症状との関連性,1,0+1
+723,28202373,Is fatigue associated with cognitive dysfunction in early Parkinson's disease?,初期パーキンソン病における疲労と認知機能障害の関連性,2,1+1
+724,30306414,Dopaminergic influences on risk preferences of Parkinson's disease patients,パーキンソン病患者のリスク選好に対するドーパミン作動性影響,1,0+1
+725,36119701,Poor sleep quality is associated with fatigue and depression in early Parkinson's disease: A longitudinal study in the PALS cohort,パーキンソン病初期における睡眠の質の低下は疲労感と抑うつと関連する：PALSコホートにおける縦断研究,2,1+1
+727,30021532,Characteristics of facial expression recognition ability in patients with Lewy body disease,レビー小体型認知症患者の表情認識能力の特徴,1,1+0
+728,28826872,Determinants of behavioral and psychological symptoms of dementia: A scoping review of the evidence,認知症の行動・心理症状の決定要因：エビデンスの探索的レビュー,2,1+0
+734,31469297,The Edinburgh cognitive and behavioral amyotrophic lateral sclerosis screen (ECAS): sensitivity in differentiating between ALS and Alzheimer's disease in a Greek population,エディンバラ認知行動筋萎縮性側索硬化症スクリーニング（ECAS）：ギリシャ人集団におけるALSとアルツハイマー病の鑑別における感度,2,1+1
+735,33393797,"Functional reserve: The residual variance in instrumental activities of daily living not explained by brain structure, cognition, and demographics",機能的予備能：脳構造、認知機能、人口統計学的要因では説明できない、手段的日常生活動作における残存分散,1,1+0
+736,36335542,Motor and non-motor improvements following short-term multidisciplinary day-clinic care in Parkinson´s disease,パーキンソン病における短期多職種デイケア後の運動機能および非運動機能の改善,2,1+1
+739,35142047,Association between CSF biomarkers of Alzheimer's disease and neuropsychiatric symptoms: Mayo Clinic Study of Aging,アルツハイマー病の脳脊髄液バイオマーカーと神経精神症状との関連：メイヨー・クリニック加齢研究,2,1+1
+740,27447426,FDG-PET and Neuropsychiatric Symptoms among Cognitively Normal Elderly Persons: The Mayo Clinic Study of Aging,FDG-PETと認知正常高齢者の神経精神症状：メイヨー・クリニック加齢研究,1,0+1
+741,36464975,Mid- and Late-Life Physical Activity and Neuropsychiatric Symptoms in Dementia-Free Older Adults: Mayo Clinic Study of Aging,認知症のない高齢者を対象とした中年期および老年期の身体活動と神経精神症状：メイヨー・クリニック加齢研究,2,0+1
+742,33724517,Neuropsychiatric symptoms and the outcome of cognitive trajectories in older adults free of dementia: The Mayo Clinic Study of Aging,認知症のない高齢者の神経精神症状と認知機能経過の転帰：メイヨー・クリニック加齢研究,2,1+1
+748,28597694,Everyday functioning of people with Parkinson's disease and impairments in executive function: a qualitative investigation,パーキンソン病患者の日常生活機能と実行機能障害：質的調査,2,1+0
+749,31118162,Predictors of health-related quality of life in Parkinson's disease,パーキンソン病における健康関連QOLの予測因子,2,1+1
+750,29704671,Apathy in Alzheimer's disease and frontotemporal dementia: Distinct clinical profiles and neural correlates,アルツハイマー病および前頭側頭型認知症における無関心：異なる臨床プロファイルと神経相関,2,1+1
+751,31085360,Cingulate infarction: A neuropsychological and neuroimaging study,帯状回梗塞：神経心理学的および神経画像学的研究,2,1+0
+753,27020694,"Comparison of QOL between patients with different degenerative dementias, focusing especially on positive and negative affect",特に陽性および陰性感情に焦点を当てた、異なる変性性認知症患者間のQOLの比較,2,1+1
+756,38239023,Relationship between mortality and vitality in patients with mild cognitive impairment/dementia: An 8-year retrospective study,軽度認知障害/認知症患者における死亡率と活力の関係：8年間の回顧的研究,2,1+1
+757,26268660,Use of anti-dementia drugs in home care and residential care and associations with neuropsychiatric symptoms: a cross-sectional study,在宅介護および施設介護における抗認知症薬の使用と神経精神症状との関連性：横断研究,2,1+1
+758,38036966,Long-term psychological outcomes following stroke: the OX-CHRONIC study,脳卒中後の長期心理的転帰：OX-CHRONIC研究,2,1+1
+759,38505945,Psychometric properties of the Russian version of the Edinburgh cognitive and behavioral amyotrophic lateral sclerosis screen,ロシア語版エディンバラ認知・行動性筋萎縮性側索硬化症スクリーニングの心理測定特性,2,1+1
+760,36756689,Lower cognitive function attenuates the convergence between self-ratings and observer ratings of depressive symptoms in late-life cognitive impairment,認知機能低下は老年期認知障害における抑うつ症状の自己評価と観察者評価の収束を弱める,2,1+1
+762,34641989,Measuring neuropsychiatric symptoms in patients with early cognitive decline using speech analysis,音声分析を用いた早期認知機能低下患者の神経精神症状の評価,2,1+0
+763,39812009,The effect of apathy on quality of life and caregiver burden in patients with dementia,認知症患者における無気力が生活の質と介護者負担に及ぼす影響,2,1+0
+765,34523075,Effectiveness of Safinamide over Mood in Parkinson's Disease Patients: Secondary Analysis of the Open-label Study SAFINONMOTOR,パーキンソン病患者におけるサフィナミドの気分改善効果：非盲検試験SAFINONMOTORの二次解析,2,1+1
+770,32565008,Measuring Apathy in Alzheimer's Disease in the Apathy in Dementia Methylphenidate Trial 2 (ADMET 2): A Comparison of Instruments,認知症における無関心症メチルフェニデート試験 2（ADMET 2）におけるアルツハイマー病の無関心症の測定：測定機器の比較,2,1+0
+772,40415148,Motor and Non-motor Complications Following Different Early Therapies in Parkinson's Disease: Longitudinal Analysis of Real-Life Clinical and Therapeutic Data from the French NS-PARK Cohort,パーキンソン病における異なる早期治療後の運動・非運動合併症：フランスNS-PARKコホートからの実臨床・治療データの縦断的解析,2,1+0
+773,29453244,White matter change with apathy and impulsivity in frontotemporal lobar degeneration syndromes,前頭側頭葉変性症候群における無関心と衝動性に伴う白質変化,2,1+0
+774,28486594,Apathy and impulsivity in frontotemporal lobar degeneration syndromes,前頭側頭葉変性症候群における無関心と衝動性,2,1+1
+775,30842292,Prognostic importance of apathy in syndromes associated with frontotemporal lobar degeneration,前頭側頭葉変性症関連症候群における無気力の予後的意義,2,1+0
+776,32449791,Neuropsychiatric symptoms and quality of life in Spanish patients with Alzheimer's disease during the COVID-19 lockdown,COVID-19ロックダウン下におけるスペイン人アルツハイマー病患者の神経精神症状と生活の質,2,1+1
+781,38830182,Cross-Sectional and Longitudinal Association of Clinical and Neurocognitive Factors With Apathy in Patients With Parkinson Disease,パーキンソン病患者における無関心と臨床的・神経認知的要因との横断的および縦断的関連,2,1+1
+782,30346491,Dysfunctional effort-based decision-making underlies apathy in genetic cerebral small vessel disease,遺伝性脳小血管病における無気力の背景にある機能不全的な努力ベースの意思決定,2,1+1
+783,29672668,Distinct effects of apathy and dopamine on effort-based decision-making in Parkinson's disease,パーキンソン病における無関心とドーパミンの努力に基づく意思決定への異なる影響,2,1+1
+784,40294408,Uncovering Social States in Healthy and Clinical Populations Using Digital Phenotyping and Hidden Markov Models: Observational Study,デジタルフェノタイピングと隠れマルコフモデルを用いた健常者および臨床集団における社会的状態の解明：観察研究,1,1+0
+785,30073037,Quality of Life in Patients with Dementia with Lewy Bodies,レビー小体型認知症患者の生活の質,2,1+1
+787,33192487,"Cognitive Reserve, Leisure Activity, and Neuropsychological Profile in the Early Stage of Cognitive Decline",認知機能低下初期段階における認知予備力、余暇活動、および神経心理学的プロファイル,2,1+1
+788,40891041,Neural Representations of Neuropsychiatric Symptoms in Alzheimer's Disease Continuum Using Pathology-Based Functional Connectivity Analysis,病理に基づく機能的接続性分析を用いたアルツハイマー病連続体における神経精神症状の神経表象,1,1+0
+789,31428305,Brief Psychiatric Screening Questionnaire in Parkinson's Disease,パーキンソン病における簡易精神症状スクリーニング質問票,2,1+1
+791,38494742,"Mental Health Mediators for Subjective, Not Objective, Cognition, and Community Participation Poststroke",脳卒中後の主観的認知機能および地域参加に対する精神的健康の媒介変数（客観的認知機能ではなく）,2,1+1
+792,27662321,Alzheimer's Disease Severity is Not Significantly Associated with Short Sleep: Survey by Actigraphy on 208 Mild and Moderate Alzheimer's Disease Patients,アルツハイマー病の重症度は睡眠時間の短さと有意な関連性なし：軽度および中等度アルツハイマー病患者208名を対象としたアクチグラフ調査,2,1+1
+793,33459637,Improving the Diagnosis of the Frontal Variant of Alzheimer's Disease with the DAPHNE Scale,DAPHNEスケールによるアルツハイマー病前頭葉変異型の診断精度向上,2,1+1
+794,39841404,What does it mean when the pleasant smells come and go? Correlation between UPSIT odor identification status and fluctuation of non-motor symptoms in Parkinson's disease,心地よい匂いが現れたり消えたりするとはどういう意味か？ UPSITによる匂い識別状態とパーキンソン病における非運動症状の変動との相関,2,1+1
+797,34958871,Planning in amnestic mild cognitive impairment: an fMRI study,健忘型軽度認知障害における計画能力：fMRI研究,1,1+0
+802,30037742,Bayesian Analyses Showed More Evidence for Apathy than for Depression Being Associated With Cognitive Functioning in Nursing Home Residents,ベイジアン分析により、介護施設入居者の認知機能と関連する抑うつよりも無気力の方がより多くの証拠が示された,2,1+0
+803,26402012,Latent Classes of Neuropsychiatric Symptoms in NACC Controls and Conversion to Mild Cognitive Impairment or Dementia,NACC対照群における神経精神症状の潜在クラスと軽度認知障害または認知症への移行,2,1+1
+804,30037284,Specific Cognitive-Psychopathological Phenotypes in Patients With Early Stages of Subcortical Vascular Neurocognitive Disorders: A Hospital-Based Case-Control Study,皮質下血管性神経認知障害初期段階患者における特定の認知・精神病理学的表現型：病院ベースの症例対照研究,2,1+1
+805,25066623,Subjectively perceived personality and mood changes associated with subthalamic stimulation in patients with Parkinson's disease,パーキンソン病患者における視床下部刺激に伴う主観的に知覚される性格および気分の変化,1,1+0
+806,28643887,"Personality, dopamine, and Parkinson's disease: Insights from subthalamic stimulation",人格、ドーパミン、パーキンソン病：視床下部刺激からの知見,2,1+1
+809,38709856,"Meso-cortical pathway damage in cognition, apathy and gait in cerebral small vessel disease",脳小血管病変における認知機能、無関心、歩行障害と中皮質路損傷の関係,2,1+1
+810,39761756,Subthalamic nucleus oscillations during facial emotion processing and apathy in Parkinson's disease,パーキンソン病における顔面感情処理および無関心時の視床下核振動,2,1+0
+811,30292146,Executive dysfunctions and behavioral changes in early drug-naïve patients with Parkinson's disease,パーキンソン病の早期無治療患者における実行機能障害と行動変化,2,1+1
+812,41160926,The relationship between cognitive function and depressive symptoms in Chinese older adults: A cross-lagged panel network analysis,中国高齢者における認知機能と抑うつ症状の関係：クロスラグパネルネットワーク分析,2,1+0
+814,39430139,Effects of Multi-Sensory Stimulation on Apathy Symptoms in Elderly Patients with Alzheimer's Disease,アルツハイマー病高齢患者の無関心症状に対する多感覚刺激の効果,2,1+0
+815,36363543,The Relationship between Neuropsychiatric Symptoms and Cognitive Performance in Older Adults with Normal Cognition,正常認知機能を有する高齢者の神経精神症状と認知機能の関連性,1,1+1
+816,39617744,Neuropsychiatric Symptoms Associated With Frontotemporal Atrophy in Older Adults Without Dementia,認知症のない高齢者の前頭側頭型萎縮に伴う神経精神症状,2,1+0
+817,40495289,Neuropsychiatric Symptoms and White Matter Hyperintensities in Older Cognitively Unimpaired Men Versus Women,認知機能障害のない高齢男性と女性における神経精神症状と白質高信号域,1,1+1
+821,29171995,High Caregiver Burden in Young Onset Dementia: What Factors Need Attention?,若年性認知症における介護者の高い負担：注目すべき要因は何か？,2,1+1
+824,36402056,Effects of an empowerment-based educative psycho-behavioral program on neuropsychiatric symptoms among persons with mild cognitive impairment: A mixed methods study,軽度認知障害患者におけるエンパワーメントに基づく教育的心理行動プログラムが神経精神症状に及ぼす影響：混合方法研究,2,1+1
+825,28882104,"Dysphoric symptoms in relation to other behavioral and psychological symptoms of dementia, among elderly in nursing homes",介護施設入所高齢者における認知症のその他の行動・心理症状と関連する不快症状,2,1+1
+827,26329453,Trajectories of Behavioural Disturbances Across Dementia Types,認知症タイプ間における行動障害の軌跡,2,1+1
+829,29481995,Involvement of the reward network is associated with apathy in cerebral small vessel disease,報酬ネットワークの関与は脳小血管病変における無関心と関連する,2,1+1
+830,28844367,Apathy in drug-naïve patients with Parkinson's disease,パーキンソン病の未治療患者における無関心,2,1+1
+832,33104025,The Relationship Between Anxiety and Incident Agitation in Alzheimer's Disease,アルツハイマー病における不安と新規興奮症状発現の関連性,2,1+0
+833,26882509,"The effects of behavioral and psychological symptoms on caregiver burden in frontotemporal dementia, Lewy body dementia, and Alzheimer's disease: clinical experience in China",前頭側頭型認知症、レビー小体型認知症、アルツハイマー病における行動・心理症状が介護者負担に及ぼす影響：中国における臨床経験,2,1+1
+835,29306607,"The Prevalence and Correlates of Frailty in Urban and Rural Populations in Latin America, China, and India: A 10/66 Population-Based Survey",ラテンアメリカ、中国、インドの都市部および農村部における虚弱の有病率と相関関係：10/66 人口ベースの調査,1,1+0
+837,31633557,Association Between Neuropsychiatric Symptom Trajectory and Conversion to Alzheimer Disease,神経精神症状の経過とアルツハイマー病への移行との関連,1,1+1
+838,28493898,"Apathy, but not depression, is associated with executive dysfunction in cerebral small vessel disease",無関心（抑うつではない）は、脳小血管病変における実行機能障害と関連している,2,1+1
+839,33619849,"Early apathetic, but not depressive, symptoms are associated with poor outcome after stroke",脳卒中後の予後不良と関連するのは、抑うつ症状ではなく早期の無関心症状である,2,1+1
+840,38141049,Pre-stroke and early post-stroke apathy is associated with increased risk of dementia 3 months after stroke,脳卒中前および脳卒中早期の無関心は、脳卒中後3ヶ月における認知症リスク増加と関連する,2,1+1
+841,36446750,Unpacking the NIH Toolbox Emotion Battery in Persons With Parkinson's disease,パーキンソン病患者におけるNIHツールボックス感情バッテリー解析,2,1+1
+842,30251374,Does the Geriatric Depression Scale measure depression in Parkinson's disease?,老年期うつ病尺度（GDS）はパーキンソン病におけるうつ病を測定できるか？,2,1+1
+843,27623026,Caregiver's distress related to the patient's neuropsychiatric symptoms as a function of the care-setting,介護環境の機能としての患者の神経精神症状に関連する介護者の苦痛,2,1+0
+844,26108739,"Comprehensive analysis of patient and caregiver predictors for caregiver burden, anxiety and depression in Alzheimer's disease",アルツハイマー病における介護負担、不安、抑うつに関する患者および介護者の予測因子の包括的分析,2,1+1
+845,39031368,Social Dysfunction and Apathy: Transdiagnostic Domains in Late-Life Cognitive Disorders,社会的機能障害と無関心：老年期認知障害における横断的診断領域,2,1+0
+846,30103335,"Social Dysfunction in Older Age and Relationships with Cognition, Depression, and Apathy: The GreatAGE Study",高齢期の社会的機能障害と認知機能・抑うつ・無関心との関連：GreatAGE研究,2,1+0
+847,39214962,Shared and distinct cortical morphometric alterations in five neuropsychiatric symptoms of Parkinson's disease,パーキンソン病の5つの神経精神症状における共有および特異的な皮質形態学的変化,2,1+1
+848,37801360,The Application of Fully Immersive Virtual Reality on Reminiscence Interventions for Older Adults: Scoping Review,高齢者向け回想療法への完全没入型仮想現実の応用：スコープレビュー,1,1+0
+849,40492471,Neuropsychiatric Symptoms and Alzheimer's Disease Severity. A Focus on Sex-Differences,神経精神症状とアルツハイマー病の重症度：性差に焦点を当てて,2,1+1
+850,35863150,Neuropsychiatric symptoms influence differently cognitive decline in older women and men,神経精神症状は高齢女性と男性で認知機能低下に異なる影響を与える,2,1+1
+851,28418163,Psychometric properties of the apathy evaluation scale in patients with Parkinson's disease,パーキンソン病患者における無関心評価尺度の心理測定特性,2,1+1
+852,40550276,Bidirectional relationships between cognitive decline and depression: A study of middle-aged and older adults using cross-lagged panel network analysis,認知機能低下と抑うつ症状の双方向的関係：クロスラグパネルネットワーク分析を用いた中高年者を対象とした研究,2,1+0
+855,35586201,Neuropsychiatric Symptoms in Clinically Defined Parkinson's Disease: An Updated Review of Literature,臨床的に定義されたパーキンソン病における神経精神症状：文献の最新レビュー,2,1+1
+856,38416170,Anatomical correlates of apathy and impulsivity co-occurrence in early Parkinson's disease,初期パーキンソン病における無関心と衝動性の併発の解剖学的相関,2,1+0
+858,26208108,Probable RBD and association with neurodegenerative disease markers: A population-based study,可能性の高いレム睡眠行動障害と神経変性疾患マーカーとの関連性：人口ベース研究,2,1+1
+859,32375913,"REM Sleep Behavior Disorder in Parkinson's Disease: Effects on Cognitive, Psychiatric, and Functional outcomes",パーキンソン病におけるレム睡眠行動障害：認知機能、精神症状、機能的転帰への影響,2,1+0
+860,34925096,Frontotemporal Dementia and Late-Onset Bipolar Disorder: The Many Directions of a Busy Road,前頭側頭型認知症と遅発性双極性障害：複雑に交錯する病態の道筋,2,1+1
+862,26827110,Subjective perceived outcome of subthalamic deep brain stimulation in Parkinson's disease one year after surgery,手術後1年におけるパーキンソン病の視床下部深部脳刺激の主観的知覚結果,2,1+0
+863,32463470,Bupropion for the Treatment of Apathy in Alzheimer Disease: A Randomized Clinical Trial,アルツハイマー病における無気力症の治療のためのブプロピオン：無作為化臨床試験,2,1+1
+864,27538418,"The prominent role of serotonergic degeneration in apathy, anxiety and depression in de novo Parkinson's disease",新規発症パーキンソン病における無関心・不安・抑うつにおけるセロトニン作動性変性の顕著な役割,2,1+0
+868,30394003,Prevalence of behavioural and psychological symptoms of dementia in cognitively impaired elderly residents of long-term care facilities in East Asia: a cross-sectional study,東アジアの長期療養施設における認知機能障害高齢入居者の認知症行動心理症状の有病率：横断研究,2,1+1
+869,39610284,A DAT1 gene and APOE ε4 interaction is associated with apathy and structural brain changes in mild cognitive impairment and Alzheimer's disease,DAT1遺伝子とAPOE ε4の相互作用は、軽度認知障害およびアルツハイマー病における無関心と脳構造変化に関連している,2,1+1
+870,40227643,"Conversion to Mild Cognitive Impairment and Alzheimer's Disease Dementia Related to Apathy, APOE Genotype and Antidepressant Use",無関心、APOE遺伝子型および抗うつ薬使用に関連する軽度認知障害およびアルツハイマー病認知症への移行,2,1+0
+871,28522892,Enhancing Communication in Adults with Dementia and Age-Related Hearing Loss,認知症と加齢性難聴を併せ持つ成人におけるコミュニケーションの促進,2,0+1
+873,33192732,The Impact of COVID-19 Infection and Enforced Prolonged Social Isolation on Neuropsychiatric Symptoms in Older Adults With and Without Dementia: A Review,COVID-19感染と強制的な長期社会的隔離が認知症有無にかかわらず高齢者の神経精神症状に与える影響：レビュー,2,0+1
+877,37020737,"Cutoff scores for the ""Interest game"", an application for the assessment of diminished interest in neurocognitive disorders",神経認知障害における興味減退評価ツール「興味ゲーム」のカットオフスコア,2,1+1
+878,30993719,A survey on the prevalence of apathy in elderly people referred to specialized memory centers,専門記憶センターに紹介された高齢者における無気力の有病率に関する調査,2,1+1
+880,25852542,"'Kitchen and cooking,' a serious game for mild cognitive impairment and Alzheimer's disease: a pilot study",軽度認知障害およびアルツハイマー病向けシリアスゲーム「キッチンと料理」：パイロット研究,2,1+1
+884,26874940,Human ventromedial prefrontal lesions alter incentivisation by reward,ヒト腹内側前頭前野病変は報酬による動機付けを変化させる,2,1+1
+885,31494822,The impact of vascular burden on behavioural and psychological symptoms in older adults with dementia: the BEVASDE study,認知症高齢者の行動・心理症状に対する血管負荷の影響：BEVASDE研究,2,1+1
+886,39531267,The Effects of Virtual Reality-Based Reminiscence Therapies for Older Adults With Cognitive Impairment: Systematic Review,認知機能障害を有する高齢者に対する仮想現実ベースの回想療法の効果：系統的レビュー,2,1+1
+887,28892315,[Which psychiatric symptoms must raise suspicion about a possible brain tumor ?],[脳腫瘍の可能性を疑わせるべき精神症状とは？],2,1+1
+888,33745342,Visiting Out-of-Home Places When Living With Dementia: A Cross-Sectional Observational Study: Visiter des lieux hors du domicile lorsque l'on vit avec une démence: étude transversale observationnelle,認知症と共に生きる際の自宅外場所への訪問：横断的観察研究,2,1+1
+892,30689584,Regional Tau Correlates of Instrumental Activities of Daily Living and Apathy in Mild Cognitive Impairment and Alzheimer's Disease Dementia,軽度認知障害およびアルツハイマー病認知症における日常生活動作（IADL）と無気力症の地域的タウ相関,2,1+1
+893,32289790,Neuropsychiatric Symptoms in Mild Cognitive Impairment: A Literature Review,軽度認知障害における神経精神症状：文献レビュー,2,1+1
+894,31616991,Apathy as a behavioural marker of cognitive impairment in Parkinson's disease: a longitudinal analysis,パーキンソン病における認知機能障害の行動マーカーとしての無関心：縦断的分析,2,1+1
+896,27730477,Non-demented Parkinson's disease patients with apathy show decreased grey matter volume in key executive and reward-related nodes,無関心症状を呈する非認知症パーキンソン病患者では、主要な実行機能および報酬関連領域の灰白質容積が減少している,1,1+1
+897,26695691,Accuracy of screening instruments for detection of neuropsychiatric syndromes in Parkinson's disease,パーキンソン病における神経精神症候群検出のためのスクリーニングツールの精度,1,1+1
+901,29676484,Structural and metabolic brain correlates of apathy in Huntington's disease,ハンチントン病における無気力の構造的・代謝的脳相関,2,1+1
+902,33786884,Association between apathy and satisfaction with meaningful activities in older adults with mild cognitive impairment: A population-based cross-sectional study,軽度認知障害を有する高齢者における無関心と有意義な活動への満足度の関連性：人口ベース横断研究,2,1+0
+905,29804147,"Correlation among olfactory function, motors' symptoms, cognitive impairment, apathy, and fatigue in patients with Parkinson's disease",パーキンソン病患者における嗅覚機能、運動症状、認知障害、無関心、疲労の相関関係,2,0+1
+906,26333257,Rating Apathy in Huntington’s Disease: Patients and Companions Agree,ハンチントン病における無関心評価：患者と介護者の一致性,2,0+1
+909,25092799,Delayed atrophy in posterior cingulate cortex and apathy after stroke,脳卒中後の後部帯状皮質の萎縮の遅延と無関心,2,1+1
+910,38306041,Relationship between Loneliness and Mild Behavioral Impairment: Validation of the Japanese Version of the MBI Checklist and a Cross-Sectional Study,孤独感と軽度行動障害の関係：MBIチェックリスト日本語版の妥当性検証と横断研究,2,0+1
+912,25702600,The relationship between post-stroke depression and physical recovery,脳卒中後うつ病と身体的回復の関係,2,1+1
+913,25624417,Combination Therapy of Cholinesterase Inhibitor (Donepezil or Galantamine) plus Memantine in the Okayama Memantine Study,岡山メマンチン研究におけるコリンエステラーゼ阻害薬（ドネペジルまたはガランタミン）とメマンチンの併用療法,2,1+1
+914,34108874,Mild Behavioral Impairment Is Associated With Atrophy of Entorhinal Cortex and Hippocampus in a Memory Clinic Cohort,軽度行動障害は記憶クリニックコホートにおける内嗅皮質および海馬の萎縮と関連する,2,0+1
+915,38279143,Mild behavioral impairment in early Alzheimer's disease and its association with APOE and BDNF risk genetic polymorphisms,初期アルツハイマー病における軽度行動障害とAPOEおよびBDNFリスク遺伝子多型との関連,2,1+1
+916,26889640,Psychotropic use and associated neuropsychiatric symptoms among patients with dementia in the USA,米国における認知症患者における向精神薬の使用と関連する神経精神症状,2,0+1
+917,25627292,Getting on with the rest of your life following stroke: a randomized trial of a complex intervention aimed at enhancing life participation post stroke,脳卒中後の日常生活への復帰：脳卒中後の生活参加を促進することを目的とした複合的介入の無作為化試験,2,1+1
+920,27469360,123I-Iodobenzovesamicol SPECT Imaging of Cholinergic Systems in Dementia with Lewy Bodies,レビー小体型認知症におけるコリン作動性システムの123I-ヨードベンゾベサミコールSPECTイメージング,2,1+1
+923,33761300,Barriers and facilitators of meaningful engagement among older migrants living with dementia in residential aged care facilities: A mixed studies systematic review,認知症を伴う高齢者移民の居住型高齢者ケア施設における有意義な関与の障壁と促進要因：混合研究法による系統的レビュー,2,0+1
+924,30689734,Dopamine restores cognitive motivation in Parkinson's disease,パーキンソン病におけるドーパミンによる認知的動機付けの回復,2,1+1
+925,31871139,Relationship between neuropsychiatric disorders and cognitive and behavioural change in MND,筋萎縮性側索硬化症（MND）における神経精神疾患と認知・行動変化の関連性,2,0+1
+926,31361357,Insensitivity to loss predicts apathy in huntington's disease,損失に対する鈍感さはハンチントン病における無関心を予測する,2,1+0
+927,37128648,Turning apathy into action in neurodegenerative disease: Development and pilot testing of a goal-directed behaviour app,神経変性疾患における無気力を行動へ転換する：目標指向型行動アプリの開発とパイロット試験,2,1+1
+930,32907903,"Diagnosis, treatment and management of apathy in Parkinson's disease: a scoping review",パーキンソン病における無気力の診断、治療、管理：探索的レビュー,2,1+1
+931,32067288,Efficacy and safety of 5-hydroxytryptophan on depression and apathy in Parkinson's disease: a preliminary finding,パーキンソン病における抑うつと無気力に対する5-ヒドロキシトリプトファンの有効性と安全性：予備的知見,2,1+1
+940,28228566,Reduced cognitive function in patients with Parkinson disease and obstructive sleep apnea,パーキンソン病および閉塞性睡眠時無呼吸症患者における認知機能低下,2,1+1
+942,36324720,White matter hyperintensities and mild behavioral impairment: Findings from the MEMENTO cohort study,白質高信号域と軽度行動障害：MEMENTOコホート研究からの知見,2,0+1
+945,27056065,Frontal Cortical Atrophy as a Predictor of Poststroke Apathy,前頭葉皮質萎縮が脳卒中後の無気力症を予測する指標として,2,0+1
+946,28127989,Psychiatric symptom burden in older people living with HIV with and without cognitive impairment: the UCSF HIV over 60 cohort study,認知障害の有無にかかわらずHIVに感染している高齢者の精神症状の負担：UCSF HIV 60歳以上コホート研究,2,1+0
+948,31061232,[Neuro-endoscopic Management of Intraparenchymal Arachnoid Cyst in Adults:Three Case Reports],[成人における脳実質内クモ膜嚢胞の神経内視鏡的治療：3症例報告],2,1+1
+949,34570180,Effect of Methylphenidate on Apathy in Patients With Alzheimer Disease: The ADMET 2 Randomized Clinical Trial,アルツハイマー病患者における無関心に対するメチルフェニデート（ADMET 2）の効果：無作為化臨床試験,2,1+1
+951,29089398,Establishing diagnostic criteria for Perry syndrome,ペリー症候群の診断基準の確立,2,1+1
+954,32798911,White matter hyperintensities and neuropsychiatric symptoms in mild cognitive impairment and Alzheimer's disease,軽度認知障害およびアルツハイマー病における白質高信号域と神経精神症状,2,1+1
+955,27771195,The Effectiveness of Repetitive Transcranial Magnetic Stimulation for Poststroke Apathy Is Associated with Improved Interhemispheric Functional Connectivity,脳卒中後の無関心に対する反復経頭蓋磁気刺激の有効性は、大脳半球間の機能的接続性の改善と関連している,2,1+1
+959,28131192,Cross-sectional and longitudinal associations of motor fluctuations and non-motor predominance with cerebrospinal τ and Aβ as well as dementia-risk in Parkinson's disease,パーキンソン病における運動変動と非運動症状優位性、脳脊髄液中τタンパク質およびAβ、ならびに認知症リスクとの横断的・縦断的関連,2,0+1
+966,38768581,"Influence of Behavioral and Psychological Symptoms on Caregiver Burden for Different Types of Dementia: Clinical Experience in Lima, Peru",行動・心理症状が異なるタイプの認知症における介護負担に及ぼす影響：ペルー・リマにおける臨床経験,2,1+0
+971,27659190,Influence of Small Vessel Disease and Microstructural Integrity on Neurocognitive Functioning in Older Individuals: The DANTE Study Leiden,高齢者の神経認知機能に対する小血管疾患および微細構造の完全性の影響：DANTE研究ライデン,2,1+1
+974,40084665,Domestic violence in Lewy body dementia: A national study,レビー小体型認知症における家庭内暴力：全国調査,2,1+1
+976,31151748,Delirium in patients with dementia and in children: Overlap of symptoms profile and possible role for future diagnosis,認知症患者と小児におけるせん妄：症状プロファイルの重複と将来の診断における可能性のある役割,2,1+0
+977,26928581,Mapping brain morphological and functional conversion patterns in predementia late-onset bvFTD,認知症前段階の遅発性bvFTDにおける脳形態学的・機能的転換パターンのマッピング,2,1+1
+979,29306357,Apathy in corticobasal degeneration: possible parietal involvement,皮質基底核変性症における無関心：頭頂葉関与の可能性,2,1+1
+980,25204314,Gait and apathy as relevant symptoms of subcortical vascular dementia,皮質下血管性認知症における歩行障害と無関心症の関連症状,2,1+1
+981,28612623,Frontal Tasks and Behavior in Rigid or Tremor-Dominant Parkinson Disease,硬直型または振戦優位型パーキンソン病における前頭葉タスクと行動,2,1+0
+985,40381314,Chronic apathy following a major depressive episode: What is it?,大うつ病エピソード後の慢性無関心：それは何か？,2,1+1
+988,39322558,[Clinical features of five Japanese cases with leucine-rich glioma inactivated-1 (LGI1) antibody-positive encephalitis],[ロイシンリッチグリア腫瘍不活性化因子1（LGI1）抗体陽性脳炎を呈した日本人5例の臨床的特徴],2,1+1
+989,39269457,Decision cost hypersensitivity underlies Huntington's disease apathy,ハンチントン病の無関心の背景にある意思決定コスト過敏性,2,0+1
+990,40457034,Goal-directedness deficit in Huntington's disease,ハンチントン病における目標指向性の障害,2,1+1
+992,28931446,Prevalence estimates of mild behavioral impairment in a population-based sample of pre-dementia states and cognitively healthy older adults,認知症前段階および認知機能正常高齢者を対象とした集団ベースサンプルにおける軽度行動障害の有病率推定,2,1+1
+996,34911368,The Impact of a Dementia-Friendly Garden Design on People With Dementia in a Residential Aged Care Facility: A Case Study,認知症に配慮した庭園設計が高齢者介護施設入居者の認知症患者に与える影響：事例研究,2,0+1
+997,33598981,Apathy and agitation in institutionalized older adults: an empirically derived classification,施設入所高齢者の無関心と興奮：実証的に導出された分類,2,1+0
+999,28329867,Effectiveness of a Virtual Reality Forest on People With Dementia: A Mixed Methods Pilot Study,認知症患者に対する仮想現実森林の効果：混合手法によるパイロット研究,2,1+1
+1002,27452600,Reward sensitivity deficits modulated by dopamine are associated with apathy in Parkinson's disease,ドーパミンによって調節される報酬感受性障害は、パーキンソン病における無気力と関連している,2,1+0
+1004,26944910,Prevalence and Correlates of Neuropsychiatric Symptoms in Nursing Home Patients With Young-Onset Dementia: The BEYOnD Study,若年性認知症を伴う介護施設患者の神経精神症状の有病率と相関要因：BEYOnD研究,2,0+1
+1006,32977734,Neuropsychiatric Presentations due to Traumatic Brain Injury in Cognitively Normal Older Adults,認知機能正常高齢者の外傷性脳損傷に起因する神経精神症状,2,1+1
+1009,39225548,Quality of Life after Deep Brain Stimulation in Parkinson's Disease: Does the Target Matter?,パーキンソン病における深部脳刺激術後の生活の質：標的部位は重要か？,2,0+1
+1010,33563798,Predicting loss of independence and mortality in frontotemporal lobar degeneration syndromes,前頭側頭葉変性症候群における自立喪失と死亡率の予測,2,1+0
+1012,28483068,Factors associated with multidimensional aspect of post-stroke fatigue in acute stroke period,急性脳卒中期における脳卒中後疲労の多次元的側面に関連する因子,2,1+0
+1013,35594063,Assessment of Social Behavior Using a Passive Monitoring App in Cognitively Normal and Cognitively Impaired Older Adults: Observational Study,認知機能正常および認知機能障害高齢者を対象とした受動的モニタリングアプリを用いた社会行動の評価：観察研究,2,1+1
+1014,32148563,Personality Factors and Subjective Cognitive Decline: The FACEHBI Cohort,性格要因と主観的認知機能低下：FACEHBIコホート,2,1+0
+1020,27714849,Psychosocial or clinico-demographic factors related to neuropsychiatric symptoms in patients with Alzheimer's disease needing interventional treatment: analysis of the CATIE-AD study,介入治療を必要とするアルツハイマー病患者の神経精神症状に関連する心理社会的・臨床人口統計学的要因：CATIE-AD研究の分析,2,1+0
+1024,30423541,Effect of istradefylline on mood disorders in Parkinson's disease,パーキンソン病における気分障害に対するイストラデフィリンの効果,2,1+1
+1025,27839720,Anhedonia and its correlation with clinical aspects in Parkinson's disease,パーキンソン病における快感喪失とその臨床的側面との相関,2,0+1
+1032,27054957,Does impaired socioemotional functioning account for behavioral dysexecutive disorders? Evidence from a transnosological study,社会情緒機能障害は行動性実行機能障害の原因となるか？ 病態横断的研究からの証拠,2,1+1
+1035,28161090,Repetitive transcranial magnetic stimulation combined with cognitive training for the treatment of Alzheimer's disease,アルツハイマー病治療のための反復経頭蓋磁気刺激と認知訓練の併用,2,1+1
+1037,32430087,Frontal Behavior Syndromes in Idiopathic Normal Pressure Hydrocephalus as a Function of Alzheimer's Disease Biomarker Status,アルツハイマー病バイオマーカーの状態に依存する特発性正常圧水頭症における前頭葉行動症候群,2,1+1
+1044,28676310,An investigation into the effects and prognostic factors of cognitive decline following subthalamic nucleus stimulation in patients with Parkinson's disease,パーキンソン病患者における視床下核刺激後の認知機能低下の影響と予後因子に関する調査,2,0+1
+1055,28278447,Depressive disorder may be associated with raphe nuclei lesions in patients with brainstem infarction,脳幹梗塞患者におけるうつ病性障害と縫線核病変の関連性,1,0+1
+1058,28701492,Behavioral-variant frontotemporal dementia: Distinct phenotypes with unique functional profiles,行動変異型前頭側頭型認知症：独自の機能プロファイルを持つ異なる表現型,2,0+1
+1062,34183087,A tablet-based intervention for activating nursing home residents with dementia: results from a cluster-randomized controlled trial,認知症の介護施設入居者を活性化するためのタブレット端末を用いた介入：クラスターランダム化比較試験の結果,2,1+1
+1065,39986906,Multisensory stimulation reduces neuropsychiatric symptoms and enhances cognitive function in older adults with dementia: A meta-analysis of randomized controlled trials,認知症高齢者の神経精神症状軽減と認知機能向上における多感覚刺激の効果：無作為化比較試験のメタ分析,2,0+1
+1068,40789339,Apathy in Korsakoff Syndrome: A Call for Clinical Awareness in Long-Term Care Settings,コルサコフ症候群における無関心：長期療養施設における臨床的認識の必要性,2,0+1
+1075,26114924,Predicting the neural effect of switching from donepezil to galantamine based on single-photon emission computed tomography findings in patients with Alzheimer's disease,アルツハイマー病患者における単一光子放出コンピュータ断層撮影所見に基づくドネペジルからガランタミンへの切り替えの神経学的効果予測,2,1+0
+1081,34334394,Adjunctive Therapy to Manage Neuropsychiatric Symptoms in Moderate and Severe Dementia: Randomized Clinical Trial Using an Outpatient Version of Tailored Activity Program,中等度および重度認知症における神経精神症状管理のための補助療法：外来版テーラード活動プログラムを用いた無作為化臨床試験,2,1+1
+1083,26280289,Contrasts Between Patients With Lewy Body Dementia Syndromes and APOE-ε3/ε3 Patients With Late-onset Alzheimer Disease Dementia,レビー小体型認知症症候群患者とAPOE-ε3/ε3型遅発性アルツハイマー病認知症患者の比較,2,1+0
+1084,38874248,The Impact of Subthalamic Deep Brain Stimulation on Apathy in Parkinson's Disease Patients,パーキンソン病患者における視床下部深部脳刺激が無気力に及ぼす影響,2,1+0
+1090,26141491,"The behavioural/dysexecutive variant of Alzheimer's disease: clinical, neuroimaging and pathological features",アルツハイマー病の行動／実行機能障害型：臨床的、神経画像学的、病理学的特徴,2,1+0
+1095,32023367,The Value of Neuropsychological Assessment in the Differentiation Between Behavioral Variant Frontotemporal Dementia and Late-Onset Psychiatric Disorders,行動変異型前頭側頭型認知症と遅発性精神疾患の鑑別における神経心理学的評価の有用性,2,1+0
+1098,32925060,"Neuromodulation for Apathy in Alzheimer's Disease: A Double-Blind, Randomized, Sham-Controlled Pilot Study",アルツハイマー病における無関心に対する神経調節：二重盲検、無作為化、偽治療対照パイロット研究,2,1+1
+1099,29331848,"Repetitive transcranial magnetic stimulation for apathy in mild cognitive impairment: A double-blind, randomized, sham-controlled, cross-over pilot study",軽度認知障害における無関心に対する反復経頭蓋磁気刺激：二重盲検、無作為化、偽治療対照、クロスオーバーパイロット研究,2,1+1
+1100,28945120,"Methylphenidate for Apathy in Community-Dwelling Older Veterans With Mild Alzheimer's Disease: A Double-Blind, Randomized, Placebo-Controlled Trial",軽度アルツハイマー病を伴う在宅高齢退役軍人における無気力に対するメチルフェニデート：二重盲検ランダム化プラセボ対照試験,2,1+1
+1101,32019622,Improvement of neuronal integrity with methylphenidate treatment for apathy in Alzheimer's disease,アルツハイマー病における無関心に対するメチルフェニデート治療による神経細胞の完全性の改善,2,1+0
+1102,38374744,"Vortioxetine Treatment for Depression in Patients with Prodromal vs Mild Alzheimer's Disease: A Six-Month, Open-Label, Observational Study",前駆期および軽度アルツハイマー病患者におけるうつ病に対するボルチオキセチン治療：6ヶ月間の非盲検観察研究,2,1+1
+1104,32536421,Prediagnostic motor and non-motor symptoms in progressive supranuclear palsy: The step-back PSP study,進行性核上性麻痺における診断前の運動症状および非運動症状：ステップバックPSP研究,2,1+1
+1106,38207223,"Apathy After Stroke: Incidence, Symptom Trajectory, and Impact on Quality of Life and Disability",脳卒中後の無関心：発生率、症状の経過、生活の質と障害への影響,2,1+1
+1108,36655645,Oral THC: CBD cannabis extract in main symptoms of Alzheimer disease: agitation and weight loss,経口THC：CBDカンナビス抽出物がアルツハイマー病の主要症状（興奮・体重減少）に及ぼす効果,2,1+1
+1109,40021526,Specific cognitive impairment predicts the neuropsychiatric symptoms in patient with mild cognitive impairment,軽度認知障害患者における神経精神症状を予測する特異的認知障害,2,1+1
+1110,40426671,Exploring Virtual Reality-Based Reminiscence Therapy on Cognitive and Emotional Well-Being in People with Cognitive Impairments: A Scoping Review,認知障害を有する人々の認知的・情緒的ウェルビーイングに対する仮想現実ベースの回想療法の検討：スコープレビュー,2,1+1
+1116,39922446,Empirical Classification of Neuropsychiatric Symptoms and Association of Classes With Diagnostic Progression and Cognitive Decline in Mild Cognitive Impairment and Alzheimer's Disease Populations,軽度認知障害およびアルツハイマー病患者における神経精神症状の実証的分類と、診断の進行および認知機能低下との関連,2,1+1
+1117,38403289,"Prevalence of mild behavioural impairment and its association with cognitive and functional impairment in normal cognition, mild cognitive impairment, and mild Alzheimer's dementia",軽度行動障害の有病率と、正常認知、軽度認知障害、軽度アルツハイマー型認知症における認知機能障害および機能障害との関連,2,1+1
+1123,38015288,"Prevalence, treatment, and neural correlates of apathy in different forms of dementia: a narrative review",各種認知症における無気力の有病率、治療、神経相関：記述的レビュー,2,1+1
+1126,38593940,"Treatment resistant late-life depression: A narrative review of psychosocial risk factors, non-pharmacological interventions, and the role of clinical phenotyping",治療抵抗性老年期うつ病：心理社会的危険因子、非薬物療法、臨床的表現型分類の役割に関するナラティブレビュー,1,1+0
+1130,32718797,Clustering of Behavioral Changes and Their Associations With Cognitive Decline in Older Adults,高齢者の行動変化のクラスタリングと認知機能低下との関連性,1,1+0
+1133,37980780,"Doll therapy for improving behavior, psychology and cognition among older nursing home residents with dementia: A systematic review and meta-analysis",認知症高齢介護施設入居者の行動・心理・認知機能改善のためのドール療法：系統的レビューとメタ分析,2,1+1
+1137,40879406,"Effects of an immersive virtual reality reminiscence intervention on engagement, behavioral and psychological symptoms, and well-being of people with dementia: A randomized crossover trial",没入型仮想現実回想介入が認知症患者の関与度、行動・心理症状、幸福感に及ぼす影響：無作為化クロスオーバー試験,2,1+1
+1139,29329059,Amyloid burden and incident depressive symptoms in preclinical Alzheimer's disease,前臨床アルツハイマー病におけるアミロイド負荷と抑うつ症状の発症,2,1+0
+1142,28089265,Gender differences in Parkinson's disease depression,パーキンソン病における抑うつ症状の性差,2,0+1
+1146,25968325,"Apathy, ventriculomegaly and neurocognitive improvement following shunt surgery in normal pressure hydrocephalus",正常圧水頭症におけるシャント手術後の無関心、脳室拡大および神経認知機能の改善,2,1+1
+1147,31894601,"Mild cognitive impairment, psychiatric symptoms, and executive functioning in patients with Parkinson's disease",パーキンソン病患者における軽度認知障害、精神症状、および実行機能,2,0+1
+1149,31553039,Non-motor outcomes depend on location of neurostimulation in Parkinson's disease,パーキンソン病における非運動症状の転帰は神経刺激部位に依存する,2,1+1
+1153,28874701,"Restless legs syndrome in Parkinson disease: Clinical characteristics, abnormal iron metabolism and altered neurotransmitters",パーキンソン病におけるむずむず脚症候群：臨床的特徴、異常な鉄代謝および神経伝達物質の変化,2,0+1
+1157,28214265,Association between dopaminergic dysfunction and anxiety in de novo Parkinson's disease,新規発症パーキンソン病におけるドーパミン作動性機能障害と不安の関連性,2,0+1
+1159,39384733,"Apathy, gait slowness, and executive dysfunction (AGED) triad: opportunities to predict and delay dementia onset",無関心、歩行遅延、実行機能障害（AGED）の三徴候：認知症発症の予測と遅延の可能性,2,0+1
+1160,40820228,Fourteen years later: Reviewing the diagnostic criteria for behavioral-variant frontotemporal dementia,14年後の検証：行動変異型前頭側頭型認知症の診断基準,2,0+1
+1165,25653291,"Neuropsychiatric symptoms, APOE ε4, and the risk of incident dementia: a population-based study",神経精神症状、APOE ε4、および認知症発症リスク：人口ベース研究,2,0+1
+1166,35986203,Impact of behavioral and psychological symptoms of Alzheimer's disease on caregiver outcomes,アルツハイマー病の行動・心理症状が介護者の転帰に及ぼす影響,2,0+1
+1173,39231919,Health Outcomes Associated with Loneliness and Social Isolation in Older Adults Living with HIV: A Systematic Review,HIV感染高齢者の孤独感と社会的孤立に関連する健康アウトカム：系統的レビュー,2,0+1
+1174,25449044,The onset of nonmotor symptoms in Parkinson's disease (the ONSET PD study),パーキンソン病における非運動症状の発症（ONSET PD研究）,2,0+1
+1177,39868903,A Short Cognitive and Neuropsychiatric Assessment Scale for Progressive Supranuclear Palsy,進行性核上性麻痺のための簡便な認知・神経精神評価尺度,2,0+1
+1182,38356477,Longitudinal associations of apathy and regional tau in mild cognitive impairment and dementia: Findings from the Alzheimer's Disease Neuroimaging Initiative,軽度認知障害および認知症における無関心と局所タウの縦断的関連性：アルツハイマー病神経画像化イニシアチブからの知見,2,0+1
+1184,29688673,[The Post Stroke Depression Scale (PSDRS) as a tool for evaluation of depressed mood at an early stage after cerebral stroke],[脳卒中後うつ病評価尺度（PSDRS）を用いた脳卒中早期段階における抑うつ気分評価ツールとしての有用性],2,0+1
+1186,34487043,Personalized Repetitive Transcranial Magnetic Stimulation for Primary Progressive Aphasia,原発性進行性失語症に対する個別化反復経頭蓋磁気刺激,2,1+1
+1187,25941103,"Head-to-Head Comparison of the Neuropsychiatric Effect of Dopamine Agonists in Parkinson's Disease: A Prospective, Cross-Sectional Study in Non-demented Patients",パーキンソン病におけるドーパミン作動薬の神経精神作用の直接比較：非認知症患者を対象とした前向き横断研究,2,1+1
+1192,28247480,Apathy dimensions in Parkinson's disease,パーキンソン病における無関心症候群の次元,2,0+1
+1195,28759970,A Novel Assessment and Profiling of Multidimensional Apathy in Alzheimer's Disease,アルツハイマー病における多次元的無気力の新規評価法とプロファイリング,2,0+1
+1196,26203157,Multidimensional apathy in ALS: validation of the Dimensional Apathy Scale,ALSにおける多次元的無関心：次元別無関心尺度（Dimensional Apathy Scale）の妥当性検証,2,0+1
+1202,27184521,"Apathy and Its Response to Antipsychotic Review and Nonpharmacological Interventions in People With Dementia Living in Nursing Homes: WHELD, a Factorial Cluster Randomized Controlled Trial",介護施設入所認知症患者における無気力と抗精神病薬見直し・非薬物療法への反応：WHELD因子クラスター無作為化比較試験,2,1+1
+1207,37348392,"The effectiveness of a therapeutic robot, 'Paro', on behavioural and psychological symptoms, medication use, total sleep time and sociability in older adults with dementia: A systematic review and meta-analysis",認知症高齢者の行動・心理症状、服薬状況、総睡眠時間、社交性に対する治療用ロボット「パロ」の効果：系統的レビューとメタ分析,2,0+1
+1208,40246706,"A Cross Sectional and Longitudinal Assessment of Neuropsychiatric Symptoms and Brain Functional Connectivity in Patients With Mild Cognitive Impairment, Cerebrovascular Disease and Parkinson Disease",軽度認知障害、脳血管疾患、パーキンソン病患者における神経精神症状と脳機能的接続性の横断的・縦断的評価,2,1+1
+1213,25709422,A new delirium phenotype with rapid high amplitude onset and nearly as rapid reversal: Central Coast Australia Delirium Intervention Study,急速な高振幅発症とほぼ同等の速さで回復する新たなせん妄表現型：オーストラリア・セントラルコーストせん妄介入研究,2,1+1
+1217,29923469,"The effect of errorless learning on psychotic and affective symptoms, as well as aggression and apathy in patients with Korsakoff's syndrome in long-term care facilities",長期療養施設におけるコルサコフ症候群患者の精神病症状・情動症状、攻撃性および無関心に対するエラーレス学習の効果,2,1+1
+1218,36758621,Fully Immersive Virtual Reality Using 360° Videos to Manage Well-Being in Older Adults: A Scoping Review,高齢者におけるウェルビーイング管理のための360°動画を用いた完全没入型仮想現実：スコーピングレビュー,2,0+1
+1223,37335212,Associations of Prior Head Injury With Mild Behavioral Impairment Domains,既往頭部外傷と軽度行動障害領域との関連性,2,1+1
+1224,39882790,Associations of Traumatic Brain Injury and Mild Behavioral Impairment With Cognitive Function and Dementia,外傷性脳損傷および軽度行動障害と認知機能・認知症との関連性,2,1+0
+1230,34370420,Living With Chronic HIV Disease in the Antiretroviral Era: The Impact of Neurocognitive Impairment on Everyday Life Functions,抗レトロウイルス療法時代における慢性HIV疾患との共生：神経認知障害が日常生活機能に与える影響,2,1+0
+1232,32159519,Efficacy of a Web App for Cognitive Training (MeMo) Regarding Cognitive and Behavioral Performance in People With Neurocognitive Disorders: Randomized Controlled Trial,神経認知障害患者における認知・行動パフォーマンスに対する認知トレーニング用ウェブアプリ（MeMo）の有効性：無作為化比較試験,2,1+1
+1238,30056433,Dopaminergic Effect on Non-Motor Symptoms in Late Stage Parkinson's Disease,末期パーキンソン病における非運動症状へのドーパミン作動性効果,2,1+1
+1241,31156171,Does Personality Predict Behavioral and Psychological Symptoms of Dementia? Results from PACO Prospective Study,人格特性は認知症の行動・心理症状を予測するか？ PACO前向き研究の結果,2,0+1
+1242,32391573,Neuropsychiatric symptoms as a distinguishing factor between memory diagnoses,記憶障害の鑑別因子としての神経精神症状,1,1+0
+1244,26824746,The Behavioral and Cognitive Executive Disorders of Stroke: The GREFEX Study,脳卒中における行動・認知実行機能障害：GREFEX研究,2,1+1
+1250,41008319,Neuropsychiatric Symptoms in Cerebral Amyloid Angiopathy: A Significant but Overlooked Association,脳アミロイド血管症における神経精神症状：重要でありながら見過ごされている関連性,2,1+0
+1251,30910421,The Roles of Apathy and Depression in Predicting Alzheimer Disease: A Longitudinal Analysis in Older Adults With Mild Cognitive Impairment,アルツハイマー病予測における無関心と抑うつの役割：軽度認知障害高齢者を対象とした縦断的分析,2,1+1
+1254,31656211,Neuropsychiatric symptoms and activities of daily living in Alzheimer's disease: ALSOVA 5-year follow-up study,アルツハイマー病における神経精神症状と日常生活動作：ALSOVA 5年間追跡調査,2,1+1
+1257,30718064,The Influence of Stroke Location on Cognitive and Mood Impairment. A Voxel-Based Lesion-Symptom Mapping Study,脳卒中部位が認知機能および気分障害に及ぼす影響：ボクスルベース病変-症状マッピング研究,2,1+1
+1261,32518146,Clinical and pathologic features of cognitive-predominant corticobasal degeneration,認知優位型皮質基底核変性症の臨床的・病理学的特徴,2,1+0
+1264,33734344,Apathy in small vessel cerebrovascular disease is associated with deficits in effort-based decision making,小血管性脳血管疾患における無関心は、努力に基づく意思決定の障害と関連している,2,1+1
+1267,40280825,Mapping of validated apathy scales onto the apathy diagnostic criteria for neurocognitive disorders,神経認知障害における無気力症診断基準への検証済み無気力尺度マッピング,2,1+0
+1268,40086910,Correlation between changes in apathy and cognition in Alzheimer's disease associated apathy: Analysis of the Apathy in Dementia Methylphenidate Trial 2 (ADMET 2),アルツハイマー病に伴う無気力症における無気力と認知機能の変化の相関：認知症における無気力症メチルフェニデート試験 2（ADMET 2）の分析,2,1+1
+1270,30178175,"Comparative cognitive and neuropsychiatric profiles between Parkinson's disease, multiple system atrophy and progressive supranuclear palsy",パーキンソン病、多系統萎縮症、進行性核上性麻痺の認知機能および神経精神症状プロファイルの比較,2,1+1
+1271,31881520,Evolution of neuropsychological profile in motor subtypes of multiple system atrophy,多系統萎縮症の運動サブタイプにおける神経心理学的プロファイルの変遷,2,1+1
+1272,28389975,Assessment of apathy minimising the effect of motor dysfunctions in Parkinson's disease: a validation study of the dimensional apathy scale,パーキンソン病における運動機能障害の影響を最小限に抑えた無気力評価：次元別無気力尺度の検証研究,2,1+0
+1275,25753457,"Apathy and striatal dopamine transporter levels in de-novo, untreated Parkinson's disease patients",新規発症・未治療パーキンソン病患者における無関心と線条体ドーパミントランスポーター量,1,1+1
+1276,26321021,Mild Cognitive Impairment in newly diagnosed Parkinson's disease: A longitudinal prospective study,新たに診断されたパーキンソン病における軽度認知障害：縦断的前向き研究,2,1+1
+1277,24848193,Relationship between apathy and cognitive dysfunctions in de novo untreated Parkinson's disease: a prospective longitudinal study,新規発症未治療パーキンソン病における無関心と認知機能障害の関係：前向き縦断研究,2,1+1
+1279,29682232,Neuropsychiatric symptoms in vascular dementia: Epidemiologic and clinical aspects,血管性認知症における神経精神症状：疫学的・臨床的側面,2,1+1
+1284,39962563,Exploring apathy components and their relationship in cognitive decline: insights from a network cross-sectional study,無気力症候群の構成要素とその認知機能低下における関連性の探求：ネットワーク横断研究からの知見,2,1+1
+1286,28578330,The Efficacy of High-Frequency Repetitive Transcranial Magnetic Stimulation for Improving Apathy in Chronic Stroke Patients,慢性脳卒中患者の無気力改善に対する高頻度反復経頭蓋磁気刺激の有効性,2,1+1
+1291,33104038,Clinical Non-Motor Phenotyping of Black and Asian Minority Ethnic Compared to White Individuals with Parkinson's Disease Living in the United Kingdom,英国在住の白人パーキンソン病患者と比較した黒人およびアジア系少数民族の臨床的非運動症状表現型,2,1+1
+1293,28898959,Cognitive Training Using a Novel Memory Game on an iPad in Patients with Amnestic Mild Cognitive Impairment (aMCI),健忘型軽度認知障害（aMCI）患者におけるiPad用新規記憶ゲームを用いた認知訓練,1,1+1
+1294,33055142,Cognition and behaviour in frontotemporal dementia with and without amyotrophic lateral sclerosis,筋萎縮性側索硬化症を伴う／伴わない前頭側頭型認知症における認知機能と行動,2,1+1
+1297,38780969,Greater Apathy Associated With Selective Serotonin Reuptake Inhibitor Use in Parkinson's Disease,パーキンソン病における選択的セロトニン再取り込み阻害薬の使用に伴う無気力の増大,2,1+1
+1298,28914089,Art museum-based intervention to promote emotional well-being and improve quality of life in people with dementia: The ARTEMIS project,認知症患者の情緒的幸福感促進と生活の質向上を目的とした美術館ベース介入：ARTEMISプロジェクト,2,1+1
+1301,30398087,Risk factors for social withdrawal in amyotrophic lateral sclerosis/motor neurone disease,筋萎縮性側索硬化症／運動ニューロン疾患における社会的引きこもりの危険因子,2,0+1
+1303,31101555,Heterogeneity in progression of prodromal features in Parkinson's disease,パーキンソン病における前駆症状の進行における異質性,2,1+1
+1304,40126083,Physical and Psychological Symptoms After Stroke: Longitudinal Symptom Prevalence and Network Analysis,脳卒中後の身体的・心理的症状：縦断的症状有病率とネットワーク解析,2,1+0
+1305,27075452,[Methylphenidate in a patient with Alzheimer's disease : Increase in drive and cardiac performance],[アルツハイマー病患者におけるメチルフェニデート：意欲と心機能の向上],2,1+1
+1307,34728587,Long-term neuropsychiatric symptoms in spontaneous intracerebral haemorrhage survivors,自然発生性脳内出血生存者における長期神経精神症状,2,1+0
+1308,39324780,Depressive symptoms profile and dementia risk after spontaneous intracerebral haemorrhage,自然発生性脳内出血後の抑うつ症状プロファイルと認知症リスク,2,1+1
+1309,40948447,Depressive Symptoms Profiles and Cognitive Outcomes After Stroke,脳卒中後の抑うつ症状プロファイルと認知機能アウトカム,2,1+0
+1310,33004605,Co-occurrence of apathy and impulse control disorders in Parkinson disease,パーキンソン病における無関心と衝動制御障害の併発,2,1+1
+1311,40120211,Motivational disturbances and cognitive effort-based decision-making in Parkinson's disease,パーキンソン病における動機付け障害と認知的努力に基づく意思決定,2,1+1
+1312,38704737,Co-Occurrence of Apathy and Impulse Control Disorders in Parkinson Disease: Variation across Multiple Measures,パーキンソン病における無関心と衝動制御障害の併発：複数の測定法による差異,2,1+1
+1313,36409466,From pleasure to punding: Distinct patterns of anhedonia and impulsivity linked to motivational disturbances in Parkinson disease,快楽からパンディングへ：パーキンソン病における動機付け障害に関連する無快感症と衝動性の異なるパターン,2,1+1
+1314,28437320,Development of a Claims-based Frailty Indicator Anchored to a Well-established Frailty Phenotype,確立された虚弱フェノタイプに基づく請求データからの虚弱指標の開発,1,0+1
+1317,30845903,Detecting Non-cognitive Features of Prodromal Neurodegenerative Diseases,前駆期神経変性疾患の非認知的特徴の検出,2,1+1
+1318,29710716,Brain Inflammation Connects Cognitive and Non-Cognitive Symptoms in Alzheimer's Disease,アルツハイマー病における認知症状と非認知症状を結びつける脳炎症,2,1+1
+1319,28818699,Apathy in people with epilepsy and its clinical significance: A case-control study,てんかん患者における無関心とその臨床的意義：症例対照研究,2,1+0
+1321,27567824,The Savvy Caregiver Program: A Probe Multicenter Randomized Controlled Pilot Trial in Caregivers of Patients Affected by Alzheimer's Disease,サヴィ・ケアギバー・プログラム：アルツハイマー病患者の介護者を対象とした多施設共同無作為化比較パイロット試験,2,1+0
+1323,37201184,Virtual Group Music Therapy for Apathy in Parkinson's Disease: A Pilot Study,パーキンソン病における無気力に対する仮想グループ音楽療法：パイロット研究,2,1+0
+1325,26150429,The roles of resilience and nonmotor symptoms in adjustment to Parkinson's disease,パーキンソン病への適応におけるレジリエンスと非運動症状の役割,2,1+1
+1328,32694297,Psychiatric Disturbance or Parkinsonism as a Presentation of CNS Lymphoma: Observational Retrospective Study and Review of Literature,中枢神経系リンパ腫の臨床症状としての精神障害またはパーキンソン症候群：観察的後方視的研究と文献レビュー,2,0+1
+1329,39255020,Impact of motor dysfunction on neuropsychiatric symptom profile in patients with autopsy-confirmed Alzheimer's disease,剖検で確認されたアルツハイマー病患者における運動機能障害が神経精神症状プロファイルに及ぼす影響,2,1+1
+1330,33843983,Uncovering the prevalence and neural substrates of anhedonia in frontotemporal dementia,前頭側頭型認知症における快感喪失の有病率と神経基盤の解明,2,0+1
+1331,38758282,Profiles of motivational impairment and their relationship to functional decline in frontotemporal dementia,前頭側頭型認知症における動機付け障害の特徴と機能低下との関係,2,1+1
+1332,25533477,"Comparisons of clinical symptoms in biomarker-confirmed Alzheimer's disease, dementia with Lewy bodies, and frontotemporal dementia patients in a local memory clinic",地域記憶クリニックにおけるバイオマーカー確認済みアルツハイマー病、レビー小体型認知症、前頭側頭型認知症患者の臨床症状比較,2,1+1
+1333,31796642,Natural clinical course of progressive supranuclear palsy in Chinese patients in Hong Kong,香港在住中国人患者における進行性核上性麻痺の自然経過,2,0+1
+1334,28838910,Assessment of Iron Deposition in the Brain in Frontotemporal Dementia and Its Correlation with Behavioral Traits,前頭側頭型認知症における脳内鉄沈着の評価と行動特性との相関,2,1+1
+1335,28879833,"Prevalence of mild behavioral impairment in mild cognitive impairment and subjective cognitive decline, and its association with caregiver burden",軽度認知障害および主観的認知機能低下における軽度行動障害の有病率と介護負担との関連,2,1+1
+1336,26757043,"Safety and Efficacy of Medical Cannabis Oil for Behavioral and Psychological Symptoms of Dementia: An-Open Label, Add-On, Pilot Study",医療用カンナビスオイルの認知症に伴う行動・心理症状に対する安全性と有効性：非盲検追加療法パイロット研究,1,1+1
+1338,29953925,Disrupted amplitude of low-frequency fluctuations and causal connectivity in Parkinson's disease with apathy,無関心症を伴うパーキンソン病における低周波変動振幅の乱れと因果的接続性,2,1+1
+1339,39052823,Health Care Team Interventions for Older Adults With Distress Behaviors: A Systematic Review,苦痛行動を呈する高齢者に対する医療チーム介入：系統的レビュー,1,1+1
+1340,28416030,"Prevalence, neurobiology, and treatments for apathy in prodromal dementia",前駆期認知症における無気力の有病率、神経生物学、および治療法,2,1+1
+1341,27605868,Treatment resistant depression or dementia: a case report,治療抵抗性うつ病または認知症：症例報告,1,1+1
+1342,32610338,Analysis of Neuropsychiatric Symptoms in Patients with Alzheimer's Disease Using Quantitative EEG and sLORETA,定量的脳波（qEEG）およびsLORETAを用いたアルツハイマー病患者の神経精神症状の分析,2,1+1
+1343,28579482,Precuneus degeneration and isolated apathy in patients with Parkinson's disease,パーキンソン病患者における前帯状皮質の変性と孤立性無関心,2,1+1
+1344,26741499,When a Little Knowledge Can Be Dangerous: False-Positive Diagnosis of Behavioral Variant Frontotemporal Dementia among Community Clinicians,わずかな知識が危険をもたらす場合：地域医療従事者における行動変異型前頭側頭型認知症の偽陽性診断,2,1+1
+1347,40117894,Cholinergic basal forebrain atrophy and cortical alterations in Parkinson's disease with apathy,無関心型パーキンソン病におけるコリン作動性基底前脳萎縮と皮質変化,2,1+1
+1348,34399870,Neuropsychiatric symptoms and brain morphology in patients with mild cognitive impairment and Alzheimer's disease with dementia,軽度認知障害および認知症を伴うアルツハイマー病患者における神経精神症状と脳形態,2,1+1
+1349,28927477,Frequency and subgroups of neuropsychiatric symptoms in mild cognitive impairment and different stages of dementia in Alzheimer's disease,アルツハイマー病における軽度認知障害および認知症の異なる段階における神経精神症状の頻度とサブグループ,2,1+1
+1350,29037500,"Motor, behavioural, and cognitive correlates of fatigue in early, de novo Parkinson disease patients",初期・新規発症パーキンソン病患者における疲労の運動機能・行動・認知的相関,2,1+1
+1351,32853825,"Predictors of fatigue severity in early, de novo Parkinson disease patients: A 1-year longitudinal study",新規発症パーキンソン病患者における疲労重症度の予測因子：1年間の縦断的研究,2,1+1
+1353,26207978,Loss of Dopamine Transporter Binding and Clinical Symptoms in Dementia With Lewy Bodies,レビー小体型認知症におけるドーパミン輸送体結合の喪失と臨床症状,1,1+1
+1359,35604656,Clinical Manifestations of Early-Onset Dementia With Lewy Bodies Compared With Late-Onset Dementia With Lewy Bodies and Early-Onset Alzheimer Disease,レビー小体型認知症の早期発症例と遅発性例、およびアルツハイマー病早期発症例との臨床的特徴の比較,2,1+1
+1360,33132939,"Neuropsychiatric Symptoms in Elderly With Dementia During COVID-19 Pandemic: Definition, Treatment, and Future Directions",COVID-19パンデミック下における認知症高齢者の神経精神症状：定義、治療、今後の方向性,2,0+1
+1361,25070650,Experiences of apathy in people with Parkinson's disease: a qualitative exploration,パーキンソン病患者における無気力感の経験：質的探求,2,1+1
+1363,25613190,Neuropsychiatric symptoms in primary progressive aphasia and apraxia of speech,原発性進行性失語症および失語性失行症における神経精神症状,2,1+1
+1364,25595665,Strategy Training During Inpatient Rehabilitation May Prevent Apathy Symptoms After Acute Stroke,急性脳卒中後の無関心症状を予防する入院リハビリテーション中の戦略訓練,2,1+1
+1365,25288130,"The associations between fatigue, apathy, and depression in Parkinson's disease",パーキンソン病における疲労、無関心、抑うつとの関連性,2,1+1
+1369,37488778,Impaired facial emotion recognition in relation to social behaviours in de novo Parkinson's disease,新規発症パーキンソン病における社会的行動と関連した顔面感情認識障害,2,1+1
+1370,34755541,"Cerebral Amyloid Angiopathy Is Associated With Emotional Dysregulation, Impulse Dyscontrol, and Apathy",脳アミロイド血管症は感情調節障害、衝動制御障害、無関心と関連している,2,1+1
+1371,25420207,Combined rasagiline and antidepressant use in Parkinson disease in the ADAGIO study: effects on nonmotor symptoms and tolerability,ADAGIO研究におけるパーキンソン病患者へのラサギリンと抗うつ薬の併用：非運動症状および忍容性への影響,2,0+1
+1374,39868558,Association of Depression Dimensions With Cognitive Functioning in Community-Dwelling Oldest-Old Adults: The LifeAfter90 Study,地域在住最高齢高齢者における抑うつ次元の認知機能との関連性：LifeAfter90研究,2,1+0
+1375,39092182,Speech markers of depression dimensions across cognitive status,認知機能レベルを横断した抑うつ次元の言語マーカー,2,1+0
+1378,26071817,Dopamine agonist withdrawal syndrome (DAWS) symptoms in Parkinson's disease patients treated with levodopa-carbidopa intestinal gel infusion,レボドパ・カルビドパ腸管注入療法を受けたパーキンソン病患者におけるドーパミン作動薬離脱症候群（DAWS）症状,2,1+1
+1380,28327492,Pet therapy: an effective strategy to care for the elderly? An experimental study in a nursing home,ペットセラピー：高齢者ケアの効果的な戦略か？ 介護施設における実験的研究,1,1+0
+1381,25840672,Cognitive and behavioral symptoms in Parkinson's disease patients with the G2019S and R1441G mutations of the LRRK2 gene,LRRK2遺伝子G2019SおよびR1441G変異を有するパーキンソン病患者の認知・行動症状,2,1+1
+1382,35342090,Apathy in UK Care Home Residents with Dementia: Longitudinal Course and Determinants,英国介護施設入居者における認知症に伴う無関心：縦断的経過と決定要因,2,0+1
+1383,39821434,Neuropsychiatric symptoms and neuroimaging-based brain age in mild cognitive impairment and early dementia: A multicenter study,軽度認知障害および初期認知症における神経精神症状と神経画像に基づく脳年齢：多施設共同研究,2,1+0
+1384,34024829,The Association Between Diabetes Mellitus and Mild Behavioral Impairment Among Mild Cognitive Impairment: Findings from Singapore,軽度認知障害における糖尿病と軽度行動障害の関連性：シンガポールからの知見,2,1+1
+1386,27002495,"Perceived autonomy support, psychological needs satisfaction, depressive symptoms and apathy in French hospitalized older people",フランス人入院高齢者の自律性支援の知覚、心理的ニーズ充足、抑うつ症状および無関心,2,1+0
+1388,29131091,Apathy Profile in Parkinson's and Huntington's Disease: A Comparative Cross-Sectional Study,パーキンソン病とハンチントン病における無関心プロファイル：比較横断研究,2,0+1
+1389,34450643,Reconciling psychological and neuroscientific accounts of reduced motivation in aging,加齢に伴う動機減退の心理学的説明と神経科学的説明の調和,2,0+1
+1392,33076372,Subclinical Cognitive and Neuropsychiatric Correlates and Hippocampal Volume Features of Brain White Matter Hyperintensity in Healthy People,健常者における脳白質高信号域の亜臨床的認知・神経精神相関と海馬体積特徴,2,1+1
+1393,26402103,Longitudinal Neuropsychiatric Predictors of Death in Alzheimer's Disease,アルツハイマー病における死亡の縦断的神経精神医学的予測因子,2,1+0
+1398,39068922,Cognitive and Behavioral Profile of Patients with Amyotrophic Lateral Sclerosis Spectrum in the Indian Context,インドにおける筋萎縮性側索硬化症スペクトラム患者の認知・行動プロファイル,2,1+1
+1399,30082208,Psychometric Properties of an Abbreviated Version of the Apathy Evaluation Scale for Parkinson Disease (AES-12PD),パーキンソン病用無関心評価尺度（AES-12PD）短縮版の心理測定特性,2,0+1
+1400,31320275,Longitudinal assessment of autonomic dysfunction in early Parkinson's disease,初期パーキンソン病における自律神経機能障害の縦断的評価,2,1+1
+1401,26900739,Psychiatric Symptoms in the Initial Motor Stage of Parkinson's Disease,パーキンソン病初期運動段階における精神症状,2,1+1
+1402,26502729,Apathy: a practical guide for neurologists,無関心：神経科医のための実践ガイド,2,1+1
+1403,26915605,"A Randomized, Placebo-Controlled, Double-Blind Efficacy Study of Nefiracetam to Treat Poststroke Apathy",脳卒中後の無関心症に対するネフィラセタムの有効性に関する無作為化プラセボ対照二重盲検試験,2,0+1
+1404,26226988,Mild Cognitive Impairment in Early Parkinson's Disease Using the Movement Disorder Society Task Force Criteria: Cross-Sectional Study in Hoehn and Yahr Stage 1,運動障害学会タスクフォース基準を用いたパーキンソン病初期段階における軽度認知障害：Hoehn and Yahrステージ1における横断研究,2,1+1
+1405,36572691,"The neurobiology of apathy in depression and neurocognitive impairment in older adults: a review of epidemiological, clinical, neuropsychological and biological research",うつ病における無気力と高齢者の神経認知障害の神経生物学：疫学的・臨床的・神経心理学的・生物学的研究のレビュー,2,1+1
+1408,25754669,Caregiver report versus clinician impression: disagreements in rating neuropsychiatric symptoms in Alzheimer's disease patients,介護者報告と臨床医の印象：アルツハイマー病患者の神経精神症状評価における不一致,2,1+0
+1409,26673910,Association of neuropsychiatric syndromes with global clinical deterioration in Alzheimer's disease patients,アルツハイマー病患者における神経精神症候群と全般的臨床悪化との関連性,2,1+1
+1410,38303161,Neuropsychiatric symptoms and ApoE genotype in older adults without dementia: a cross-sectional study,認知症のない高齢者における神経精神症状とApoE遺伝子型：横断研究,2,1+0
+1413,33914574,Factor structure of the BDI-II in Parkinson's disease,パーキンソン病におけるBDI-IIの因子構造,2,1+1
+1417,30317048,Resting parasympathetic dysfunction predicts prosocial helping deficits in behavioral variant frontotemporal dementia,安静時副交感神経機能障害は行動変異型前頭側頭型認知症における利他的援助行動の障害を予測する,2,1+1
+1420,37385899,"Cognitive, Disability, and Treatment Outcome Implications of Symptom-Based Phenotyping in Late-Life Depression",老年期うつ病における症状ベースの表現型分類が認知機能、障害、治療結果に及ぼす影響,2,0+1
+1421,26863996,Prevalence and associated factors of sarcopenia in elderly subjects with amnestic mild cognitive impairment or Alzheimer disease,健忘型軽度認知障害またはアルツハイマー病を有する高齢者におけるサルコペニアの有病率と関連因子,2,0+1
+1422,34663799,Prefrontal Aβ pathology influencing the pathway from apathy to cognitive decline in non-dementia elderly,非認知症高齢者における無関心から認知機能低下への経路に影響を与える前頭前野Aβ病理,2,1+1
+1423,33091165,Importance of loneliness in behavioral and psychological symptoms of dementia,認知症の行動・心理症状における孤独感の重要性,2,0+1
+1425,33219292,Lesions in the right Rolandic operculum are associated with self-rating affective and apathetic depressive symptoms for post-stroke patients,右側ロランディ蓋部の病変は、脳卒中後の患者における自己評価による感情的および無気力な抑うつ症状と関連している,2,1+1
+1427,30799347,Patient Health Questionnaire-2 Screening for Depressive Symptoms in Japanese Outpatients with Heart Failure,心不全外来患者における抑うつ症状のスクリーニング：患者健康質問票-2を用いた検討,2,1+0
+1428,35811445,An autopsy case of progressive supranuclear palsy. Pallido-nigro-luysian type with argyrophilic grains clinically presenting with personality and behavioral changes,進行性核上性麻痺の剖検例：人格・行動変化を臨床的に呈したアルギロフィリック顆粒を伴う淡蒼球・黒質・ルイス型,2,1+1
+1430,26404166,Neuropsychiatric Symptoms in Posterior Cortical Atrophy and Alzheimer Disease,後部皮質萎縮症およびアルツハイマー病における神経精神症状,2,1+1
+1434,29032789,Symptom Dimensions of Depression and Apathy and Their Relationship With Cognition in Parkinson's Disease,パーキンソン病における抑うつと無気力の症状次元と認知機能との関係,2,1+1
+1435,31223247,Relationship of Apathy with Depressive Symptom Severity and Cognitive Functions in Geriatric Depression,老年期うつ病における無関心と抑うつ症状の重症度および認知機能との関連,2,1+0
+1436,28177178,Association of premorbid personality with behavioral and psychological symptoms in dementia with Lewy bodies: Comparison with Alzheimer's disease patients,レビー小体型認知症における発症前性格と行動・心理症状の関連性：アルツハイマー病患者との比較,2,1+1
+1437,39478058,Behavioral and psychological symptoms and brain volumes in community-dwelling older persons from the Nakayama Study,中山研究における地域在住高齢者の行動・心理症状と脳容積,2,1+1
+1438,31930617,Anosognosia in patients with Alzheimer's disease: current perspectives,アルツハイマー病患者における自己認識障害：現在の視点,2,1+1
+1439,37194465,Distinct latent symptom profiles in late-onset depressive symptoms in community-dwelling older adults,地域在住高齢者の遅発性抑うつ症状における顕著な潜在症状プロファイル,2,1+0
+1441,30146591,"Antidepressants for Depression, Apathy, and Gait Instability in Parkinson's Disease: A Multicenter Randomized Study",パーキンソン病におけるうつ病、無関心、歩行不安定に対する抗うつ薬：多施設共同無作為化試験,2,0+1
+1444,35468172,Prefrontal hyperactivation during dual-task walking related to apathy symptoms in older individuals,高齢者の無関心症状に関連する二重課題歩行中の前頭前野過活動,2,1+0
+1445,25737233,Relationship between dementia severity and behavioural and psychological symptoms in early-onset Alzheimer's disease,若年性アルツハイマー病における認知症重症度と行動・心理症状の関係,2,0+1
+1447,31177644,"A systematic review and meta-analysis on basic psychological need satisfaction, motivation, and well-being in later life: Contributions of self-determination theory",老年期における基本的心理的欲求充足、動機付け、および幸福感に関する系統的レビューとメタ分析：自己決定理論の貢献,2,1+0
+1449,25899716,Apathy and suicide-related ideation 3 months after stroke: a cross-sectional study,脳卒中後3ヶ月における無関心と自殺関連思考：横断研究,2,0+1
+1450,29937440,Apathy after stroke: potential risk factors and magnetic resonance imaging markers,脳卒中後の無関心：潜在的危険因子と磁気共鳴画像マーカー,1,0+1
+1451,25658577,Integrating Neuropsychology and Brain Imaging for a Referral of Possible Pseudodementia: A Case Report,疑似認知症の可能性に関する紹介のための神経心理学と脳画像診断の統合：症例報告,2,0+1
+1452,29801902,Dopaminergic dose adjustment and negative affective symptoms after deep brain stimulation,深部脳刺激後のドーパミン作動薬投与量調整と陰性情動症状,2,0+1
+1456,32651249,"Apathy, but not depression, predicts all-cause dementia in cerebral small vessel disease",無関心（抑うつではない）が脳小血管病変における全原因認知症を予測する,2,0+1
+1457,30737341,Apathy is associated with large-scale white matter network disruption in small vessel disease,無関心は小血管病変における大規模な白質ネットワーク障害と関連する,2,0+1
+1462,25162434,Development and evaluation of a short version of the quality of life questionnaire for dementia,認知症患者向けQOL質問票の短縮版の開発と評価,1,1+1
+1463,29801896,Reduced gray matter volume is correlated with frontal cognitive and behavioral impairments in Parkinson's disease,パーキンソン病における灰白質体積減少と前頭葉認知機能・行動障害の相関,2,1+1
+1464,31571008,Association of daily physical activity with cognition and mood disorders in treatment-naive patients with early-stage Parkinson's disease,治療未経験の初期段階パーキンソン病患者における日常的身体活動と認知機能・気分障害の関連性,2,1+1
+1465,30035696,Characteristics of apathy in treatment-naïve patients with Parkinson's disease,治療未経験のパーキンソン病患者における無気力の特徴,2,1+1
+1469,34597386,Differences in Symptomatic Presentation and Cognitive Performance Among Participants With LATE-NC Compared to FTLD-TDP,LATE-NC と FTLD-TDP 参加者の症状発現と認知機能の差異,2,1+1
+1470,28248559,Pharmacological and Nonpharmacological Treatment for Apathy in Alzheimer Disease : A systematic review across modalities,アルツハイマー病における無気力に対する薬物療法と非薬物療法：治療法横断的系統的レビュー,2,1+1
+1473,25765916,Burden of Behavioral and Psychiatric Symptoms in People Screened Positive for Dementia in Primary Care: Results of the DelpHi-Study,プライマリケアで認知症陽性とスクリーニングされた人々の行動・精神症状の負担：DelpHi研究の結果,2,1+1
+1474,25952367,Cognitive and affective benefits of combination therapy with galantamine plus cognitive rehabilitation for Alzheimer's disease,アルツハイマー病に対するガランタミンと認知リハビリテーションの併用療法の認知的・情動的効果,2,1+1
+1475,27653908,Differences between the behavioral and psychological symptoms of Alzheimer's disease and Parkinson's disease,アルツハイマー病とパーキンソン病における行動・心理症状の差異,2,1+1
+1476,38839316,[A longitudinal study of the association between physical activity and apathy among community-dwelling older adults],[地域在住高齢者における身体活動と無気力感の関連性に関する縦断研究],2,1+0
+1477,26671151,White matter integrity and cognitive dysfunction: Radiological and neuropsychological correlations,白質完全性と認知機能障害：画像所見と神経心理学的相関,2,0+1
+1478,40857986,Apathy in autoimmune GFAP Astrocytopathy: A case series and literature review,自己免疫性GFAP星細胞病における無関心：症例シリーズと文献レビュー,2,0+1
+1481,36240173,"Digital phenotyping by wearable-driven artificial intelligence in older adults and people with Parkinson's disease: Protocol of the mixed method, cyclic ActiveAgeing study",高齢者およびパーキンソン病患者におけるウェアラブル駆動型人工知能によるデジタルフェノタイピング：混合手法による周期的ActiveAgeing研究のプロトコル,2,1+1
+1483,25932637,Strategic lesions in the anterior thalamic radiation and apathy in early Alzheimer's disease,初期アルツハイマー病における前視床放射路の戦略的病変と無関心,2,1+0
+1484,26338814,Pattern of extrapyramidal signs in Alzheimer's disease,アルツハイマー病における錐体外路症状のパターン,2,1+1
+1485,40142629,Apathy in Dementia: A Pilot Study Providing Insights from Neuropsychiatric and Radiological Perspectives,認知症における無関心：神経精神医学的・放射線学的観点からの知見を提供するパイロット研究,1,1+1
+1486,40084663,"Associations between neuropsychiatric symptoms and pathology in clinicopathologically defined Alzheimer's disease, Alzheimer's disease with Lewy bodies, and dementia with Lewy bodies",臨床病理学的に定義されたアルツハイマー病、レビー小体を伴うアルツハイマー病、およびレビー小体認知症における神経精神症状と病理所見との関連性,2,1+1
+1488,37732590,Health-related quality of life and mild behavioral impairment in older adults without dementia,認知症のない高齢者の健康関連QOLと軽度行動障害,2,1+1
+1490,31771056,Early Emergence of Neuropsychiatric Symptoms in Cognitively Normal Subjects and Mild Cognitive Impairment,認知正常者および軽度認知障害における神経精神症状の早期出現,2,1+1
+1492,28754095,Comparison of neuropsychiatric symptoms and diffusion tensor imaging correlates among patients with subcortical ischemic vascular disease and Alzheimer's disease,皮質下虚血性血管疾患患者とアルツハイマー病患者における神経精神症状および拡散テンソル画像相関の比較,2,1+1
+1493,39297292,Measuring clinically relevant change in apathy symptoms in ADMET and ADMET 2,ADMETおよびADMET 2における無気力症状の臨床的に意義のある変化の測定,2,1+1
+1495,32830218,A clinical-radiological framework of the right temporal variant of frontotemporal dementia,前頭側頭型認知症の右側頭葉変異型に関する臨床・画像診断的枠組み,2,1+1
+1496,38982845,Clinical recognition of frontotemporal dementia with right anterior temporal predominance: A multicenter retrospective cohort study,右側前頭側頭葉優位の前頭側頭型認知症の臨床的認識：多施設共同後ろ向きコホート研究,2,1+1
+1497,38462968,Validation of the Japanese version of the Social Functioning in Dementia scale and COVID-19 pandemic's impact on social function in mild cognitive impairment and mild dementia,認知症における社会機能評価尺度（SFID）日本語版の妥当性検証と、軽度認知障害および軽度認知症におけるCOVID-19パンデミックの社会機能への影響,2,1+1
+1498,30103612,Apathy in Preclinical Alzheimer's Disease: Psychometric Validation of the Apathy Evaluation Scale,前臨床アルツハイマー病における無関心：無関心評価尺度の心理測定学的検証,2,1+1
+1499,30355543,Emotional feeling in patients suffering from amyotrophic lateral sclerosis,筋萎縮性側索硬化症患者の感情的感覚,2,1+1
+1500,39962903,Unilateral and Bilateral Subthalamic Deep Brain Stimulation Differently Favour Apathy in Parkinson's Disease,片側および両側視床下核深部脳刺激はパーキンソン病における無気力に異なる影響を与える,2,1+1
+1502,29633694,Apathy in Parkinson's disease: differences between caregiver's report and self-evaluation,パーキンソン病における無関心：介護者の報告と自己評価の差異,2,1+1
+1503,33208795,Interaction of neuropsychiatric symptoms with APOE ε4 and conversion to dementia in MCI patients in a Memory Clinic,記憶クリニックにおける軽度認知障害患者における神経精神症状とAPOE ε4の相互作用および認知症への移行,2,1+1
+1505,40203967,Motor dysfunction in late life depression: A mood or movement disorder?,老年期うつ病における運動機能障害：気分障害か運動障害か？,2,0+1
+1506,29865086,Participation and the Role of Neuropsychological Functioning in Myotonic Dystrophy Type 1,筋緊張性ジストロフィー1型における参加と神経心理学的機能の役割,2,1+0
+1507,35275557,Patient-Related Factors Influencing Caregiver Burden in Parkinson's Disease Patients: Comparison of Effects Before and After Deep Brain Stimulation,パーキンソン病患者における介護負担に影響を与える患者関連要因：深部脳刺激術前後の効果比較,2,1+0
+1509,26674655,"Clinical features of TBK1 carriers compared with C9orf72, GRN and non-mutation carriers in a Belgian cohort",ベルギー人集団におけるTBK1保因者とC9orf72、GRN、非変異保因者の臨床的特徴比較,2,1+0
+1510,34037689,"REM Sleep Behavior Disorder in Parkinson's Disease: Change in Cognitive, Psychiatric, and Functional Outcomes from Baseline to 16-47-Month Follow-Up",パーキンソン病におけるレム睡眠行動障害：ベースラインから16～47ヶ月追跡調査までの認知機能、精神症状、機能的アウトカムの変化,2,1+0
+1511,39713899,Psychotropic medication usage in sporadic versus genetic behavioral-variant frontotemporal dementia,散発性と遺伝性行動変異型前頭側頭型認知症における向精神薬の使用,2,1+0
+1512,40495575,GWAS links APOE to neuropsychiatric symptoms in mild cognitive impairment and dementia,GWAS解析により、軽度認知障害および認知症における神経精神症状とAPOE遺伝子の関連性が示唆される,2,0+1
+1513,38720624,Apathy and Depression Among People Aging With Traumatic Brain Injury: Relationships to Cognitive Performance and Psychosocial Functioning,外傷性脳損傷を抱えて高齢化する人々における無関心と抑うつ：認知機能と心理社会的機能との関係,2,1+1
+1515,30913958,Association Between CSF Beta-Amyloid and Apathy in Early-Stage Alzheimer Disease,初期アルツハイマー病における脳脊髄液βアミロイドと無関心症の関連性,2,1+1
+1517,29494058,Methylphenidate,メチルフェニデート,1,1+0
+1522,29979473,Course of neuropsychiatric symptoms in dementia: 5-year longitudinal study,認知症における神経精神症状の経過：5年間の縦断研究,2,1+1
+1523,33145603,Cognitive and emotional symptoms in patients with first-ever mild stroke: The syndrome of hidden impairments,初回軽度脳卒中患者の認知・情動症状：隠れた障害の症候群,2,1+0
+1524,29488192,"[Apathy, depression and cognitive functioning in patients with MCI and dementia]",[軽度認知障害および認知症患者における無関心、抑うつ、認知機能],2,1+1
+1526,30336992,Behavioral Problems and Dementia,行動問題と認知症,2,1+1
+1535,26940028,Excessive Iron and α-Synuclein Oligomer in Brain are Relevant to Pure Apathy in Parkinson Disease,脳内の過剰な鉄とα-シヌクレインオリゴマーはパーキンソン病における純粋無動に関連している,2,1+1
+1536,26005192,Caregiver distress and associated factors in dementia care in the community setting in China,中国における地域社会での認知症ケアにおける介護者の苦痛と関連要因,2,1+0
+1537,40354560,The use and effect of virtual reality as a non-pharmacological intervention for behavioural and psychological symptoms of dementia: a systematic review and meta-analysis,認知症の行動・心理症状に対する非薬物療法としての仮想現実（VR）の使用と効果：系統的レビューとメタ分析,2,1+0
+1538,34054625,Emotional Comparison Between Semantic Dementia and Alzheimer's Disease,意味性認知症とアルツハイマー病の感情比較,1,1+0
+1541,40261292,Impact of obesity on neuropsychiatric symptoms in Alzheimer's disease: Insights from the ADNI cohort,アルツハイマー病における肥満が神経精神症状に及ぼす影響：ADNIコホートからの知見,2,1+1
+1542,39634772,Brain function assessment of acupuncture for chronic insomnia disorder with mild cognitive dysfunction based on fNIRS: protocol for a randomized controlled trial,軽度認知機能障害を伴う慢性不眠症に対する鍼治療の脳機能評価：fNIRSに基づく無作為化比較試験プロトコル,2,1+0
+1544,25890772,A neurophysiological profile in Parkinson's disease with mild cognitive impairment and dementia in China,中国における軽度認知障害および認知症を伴うパーキンソン病の神経生理学的プロファイル,2,1+1
+1546,28582564,"Disengagement as Withdrawal From Public Space: Rethinking the Relation Between Place Attachment, Place Appropriation, and Identity-Building Among Older Adults",公共空間からの離脱としての離脱：高齢者における場所への愛着、場所の占有、アイデンティティ構築の関係の再考,2,0+1
+1547,34633324,A Nationwide Multi-Center Questionnaire Survey on the Real-World State and Clinical Management of Poststroke Dementia in Japan,日本における脳卒中後認知症の現実状態と臨床管理に関する全国多施設共同質問票調査,2,1+0
+1548,38640961,Guideline Recommendations on Behavioral and Psychological Symptoms of Dementia: A Systematic Review,認知症の行動・心理症状に関するガイドライン推奨事項：系統的レビュー,1,1+1
+1551,26711668,Depression and anxiety are co-morbid but dissociable in mild Parkinson's disease: A prospective longitudinal study of patterns and predictors,軽度パーキンソン病における抑うつと不安の併存性および分離可能性：パターンと予測因子に関する前向き縦断研究,2,1+1
+1552,26705846,Baseline predictors of worsening apathy in Parkinson's disease: A prospective longitudinal study,パーキンソン病における無関心の悪化を予測するベースライン因子：前向き縦断研究,2,1+1
+1553,41214532,Network analysis of neuropsychiatric symptoms in mild behavioral impairment among nursing homes: an observational study,介護施設における軽度行動障害の神経精神症状のネットワーク分析：観察研究,2,1+1
+1555,31873787,Disease-specific profiles of apathy in Alzheimer's disease and behavioural-variant frontotemporal dementia differ across the disease course,アルツハイマー病と行動変異型前頭側頭型認知症における無関心症の疾患特異的プロファイルは病態経過によって異なる,2,1+1
+1556,25737166,"Cognitive performance and neuropsychiatric symptoms in early, untreated Parkinson's disease",早期未治療パーキンソン病における認知機能と神経精神症状,2,1+1
+1557,26889636,Lille Apathy Rating Scale and MDS-UPDRS for Screening Apathy in Parkinson's Disease,パーキンソン病における無気力スクリーニングのためのリール無気力評価尺度とMDS-UPDRS,2,1+1
+1558,39856128,Consequences of COVID-19 for geriatric patients during a pandemic,パンデミック下における高齢者患者へのCOVID-19の影響,2,0+1
+1561,31534024,Unusual cause of treatable Parkinsonism,治療可能なパーキンソニズムの珍しい原因,2,1+1
+1562,34483998,Neuropsychiatric Symptoms in Mild Cognitive Impairment and Dementia Due to AD: Relation With Disease Stage and Cognitive Deficits,アルツハイマー病による軽度認知障害および認知症における神経精神症状：疾患段階および認知障害との関係,1,1+1
+1568,35599483,Gender/Sex Differences in the Association of Mild Behavioral Impairment with Cognitive Aging,軽度行動障害と認知老化との関連における性別差,2,1+1
+1570,36283953,Strengths and Weaknesses of the Vascular Apathy Hypothesis: A Narrative Review,血管性無関心仮説の長所と短所：物語的レビュー,2,1+0
+1571,40267731,Brain network connectivity underlying neuropsychiatric symptoms in prodromal Lewy body dementia,前駆期レビー小体型認知症における神経精神症状の基盤となる脳ネットワーク接続性,2,1+1
+1574,26181568,Clinical Significance of Cerebrovascular Biomarkers and White Matter Tract Integrity in Alzheimer Disease: Clinical correlations With Neurobehavioral Data in Cross-Sectional and After 18 Months Follow-ups,アルツハイマー病における脳血管バイオマーカーと白質路完全性の臨床的意義：横断的調査および18ヶ月追跡調査における神経行動学的データとの臨床的相関,2,1+1
+1575,30523659,Effects of a hybrid intervention combining exergaming and physical therapy among older adults in a long-term care facility,長期療養施設における高齢者対象のエクササイズゲームと物理療法を組み合わせたハイブリッド介入の効果,2,0+1
+1577,26201550,Association of neuropsychiatric symptoms and sub-syndromes with cognitive impairment in community-dwelling Asian elderly,地域在住アジア人高齢者における神経精神症状および亜症候群と認知機能障害の関連性,2,1+1
+1578,33724091,Long-term neurobehavioral correlates of brain cortical microinfarcts in a memory clinic cohort in Singapore,シンガポール記憶クリニックコホートにおける脳皮質微小梗塞の長期神経行動学的相関,2,1+1
+1579,38907208,"Using a smartphone-based self-management platform to study sex differences in Parkinson's disease: multicenter, cross-sectional pilot study",スマートフォンベースの自己管理プラットフォームを用いたパーキンソン病における性差の研究：多施設共同横断パイロット研究,2,1+1
+1581,40353593,Atypical Frontal Release Signs in Acute Anterior Cerebral Artery Infarction and Striatal Dopaminergic Dysfunction: A Case Report,急性前大脳動脈梗塞における非定型前頭部解放徴候と線条体ドーパミン作動性機能障害：症例報告,2,1+0
+1582,26933435,Obtaining Information from Family Caregivers Is Important to Detect Behavioral and Psychological Symptoms and Caregiver Burden in Subjects with Mild Cognitive Impairment,軽度認知障害患者における行動・心理症状および介護負担の検出には家族介護者からの情報収集が重要,2,1+1
+1583,40618026,Examining apathy prevalence and associated factors among older adults after the Great East Japan Earthquake: a mixed-methods study,東日本大震災後の高齢者における無気力症の有病率と関連要因の検討：混合研究法による研究,2,0+1
+1586,26082708,Gray Matter Volume Changes in the Apathetic Elderly,無関心な高齢者の灰白質容積変化,2,1+1
+1587,37396666,The neural correlates of apathy in the context of aging and brain disorders: a meta-analysis of neuroimaging studies,加齢および脳疾患における無気力の神経相関：神経画像研究のメタ分析,2,1+1
+1588,28225493,Acetylcholinesterase inhibitor treatment alleviated cognitive impairment caused by delayed encephalopathy due to carbon monoxide poisoning: Two case reports and a review of the literature,一酸化炭素中毒による遅発性脳症が引き起こす認知障害に対するアセチルコリンエステラーゼ阻害薬治療の効果：2症例報告と文献レビュー,2,0+1
+1589,32717901,The Role of Bedroom Privacy in Social Interaction among Elderly Residents in Nursing Homes: An Exploratory Case Study of Hong Kong,介護施設における高齢入居者の社会的交流における寝室のプライバシーの役割：香港における探索的ケーススタディ,2,1+0
+1590,32003417,Neuropsychiatric Symptoms and Risk Factors in Mild Cognitive Impairment: A Cohort Investigation of Elderly Patients,軽度認知障害における神経精神症状と危険因子：高齢者患者を対象としたコホート研究,2,1+1
+1592,36257223,Apathy co-occurs with subjective cognitive decline among community-dwelling older adults,地域在住高齢者における無気力と主観的認知機能低下の併発,2,1+1
+1593,25319873,Deficiency of brain structural sub-network underlying post-ischaemic stroke apathy,虚血性脳卒中後の無関心症候群の基盤となる脳構造サブネットワークの欠損,2,0+1
+1594,25555189,Voxel-based analysis of fractional anisotropy in post-stroke apathy,脳卒中後の無関心症における分画異方性のボクセルベース解析,2,0+1
+1595,27314246,Urodynamic findings in patients with Creutzfeldt-Jakob disease: a case report,クロイツフェルト・ヤコブ病患者の尿動態所見：症例報告,2,0+1
+1596,30999680,Low-Grade Inflammation Is Associated with Apathy Indirectly via Deep White Matter Lesions in Community-Dwelling Older Adults: The Sefuri Study,低度炎症は地域在住高齢者において深部白質病変を介して間接的に無気力と関連する：セフリ研究,2,0+1
+1597,26300077,Leisure-Time Physical Inactivity Associated with Vascular Depression or Apathy in Community-Dwelling Elderly Subjects: The Sefuri Study,地域在住高齢者における血管性抑うつまたは無気力と余暇時間の身体活動不足との関連：瀬府里研究,2,0+1
+1598,30868501,Neuropsychiatric Symptoms and Cognitive Impairment in Chinese Patients with Parkinson's Disease in Han and Hui Ethnicity,漢民族および回族の中国パーキンソン病患者における神経精神症状と認知機能障害,2,1+1
+1601,28951497,Effects of dopaminergic depletion and brain atrophy on neuropsychiatric symptoms in de novo Parkinson's disease,新規発症パーキンソン病におけるドーパミン作動性枯渇と脳萎縮が神経精神症状に及ぼす影響,2,1+1
+1602,40462618,Tackling gender in progressive supranuclear palsy: Male patients present more apathy,進行性核上性麻痺における性差の検討：男性患者はより無気力を示す,2,1+1
+1605,37817385,Association between subclinical epileptiform discharge and the behavioral and psychological symptoms in patients with Alzheimer's dementia,アルツハイマー型認知症患者における亜臨床的てんかん様放電と行動・心理症状の関連性,2,1+1
+1606,29143702,Association between altered neurochemical metabolites and apathy in patients with Alzheimer's disease,アルツハイマー病患者における神経化学代謝物の変化と無関心の関連性,2,1+1
+1609,38232445,Development and validation of the geriatric apathy scale: Examining multi-dimensional apathy profiles in a neurodegenerative population with cultural considerations,老年期無気力尺度（GAS）の開発と妥当性検証：文化的配慮を伴う神経変性疾患集団における多次元的無気力プロファイルの検討,2,1+0
+1610,36701853,Effect of cyborg-type robot Hybrid Assistive Limb on patients with severe walking disability in acute stroke: A randomized controlled study,急性脳卒中における重度の歩行障害患者に対するサイボーグ型ロボット「ハイブリッドアシストリム」の効果：無作為化比較試験,2,0+1
+1611,39658351,Association between meaningful activities and behavioural and psychological symptoms of dementia among people with early-onset dementia using long-term care services,長期介護サービスを利用する若年性認知症患者における有意義な活動と認知症の行動・心理症状との関連性,2,1+1
+1613,32956117,Clinical and Striatal Dopamine Transporter Predictors of Mild Behavioral Impairment in Drug-Naive Parkinson Disease,薬物未治療のパーキンソン病における軽度の行動障害の臨床的および線条体ドーパミン輸送体予測因子,2,1+1
+1614,34275910,Clinical and Dopamine Depletion Patterns in Hyposmia- and Dysautonomia-Dominant Parkinson's Disease,嗅覚減退および自律神経失調症が優勢なパーキンソン病における臨床的およびドーパミン枯渇パターン,2,1+1
+1615,27060941,Differences in Depressive Patterns According to Disease Severityin Early-Onset Alzheimer's Disease,若年性アルツハイマー病における疾患重症度に応じた抑うつパターンの差異,2,0+1
+1616,36688162,Mild behavioral impairment linked to progression to Alzheimer's disease and cortical thinning in amnestic mild cognitive impairment,軽度行動障害とアルツハイマー病への進行および健忘型軽度認知障害における皮質薄化との関連,2,1+1
+1617,31681982,Severity of Neuropsychiatric Symptoms and Distress in Dementia among Older People in Central Africa (EPIDEMCA Study),中央アフリカの高齢者における認知症の神経精神症状と苦痛の重症度（EPIDEMCA研究）,2,1+1
+1620,39603508,Associations of Mild Behavioral Impairment Domains with Brain Volumes: Cross-sectional Analysis of Atherosclerosis Risk in Community (ARIC) Study,軽度行動障害領域と脳容積の関連性：地域住民における動脈硬化リスク（ARIC）研究の横断的分析,2,0+1
+1621,29330419,Parkinson disease with constipation: clinical features and relevant factors,便秘を伴うパーキンソン病：臨床的特徴と関連要因,2,1+1
+1622,33189129,Correlations of apathy with clinical symptoms of Alzheimer's disease and olfactory dysfunctions: a cross-sectional study,無気力とアルツハイマー病の臨床症状および嗅覚機能障害との相関：横断的研究,2,1+1
+1625,39243355,Multimodal nonlinear correlates of behavioural symptoms in frontotemporal dementia,前頭側頭型認知症における行動症状の多模態非線形相関,2,1+1
+1626,40026013,Validation of the Cognitive-Emotional Perspective Taking test in patients with neurodegeneration,神経変性疾患患者における認知・感情的視点取り込みテストの妥当性検証,1,1+0
+1627,33787499,Correlations Between Facial Expressivity and Apathy in Elderly People With Neurocognitive Disorders: Exploratory Study,神経認知障害を有する高齢者における表情表現性と無関心との相関：探索的研究,2,1+0
+1632,39179981,Housing status is protective of neuropsychiatric symptoms among dementia-free multi-ethnic Asian elderly,住宅状況は認知症のない多民族アジア系高齢者の神経精神症状に対する保護因子である,1,1+0
+1634,27993522,Non-motor symptoms and the quality of life in multiple system atrophy with different subtypes,非運動症状と異なるサブタイプにおける多系統萎縮症の生活の質,2,1+1
+1636,36979186,Mental Fatigue Is Associated with Subjective Cognitive Decline among Older Adults,精神的疲労は高齢者の主観的認知機能低下と関連する,2,1+1
+1638,35183116,Sarcopenia and motoric cognitive risk syndrome: a moderated mediation model,サルコペニアと運動認知リスク症候群：調整された媒介モデル,2,0+1
+1639,28648111,Reduction of white matter integrity correlates with apathy in Parkinson's disease,パーキンソン病における白質完全性の低下は無関心と相関する,2,1+1
+1640,32857484,White matter hyperintensities: a marker for apathy in Parkinson's disease without dementia?,白質高信号域：認知症を伴わないパーキンソン病における無関心のマーカーか？,2,1+1
+1641,37990547,The relationship between apathy and nonparametric variables of rest activity rhythm in older adults with cerebral small vessel disease,脳小血管病を有する高齢者における無関心と休息活動リズムの非パラメトリック変数との関連性,2,1+1
+1645,38976268,Dementia Subtypes Defined Through Neuropsychiatric Symptom-Associated Brain Connectivity Patterns,神経精神症状に関連する脳接続パターンによって定義される認知症のサブタイプ,2,1+0
+1646,40543818,Hypo-connected pattern in Parkinson's disease with pure apathy: A dynamic functional connectivity perspective,純粋無関心を伴うパーキンソン病における低接続パターン：動的機能的接続性の観点から,2,1+1
+1647,31852160,High prevalence of sleep disorders and behavioral and psychological symptoms of dementia in late-onset Alzheimer disease: A study in Eastern China,遅発性アルツハイマー病における睡眠障害および認知症の行動・心理症状の高頻度：中国東部における研究,2,1+1
+1650,37970813,Measurement of neuropsychiatric symptoms in the older adults with mild cognitive impairment based on speech and facial expressions: a cross-sectional observational study,軽度認知障害を有する高齢者の神経精神症状を言語と表情に基づいて測定：横断的観察研究,2,1+0
+1651,36284449,"Distinguishing apathy and depression in older adults with mild cognitive impairment using text, audio, and video based on multiclass classification and shapely additive explanations",多クラス分類とShapely Additive Explanationsに基づくテキスト・音声・動画を用いた軽度認知障害高齢者の無関心と抑うつの鑑別,2,1+0
+1652,31732566,Apathy rating scores and β-amyloidopathy in patients with Parkinson disease at risk for cognitive decline,認知機能低下リスクのあるパーキンソン病患者における無関心度評価スコアとβアミロイド病変,2,1+1
+1654,38313558,Apathy in Lewy body disease and its effects on functional impairment over time,レビー小体型認知症における無関心とその経時的機能障害への影響,2,1+1
+1655,30655032,Why Do They Just Sit? Apathy as a Core Symptom of Alzheimer Disease,なぜ彼らはただ座っているのか？アルツハイマー病の中核症状としての無関心,2,1+1
+1656,39013750,Neuropsychiatric Symptom Profile in Alzheimer's Disease and Their Relationship With Functional Decline,アルツハイマー病における神経精神症状プロファイルと機能低下との関連性,2,1+1
+1657,31284232,Altered EEG alpha and theta oscillations characterize apathy in Parkinson's disease during incentivized movement,インセンティブ運動中のパーキンソン病における無関心を特徴付ける脳波α波およびθ波の変動,2,1+1
+1663,34413797,Diagnosis and Assessment of Apathy in Elderly Chinese Patients With Cerebral Small Vessel Disease,中国高齢脳小血管病患者における無気力の診断と評価,2,1+1
+1665,30788615,Resolution of apathy after dorsal instead of ventral subthalamic deep brain stimulation for Parkinson's disease,パーキンソン病に対する腹側視床下部深部脳刺激ではなく背側視床下部深部脳刺激後の無気力感の解消,2,0+1
+1666,33331023,Apathy Induced by Subthalamic Nucleus Deep Brain Stimulation in Parkinson's Disease: A Meta-Analysis,パーキンソン病における視床下核深部脳刺激による無気力感：メタ分析,2,1+1
+1670,35084704,Subthalamic deep brain stimulation versus best medical treatment: a 12-year follow-up,視床下核深部脳刺激療法と最善の薬物療法の比較：12年間の追跡調査,2,1+1
+1671,26010393,Correlations among cognitive and behavioural assessments in patients with dementia due to Alzheimer's disease,アルツハイマー病による認知症患者における認知機能と行動評価の相関関係,2,1+1
+1672,40441773,APOE-mediated associations of promoter variants of GRIN1 and GRIN2B with behavioral symptoms and age at onset of Alzheimer's disease dementia,APOEを介したGRIN1およびGRIN2Bのプロモーター変異体とアルツハイマー病認知症の行動症状および発症年齢との関連,1,1+0
+1677,24823894,Apathy among institutionalized stroke patients: prevalence and clinical correlates,施設入所中の脳卒中患者における無関心：有病率と臨床的相関,2,0+1
+1679,27787708,Neuropsychiatric symptoms of cholinergic deficiency occur with degradation of the projections from the nucleus basalis of Meynert,メイヤール基底核からの投射の劣化に伴い生じるコリン作動性欠乏の神経精神症状,2,1+1
+1680,29196576,Apathy is associated with incident dementia in community-dwelling older people,無関心は地域在住高齢者の認知症発症と関連する,2,1+0
+1681,30027214,Association of Apathy With Risk of Incident Dementia: A Systematic Review and Meta-analysis,無関心と認知症発症リスクの関連性：系統的レビューとメタ分析,2,1+1
+1683,32072168,"Insight Into the Posthospital Syndrome: A 3-Month Longitudinal Follow up on Geriatric Syndromes and Their Association With Functional Decline, Readmission, and Mortality",退院後症候群に関する知見：老年症候群と機能低下、再入院、死亡率との関連性に関する3ヶ月縦断追跡調査,2,1+1
+1685,29304202,"""I Feel Worn Out, as if I Neglected Myself"": Older Patients' Perspectives on Post-hospital Symptoms After Acute Hospitalization",「疲れ果てた、まるで自分を顧みなかったかのようだ」：急性期入院後の退院後症状に関する高齢患者の視点,2,1+0
+1687,33953218,"Cross-sectional analysis of the Parkinson's disease Non-motor International Longitudinal Study baseline non-motor characteristics, geographical distribution and impact on quality of life",パーキンソン病非運動症状国際縦断研究におけるベースライン非運動症状の特徴、地理的分布、および生活の質への影響に関する横断的分析,2,1+1
+1688,30782219,A network approach on the relation between apathy and depression symptoms with dementia and functional disability,無関心と抑うつ症状と認知症および機能障害との関係に関するネットワークアプローチ,2,1+1
+1690,39831385,Interrelation between domains of functioning and white matter hyperintensities in geriatric memory clinic patients: a holistic approach through network analysis,老年期記憶クリニック患者における機能領域と白質高信号域の相互関係：ネットワーク分析による総合的アプローチ,2,1+1
+1691,34454919,Slowing: A Vascular Geriatric Syndrome?,スローイング：血管性老年症候群か？,2,1+1
+1693,25476003,Impaired affective and cognitive theory of mind and behavioural change in amyotrophic lateral sclerosis,筋萎縮性側索硬化症における感情的・認知的理論的思考の障害と行動変化,2,1+1
+1694,36317267,Vascular disease and apathy symptoms in the very old: A cross-sectional and longitudinal meta-analysis of individual participant data,超高齢者の血管疾患と無関心症状：個人参加者データの横断的・縦断的メタ分析,2,1+1
+1695,27017917,Patterns and persistence of behavioural and psychological symptoms in those with cognitive impairment: the importance of apathy,認知障害を有する者における行動・心理症状のパターンと持続性：無気力の重要性,2,1+1
+1697,40074663,"Temporal Dynamics of Depressive Symptoms, Apathy, Daily Activities, and Cognitive Decline in Older People From the General Population: A Network Analysis",一般人口の高齢者における抑うつ症状、無関心、日常活動、認知機能低下の時間的動態：ネットワーク分析,2,1+1
+1698,28931452,Factors associated with appropriate psychotropic drug prescription in nursing home patients with severe dementia,重度認知症を有する介護施設入所患者における適切な向精神薬処方に影響する要因,2,1+1
+1702,40471217,Apathy in Parkinson's Disease: EEG Microstate Characteristics,パーキンソン病における無関心：脳波マイクロステートの特徴,2,1+1

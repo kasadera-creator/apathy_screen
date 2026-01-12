@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}二次レビュー - {{ pmid }}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-7">
+    <div class="mb-2">
+      <strong>PMID: </strong>{{ pmid }}
+      &nbsp; <a href="https://pubmed.ncbi.nlm.nih.gov/{{ pmid }}/" target="_blank">PubMed</a>
+      {% if article and article.doi %}
+        &nbsp; | &nbsp; <a href="https://doi.org/{{ article.doi }}" target="_blank">DOI: {{ article.doi }}</a>
+      {% endif %}
+    </div>
+
+    <h5>タイトル / 要旨（英語・日本語）</h5>
+    <h6>{{ article.title_en if article else "(no title)" }}</h6>
+    <p>{{ article.abstract_en if article else "" }}</p>
+    <hr>
+    <h6>日本語タイトル / 要旨</h6>
+    {% if article %}
+      <p>{{ article.title_ja or "(日本語タイトルはありません)" }}</p>
+      <p>{{ article.abstract_ja or "" }}</p>
+    {% else %}
+      <div class="alert alert-info">一次DBに該当レコードがありません（後でimport予定）。以下は二次DBの情報で代替表示しています。</div>
+      {% if secondary %}
+        <p><strong>PMID:</strong> {{ secondary.pmid }}</p>
+        <p><strong>フラグ:</strong>
+          {% if secondary.is_physical %} 身体的 {% endif %}
+          {% if secondary.is_brain %} 脳器質的 {% endif %}
+          {% if secondary.is_psycho %} 心理・環境 {% endif %}
+          {% if secondary.is_drug %} 薬剤 {% endif %}
+        </p>
+      {% endif %}
+    {% endif %}
+    <hr>
+    {% if pdf_available %}
+      <iframe src="/secondary/pdf/{{ pmid }}" style="width:100%;height:600px;border:1px solid #ccc"></iframe>
+    {% else %}
+      <div class="alert alert-warning">
+        <h5 class="mb-1">PDF が見つかりません</h5>
+        <p class="mb-0 small">この論文の本文PDFはまだ登録されていません。本文が未入手でも、右の自動抽出や要約を参考に「採用/除外/保留」の判定および編集を行ってください。</p>
+        <p class="mt-2 small text-muted">PMID: {{ pmid }}</p>
+      </div>
+    {% endif %}
+  </div>
+  <div class="col-md-5">
+    <h5>自動抽出 (Gemini)</h5>
+    {% if auto %}
+      <p><strong>Target condition:</strong> {{ auto.auto_target_condition }}</p>
+      <p><strong>Apathy terms:</strong> {{ auto.auto_apathy_terms }}</p>
+      <p><strong>Confidence:</strong> {{ auto.auto_confidence }}</p>
+    {% else %}
+      <div class="alert alert-secondary">自動抽出は処理中／未反映です（後から反映されます）</div>
+    {% endif %}
+
+    <hr>
+    <h5>レビュー (あなた)</h5>
+    <form method="post" action="/secondary/{{ group }}/{{ pmid }}/save">
+      <div class="mb-2">
+        <label class="form-label">判定</label>
+        <div>
+          <label class="form-check-label me-2"><input type="radio" name="decision" value="include" {% if review.decision=='include' %}checked{% endif %}> 採用</label>
+          <label class="form-check-label me-2"><input type="radio" name="decision" value="exclude" {% if review.decision=='exclude' %}checked{% endif %}> 除外</label>
+          <label class="form-check-label"><input type="radio" name="decision" value="pending" {% if review.decision!='include' and review.decision!='exclude' %}checked{% endif %}> 保留</label>
+        </div>
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">意欲低下を示す用語（apathy/avolition 等）</label>
+        {% if auto and auto.auto_apathy_terms %}
+          <div class="form-text text-muted small">自動抽出: {{ auto.auto_apathy_terms }}</div>
+        {% endif %}
+        <input class="form-control" name="final_apathy_terms" value="{{ review.final_apathy_terms or '' }}">
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">対象疾患・病態</label>
+        {% if auto and auto.auto_target_condition %}
+          <div class="form-text text-muted small">自動抽出: {{ auto.auto_target_condition }}</div>
+        {% endif %}
+        <input class="form-control" name="final_target_condition" value="{{ review.final_target_condition or '' }}">
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">母集団・N</label>
+        {% if auto and auto.auto_population_N %}
+          <div class="form-text text-muted small">自動抽出: {{ auto.auto_population_N }}</div>
+        {% endif %}
+        <input class="form-control" name="final_population_n" value="{{ review.final_population_n or review.final_population_N or '' }}">
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">頻度（有症率）</label>
+        {% if auto and auto.auto_prevalence %}
+          <div class="form-text text-muted small">自動抽出: {{ auto.auto_prevalence }}</div>
+        {% endif %}
+        <input class="form-control" name="final_prevalence" value="{{ review.final_prevalence or '' }}">
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">介入（治療・リハビリ）</label>
+        {% if auto and auto.auto_intervention %}
+          <div class="form-text text-muted small">自動抽出: {{ auto.auto_intervention }}</div>
+        {% endif %}
+        <input class="form-control" name="final_intervention" value="{{ review.final_intervention or '' }}">
+      </div>
+
+      <div class="d-flex gap-2">
+        <button type="submit" name="action" value="save" class="btn btn-primary">保存</button>
+        <button type="submit" name="action" value="save_next" class="btn btn-success">保存して次へ</button>
+        <button type="submit" name="action" value="exclude_next" class="btn btn-danger">除外して次へ</button>
+        <a href="/secondary" class="btn btn-outline-secondary">戻る</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

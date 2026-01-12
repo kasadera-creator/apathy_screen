@@ -122,3 +122,61 @@ class ScaleScreeningDecision(SQLModel, table=True):
     comment: Optional[str] = None
     
     created_at: Optional[str] = None
+
+
+# ==========================================
+# 二次スクリーニング用モデル
+# ==========================================
+class SecondaryArticle(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    pmid: int = Field(index=True, unique=True)
+
+    is_physical: bool = Field(default=False)
+    is_brain: bool = Field(default=False)
+    is_psycho: bool = Field(default=False)
+    is_drug: bool = Field(default=False)
+
+    pdf_exists: bool = Field(default=False)
+
+    created_at: Optional[str] = None
+    updated_at: Optional[str] = None
+
+
+class SecondaryAutoExtraction(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    pmid: int = Field(index=True, unique=True)
+
+    auto_citation: Optional[str] = None
+    auto_apathy_terms: Optional[str] = None
+    auto_target_condition: Optional[str] = None
+    auto_population_N: Optional[str] = None
+    auto_prevalence: Optional[str] = None
+    auto_intervention: Optional[str] = None
+    auto_confidence: Optional[str] = None
+    auto_needs_review: Optional[bool] = Field(default=False)
+
+    updated_at: Optional[str] = None
+
+
+class SecondaryReview(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    pmid: int = Field(index=True)
+    group: str = Field(index=True)
+    reviewer_id: int = Field(foreign_key="user.id")
+
+    decision: Optional[str] = Field(default="pending")  # include/exclude/pending
+
+    final_citation: Optional[str] = None
+    final_apathy_terms: Optional[str] = None
+    final_target_condition: Optional[str] = None
+    final_population_N: Optional[str] = None
+    final_population_n: Optional[str] = None
+    final_prevalence: Optional[str] = None
+    final_intervention: Optional[str] = None
+    comment: Optional[str] = None
+
+    updated_at: Optional[str] = None
+
+    class Config:
+        # unique constraint not enforced here; handled via upsert logic in app
+        arbitrary_types_allowed = True
