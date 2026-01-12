@@ -1452,15 +1452,17 @@ def _export_category_csv(session: Session, article_ids: List[int], cat_attr: str
         art = get_article_safe(session, aid)
         rows = art_map.get(aid, [])
         # aggregated decision checks
-        dec_votes = [int(d.decision) for d in rows if d.decision is not None]
+        dec_votes = [int(d["decision"]) for d in rows if d.get("decision") is not None]
         if not dec_votes or max(dec_votes) < 1:
             continue
 
         # category votes
-        cat_votes = [int(getattr(d, cat_attr)) for d in rows if getattr(d, cat_attr) is not None]
+        cat_votes = [int(d.get(cat_attr)) for d in rows if d.get(cat_attr) is not None]
         if not cat_votes or max(cat_votes) < 1:
             continue
 
+        if not art:
+            continue
         votes_summary = "+".join(str(v) for v in cat_votes)
         agg_decision = max(dec_votes) if dec_votes else ""
         writer.writerow([art.id, art.pmid, art.title_en, art.title_ja, agg_decision, votes_summary])
