@@ -31,22 +31,28 @@
 
     <div class="card mb-3 shadow-sm">
       <div class="card-body">
-        <h5 class="card-title">タイトル / 要旨（英語）</h5>
+        <h5 class="card-title">タイトル</h5>
         <h6 class="mb-2">{{ article.title_en if article else "(no title)" }}</h6>
+        <p class="text-muted small mb-0">{{ article.title_ja or "(日本語タイトルはありません)" }}</p>
+      </div>
+    </div>
+
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">英語要旨</h5>
         <p class="mb-0" style="white-space:pre-wrap;">{{ article.abstract_en if article else "" }}</p>
       </div>
     </div>
 
     <div class="card mb-3 shadow-sm">
       <div class="card-body">
-        <h5 class="card-title">日本語タイトル / 要旨</h5>
+        <h5 class="card-title">日本語要旨</h5>
         {% if article %}
-          <p class="text-muted mb-1">{{ article.title_ja or "(日本語タイトルはありません)" }}</p>
           <p class="mb-0" style="white-space:pre-wrap;">{{ article.abstract_ja or "" }}</p>
         {% else %}
-          <div class="alert alert-info mb-2">一次DBに該当レコードがありません（後でimport予定）。以下は二次DBの情報で代替表示しています。</div>
+          <div class="alert alert-info mb-0">一次DBに該当レコードがありません（後でimport予定）。以下は二次DBの情報で代替表示しています。</div>
           {% if secondary %}
-            <p class="mb-1"><strong>PMID:</strong> {{ secondary.pmid }}</p>
+            <p class="mt-2 mb-1"><strong>PMID:</strong> {{ secondary.pmid }}</p>
             <p class="mb-0"><strong>フラグ:</strong>
               {% if secondary.is_physical %} 身体的要因 {% endif %}
               {% if secondary.is_brain %} 脳神経疾患 {% endif %}
