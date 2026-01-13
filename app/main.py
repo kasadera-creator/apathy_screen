@@ -4,7 +4,7 @@ import csv
 import io
 from collections import defaultdict
 
-from fastapi import FastAPI, Request, Form, Query, Depends
+from fastapi import FastAPI, Request, Form, Query, Depends, HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse, StreamingResponse, FileResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
@@ -13,6 +13,9 @@ from sqlmodel import SQLModel, Session, create_engine, select
 from sqlalchemy import func, text
 from datetime import datetime
 from types import SimpleNamespace
+import time
+import hmac
+import hashlib
 
 from starlette.middleware.sessions import SessionMiddleware
 from passlib.context import CryptContext
@@ -130,6 +133,27 @@ templates.env.globals["SECONDARY_GROUP_LABELS"] = {
     "psycho": "精神・心理・環境要因",
     "drug": "薬剤性",
 }
+
+# PDF署名設定（CoreServer連携）
+PDF_SECRET = os.getenv("PDF_SECRET")
+CORESERVER_PDF_ENDPOINT = os.getenv("CORESERVER_PDF_ENDPOINT", "https://seichiryo.v2007.coreserver.jp/pdf.php")
+try:
+    PDF_TTL_SEC = int(os.getenv("PDF_TTL_SEC", "300"))
+except Exception:
+    PDF_TTL_SEC = 300
+
+if not PDF_SECRET:
+    raise RuntimeError("PDF_SECRET environment variable is required for signed PDF redirect feature")
+
+def build_pdf_url(pmid: int) -> str:
+    """Build signed URL for CoreServer pdf.php
+
+    Signature: HMAC-SHA256 over b"{pmid}:{exp}" using PDF_SECRET
+    """
+    exp = int(time.time()) + PDF_TTL_SEC
+    msg = f"{pmid}:{exp}".encode("utf-8")
+    sig = hmac.new(PDF_SECRET.encode("utf-8"), msg, hashlib.sha256).hexdigest()
+    return f"{CORESERVER_PDF_ENDPOINT}?pmid={pmid}&exp={exp}&sig={sig}"
 
 app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
 
@@ -1810,6 +1834,21 @@ def secondary_pdf(pmid: int):
     if not path.exists():
         return HTMLResponse("PDF not found", status_code=404)
     return FileResponse(path, media_type="application/pdf", headers={"Content-Disposition": f'inline; filename="{pmid}.pdf"'})
+
+
+@app.get("/pdf/{pmid}")
+def pdf_redirect(pmid: int, request: Request):
+    user = get_current_user(request)
+    if not user:
+        return RedirectResponse("/login", status_code=302)
+    try:
+        pmid_i = int(pmid)
+    except Exception:
+        raise HTTPException(status_code=400, detail="invalid pmid")
+    if pmid_i <= 0:
+        raise HTTPException(status_code=400, detail="bad pmid")
+    url = build_pdf_url(pmid_i)
+    return RedirectResponse(url, status_code=302)
 
 
 @app.get("/secondary/{group}/export")
