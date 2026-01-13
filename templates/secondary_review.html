@@ -34,18 +34,27 @@
       {% endif %}
     {% endif %}
     <hr>
-    {% if pdf_available %}
-      <iframe src="/secondary/pdf/{{ pmid }}" style="width:100%;height:600px;border:1px solid #ccc"></iframe>
+    <style>
+      .pdf-panel { border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background: #fff; }
+      .pdf-panel__toolbar { display:flex; justify-content:flex-end; padding:8px 10px; border-bottom:1px solid #eee; background:#fafafa; }
+      .pdf-panel__iframe { width:100%; height:70vh; border:0; }
+      @media (max-width:767px) { .pdf-panel__iframe { height:60vh; } }
+    </style>
+
+    {% if pdf_exists or pdf_available %}
+      <div class="pdf-panel">
+        <div class="pdf-panel__toolbar">
+          <a class="btn btn-sm btn-outline-primary" href="/pdf/{{ pmid }}" target="_blank" rel="noopener">PDFを別タブで開く</a>
+        </div>
+        <iframe class="pdf-panel__iframe" src="/pdf/{{ pmid }}" title="PDF {{ pmid }}" loading="lazy"></iframe>
+      </div>
     {% else %}
       <div class="alert alert-warning">
         <h5 class="mb-1">PDF が見つかりません</h5>
-        <p class="mb-0 small">この論文の本文PDFはまだローカルに登録されていません。本文が未入手でも、右の自動抽出や要約を参考に「採用/除外/保留」の判定および編集を行ってください。</p>
+        <p class="mb-0 small">この論文の本文PDFはまだ取得されていません。取得方法については運用担当者にお問い合わせください。</p>
         <p class="mt-2 small text-muted">PMID: {{ pmid }}</p>
       </div>
     {% endif %}
-    <div class="mt-2">
-      <a href="/pdf/{{ pmid }}" target="_blank" class="btn btn-outline-primary">PDFを開く</a>
-    </div>
   </div>
   <div class="col-md-5">
     <h5>自動抽出 (Gemini)</h5>
