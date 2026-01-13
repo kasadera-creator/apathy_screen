@@ -26,12 +26,8 @@
             {% endif %}
           </div>
         </div>
-      </div>
-    </div>
-
-    <div class="card mb-3 shadow-sm">
-      <div class="card-body">
-        <h5 class="card-title">Title</h5>
+        <hr class="my-2">
+        <h5 class="card-title mb-1">Title</h5>
         <h6 class="mb-2">{{ article.title_en if article else "(no title)" }}</h6>
         <p class="text-muted small mb-0">{{ article.title_ja or "(日本語タイトルはありません)" }}</p>
       </div>
