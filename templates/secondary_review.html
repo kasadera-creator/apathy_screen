@@ -31,7 +31,7 @@
 
     <div class="card mb-3 shadow-sm">
       <div class="card-body">
-        <h5 class="card-title">タイトル</h5>
+        <h5 class="card-title">Title</h5>
         <h6 class="mb-2">{{ article.title_en if article else "(no title)" }}</h6>
         <p class="text-muted small mb-0">{{ article.title_ja or "(日本語タイトルはありません)" }}</p>
       </div>
@@ -39,14 +39,14 @@
 
     <div class="card mb-3 shadow-sm">
       <div class="card-body">
-        <h5 class="card-title">英語要旨</h5>
+        <h5 class="card-title">Abstract</h5>
         <p class="mb-0" style="white-space:pre-wrap;">{{ article.abstract_en if article else "" }}</p>
       </div>
     </div>
 
     <div class="card mb-3 shadow-sm">
       <div class="card-body">
-        <h5 class="card-title">日本語要旨</h5>
+        <h5 class="card-title">要旨（DeepL翻訳）</h5>
         {% if article %}
           <p class="mb-0" style="white-space:pre-wrap;">{{ article.abstract_ja or "" }}</p>
         {% else %}
