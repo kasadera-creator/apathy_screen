@@ -5,7 +5,7 @@
 {% block content %}
 <div class="review-layout-full">
   <div class="review-layout">
-  <div class="review-left">
+    <div class="review-left">
     <div class="mb-2">
       <strong>PMID: </strong>{{ pmid }}
       &nbsp; <a href="https://pubmed.ncbi.nlm.nih.gov/{{ pmid }}/" target="_blank" rel="noopener">PubMed</a>
@@ -68,10 +68,9 @@
         </div>
       {% endif %}
     </div>
-  </div>
-</div>
+    </div>
 
-  <div class="review-right">
+    <div class="review-right">
     <details class="gemini-box" {% if auto and auto.needs_review %}open{% endif %}>
       <summary>Gemini抽出（クリックで開く）{% if auto and auto.auto_confidence %} / 信頼度: {{ auto.auto_confidence }}{% endif %}</summary>
       <div class="mt-2">
@@ -193,6 +192,18 @@
     max-height: none;
     overflow: visible;
   }
+}
+
+/* PDF panel */
+.pdf-panel { border:1px solid #ddd; border-radius:8px; overflow:hidden; background:#fff; }
+.pdf-panel__toolbar { display:flex; justify-content:flex-end; padding:8px 10px; border-bottom:1px solid #eee; background:#fafafa; }
+.pdf-panel__iframe { width:100%; height:70vh; border:0; }
+@media (max-width:767px) { .pdf-panel__iframe { height:60vh; } }
+
+/* Gemini */
+details.gemini-box > summary{
+  cursor:pointer;
+  font-weight:600;
 }
 </style>
 
