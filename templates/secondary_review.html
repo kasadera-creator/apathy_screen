@@ -3,8 +3,8 @@
 {% block title %}二次レビュー - {{ pmid }}{% endblock %}
 
 {% block content %}
-<div class="row">
-  <div class="col-md-7">
+<div class="review-layout">
+  <div class="review-left">
     <div class="mb-2">
       <strong>PMID: </strong>{{ pmid }}
       &nbsp; <a href="https://pubmed.ncbi.nlm.nih.gov/{{ pmid }}/" target="_blank">PubMed</a>
@@ -35,10 +35,28 @@
     {% endif %}
     <hr>
     <style>
+      /* PDF panel */
       .pdf-panel { border:1px solid #ddd; border-radius:8px; overflow:hidden; background:#fff; }
       .pdf-panel__toolbar { display:flex; justify-content:flex-end; padding:8px 10px; border-bottom:1px solid #eee; background:#fafafa; }
       .pdf-panel__iframe { width:100%; height:70vh; border:0; }
       @media (max-width:767px) { .pdf-panel__iframe { height:60vh; } }
+
+      /* Two-column review layout: left content scrolls normally, right column sticks */
+      .review-layout{ display:grid; grid-template-columns: minmax(0, 1fr) 420px; gap:16px; align-items:start; }
+      .review-left{ min-width:0; }
+      .review-right{ min-width:0; }
+
+      .review-right__sticky{ position:sticky; top:12px; max-height:calc(100vh - 24px); overflow-y:auto; border:1px solid #e6e6e6; border-radius:10px; background:#fff; padding:12px; }
+      .review-right__sticky .section-title{ position:sticky; top:0; background:#fff; padding:6px 0; z-index:1; border-bottom:1px solid #f0f0f0; margin-bottom:8px; }
+
+      /* Ensure embedded PDF fits */
+      .pdf-panel__iframe{ width:100%; }
+
+      /* Mobile: single column and disable sticky */
+      @media (max-width:991px){
+        .review-layout{ grid-template-columns: 1fr; }
+        .review-right__sticky{ position:static; max-height:none; overflow:visible; }
+      }
     </style>
 
     {% set _pmid = pmid if (pmid is defined and pmid) else (
@@ -73,9 +91,10 @@
       {% endif %}
     </div>
   </div>
-  <div class="col-md-5">
-    <h5>自動抽出 (Gemini)</h5>
-    {% if auto %}
+  <div class="review-right">
+    <div class="review-right__sticky">
+      <h5 class="section-title">自動抽出 (Gemini)</h5>
+      {% if auto %}
       <p><strong>対象疾患・病態:</strong> {{ auto.auto_target_condition }}</p>
       <p><strong>意欲低下を示す用語:</strong> {{ auto.auto_apathy_terms }}</p>
       <p><strong>信頼度:</strong> {{ auto.auto_confidence }}</p>
@@ -83,9 +102,9 @@
       <div class="alert alert-secondary">自動抽出は処理中／未反映です（後から反映されます）</div>
     {% endif %}
 
-    <hr>
-    <h5>レビュー (あなた)</h5>
-    <form method="post" action="/secondary/{{ group }}/{{ pmid }}/save">
+      <hr>
+      <h5 class="section-title">レビュー (あなた)</h5>
+      <form method="post" action="/secondary/{{ group }}/{{ pmid }}/save">
       <div class="mb-2">
         <label class="form-label">判定</label>
         <div>
@@ -141,7 +160,8 @@
         <button type="submit" name="action" value="exclude_next" class="btn btn-danger">除外して次へ</button>
         <a href="/secondary" class="btn btn-outline-secondary">戻る</a>
       </div>
-    </form>
+      </form>
+    </div>
   </div>
 </div>
 {% endblock %}
