@@ -35,26 +35,43 @@
     {% endif %}
     <hr>
     <style>
-      .pdf-panel { border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background: #fff; }
+      .pdf-panel { border:1px solid #ddd; border-radius:8px; overflow:hidden; background:#fff; }
       .pdf-panel__toolbar { display:flex; justify-content:flex-end; padding:8px 10px; border-bottom:1px solid #eee; background:#fafafa; }
       .pdf-panel__iframe { width:100%; height:70vh; border:0; }
       @media (max-width:767px) { .pdf-panel__iframe { height:60vh; } }
     </style>
 
-    {% if pdf_exists or pdf_available %}
-      <div class="pdf-panel">
-        <div class="pdf-panel__toolbar">
-          <a class="btn btn-sm btn-outline-primary" href="/pdf/{{ pmid }}" target="_blank" rel="noopener">PDFを別タブで開く</a>
+    {% set _pmid = pmid if (pmid is defined and pmid) else (
+        (article.pmid if (article is defined and article and article.pmid) else (
+            (secondary.pmid if (secondary is defined and secondary and secondary.pmid) else (
+                (item.pmid if (item is defined and item and item.pmid) else (
+                    (sec.pmid if (sec is defined and sec and sec.pmid) else (
+                        (cand.pmid if (cand is defined and cand and cand.pmid) else (
+                            (rec.pmid if (rec is defined and rec and rec.pmid) else None)
+                        ))
+                    ))
+                ))
+            ))
+        ))
+    ) %}
+
+    <div class="pdf-panel">
+      <div class="pdf-panel__toolbar">
+        {% if _pmid %}
+          <a class="btn btn-sm btn-outline-primary" href="/pdf/{{ _pmid }}" target="_blank" rel="noopener">PDFを別タブで開く</a>
+        {% else %}
+          <button class="btn btn-sm btn-outline-secondary" disabled>PDFを別タブで開く</button>
+        {% endif %}
+      </div>
+
+      {% if _pmid %}
+        <iframe class="pdf-panel__iframe" src="/pdf/{{ _pmid }}" title="PDF {{ _pmid }}" loading="lazy"></iframe>
+      {% else %}
+        <div class="alert alert-warning" style="margin:10px;">
+          PMIDがテンプレに渡っていないためPDFリンクを生成できません。サーバ側で `pmid` 変数名を確認してください。
         </div>
-        <iframe class="pdf-panel__iframe" src="/pdf/{{ pmid }}" title="PDF {{ pmid }}" loading="lazy"></iframe>
-      </div>
-    {% else %}
-      <div class="alert alert-warning">
-        <h5 class="mb-1">PDF が見つかりません</h5>
-        <p class="mb-0 small">この論文の本文PDFはまだ取得されていません。取得方法については運用担当者にお問い合わせください。</p>
-        <p class="mt-2 small text-muted">PMID: {{ pmid }}</p>
-      </div>
-    {% endif %}
+      {% endif %}
+    </div>
   </div>
   <div class="col-md-5">
     <h5>自動抽出 (Gemini)</h5>
