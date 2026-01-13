@@ -1,3 +1,4 @@
+````markdown
 PDF 配信連携メモ
 
 概要
@@ -6,13 +7,13 @@ PDF 配信連携メモ
 
 環境変数
 - PDF_SECRET: 必須（例: 長いランダム文字列）
-- CORESERVER_PDF_ENDPOINT: 任意（デフォルト: https://seichiryo.v2007.coreserver.jp/pdf.php ）
+- CORESERVER_PDF_ENDPOINT: 任意（デフォルト: https://ifc66.v2003.coreserver.jp/pdf.php ）
 - PDF_TTL_SEC: 署名有効秒数（デフォルト: 300）
 
 起動例（systemd / crontab など）
 ```
 export PDF_SECRET="長いランダム文字列"
-export CORESERVER_PDF_ENDPOINT="https://seichiryo.v2007.coreserver.jp/pdf.php"
+export CORESERVER_PDF_ENDPOINT="https://ifc66.v2003.coreserver.jp/pdf.php"
 export PDF_TTL_SEC=300
 uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
@@ -29,3 +30,5 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000
 
 問い合わせ
 - 実際の CoreServer の `pdf.php` の検証ロジックや鍵の更新戦略が必要なら教えてください。
+
+````

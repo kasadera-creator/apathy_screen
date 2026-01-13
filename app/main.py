@@ -136,7 +136,7 @@ templates.env.globals["SECONDARY_GROUP_LABELS"] = {
 
 # PDF署名設定（CoreServer連携）
 PDF_SECRET = os.getenv("PDF_SECRET")
-CORESERVER_PDF_ENDPOINT = os.getenv("CORESERVER_PDF_ENDPOINT", "https://seichiryo.v2007.coreserver.jp/pdf.php")
+CORESERVER_PDF_ENDPOINT = os.getenv("CORESERVER_PDF_ENDPOINT", "https://ifc66.v2003.coreserver.jp/pdf.php")
 try:
     PDF_TTL_SEC = int(os.getenv("PDF_TTL_SEC", "300"))
 except Exception:
