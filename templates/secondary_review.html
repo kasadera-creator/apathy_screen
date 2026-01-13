@@ -6,34 +6,57 @@
 <div class="review-layout-full">
   <div class="review-layout">
     <div class="review-left">
-    <div class="mb-2">
-      <strong>PMID: </strong>{{ pmid }}
-      &nbsp; <a href="https://pubmed.ncbi.nlm.nih.gov/{{ pmid }}/" target="_blank" rel="noopener">PubMed</a>
-      {% if article and article.doi %}
-        &nbsp; | &nbsp; <a href="https://doi.org/{{ article.doi }}" target="_blank" rel="noopener">DOI: {{ article.doi }}</a>
-      {% endif %}
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start flex-wrap">
+          <div>
+            <div class="mb-2">
+              <span class="badge bg-secondary me-2">PMID</span>
+              {% if pmid %}
+                <a href="https://pubmed.ncbi.nlm.nih.gov/{{ pmid }}/" target="_blank" rel="noopener">{{ pmid }}</a>
+              {% else %}
+                —
+              {% endif %}
+            </div>
+            {% if article and article.doi %}
+            <div class="mb-2">
+              <span class="badge bg-info text-dark me-2">DOI</span>
+              <a href="https://doi.org/{{ article.doi }}" target="_blank" rel="noopener">{{ article.doi }}</a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
     </div>
 
-    <h5>タイトル / 要旨（英語・日本語）</h5>
-    <h6>{{ article.title_en if article else "(no title)" }}</h6>
-    <p>{{ article.abstract_en if article else "" }}</p>
-    <hr>
-    <h6>日本語タイトル / 要旨</h6>
-    {% if article %}
-      <p>{{ article.title_ja or "(日本語タイトルはありません)" }}</p>
-      <p>{{ article.abstract_ja or "" }}</p>
-    {% else %}
-      <div class="alert alert-info">一次DBに該当レコードがありません（後でimport予定）。以下は二次DBの情報で代替表示しています。</div>
-      {% if secondary %}
-        <p><strong>PMID:</strong> {{ secondary.pmid }}</p>
-        <p><strong>フラグ:</strong>
-          {% if secondary.is_physical %} 身体的要因 {% endif %}
-          {% if secondary.is_brain %} 脳神経疾患 {% endif %}
-          {% if secondary.is_psycho %} 精神・心理・環境要因 {% endif %}
-          {% if secondary.is_drug %} 薬剤性 {% endif %}
-        </p>
-      {% endif %}
-    {% endif %}
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">タイトル / 要旨（英語）</h5>
+        <h6 class="mb-2">{{ article.title_en if article else "(no title)" }}</h6>
+        <p class="mb-0" style="white-space:pre-wrap;">{{ article.abstract_en if article else "" }}</p>
+      </div>
+    </div>
+
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">日本語タイトル / 要旨</h5>
+        {% if article %}
+          <p class="text-muted mb-1">{{ article.title_ja or "(日本語タイトルはありません)" }}</p>
+          <p class="mb-0" style="white-space:pre-wrap;">{{ article.abstract_ja or "" }}</p>
+        {% else %}
+          <div class="alert alert-info mb-2">一次DBに該当レコードがありません（後でimport予定）。以下は二次DBの情報で代替表示しています。</div>
+          {% if secondary %}
+            <p class="mb-1"><strong>PMID:</strong> {{ secondary.pmid }}</p>
+            <p class="mb-0"><strong>フラグ:</strong>
+              {% if secondary.is_physical %} 身体的要因 {% endif %}
+              {% if secondary.is_brain %} 脳神経疾患 {% endif %}
+              {% if secondary.is_psycho %} 精神・心理・環境要因 {% endif %}
+              {% if secondary.is_drug %} 薬剤性 {% endif %}
+            </p>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
 
     <hr>
 
@@ -51,43 +74,56 @@
         ))
     ) %}
 
-    <div class="pdf-panel mb-3">
-      <div class="pdf-panel__toolbar">
-        {% if _pmid %}
-          <a class="btn btn-sm btn-outline-primary" href="/pdf/{{ _pmid }}" target="_blank" rel="noopener">PDFを別タブで開く</a>
-        {% else %}
-          <button class="btn btn-sm btn-outline-secondary" disabled>PDFを別タブで開く</button>
-        {% endif %}
-      </div>
-
-      {% if _pmid %}
-        <iframe class="pdf-panel__iframe" src="/pdf/{{ _pmid }}" title="PDF {{ _pmid }}" loading="lazy"></iframe>
-      {% else %}
-        <div class="alert alert-warning m-2">
-          PMIDがテンプレに渡っていないためPDFリンクを生成できません。サーバ側で pmid 変数名を確認してください。
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body p-0">
+        <div class="pdf-panel">
+          <div class="pdf-panel__toolbar">
+            {% if _pmid %}
+              <a class="btn btn-sm btn-outline-primary" href="/pdf/{{ _pmid }}" target="_blank" rel="noopener">PDFを別タブで開く</a>
+            {% else %}
+              <button class="btn btn-sm btn-outline-secondary" disabled>PDFを別タブで開く</button>
+            {% endif %}
+          </div>
+          {% if _pmid %}
+            <iframe class="pdf-panel__iframe" src="/pdf/{{ _pmid }}" title="PDF {{ _pmid }}" loading="lazy"></iframe>
+          {% else %}
+            <div class="alert alert-warning m-2">
+              PMIDがテンプレに渡っていないためPDFリンクを生成できません。サーバ側で pmid 変数名を確認してください。
+            </div>
+          {% endif %}
         </div>
-      {% endif %}
+      </div>
     </div>
     </div>
 
     <div class="review-right">
-    <details class="gemini-box" {% if auto and auto.needs_review %}open{% endif %}>
-      <summary>Gemini抽出（クリックで開く）{% if auto and auto.auto_confidence %} / 信頼度: {{ auto.auto_confidence }}{% endif %}</summary>
-      <div class="mt-2">
-        {% if auto %}
-          <p><strong>対象疾患・病態:</strong> {{ auto.auto_target_condition }}</p>
-          <p><strong>意欲低下を示す用語:</strong> {{ auto.auto_apathy_terms }}</p>
-          <p><strong>母集団・N:</strong> {{ auto.auto_population_N }}</p>
-          <p><strong>頻度（有症率）:</strong> {{ auto.auto_prevalence }}</p>
-          <p><strong>介入:</strong> {{ auto.auto_intervention }}</p>
-        {% else %}
-          <div class="alert alert-secondary">自動抽出は処理中／未反映です（後から反映されます）</div>
-        {% endif %}
+    <div class="card mb-3 shadow-sm">
+      <div class="card-header bg-light py-2">
+        <h5 class="card-title fw-bold mb-0 text-dark"><i class="bi bi-robot me-2"></i>Gemini 要約</h5>
       </div>
-    </details>
+      <div class="card-body">
+        <details class="gemini-box" {% if auto and auto.needs_review %}open{% endif %}>
+          <summary>内容を表示 / 非表示{% if auto and auto.auto_confidence %}（信頼度: {{ auto.auto_confidence }}）{% endif %}</summary>
+          <div class="mt-2">
+            {% if auto %}
+              <p><strong>対象疾患・病態:</strong> {{ auto.auto_target_condition }}</p>
+              <p><strong>意欲低下を示す用語:</strong> {{ auto.auto_apathy_terms }}</p>
+              <p><strong>母集団・N:</strong> {{ auto.auto_population_N }}</p>
+              <p><strong>頻度（有症率）:</strong> {{ auto.auto_prevalence }}</p>
+              <p><strong>介入:</strong> {{ auto.auto_intervention }}</p>
+            {% else %}
+              <div class="alert alert-secondary mb-0">自動抽出は処理中／未反映です（後から反映されます）</div>
+            {% endif %}
+          </div>
+        </details>
+      </div>
+    </div>
 
-    <div class="entry-box mt-3">
-      <h5 class="mb-2">レビュー (あなた)</h5>
+    <div class="card mb-3 shadow-sm">
+      <div class="card-header bg-light py-2">
+        <h5 class="card-title fw-bold mb-0 text-dark"><i class="bi bi-pencil-square me-2"></i>レビュー (あなた)</h5>
+      </div>
+      <div class="card-body">
       <form method="post" action="/secondary/{{ group }}/{{ pmid }}/save">
         <div class="mb-2">
           <label class="form-label">判定</label>
@@ -138,13 +174,14 @@
           <input class="form-control" name="final_intervention" value="{{ review.final_intervention or '' }}">
         </div>
 
-        <div class="d-flex gap-2">
+        <div class="d-flex gap-2 pt-2 border-top">
           <button type="submit" name="action" value="save" class="btn btn-primary">保存</button>
           <button type="submit" name="action" value="save_next" class="btn btn-success">保存して次へ</button>
           <button type="submit" name="action" value="exclude_next" class="btn btn-danger">除外して次へ</button>
           <a href="/secondary" class="btn btn-outline-secondary">戻る</a>
         </div>
       </form>
+      </div>
     </div>
   </div>
 </div>
@@ -172,8 +209,9 @@
 .review-right{
   position: sticky;
   top: 88px; /* navbar + margin */
-  max-height: calc(100vh - 104px);
-  overflow-y: auto;
+  /* 固定表示（内部スクロールなし） */
+  max-height: none;
+  overflow: visible;
 
   border: 1px solid #e6e6e6;
   border-radius: 10px;
