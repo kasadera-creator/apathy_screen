@@ -141,19 +141,25 @@ try:
     PDF_TTL_SEC = int(os.getenv("PDF_TTL_SEC", "300"))
 except Exception:
     PDF_TTL_SEC = 300
+PDF_USE_SIGNED = bool(PDF_SECRET)
 
-if not PDF_SECRET:
-    raise RuntimeError("PDF_SECRET environment variable is required for signed PDF redirect feature")
+if not PDF_USE_SIGNED:
+    print("[PDF] PDF_SECRET not set — using local PDF endpoint /secondary/pdf/{pmid} for development")
 
 def build_pdf_url(pmid: int) -> str:
-    """Build signed URL for CoreServer pdf.php
+    """Return a URL to use for PDF display/redirect.
 
-    Signature: HMAC-SHA256 over b"{pmid}:{exp}" using PDF_SECRET
+    - When `PDF_SECRET` is configured, build a signed CoreServer URL.
+    - Otherwise return the local secondary PDF endpoint which serves files from
+      `SECONDARY_PDF_DIR` (useful for local development).
     """
-    exp = int(time.time()) + PDF_TTL_SEC
-    msg = f"{pmid}:{exp}".encode("utf-8")
-    sig = hmac.new(PDF_SECRET.encode("utf-8"), msg, hashlib.sha256).hexdigest()
-    return f"{CORESERVER_PDF_ENDPOINT}?pmid={pmid}&exp={exp}&sig={sig}"
+    if PDF_USE_SIGNED:
+        exp = int(time.time()) + PDF_TTL_SEC
+        msg = f"{pmid}:{exp}".encode("utf-8")
+        sig = hmac.new(PDF_SECRET.encode("utf-8"), msg, hashlib.sha256).hexdigest()
+        return f"{CORESERVER_PDF_ENDPOINT}?pmid={pmid}&exp={exp}&sig={sig}"
+    # Local fallback
+    return f"/secondary/pdf/{pmid}"
 
 app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
 
