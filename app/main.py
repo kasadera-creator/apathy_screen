@@ -357,6 +357,69 @@ def get_scale_article_safe(session: Session, article_id: int) -> Optional[Simple
             data[c] = None
     return SimpleNamespace(**data)
 
+
+def _serialize_article(article) -> Optional[dict]:
+    """
+    ORM Article -> template-safe dict
+    """
+    if not article:
+        return None
+    return {
+        "id": getattr(article, "id", None),
+        "pmid": getattr(article, "pmid", None),
+        "title_en": getattr(article, "title_en", None),
+        "abstract_en": getattr(article, "abstract_en", None),
+        "title_ja": getattr(article, "title_ja", None),
+        "abstract_ja": getattr(article, "abstract_ja", None),
+        "doi": getattr(article, "doi", None),
+        "year": getattr(article, "year", None),
+    }
+
+
+def _serialize_secondary(secondary) -> Optional[dict]:
+    if not secondary:
+        return None
+    return {
+        "pmid": getattr(secondary, "pmid", None),
+        "is_physical": bool(getattr(secondary, "is_physical", False)),
+        "is_brain": bool(getattr(secondary, "is_brain", False)),
+        "is_psycho": bool(getattr(secondary, "is_psycho", False)),
+        "is_drug": bool(getattr(secondary, "is_drug", False)),
+        "pdf_exists": bool(getattr(secondary, "pdf_exists", False)),
+    }
+
+
+def _serialize_auto(auto) -> Optional[dict]:
+    if not auto:
+        return None
+    return {
+        "pmid": getattr(auto, "pmid", None),
+        "auto_target_condition": getattr(auto, "auto_target_condition", None),
+        "auto_apathy_terms": getattr(auto, "auto_apathy_terms", None),
+        "auto_population_N": getattr(auto, "auto_population_N", None),
+        "auto_prevalence": getattr(auto, "auto_prevalence", None),
+        "auto_intervention": getattr(auto, "auto_intervention", None),
+        "auto_confidence": getattr(auto, "auto_confidence", None),
+        "needs_review": getattr(auto, "needs_review", False),
+    }
+
+
+def _serialize_review(review) -> Optional[dict]:
+    if not review:
+        return None
+    return {
+        "pmid": getattr(review, "pmid", None),
+        "group": getattr(review, "group", None),
+        "reviewer_id": getattr(review, "reviewer_id", None),
+        "decision": getattr(review, "decision", None),
+        "final_apathy_terms": getattr(review, "final_apathy_terms", None),
+        "final_target_condition": getattr(review, "final_target_condition", None),
+        "final_population_n": getattr(review, "final_population_n", None),
+        "final_prevalence": getattr(review, "final_prevalence", None),
+        "final_intervention": getattr(review, "final_intervention", None),
+        "comment": getattr(review, "comment", None),
+    }
+
 def check_group_status(session: Session, group_no: int, mode: str = "disease"):
     """
     指定グループの進捗状態とコンフリクト有無をチェックする
@@ -1773,7 +1836,11 @@ def secondary_review_page(request: Request, group: str, pmid: int):
         if pdf_dir:
             pdf_path = Path(pdf_dir) / f"{pmid}.pdf"
             pdf_available = pdf_path.exists()
-
+        # Serialize ORM objects to plain dicts for template safety (avoid DetachedInstanceError)
+        article = _serialize_article(article)
+        secondary = _serialize_secondary(secondary)
+        auto = _serialize_auto(auto)
+        review = _serialize_review(review)
     return templates.TemplateResponse("secondary_review.html", {
         "request": request,
         "username": user.username,
