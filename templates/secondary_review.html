@@ -3,165 +3,188 @@
 {% block title %}二次レビュー - {{ pmid }}{% endblock %}
 
 {% block content %}
-<div class="review-layout">
-  <div class="review-left">
-    <div class="mb-2">
-      <strong>PMID: </strong>{{ pmid }}
-      &nbsp; <a href="https://pubmed.ncbi.nlm.nih.gov/{{ pmid }}/" target="_blank">PubMed</a>
-      {% if article and article.doi %}
-        &nbsp; | &nbsp; <a href="https://doi.org/{{ article.doi }}" target="_blank">DOI: {{ article.doi }}</a>
-      {% endif %}
-    </div>
-
-    <h5>タイトル / 要旨（英語・日本語）</h5>
-    <h6>{{ article.title_en if article else "(no title)" }}</h6>
-    <p>{{ article.abstract_en if article else "" }}</p>
-    <hr>
-    <h6>日本語タイトル / 要旨</h6>
-    {% if article %}
-      <p>{{ article.title_ja or "(日本語タイトルはありません)" }}</p>
-      <p>{{ article.abstract_ja or "" }}</p>
-    {% else %}
-      <div class="alert alert-info">一次DBに該当レコードがありません（後でimport予定）。以下は二次DBの情報で代替表示しています。</div>
-      {% if secondary %}
-        <p><strong>PMID:</strong> {{ secondary.pmid }}</p>
-        <p><strong>フラグ:</strong>
-          {% if secondary.is_physical %} 身体的要因 {% endif %}
-          {% if secondary.is_brain %} 脳神経疾患 {% endif %}
-          {% if secondary.is_psycho %} 精神・心理・環境要因 {% endif %}
-          {% if secondary.is_drug %} 薬剤性 {% endif %}
-        </p>
-      {% endif %}
-    {% endif %}
-    <hr>
-    <style>
-      /* PDF panel */
-      .pdf-panel { border:1px solid #ddd; border-radius:8px; overflow:hidden; background:#fff; }
-      .pdf-panel__toolbar { display:flex; justify-content:flex-end; padding:8px 10px; border-bottom:1px solid #eee; background:#fafafa; }
-      .pdf-panel__iframe { width:100%; height:70vh; border:0; }
-      @media (max-width:767px) { .pdf-panel__iframe { height:60vh; } }
-
-      /* Two-column review layout: left content scrolls normally, right column sticks */
-      .review-layout{ display:grid; grid-template-columns: minmax(0, 1fr) 420px; gap:16px; align-items:start; }
-      .review-left{ min-width:0; }
-      .review-right{ min-width:0; }
-
-      .review-right__sticky{ position:sticky; top:12px; max-height:calc(100vh - 24px); overflow-y:auto; border:1px solid #e6e6e6; border-radius:10px; background:#fff; padding:12px; }
-      .review-right__sticky .section-title{ position:sticky; top:0; background:#fff; padding:6px 0; z-index:1; border-bottom:1px solid #f0f0f0; margin-bottom:8px; }
-
-      /* Ensure embedded PDF fits */
-      .pdf-panel__iframe{ width:100%; }
-
-      /* Mobile: single column and disable sticky */
-      @media (max-width:991px){
-        .review-layout{ grid-template-columns: 1fr; }
-        .review-right__sticky{ position:static; max-height:none; overflow:visible; }
-      }
-    </style>
-
-    {% set _pmid = pmid if (pmid is defined and pmid) else (
-        (article.pmid if (article is defined and article and article.pmid) else (
-            (secondary.pmid if (secondary is defined and secondary and secondary.pmid) else (
-                (item.pmid if (item is defined and item and item.pmid) else (
-                    (sec.pmid if (sec is defined and sec and sec.pmid) else (
-                        (cand.pmid if (cand is defined and cand and cand.pmid) else (
-                            (rec.pmid if (rec is defined and rec and rec.pmid) else None)
-                        ))
-                    ))
-                ))
-            ))
-        ))
-    ) %}
-
-    <div class="pdf-panel">
-      <div class="pdf-panel__toolbar">
-        {% if _pmid %}
-          <a class="btn btn-sm btn-outline-primary" href="/pdf/{{ _pmid }}" target="_blank" rel="noopener">PDFを別タブで開く</a>
-        {% else %}
-          <button class="btn btn-sm btn-outline-secondary" disabled>PDFを別タブで開く</button>
+<div class="container-fluid">
+  <div class="row g-3 align-items-start">
+    <div class="col-12 col-lg-7">
+      <div class="mb-2">
+        <strong>PMID: </strong>{{ pmid }}
+        &nbsp; <a href="https://pubmed.ncbi.nlm.nih.gov/{{ pmid }}/" target="_blank" rel="noopener">PubMed</a>
+        {% if article and article.doi %}
+          &nbsp; | &nbsp; <a href="https://doi.org/{{ article.doi }}" target="_blank" rel="noopener">DOI: {{ article.doi }}</a>
         {% endif %}
       </div>
 
-      {% if _pmid %}
-        <iframe class="pdf-panel__iframe" src="/pdf/{{ _pmid }}" title="PDF {{ _pmid }}" loading="lazy"></iframe>
+      <h5>タイトル / 要旨（英語・日本語）</h5>
+      <h6>{{ article.title_en if article else "(no title)" }}</h6>
+      <p>{{ article.abstract_en if article else "" }}</p>
+      <hr>
+      <h6>日本語タイトル / 要旨</h6>
+      {% if article %}
+        <p>{{ article.title_ja or "(日本語タイトルはありません)" }}</p>
+        <p>{{ article.abstract_ja or "" }}</p>
       {% else %}
-        <div class="alert alert-warning" style="margin:10px;">
-          PMIDがテンプレに渡っていないためPDFリンクを生成できません。サーバ側で `pmid` 変数名を確認してください。
-        </div>
+        <div class="alert alert-info">一次DBに該当レコードがありません（後でimport予定）。以下は二次DBの情報で代替表示しています。</div>
+        {% if secondary %}
+          <p><strong>PMID:</strong> {{ secondary.pmid }}</p>
+          <p><strong>フラグ:</strong>
+            {% if secondary.is_physical %} 身体的要因 {% endif %}
+            {% if secondary.is_brain %} 脳神経疾患 {% endif %}
+            {% if secondary.is_psycho %} 精神・心理・環境要因 {% endif %}
+            {% if secondary.is_drug %} 薬剤性 {% endif %}
+          </p>
+        {% endif %}
       {% endif %}
-    </div>
-  </div>
-  <div class="review-right">
-    <div class="review-right__sticky">
-      <h5 class="section-title">自動抽出 (Gemini)</h5>
-      {% if auto %}
-      <p><strong>対象疾患・病態:</strong> {{ auto.auto_target_condition }}</p>
-      <p><strong>意欲低下を示す用語:</strong> {{ auto.auto_apathy_terms }}</p>
-      <p><strong>信頼度:</strong> {{ auto.auto_confidence }}</p>
-    {% else %}
-      <div class="alert alert-secondary">自動抽出は処理中／未反映です（後から反映されます）</div>
-    {% endif %}
 
       <hr>
-      <h5 class="section-title">レビュー (あなた)</h5>
-      <form method="post" action="/secondary/{{ group }}/{{ pmid }}/save">
-      <div class="mb-2">
-        <label class="form-label">判定</label>
-        <div>
-          <label class="form-check-label me-2"><input type="radio" name="decision" value="include" {% if review.decision=='include' %}checked{% endif %}> 採用</label>
-          <label class="form-check-label me-2"><input type="radio" name="decision" value="exclude" {% if review.decision=='exclude' %}checked{% endif %}> 除外</label>
-          <label class="form-check-label"><input type="radio" name="decision" value="pending" {% if review.decision!='include' and review.decision!='exclude' %}checked{% endif %}> 保留</label>
+
+      {% set _pmid = pmid if (pmid is defined and pmid) else (
+          (article.pmid if (article is defined and article and article.pmid) else (
+              (secondary.pmid if (secondary is defined and secondary and secondary.pmid) else (
+                  (item.pmid if (item is defined and item and item.pmid) else (
+                      (sec.pmid if (sec is defined and sec and sec.pmid) else (
+                          (cand.pmid if (cand is defined and cand and cand.pmid) else (
+                              (rec.pmid if (rec is defined and rec and rec.pmid) else None)
+                          ))
+                      ))
+                  ))
+              ))
+          ))
+      ) %}
+
+      <div class="pdf-panel mb-3">
+        <div class="pdf-panel__toolbar">
+          {% if _pmid %}
+            <a class="btn btn-sm btn-outline-primary" href="/pdf/{{ _pmid }}" target="_blank" rel="noopener">PDFを別タブで開く</a>
+          {% else %}
+            <button class="btn btn-sm btn-outline-secondary" disabled>PDFを別タブで開く</button>
+          {% endif %}
+        </div>
+
+        {% if _pmid %}
+          <iframe class="pdf-panel__iframe" src="/pdf/{{ _pmid }}" title="PDF {{ _pmid }}" loading="lazy"></iframe>
+        {% else %}
+          <div class="alert alert-warning m-2">
+            PMIDがテンプレに渡っていないためPDFリンクを生成できません。サーバ側で pmid 変数名を確認してください。
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-5">
+      <div class="right-sticky">
+        <div class="right-sticky__inner">
+          <details class="gemini-box" {% if auto and auto.needs_review %}open{% endif %}>
+            <summary>Gemini抽出（クリックで開く）{% if auto and auto.auto_confidence %} / 信頼度: {{ auto.auto_confidence }}{% endif %}</summary>
+            <div class="mt-2">
+              {% if auto %}
+                <p><strong>対象疾患・病態:</strong> {{ auto.auto_target_condition }}</p>
+                <p><strong>意欲低下を示す用語:</strong> {{ auto.auto_apathy_terms }}</p>
+                <p><strong>母集団・N:</strong> {{ auto.auto_population_N }}</p>
+                <p><strong>頻度（有症率）:</strong> {{ auto.auto_prevalence }}</p>
+                <p><strong>介入:</strong> {{ auto.auto_intervention }}</p>
+              {% else %}
+                <div class="alert alert-secondary">自動抽出は処理中／未反映です（後から反映されます）</div>
+              {% endif %}
+            </div>
+          </details>
+
+          <div class="entry-box mt-3">
+            <h5 class="mb-2">レビュー (あなた)</h5>
+            <form method="post" action="/secondary/{{ group }}/{{ pmid }}/save">
+              <div class="mb-2">
+                <label class="form-label">判定</label>
+                <div>
+                  <label class="form-check-label me-2"><input type="radio" name="decision" value="include" {% if review.decision=='include' %}checked{% endif %}> 採用</label>
+                  <label class="form-check-label me-2"><input type="radio" name="decision" value="exclude" {% if review.decision=='exclude' %}checked{% endif %}> 除外</label>
+                  <label class="form-check-label"><input type="radio" name="decision" value="pending" {% if review.decision!='include' and review.decision!='exclude' %}checked{% endif %}> 保留</label>
+                </div>
+              </div>
+
+              <div class="mb-2">
+                <label class="form-label">意欲低下を示す用語（apathy/avolition 等）</label>
+                {% if auto and auto.auto_apathy_terms %}
+                  <div class="form-text text-muted small">自動抽出: {{ auto.auto_apathy_terms }}</div>
+                {% endif %}
+                <input class="form-control" name="final_apathy_terms" value="{{ review.final_apathy_terms or '' }}">
+              </div>
+
+              <div class="mb-2">
+                <label class="form-label">対象疾患・病態</label>
+                {% if auto and auto.auto_target_condition %}
+                  <div class="form-text text-muted small">自動抽出: {{ auto.auto_target_condition }}</div>
+                {% endif %}
+                <input class="form-control" name="final_target_condition" value="{{ review.final_target_condition or '' }}">
+              </div>
+
+              <div class="mb-2">
+                <label class="form-label">母集団・N</label>
+                {% if auto and auto.auto_population_N %}
+                  <div class="form-text text-muted small">自動抽出: {{ auto.auto_population_N }}</div>
+                {% endif %}
+                <input class="form-control" name="final_population_n" value="{{ review.final_population_n or '' }}">
+              </div>
+
+              <div class="mb-2">
+                <label class="form-label">頻度（有症率）</label>
+                {% if auto and auto.auto_prevalence %}
+                  <div class="form-text text-muted small">自動抽出: {{ auto.auto_prevalence }}</div>
+                {% endif %}
+                <input class="form-control" name="final_prevalence" value="{{ review.final_prevalence or '' }}">
+              </div>
+
+              <div class="mb-2">
+                <label class="form-label">介入（治療・リハビリ）</label>
+                {% if auto and auto.auto_intervention %}
+                  <div class="form-text text-muted small">自動抽出: {{ auto.auto_intervention }}</div>
+                {% endif %}
+                <input class="form-control" name="final_intervention" value="{{ review.final_intervention or '' }}">
+              </div>
+
+              <div class="d-flex gap-2">
+                <button type="submit" name="action" value="save" class="btn btn-primary">保存</button>
+                <button type="submit" name="action" value="save_next" class="btn btn-success">保存して次へ</button>
+                <button type="submit" name="action" value="exclude_next" class="btn btn-danger">除外して次へ</button>
+                <a href="/secondary" class="btn btn-outline-secondary">戻る</a>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-
-      <div class="mb-2">
-        <label class="form-label">意欲低下を示す用語（apathy/avolition 等）</label>
-        {% if auto and auto.auto_apathy_terms %}
-          <div class="form-text text-muted small">自動抽出: {{ auto.auto_apathy_terms }}</div>
-        {% endif %}
-        <input class="form-control" name="final_apathy_terms" value="{{ review.final_apathy_terms or '' }}">
-      </div>
-
-      <div class="mb-2">
-        <label class="form-label">対象疾患・病態</label>
-        {% if auto and auto.auto_target_condition %}
-          <div class="form-text text-muted small">自動抽出: {{ auto.auto_target_condition }}</div>
-        {% endif %}
-        <input class="form-control" name="final_target_condition" value="{{ review.final_target_condition or '' }}">
-      </div>
-
-      <div class="mb-2">
-        <label class="form-label">母集団・N</label>
-        {% if auto and auto.auto_population_N %}
-          <div class="form-text text-muted small">自動抽出: {{ auto.auto_population_N }}</div>
-        {% endif %}
-        <input class="form-control" name="final_population_n" value="{{ review.final_population_n or '' }}">
-      </div>
-
-      <div class="mb-2">
-        <label class="form-label">頻度（有症率）</label>
-        {% if auto and auto.auto_prevalence %}
-          <div class="form-text text-muted small">自動抽出: {{ auto.auto_prevalence }}</div>
-        {% endif %}
-        <input class="form-control" name="final_prevalence" value="{{ review.final_prevalence or '' }}">
-      </div>
-
-      <div class="mb-2">
-        <label class="form-label">介入（治療・リハビリ）</label>
-        {% if auto and auto.auto_intervention %}
-          <div class="form-text text-muted small">自動抽出: {{ auto.auto_intervention }}</div>
-        {% endif %}
-        <input class="form-control" name="final_intervention" value="{{ review.final_intervention or '' }}">
-      </div>
-
-      <div class="d-flex gap-2">
-        <button type="submit" name="action" value="save" class="btn btn-primary">保存</button>
-        <button type="submit" name="action" value="save_next" class="btn btn-success">保存して次へ</button>
-        <button type="submit" name="action" value="exclude_next" class="btn btn-danger">除外して次へ</button>
-        <a href="/secondary" class="btn btn-outline-secondary">戻る</a>
-      </div>
-      </form>
     </div>
   </div>
 </div>
+
+<style>
+  /* Right sticky shell and inner scroll area */
+  .right-sticky{ position: sticky; top: 72px; }
+  .right-sticky__inner{
+    max-height: calc(100vh - 84px);
+    overflow-y: auto;
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    background: #fff;
+    padding: 12px;
+  }
+
+  /* Ensure ancestor overflow doesn't break sticky positioning */
+  .container, .container-fluid, main, .content, .page-content { overflow: visible !important; }
+
+  /* PDF panel */
+  .pdf-panel { border:1px solid #ddd; border-radius:8px; overflow:hidden; background:#fff; }
+  .pdf-panel__toolbar { display:flex; justify-content:flex-end; padding:8px 10px; border-bottom:1px solid #eee; background:#fafafa; }
+  .pdf-panel__iframe { width:100%; height:70vh; border:0; }
+  @media (max-width:767px) { .pdf-panel__iframe { height:60vh; } }
+
+  /* Gemini details styling */
+  details.gemini-box{ border:1px solid #eee; border-radius:10px; background:#fafafa; padding:10px 12px; }
+  details.gemini-box > summary{ cursor:pointer; font-weight:600; }
+  .entry-box{ border:1px solid #eee; border-radius:10px; background:#fff; padding:12px; }
+
+  /* Mobile fallback: static right column */
+  @media (max-width: 991px){
+    .right-sticky{ position: static; top: auto; }
+    .right-sticky__inner{ max-height: none; overflow: visible; }
+  }
+</style>
+
 {% endblock %}
