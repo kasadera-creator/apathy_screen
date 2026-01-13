@@ -3,7 +3,7 @@
 {% block title %}二次レビュー - {{ pmid }}{% endblock %}
 
 {% block content %}
-<div class="review-layout-full">
+<div class="container-xl">
   <div class="review-layout">
     <div class="review-left">
     <div class="card mb-3 shadow-sm">
@@ -193,21 +193,12 @@
 </div>
 
 <style>
-/* ===== full width wrapper ===== */
-.review-layout-full{
-  width: 100%;
-  margin-left: calc(-1 * (100vw - 100%)/2);
-  margin-right: calc(-1 * (100vw - 100%)/2);
-}
-
-/* ===== two-pane layout ===== */
+/* ===== two-pane layout (use Bootstrap container-xl for centering) ===== */
 .review-layout{
   display: grid;
-  grid-template-columns: 1fr 440px;
-  gap: 20px;
-  padding: 0 24px;
-  max-width: 1200px;
-  margin: 0 auto;
+  grid-template-columns: minmax(0, 1fr) 420px;
+  gap: 24px;
+  align-items: start;
 }
 
 .review-left{
@@ -216,23 +207,17 @@
 
 .review-right{
   position: sticky;
-  top: 88px; /* navbar + margin */
-  /* 固定表示（内部スクロールなし） */
-  max-height: none;
-  overflow: visible;
-  width: 100%;
+  top: 88px; /* navbar高さに合わせる */
+  align-self: start;
 }
 
 /* Mobile */
 @media (max-width: 991px){
   .review-layout{
     grid-template-columns: 1fr;
-    padding: 0 12px;
   }
   .review-right{
     position: static;
-    max-height: none;
-    overflow: visible;
   }
 }
 
