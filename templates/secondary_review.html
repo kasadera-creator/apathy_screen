@@ -182,19 +182,20 @@
         </div>
 
         <div class="d-flex justify-content-between align-items-center pt-3 border-top">
-          <button class="btn btn-outline-secondary" type="submit" name="nav" value="prev" formnovalidate>
-            <i class="bi bi-chevron-left"></i> 1つ前に戻る
-          </button>
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-secondary" type="submit" name="nav" value="prev" formnovalidate>
+              <i class="bi bi-chevron-left"></i> 1つ前に戻る
+            </button>
 
-          <div class="d-flex align-items-center gap-2">
-            <span class="small text-muted">No.へ移動:</span>
-            <input type="number" name="jump_index" min="1" max="{{ progress_total }}" class="form-control form-control-sm" style="width:5rem;" />
-            <button class="btn btn-outline-secondary btn-sm" type="submit" name="nav" value="jump" formnovalidate>Go</button>
+            <div class="d-flex align-items-center gap-2">
+              <span class="small text-muted">No.へ移動:</span>
+              <input type="number" name="jump_index" min="1" max="{{ progress_total }}" class="form-control form-control-sm" style="width:5rem;" />
+              <button class="btn btn-sm btn-outline-secondary" type="submit" name="nav" value="jump" formnovalidate>Go</button>
+            </div>
           </div>
 
           <div>
-            <button type="submit" name="action" value="save" class="btn btn-primary">保存</button>
-            <button class="btn btn-primary px-4 fw-bold" type="submit" name="nav" value="next">保存して次へ <i class="bi bi-chevron-right"></i></button>
+            <button class="btn btn-sm btn-primary px-3 fw-bold" type="submit" name="nav" value="next">保存して次へ <i class="bi bi-chevron-right"></i></button>
           </div>
         </div>
       </form>
