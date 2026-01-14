@@ -1867,6 +1867,26 @@ def secondary_review_page(request: Request, group: str, pmid: int):
             pdf_path = Path(pdf_dir) / f"{pmid}.pdf"
             pdf_available = pdf_path.exists()
         # Serialize ORM objects to plain dicts for template safety (avoid DetachedInstanceError)
+        # compute progress for this reviewer within the group
+        try:
+            id_rows = session.exec(select(SecondaryArticle.pmid).where(getattr(SecondaryArticle, f"is_{group}") == True).order_by(SecondaryArticle.pmid)).all()
+            id_list = [int(r) for r in id_rows] if id_rows else []
+        except Exception:
+            id_list = []
+
+        progress_total = len(id_list)
+        if progress_total:
+            done_count = session.exec(select(func.count(SecondaryReview.id)).where(
+                (SecondaryReview.group == group) & (SecondaryReview.reviewer_id == user.id) & (SecondaryReview.pmid.in_(id_list)) & (SecondaryReview.decision != 'pending')
+            )).one()
+        else:
+            done_count = 0
+
+        try:
+            current_index = id_list.index(pmid) + 1 if pmid in id_list else None
+        except Exception:
+            current_index = None
+
         article = _serialize_article(article)
         secondary = _serialize_secondary(secondary)
         auto = _serialize_auto(auto_obj)
@@ -1881,6 +1901,9 @@ def secondary_review_page(request: Request, group: str, pmid: int):
         "auto": auto,
         "auto_error": auto_error,
         "review": review,
+        "progress_done": int(done_count) if isinstance(done_count, (int,)) or hasattr(done_count, '__int__') else int(done_count[0]) if (done_count and isinstance(done_count, tuple)) else int(done_count),
+        "progress_total": progress_total,
+        "current_index": current_index,
         "pdf_available": pdf_available,
         "current_page": "secondary"
     })
@@ -1890,7 +1913,7 @@ def secondary_review_page(request: Request, group: str, pmid: int):
 def secondary_save(request: Request, group: str, pmid: int,
                    decision: str = Form("pending"), final_citation: str = Form(""), final_apathy_terms: str = Form(""),
                    final_target_condition: str = Form(""), final_population_n: str = Form(""), final_prevalence: str = Form(""), final_intervention: str = Form(""),
-                   comment: str = Form(""), action: str = Form("save")):
+                   comment: str = Form(""), action: str = Form("save"), nav: str = Form(None), jump_index: str | None = Form(None)):
     user = get_current_user(request)
     if not user: return RedirectResponse("/login", 303)
     with Session(engine) as session:
@@ -1916,9 +1939,37 @@ def secondary_save(request: Request, group: str, pmid: int,
         review.comment = comment
         review.updated_at = datetime.utcnow().isoformat()
         session.add(review); session.commit()
+        # compute id list for navigation actions
+        try:
+            id_rows = session.exec(select(SecondaryArticle.pmid).where(getattr(SecondaryArticle, f"is_{group}") == True).order_by(SecondaryArticle.pmid)).all()
+            id_list = [int(r) for r in id_rows] if id_rows else []
+        except Exception:
+            id_list = []
 
-    if action in ("save_next", "exclude_next"):
+    # Navigation handling
+    if action == 'exclude_next':
         return RedirectResponse(f"/secondary/{group}/next", 303)
+
+    if nav == 'prev' and id_list:
+        try:
+            idx = id_list.index(pmid)
+            target = id_list[idx - 1] if idx > 0 else id_list[0]
+            return RedirectResponse(f"/secondary/{group}/{target}", 303)
+        except ValueError:
+            return RedirectResponse(f"/secondary/{group}/next", 303)
+
+    if nav == 'jump' and id_list and jump_index:
+        try:
+            j = int(jump_index)
+            j = max(1, min(j, len(id_list)))
+            target = id_list[j - 1]
+            return RedirectResponse(f"/secondary/{group}/{target}", 303)
+        except Exception:
+            return RedirectResponse(f"/secondary/{group}/{pmid}", 303)
+
+    if nav == 'next' or action == 'save_next':
+        return RedirectResponse(f"/secondary/{group}/next", 303)
+
     # default: return to same page
     return RedirectResponse(f"/secondary/{group}/{pmid}", 303)
 

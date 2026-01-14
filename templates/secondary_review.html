@@ -4,6 +4,20 @@
 
 {% block content %}
 <div class="container-xl">
+  <div class="mb-2">
+    <h3 class="mb-1">{{ SECONDARY_GROUP_LABELS[group] if group in SECONDARY_GROUP_LABELS else group }} 担当グループの二次スクリーニング</h3>
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <div class="mb-0">進捗: {{ progress_done }}/{{ progress_total }}</div>
+        {% if current_index %}
+          <div class="text-muted small">（文献番号: {{ current_index }} / {{ progress_total }}）</div>
+        {% endif %}
+      </div>
+      <div class="text-end small">
+        <a class="text-decoration-none text-secondary" href="/secondary/{{ group }}/next">次へ（未評価へ） →</a>
+      </div>
+    </div>
+  </div>
   <div class="review-layout">
     <div class="review-left">
     <div class="card mb-3 shadow-sm">
@@ -167,11 +181,21 @@
           <textarea class="form-control review-textarea" name="final_intervention" rows="4">{{ review.final_intervention or (auto.auto_intervention if auto else '') }}</textarea>
         </div>
 
-        <div class="d-flex gap-2 pt-2 border-top">
-          <button type="submit" name="action" value="save" class="btn btn-primary">保存</button>
-          <button type="submit" name="action" value="save_next" class="btn btn-success">保存して次へ</button>
-          <button type="submit" name="action" value="exclude_next" class="btn btn-danger">除外して次へ</button>
-          <a href="/secondary" class="btn btn-outline-secondary">戻る</a>
+        <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+          <button class="btn btn-outline-secondary" type="submit" name="nav" value="prev" formnovalidate>
+            <i class="bi bi-chevron-left"></i> 1つ前に戻る
+          </button>
+
+          <div class="d-flex align-items-center gap-2">
+            <span class="small text-muted">No.へ移動:</span>
+            <input type="number" name="jump_index" min="1" max="{{ progress_total }}" class="form-control form-control-sm" style="width:5rem;" />
+            <button class="btn btn-outline-secondary btn-sm" type="submit" name="nav" value="jump" formnovalidate>Go</button>
+          </div>
+
+          <div>
+            <button type="submit" name="action" value="save" class="btn btn-primary">保存</button>
+            <button class="btn btn-primary px-4 fw-bold" type="submit" name="nav" value="next">保存して次へ <i class="bi bi-chevron-right"></i></button>
+          </div>
         </div>
       </form>
       </div>
