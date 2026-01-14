@@ -137,8 +137,8 @@
           <p class="small text-muted mb-2">アパシー・意欲低下をきたす病態・状態を調査するために、担当領域としてシステマティックレビューに含める価値があるか</p>
           <input type="hidden" name="decision" id="decision_input" value="{{ _initial_decision }}">
           <div class="d-flex gap-2 mb-2" role="group" aria-label="判定ボタン">
-            <button type="button" class="btn btn-lg btn-success decision-btn flex-fill {% if _initial_decision=='include' %}selected{% endif %}" data-value="include">採用</button>
-            <button type="button" class="btn btn-lg btn-danger decision-btn flex-fill {% if _initial_decision=='exclude' %}selected{% endif %}" data-value="exclude">除外</button>
+            <button type="button" class="{% if _initial_decision=='include' %}btn btn-lg btn-success{% else %}btn btn-lg btn-outline-success{% endif %} decision-btn flex-fill {% if _initial_decision=='include' %}selected{% endif %}" data-value="include">採用</button>
+            <button type="button" class="{% if _initial_decision=='exclude' %}btn btn-lg btn-danger{% else %}btn btn-lg btn-outline-danger{% endif %} decision-btn flex-fill {% if _initial_decision=='exclude' %}selected{% endif %}" data-value="exclude">除外</button>
           </div>
         </div>
 
@@ -244,10 +244,30 @@ document.addEventListener('DOMContentLoaded', function(){
   if(!input) return;
   btns.forEach(function(b){
     b.addEventListener('click', function(){
-      // remove selected
-      btns.forEach(function(x){ x.classList.remove('selected'); });
+      var val = this.getAttribute('data-value');
+      // reset all to outline and remove selected
+      btns.forEach(function(x){
+        x.classList.remove('selected');
+        if(x.getAttribute('data-value') === 'include'){
+          x.classList.remove('btn-success');
+          if(!x.classList.contains('btn-outline-success')) x.classList.add('btn-outline-success');
+          x.classList.remove('btn-outline-danger');
+        } else {
+          x.classList.remove('btn-danger');
+          if(!x.classList.contains('btn-outline-danger')) x.classList.add('btn-outline-danger');
+          x.classList.remove('btn-outline-success');
+        }
+      });
+      // set clicked to filled variant
+      if(val === 'include'){
+        this.classList.remove('btn-outline-success');
+        this.classList.add('btn-success');
+      } else {
+        this.classList.remove('btn-outline-danger');
+        this.classList.add('btn-danger');
+      }
       this.classList.add('selected');
-      input.value = this.getAttribute('data-value');
+      input.value = val;
     });
   });
 });
