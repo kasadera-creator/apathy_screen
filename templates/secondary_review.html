@@ -181,7 +181,7 @@
           <textarea class="form-control review-textarea" name="final_intervention" rows="4">{{ review.final_intervention or (auto.auto_intervention if auto else '') }}</textarea>
         </div>
 
-        <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+        <div class="d-flex justify-content-between align-items-center pt-3 border-top nav-controls">
           <div class="d-flex gap-2">
             <button class="btn btn-sm btn-outline-secondary" type="submit" name="nav" value="prev" formnovalidate>
               <i class="bi bi-chevron-left"></i> 1つ前に戻る
@@ -189,13 +189,13 @@
 
             <div class="d-flex align-items-center gap-2">
               <span class="small text-muted">No.へ移動:</span>
-              <input type="number" name="jump_index" min="1" max="{{ progress_total }}" class="form-control form-control-sm" style="width:5rem;" />
+              <input type="number" name="jump_index" min="1" max="{{ progress_total }}" class="form-control form-control-sm" style="width:4.5rem;" />
               <button class="btn btn-sm btn-outline-secondary" type="submit" name="nav" value="jump" formnovalidate>Go</button>
             </div>
           </div>
 
           <div>
-            <button class="btn btn-sm btn-primary px-3 fw-bold" type="submit" name="nav" value="next">保存して次へ <i class="bi bi-chevron-right"></i></button>
+            <button class="btn btn-sm btn-primary px-2 fw-bold" type="submit" name="nav" value="next">保存して次へ <i class="bi bi-chevron-right"></i></button>
           </div>
         </div>
       </form>
@@ -252,6 +252,14 @@ details.gemini-box > summary{
   white-space: pre-wrap;
   overflow-wrap: break-word;
 }
+
+/* Compact nav control buttons */
+.nav-controls .btn-sm {
+  padding-top: 0.28rem;
+  padding-bottom: 0.28rem;
+  font-size: 0.85rem;
+}
+.nav-controls input.form-control-sm { height: calc(1.5rem + 2px); padding: 0.25rem 0.4rem; font-size:0.85rem; }
 
 /* Decision buttons */
 .decision-btn.selected {
