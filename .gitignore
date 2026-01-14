@@ -27,3 +27,4 @@ db_rescue/
 # RIS / 文献データ（巨大）
 static/ris/
 data/*.xlsx
+data/*.csv

@@ -11,6 +11,8 @@ from fastapi.staticfiles import StaticFiles
 
 from sqlmodel import SQLModel, Session, create_engine, select
 from sqlalchemy import func, text
+from sqlalchemy.exc import OperationalError
+import logging
 from datetime import datetime
 from types import SimpleNamespace
 import time
@@ -123,6 +125,9 @@ def _ensure_table_columns(engine):
 
 TEMPLATE_DIR = BASE_DIR / "templates"
 app = FastAPI()
+
+# Logger for server-side messages
+logger = logging.getLogger("uvicorn.error")
 
 templates = Jinja2Templates(directory=str(TEMPLATE_DIR))
 templates.env.globals["GROUP_NAMES"] = GROUP_NAMES
@@ -1822,10 +1827,29 @@ def secondary_next(request: Request, group: str):
 def secondary_review_page(request: Request, group: str, pmid: int):
     user = get_current_user(request)
     if not user: return RedirectResponse("/login", 303)
+    # Log which DB and request context we're using to aid debugging
+    try:
+        logger.info("secondary view: pmid=%s group=%s user=%s DATABASE_URL=%s", pmid, group, user.username, engine.url)
+    except Exception:
+        # best-effort logging
+        print(f"secondary view: pmid={pmid} group={group} user={user.username} DATABASE_URL={engine.url}")
+
+    auto_error = None
     with Session(engine) as session:
         article = session.exec(select(Article).where(Article.pmid == pmid)).first()
         secondary = session.exec(select(SecondaryArticle).where(SecondaryArticle.pmid == pmid)).first()
-        auto = session.exec(select(SecondaryAutoExtraction).where(SecondaryAutoExtraction.pmid == pmid)).first()
+        # Load auto extraction table defensively: if table missing, do not raise 500
+        try:
+            auto_obj = session.exec(select(SecondaryAutoExtraction).where(SecondaryAutoExtraction.pmid == pmid)).first()
+        except OperationalError as e:
+            logger.error("SecondaryAutoExtraction query failed: %s", e, exc_info=True)
+            auto_obj = None
+            auto_error = "Gemini下書きテーブルが未作成のため表示できません（管理者に連絡してください）"
+        except Exception:
+            # re-raise unexpected exceptions so they appear in logs and fail loud
+            logger.exception("Unexpected error loading SecondaryAutoExtraction")
+            raise
+
         review = session.exec(select(SecondaryReview).where((SecondaryReview.pmid == pmid) & (SecondaryReview.group == group) & (SecondaryReview.reviewer_id == user.id))).first()
         if not review:
             if user.is_admin:
@@ -1845,7 +1869,7 @@ def secondary_review_page(request: Request, group: str, pmid: int):
         # Serialize ORM objects to plain dicts for template safety (avoid DetachedInstanceError)
         article = _serialize_article(article)
         secondary = _serialize_secondary(secondary)
-        auto = _serialize_auto(auto)
+        auto = _serialize_auto(auto_obj)
         review = _serialize_review(review)
     return templates.TemplateResponse("secondary_review.html", {
         "request": request,
@@ -1855,6 +1879,7 @@ def secondary_review_page(request: Request, group: str, pmid: int):
         "article": article,
         "secondary": secondary,
         "auto": auto,
+        "auto_error": auto_error,
         "review": review,
         "pdf_available": pdf_available,
         "current_page": "secondary"
@@ -1925,18 +1950,155 @@ def pdf_redirect(pmid: int, request: Request):
 
 
 @app.get("/secondary/{group}/export")
-def secondary_group_export(request: Request, group: str):
+def secondary_group_export(request: Request, group: str, format: str = Query("csv")):
     user = get_current_user(request)
     if not user: return RedirectResponse("/login", 303)
-    output = io.StringIO(); writer = csv.writer(output)
-    writer.writerow(["pmid", "reviewer", "decision", "final_target_condition", "final_apathy_terms", "comment", "auto_target_condition", "auto_apathy_terms"])
+    
+    # Fetch all reviews for this group with auto-extraction and user info
     with Session(engine) as session:
-        rows = session.exec(select(SecondaryReview, SecondaryAutoExtraction, User).join(User, User.id == SecondaryReview.reviewer_id).outerjoin(SecondaryAutoExtraction, SecondaryAutoExtraction.pmid == SecondaryReview.pmid).where(SecondaryReview.group == group)).all()
-        for rev, auto, usr in rows:
-            writer.writerow([rev.pmid, usr.username if usr else rev.reviewer_id, rev.decision, rev.final_target_condition or "", rev.final_apathy_terms or "", rev.comment or "", (auto.auto_target_condition if auto else ""), (auto.auto_apathy_terms if auto else "")])
+        rows = session.exec(
+            select(SecondaryReview, SecondaryAutoExtraction, User, Article)
+            .join(User, User.id == SecondaryReview.reviewer_id)
+            .outerjoin(SecondaryAutoExtraction, SecondaryAutoExtraction.pmid == SecondaryReview.pmid)
+            .outerjoin(Article, Article.pmid == SecondaryReview.pmid)
+            .where(SecondaryReview.group == group)
+        ).all()
+    
+    if format.lower() == "xlsx":
+        return _export_secondary_xlsx(rows, group)
+    else:
+        return _export_secondary_csv(rows, group)
+
+
+def _export_secondary_csv(rows, group: str):
+    """Export secondary reviews as CSV (vertical format: 1 row = 1 PMID × reviewer)"""
+    output = io.StringIO()
+    writer = csv.writer(output)
+    
+    # Header: aligned with template requirements
+    writer.writerow([
+        "pmid",
+        "reviewer",
+        "decision",
+        "target_condition",
+        "apathy_terms",
+        "population_n",
+        "prevalence",
+        "intervention",
+        "comment",
+        "auto_target_condition",
+        "auto_apathy_terms",
+        "auto_population_n",
+        "auto_prevalence",
+        "auto_intervention"
+    ])
+    
+    # Data rows
+    for rev, auto, usr, article in rows:
+        writer.writerow([
+            rev.pmid,
+            usr.username if usr else str(rev.reviewer_id),
+            rev.decision or "",
+            rev.final_target_condition or "",
+            rev.final_apathy_terms or "",
+            rev.final_population_n or "",
+            rev.final_prevalence or "",
+            rev.final_intervention or "",
+            rev.comment or "",
+            auto.auto_target_condition if auto else "",
+            auto.auto_apathy_terms if auto else "",
+            auto.auto_population_N if auto else "",
+            auto.auto_prevalence if auto else "",
+            auto.auto_intervention if auto else ""
+        ])
+    
     output.seek(0)
     filename = f"secondary_group_{group}_export.csv"
     return StreamingResponse(output, media_type="text/csv", headers={"Content-Disposition": f'attachment; filename="{filename}"'})
+
+
+def _export_secondary_xlsx(rows, group: str):
+    """Export secondary reviews as XLSX using openpyxl (vertical format)"""
+    try:
+        from openpyxl import Workbook
+        from openpyxl.styles import Font, PatternFill, Alignment
+    except ImportError:
+        return HTMLResponse("openpyxl not installed. Please install it to use XLSX export.", status_code=500)
+    
+    wb = Workbook()
+    ws = wb.active
+    ws.title = group
+    
+    # Header row with styling
+    header_row = [
+        "PMID",
+        "Reviewer",
+        "Decision",
+        "Target Condition",
+        "Apathy Terms",
+        "Population N",
+        "Prevalence",
+        "Intervention",
+        "Comment",
+        "Auto Target Condition",
+        "Auto Apathy Terms",
+        "Auto Population N",
+        "Auto Prevalence",
+        "Auto Intervention"
+    ]
+    ws.append(header_row)
+    
+    # Style header
+    header_fill = PatternFill(start_color="4472C4", end_color="4472C4", fill_type="solid")
+    header_font = Font(bold=True, color="FFFFFF")
+    for cell in ws[1]:
+        cell.fill = header_fill
+        cell.font = header_font
+        cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+    
+    # Data rows
+    for rev, auto, usr, article in rows:
+        ws.append([
+            rev.pmid,
+            usr.username if usr else str(rev.reviewer_id),
+            rev.decision or "",
+            rev.final_target_condition or "",
+            rev.final_apathy_terms or "",
+            rev.final_population_n or "",
+            rev.final_prevalence or "",
+            rev.final_intervention or "",
+            rev.comment or "",
+            auto.auto_target_condition if auto else "",
+            auto.auto_apathy_terms if auto else "",
+            auto.auto_population_N if auto else "",
+            auto.auto_prevalence if auto else "",
+            auto.auto_intervention if auto else ""
+        ])
+    
+    # Column widths
+    ws.column_dimensions["A"].width = 12  # PMID
+    ws.column_dimensions["B"].width = 15  # Reviewer
+    ws.column_dimensions["C"].width = 12  # Decision
+    ws.column_dimensions["D"].width = 25  # Target Condition
+    ws.column_dimensions["E"].width = 25  # Apathy Terms
+    ws.column_dimensions["F"].width = 20  # Population N
+    ws.column_dimensions["G"].width = 20  # Prevalence
+    ws.column_dimensions["H"].width = 25  # Intervention
+    ws.column_dimensions["I"].width = 20  # Comment
+    for col in ["J", "K", "L", "M", "N"]:
+        ws.column_dimensions[col].width = 20
+    
+    # Output to BytesIO
+    output = io.BytesIO()
+    wb.save(output)
+    output.seek(0)
+    
+    filename = f"secondary_group_{group}_export.xlsx"
+    return StreamingResponse(
+        iter([output.getvalue()]),
+        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'}
+    )
 
 
 @app.get("/secondary/conditions/summary")

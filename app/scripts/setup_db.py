@@ -10,6 +10,7 @@ from pathlib import Path
 import os
 import importlib
 from sqlmodel import SQLModel, Session, create_engine, select
+from sqlalchemy import inspect
 from passlib.context import CryptContext
 from datetime import datetime
 
@@ -26,8 +27,19 @@ def create_tables(engine):
     if os.getenv("AUTO_CREATE_TABLES", "0") != "1":
         print("AUTO_CREATE_TABLES is not '1' — refusing to run create_all from CLI helper")
         return
+    # Ensure all model classes are imported so SQLModel.metadata is populated
+    try:
+        import app.models as _models
+    except Exception:
+        pass
     SQLModel.metadata.create_all(engine)
     print("Created/verified tables via SQLModel.metadata.create_all")
+    try:
+        inspector = inspect(engine)
+        tables = inspector.get_table_names()
+        print("Tables in target DB:", tables)
+    except Exception:
+        pass
 
 
 def create_user(engine, username, password, group_no=1, is_admin=False):
