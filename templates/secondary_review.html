@@ -142,42 +142,27 @@
 
         <div class="mb-2">
           <label class="form-label">意欲低下を示す用語（apathy/avolition 等）</label>
-          {% if auto and auto.auto_apathy_terms %}
-            <div class="form-text text-muted small">自動抽出: {{ auto.auto_apathy_terms }}</div>
-          {% endif %}
-          <input class="form-control" name="final_apathy_terms" value="{{ review.final_apathy_terms or (auto.auto_apathy_terms if auto else '') }}">
+          <textarea class="form-control review-textarea" name="final_apathy_terms" rows="3">{{ review.final_apathy_terms or (auto.auto_apathy_terms if auto else '') }}</textarea>
         </div>
 
         <div class="mb-2">
           <label class="form-label">対象疾患・病態</label>
-          {% if auto and auto.auto_target_condition %}
-            <div class="form-text text-muted small">自動抽出: {{ auto.auto_target_condition }}</div>
-          {% endif %}
-          <input class="form-control" name="final_target_condition" value="{{ review.final_target_condition or (auto.auto_target_condition if auto else '') }}">
+          <textarea class="form-control review-textarea" name="final_target_condition" rows="3">{{ review.final_target_condition or (auto.auto_target_condition if auto else '') }}</textarea>
         </div>
 
         <div class="mb-2">
           <label class="form-label">母集団・N</label>
-          {% if auto and auto.auto_population_N %}
-            <div class="form-text text-muted small">自動抽出: {{ auto.auto_population_N }}</div>
-          {% endif %}
-          <input class="form-control" name="final_population_n" value="{{ review.final_population_n or (auto.auto_population_N if auto else '') }}">
+          <textarea class="form-control review-textarea" name="final_population_n" rows="4">{{ review.final_population_n or (auto.auto_population_N if auto else '') }}</textarea>
         </div>
 
         <div class="mb-2">
           <label class="form-label">頻度（有症率）</label>
-          {% if auto and auto.auto_prevalence %}
-            <div class="form-text text-muted small">自動抽出: {{ auto.auto_prevalence }}</div>
-          {% endif %}
-          <input class="form-control" name="final_prevalence" value="{{ review.final_prevalence or (auto.auto_prevalence if auto else '') }}">
+          <textarea class="form-control review-textarea" name="final_prevalence" rows="4">{{ review.final_prevalence or (auto.auto_prevalence if auto else '') }}</textarea>
         </div>
 
         <div class="mb-2">
           <label class="form-label">介入（治療・リハビリ）</label>
-          {% if auto and auto.auto_intervention %}
-            <div class="form-text text-muted small">自動抽出: {{ auto.auto_intervention }}</div>
-          {% endif %}
-          <input class="form-control" name="final_intervention" value="{{ review.final_intervention or (auto.auto_intervention if auto else '') }}">
+          <textarea class="form-control review-textarea" name="final_intervention" rows="4">{{ review.final_intervention or (auto.auto_intervention if auto else '') }}</textarea>
         </div>
 
         <div class="d-flex gap-2 pt-2 border-top">
@@ -231,6 +216,14 @@
 details.gemini-box > summary{
   cursor:pointer;
   font-weight:600;
+}
+
+/* Review textarea sizing */
+.review-textarea {
+  min-height: 6em;
+  resize: vertical;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 </style>
 
