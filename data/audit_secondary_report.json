@@ -1,0 +1,32 @@
+{
+  "physical": {
+    "csv_count": 314,
+    "db_count": 314,
+    "reviewed_count": 1,
+    "pending_count": 1,
+    "missing_count": 0,
+    "extra_count": 0,
+    "missing_pmids_sample": [],
+    "extra_pmids_sample": []
+  },
+  "brain": {
+    "csv_count": 879,
+    "db_count": 879,
+    "reviewed_count": 1,
+    "pending_count": 1,
+    "missing_count": 0,
+    "extra_count": 0,
+    "missing_pmids_sample": [],
+    "extra_pmids_sample": []
+  },
+  "psycho": {
+    "csv_count": 344,
+    "db_count": 344,
+    "reviewed_count": 1,
+    "pending_count": 1,
+    "missing_count": 0,
+    "extra_count": 0,
+    "missing_pmids_sample": [],
+    "extra_pmids_sample": []
+  }
+}
