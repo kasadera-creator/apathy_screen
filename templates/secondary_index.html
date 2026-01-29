@@ -3,6 +3,37 @@
 {% block title %}二次スクリーニング - ダッシュボード{% endblock %}
 
 {% block content %}
+<style>
+  .badge-pending { background-color: #ffc107; color: black; }
+  .badge-include { background-color: #28a745; color: white; }
+  .badge-exclude { background-color: #dc3545; color: white; }
+  .badge-completed { background-color: #17a2b8; color: white; }
+  .candidate-item { 
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .candidate-item:hover {
+    background-color: #f5f5f5;
+  }
+  .candidate-item a {
+    text-decoration: none;
+    color: inherit;
+    flex-grow: 1;
+  }
+  .candidate-item a:hover {
+    text-decoration: underline;
+  }
+  .candidates-list {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+</style>
+
 <h3>二次スクリーニング</h3>
 <div class="row">
   {% for g, s in stats.items() %}
@@ -10,11 +41,59 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">{{ SECONDARY_GROUP_LABELS[g] if g in SECONDARY_GROUP_LABELS else g|capitalize }}</h5>
-          <p class="card-text">合計: {{ s.total }}<br>未処理: {{ s.pending }}<br>採用: {{ s.included }}<br>除外: {{ s.excluded }}</p>
-          <a href="/secondary/{{ g }}/next" class="btn btn-primary">次の未着手へ</a>
+          <p class="card-text">
+            合計: {{ s.total }}<br>
+            <small>未処理: {{ s.pending }}</small><br>
+            <small>採用: {{ s.included }}</small><br>
+            <small>除外: {{ s.excluded }}</small><br>
+            {% if s.completed > 0 %}<small>完了済み: <span class="badge badge-completed">{{ s.completed }}</span></small>{% endif %}
+          </p>
+          <a href="/secondary/{{ g }}/next" class="btn btn-primary btn-sm">次の未着手へ</a>
+          
+          <!-- Expandable candidates list -->
+          {% if g in candidates_by_group and candidates_by_group[g]|length > 0 %}
+          <div class="mt-2">
+            <button class="btn btn-outline-secondary btn-sm" type="button" data-toggle="collapse" data-target="#candidates-{{ g }}">
+              候補一覧を表示
+            </button>
+            <div class="collapse mt-2" id="candidates-{{ g }}">
+              <div class="candidates-list">
+                {% for cand in candidates_by_group[g] %}
+                  <div class="candidate-item">
+                    <a href="/secondary/{{ g }}/{{ cand.pmid }}">
+                      PMID: {{ cand.pmid }}
+                    </a>
+                    <span class="badge" style="margin-left: 10px;"
+                      {% if cand.is_completed %}
+                        style="background-color: #17a2b8; color: white;"
+                      {% elif cand.status == 'pending' %}
+                        style="background-color: #ffc107; color: black;"
+                      {% elif cand.status == 'include' %}
+                        style="background-color: #28a745; color: white;"
+                      {% elif cand.status == 'exclude' %}
+                        style="background-color: #dc3545; color: white;"
+                      {% endif %}
+                    >
+                      {% if cand.is_completed %}
+                        ✓ 完了済み
+                      {% elif cand.status == 'pending' %}
+                        🟡 未処理
+                      {% elif cand.status == 'include' %}
+                        ✓ 採用
+                      {% elif cand.status == 'exclude' %}
+                        ✗ 除外
+                      {% endif %}
+                    </span>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          {% endif %}
         </div>
       </div>
     </div>
   {% endfor %}
 </div>
 {% endblock %}
+

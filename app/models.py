@@ -178,6 +178,9 @@ class SecondaryReview(SQLModel, table=True):
     comment: Optional[str] = None
 
     updated_at: Optional[str] = None
+    # Tracks completion status (when marked complete/finalized). 
+    # Different from decision: allows completed items to remain visible/editable
+    completed_at: Optional[str] = None
 
     class Config:
         # unique constraint not enforced here; handled via upsert logic in app

@@ -141,9 +141,19 @@
 
     <div class="card mb-3 shadow-sm">
       <div class="card-header bg-light py-2">
-        <h5 class="card-title fw-bold mb-0 text-dark"><i class="bi bi-pencil-square me-2"></i>レビュー (あなた)</h5>
+        <h5 class="card-title fw-bold mb-0 text-dark"><i class="bi bi-pencil-square me-2"></i>レビュー (あなた)
+          {% if review.completed_at %}
+          <span class="badge bg-info ms-2">完了済み</span>
+          {% endif %}
+        </h5>
       </div>
       <div class="card-body">
+        {% if review.completed_at %}
+        <div class="alert alert-info mb-3">
+          <strong>ℹ️ 完了済みレビュー：</strong> このレビューは {{ review.completed_at }} に完了されています。
+          修正内容を保存する場合は「保存」ボタンで再保存してください。
+        </div>
+        {% endif %}
       <form method="post" action="/secondary/{{ group }}/{{ pmid }}/save">
         {% set _initial_decision = (review.decision if review.decision in ['include','exclude'] else '') %}
         <div class="mb-3">
@@ -194,7 +204,17 @@
             </div>
           </div>
 
-          <div>
+          <div class="d-flex gap-2">
+            {% if not review.completed_at %}
+            <!-- Mark as Completed button when not yet completed -->
+            <button class="btn btn-sm btn-warning px-2" type="submit" name="action" value="complete" formnovalidate>
+              <i class="bi bi-check-circle"></i> 完了として保存
+            </button>
+            {% else %}
+            <!-- Already completed indicator -->
+            <span class="badge bg-info align-self-center">✓ 完了済み</span>
+            {% endif %}
+            
             <button class="btn btn-sm btn-primary px-2 fw-bold" type="submit" name="nav" value="next">保存して次へ <i class="bi bi-chevron-right"></i></button>
           </div>
         </div>

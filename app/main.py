@@ -1769,6 +1769,8 @@ def secondary_index(request: Request):
     if not user: return RedirectResponse("/login", 303)
     groups = ["physical", "brain", "psycho", "drug"]
     stats = {}
+    candidates_by_group = {}  # New: store candidates with review status for display
+    
     with Session(engine) as session:
         for g in groups:
             col = getattr(SecondaryArticle, f"is_{g}")
@@ -1780,26 +1782,77 @@ def secondary_index(request: Request):
                 pending_count = 0
                 included_count = 0
                 excluded_count = 0
+                completed_count = 0
+                
+                candidates_data = []
                 for pr in pmid_rows:
                     pmid = pr
                     rev = session.exec(select(SecondaryReview).where((SecondaryReview.group == g) & (SecondaryReview.reviewer_id == user.id) & (SecondaryReview.pmid == pmid))).first()
+                    
                     if not rev:
                         pending_count += 1
+                        status = "pending"
+                        is_completed = False
                     else:
+                        is_completed = rev.completed_at is not None
                         if rev.decision == 'pending':
                             pending_count += 1
+                            status = "pending"
                         elif rev.decision == 'include':
                             included_count += 1
+                            status = "include"
                         elif rev.decision == 'exclude':
                             excluded_count += 1
-                stats[g] = {"total": total or 0, "pending": pending_count, "included": included_count, "excluded": excluded_count}
+                            status = "exclude"
+                        else:
+                            status = rev.decision
+                        
+                        if is_completed:
+                            completed_count += 1
+                    
+                    candidates_data.append({
+                        "pmid": pmid,
+                        "decision": rev.decision if rev else None,
+                        "status": status,
+                        "completed_at": rev.completed_at if rev else None,
+                        "is_completed": is_completed
+                    })
+                
+                stats[g] = {"total": total or 0, "pending": pending_count, "included": included_count, "excluded": excluded_count, "completed": completed_count}
+                candidates_by_group[g] = candidates_data
             else:
                 pending = session.exec(select(func.count(SecondaryReview.id)).where((SecondaryReview.group == g) & (SecondaryReview.reviewer_id == user.id) & (SecondaryReview.decision == "pending"))).one()
                 included = session.exec(select(func.count(SecondaryReview.id)).where((SecondaryReview.group == g) & (SecondaryReview.reviewer_id == user.id) & (SecondaryReview.decision == "include"))).one()
                 excluded = session.exec(select(func.count(SecondaryReview.id)).where((SecondaryReview.group == g) & (SecondaryReview.reviewer_id == user.id) & (SecondaryReview.decision == "exclude"))).one()
-                stats[g] = {"total": total or 0, "pending": pending or 0, "included": included or 0, "excluded": excluded or 0}
+                completed = session.exec(select(func.count(SecondaryReview.id)).where((SecondaryReview.group == g) & (SecondaryReview.reviewer_id == user.id) & (SecondaryReview.completed_at != None))).one()
+                
+                stats[g] = {"total": total or 0, "pending": pending or 0, "included": included or 0, "excluded": excluded or 0, "completed": completed or 0}
+                
+                # For non-admins, also get candidate list for display
+                pmid_rows = session.exec(select(SecondaryArticle.pmid).where(col == True).order_by(SecondaryArticle.pmid)).all()
+                candidates_data = []
+                for pmid in pmid_rows:
+                    rev = session.exec(select(SecondaryReview).where((SecondaryReview.group == g) & (SecondaryReview.reviewer_id == user.id) & (SecondaryReview.pmid == pmid))).first()
+                    if rev:
+                        status = "pending" if rev.decision == "pending" else rev.decision
+                        candidates_data.append({
+                            "pmid": pmid,
+                            "decision": rev.decision,
+                            "status": status,
+                            "completed_at": rev.completed_at,
+                            "is_completed": rev.completed_at is not None
+                        })
+                
+                candidates_by_group[g] = candidates_data
 
-    return templates.TemplateResponse("secondary_index.html", {"request": request, "username": user.username, "group_no": user.group_no, "stats": stats, "current_page": "secondary"})
+    return templates.TemplateResponse("secondary_index.html", {
+        "request": request, 
+        "username": user.username, 
+        "group_no": user.group_no, 
+        "stats": stats,
+        "candidates_by_group": candidates_by_group,
+        "current_page": "secondary"
+    })
 
 
 @app.get("/secondary/{group}/next")
@@ -1924,6 +1977,11 @@ def secondary_save(request: Request, group: str, pmid: int,
             else:
                 # non-admin cannot save for unassigned item
                 return RedirectResponse(f"/secondary/{group}/next", 303)
+        
+        # If user clicked the "完了として保存" button, mark as completed
+        if action == 'complete':
+            review.completed_at = datetime.utcnow().isoformat()
+        
         # If user clicked the explicit "除外して次へ" button, force decision to exclude
         if action == 'exclude_next':
             review.decision = 'exclude'
@@ -1947,6 +2005,10 @@ def secondary_save(request: Request, group: str, pmid: int,
             id_list = []
 
     # Navigation handling
+    if action == 'complete':
+        # After marking complete, stay on same page to confirm
+        return RedirectResponse(f"/secondary/{group}/{pmid}", 303)
+    
     if action == 'exclude_next':
         return RedirectResponse(f"/secondary/{group}/next", 303)
 
