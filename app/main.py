@@ -1873,7 +1873,23 @@ def secondary_next(request: Request, group: str):
             nxt = session.exec(select(SecondaryReview).where((SecondaryReview.group == group) & (SecondaryReview.reviewer_id == user.id) & (SecondaryReview.decision == "pending")).order_by(SecondaryReview.pmid)).first()
             if nxt:
                 return RedirectResponse(f"/secondary/{group}/{nxt.pmid}", 303)
-    return templates.TemplateResponse("secondary_empty.html", {"request": request, "username": user.username, "group": group, "current_page": "secondary"})
+        
+        # Get all completed items for this group to show in empty page
+        completed_reviews = session.exec(
+            select(SecondaryReview).where(
+                (SecondaryReview.group == group) & 
+                (SecondaryReview.reviewer_id == user.id)
+            ).order_by(SecondaryReview.pmid)
+        ).all()
+        
+    return templates.TemplateResponse("secondary_empty.html", {
+        "request": request, 
+        "username": user.username, 
+        "group": group, 
+        "current_page": "secondary",
+        "completed_reviews": completed_reviews,
+        "SECONDARY_GROUP_LABELS": SECONDARY_GROUP_LABELS
+    })
 
 
 @app.get("/secondary/{group}/{pmid}", response_class=HTMLResponse)
