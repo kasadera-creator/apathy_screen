@@ -94,17 +94,17 @@
       <div class="card-body p-0">
         <div class="pdf-panel">
           <div class="pdf-panel__toolbar">
-            {% if _pmid %}
-              <a class="btn btn-sm btn-outline-primary" href="/pdf/{{ _pmid }}" target="_blank" rel="noopener">PDFを別タブで開く</a>
+            {% if pdf_url %}
+              <a class="btn btn-sm btn-outline-primary" href="{{ pdf_url }}" target="_blank" rel="noopener">PDFを別タブで開く</a>
             {% else %}
               <button class="btn btn-sm btn-outline-secondary" disabled>PDFを別タブで開く</button>
             {% endif %}
           </div>
-          {% if _pmid %}
-            <iframe class="pdf-panel__iframe" src="/pdf/{{ _pmid }}" title="PDF {{ _pmid }}" loading="lazy"></iframe>
+          {% if pdf_url %}
+            <iframe class="pdf-panel__iframe" src="{{ pdf_url }}" title="PDF {{ _pmid }}" loading="lazy"></iframe>
           {% else %}
             <div class="alert alert-warning m-2">
-              PMIDがテンプレに渡っていないためPDFリンクを生成できません。サーバ側で pmid 変数名を確認してください。
+              PDFが利用できません。
             </div>
           {% endif %}
         </div>

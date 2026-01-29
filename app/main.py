@@ -1959,6 +1959,10 @@ def secondary_review_page(request: Request, group: str, pmid: int):
         secondary = _serialize_secondary(secondary)
         auto = _serialize_auto(auto_obj)
         review = _serialize_review(review)
+    
+    # Build direct PDF URL (signed or local)
+    pdf_url = build_pdf_url(pmid)
+    
     return templates.TemplateResponse("secondary_review.html", {
         "request": request,
         "username": user.username,
@@ -1973,6 +1977,7 @@ def secondary_review_page(request: Request, group: str, pmid: int):
         "progress_total": progress_total,
         "current_index": current_index,
         "pdf_available": pdf_available,
+        "pdf_url": pdf_url,
         "current_page": "secondary"
     })
 
