@@ -1887,8 +1887,7 @@ def secondary_next(request: Request, group: str):
         "username": user.username, 
         "group": group, 
         "current_page": "secondary",
-        "completed_reviews": completed_reviews,
-        "SECONDARY_GROUP_LABELS": SECONDARY_GROUP_LABELS
+        "completed_reviews": completed_reviews
     })
 
 
